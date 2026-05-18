@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "title": "Tony Buoi Sang Fund - Planting seeds of hope",
+    "description": "A transparent platform connecting communities to support children in difficult circumstances."
+  },
+  "nav": {
+    "about": "About",
+    "children": "Children",
+    "reports": "Reports",
+    "news": "News",
+    "statements": "Statements",
+    "contact": "Contact",
+    "donate": "Donate",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchToEnglish": "Switch to English",
+    "switchToVietnamese": "Switch to Vietnamese"
+  },
+  "footer": {
+    "companyName": "Tony Buoi Sang Social Enterprise Fund JSC",
+    "registration": "Business registration no.: 4201981737",
+    "issued": "Issued on 27/06/2023 by Khanh Hoa Department of Science and Technology",
+    "registeredAddress": "Address: Tan Tu Village, Hoa Tri Commune, Khanh Hoa Province",
+    "office": "Office: 383 Nguyen Duy Trinh Street, Binh Trung Ward, Ho Chi Minh City",
+    "info": "Information",
+    "documents": "Documents & forms",
+    "library": "Library",
+    "vision": "Vision & mission",
+    "history": "Our history",
+    "logoStory": "Logo story",
+    "organization": "Organization",
+    "members": "Fund members",
+    "careers": "Careers",
+    "process": "Review process",
+    "scoring": "Scoring criteria",
+    "volunteer": "Volunteer registration",
+    "mou": "Memorandum of understanding",
+    "photos": "Photos",
+    "activities": "Activities",
+    "letters": "Letters to the fund",
+    "rights": "Tony Buoi Sang Fund. All rights reserved."
+  },
+  "home": {
+    "eyebrow": "Orphan child sponsorship fund",
+    "title": "Tony Buoi Sang",
+    "description": "We walk alongside children through life's challenges, help their dreams take flight, and bring warmth to young lives facing hardship.",
+    "sponsorNow": "Sponsor now",
+    "learnMore": "Learn more",
+    "phaseNote": "Phase 1 — layout foundation. Dynamic content and charts will follow in later phases."
+  }
+}

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #1b4f9c;
+  --color-brand-blue-light: #2d6cb5;
+  --color-brand-green: #8dc643;
+  --color-brand-green-light: #a5d466;
+
+  --font-heading: var(--font-quicksand);
+  --font-body: var(--font-quicksand);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+}
+
+@layer components {
+  .brand-card {
+    @apply rounded-xl border border-gray-100 bg-white shadow-sm;
+  }
+}
+
+@layer utilities {
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 40s linear infinite;
+  }
+
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+}
