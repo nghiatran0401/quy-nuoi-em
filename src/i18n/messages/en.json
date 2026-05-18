@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Tony Buoi Sang Fund - Planting seeds of hope",
-    "description": "A transparent platform connecting communities to support children in difficult circumstances."
+    "title": "Nuoi Em Project - School meals for highland children",
+    "description": "Nuoi Em connects sponsors with children in remote areas through transparent NE codes — helping them eat well and stay in school."
   },
   "nav": {
     "about": "About",
@@ -17,34 +17,34 @@
     "switchToVietnamese": "Switch to Vietnamese"
   },
   "footer": {
-    "companyName": "Tony Buoi Sang Social Enterprise Fund JSC",
-    "registration": "Business registration no.: 4201981737",
-    "issued": "Issued on 27/06/2023 by Khanh Hoa Department of Science and Technology",
-    "registeredAddress": "Address: Tan Tu Village, Hoa Tri Commune, Khanh Hoa Province",
-    "office": "Office: 383 Nguyen Duy Trinh Street, Binh Trung Ward, Ho Chi Minh City",
+    "companyName": "Nuoi Em Project",
+    "registration": "School lunch program for children in remote areas",
+    "issued": "Financial transparency at taichinh.nuoiem.com",
+    "registeredAddress": "Supporting children across 25+ provinces",
+    "office": "Hotline: 0975 302 307 · duannuoiem@gmail.com",
     "info": "Information",
     "documents": "Documents & forms",
     "library": "Library",
     "vision": "Vision & mission",
     "history": "Our history",
-    "logoStory": "Logo story",
+    "logoStory": "Brand story",
     "organization": "Organization",
-    "members": "Fund members",
+    "members": "Partners",
     "careers": "Careers",
-    "process": "Review process",
+    "process": "How to get an NE code",
     "scoring": "Scoring criteria",
     "volunteer": "Volunteer registration",
     "mou": "Memorandum of understanding",
     "photos": "Photos",
     "activities": "Activities",
-    "letters": "Letters to the fund",
-    "rights": "Tony Buoi Sang Fund. All rights reserved."
+    "letters": "Letters to the project",
+    "rights": "Nuoi Em Project. All rights reserved."
   },
   "home": {
-    "eyebrow": "Orphan child sponsorship fund",
-    "title": "Tony Buoi Sang",
-    "description": "We walk alongside children through life's challenges, help their dreams take flight, and bring warmth to young lives facing hardship.",
-    "sponsorNow": "Sponsor now",
+    "eyebrow": "Meals that keep children in school",
+    "title": "Nuoi Em Project",
+    "description": "150,000 VND per month helps highland children eat well and attend school. One child, one NE code, one sponsor — with transparency and visit opportunities.",
+    "sponsorNow": "Donate now",
     "learnMore": "Learn more"
   }
 }

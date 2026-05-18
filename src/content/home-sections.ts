@@ -76,7 +76,7 @@ export const membersSectionCopy: Record<
     eyebrow: "Thành viên Quỹ",
     title: "Gắn Kết Yêu Thương",
     paragraphs: [
-      "Bắt đầu từ con số 20 thành viên Quỹ là các anh chị trong nhóm sản xuất Tony Buổi Sáng, các thành viên rải rác khắp tỉnh thành trên nước Việt Nam. Giờ đây, sau ba năm con số thành viên Quỹ đã tăng lên gần gấp đôi.",
+      "Bắt đầu từ con số 20 thành viên Quỹ là các anh chị trong nhóm sản xuất Nuôi Em, các thành viên rải rác khắp tỉnh thành trên nước Việt Nam. Giờ đây, sau ba năm con số thành viên Quỹ đã tăng lên gần gấp đôi.",
       "Nhóm Quỹ vẫn đang từng bước nỗ lực hơn mỗi ngày để có thể bảo trợ nhiều trẻ hơn và mang lại nhiều niềm vui hơn cho các con!",
     ],
     cta: "Thành viên Quỹ",
@@ -85,7 +85,7 @@ export const membersSectionCopy: Record<
     eyebrow: "Fund members",
     title: "Bonded by love",
     paragraphs: [
-      "Starting with 20 members from the Tony Buoi Sang production team spread across Vietnam, the fund has nearly doubled in size over three years.",
+      "Starting with 20 members from the Nuoi Em production team spread across Vietnam, the fund has nearly doubled in size over three years.",
       "We keep working every day to sponsor more children and bring them more joy!",
     ],
     cta: "Fund members",
@@ -132,18 +132,18 @@ export const faqSectionCopy: Record<
     eyebrow: "Giải đáp thắc mắc",
     title: "Câu Hỏi Thường Gặp",
     intro:
-      "Những thông tin phổ biến nhất về Quỹ Tony Buổi Sáng được tổng hợp tại đây để giải đáp nhanh các thắc mắc của bạn.",
+      "Những thông tin phổ biến nhất về Dự án Nuôi Em được tổng hợp tại đây để giải đáp nhanh các thắc mắc của bạn.",
     items: [
       {
         id: "address",
-        question: "Địa chỉ văn phòng của Quỹ Tony Buổi Sáng ở đâu?",
+        question: "Địa chỉ văn phòng của Dự án Nuôi Em ở đâu?",
         type: "address",
         body: "Xin mời cả nhà, các anh chị ghé thăm văn phòng Quỹ để cùng lắng nghe những câu chuyện, để hiểu về hành trình mà Quỹ đang làm cho các con.",
         address: "Số 383 đường Nguyễn Duy Trinh, phường Bình Trưng, TP. HCM.",
       },
       {
         id: "bank",
-        question: "Số tài khoản của Quỹ Tony Buổi Sáng?",
+        question: "Số tài khoản của Dự án Nuôi Em?",
         type: "bank",
       },
       {
@@ -163,7 +163,7 @@ export const faqSectionCopy: Record<
   en: {
     eyebrow: "FAQ",
     title: "Frequently asked questions",
-    intro: "Common information about the Tony Buoi Sang Fund, answered quickly here.",
+    intro: "Common information about the Nuoi Em Project, answered quickly here.",
     items: [
       {
         id: "address",

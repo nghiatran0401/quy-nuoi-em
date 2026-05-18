@@ -1,13 +1,35 @@
 @import "tailwindcss";
 
+/*
+ * Nuôi Em — warm ember & wheat (logo: flame orange, gold rings, ember red)
+ * Use accent sparingly; ink + muted for reading; gold for labels on light.
+ */
 @theme {
-  --color-brand-blue: #1b4f9c;
-  --color-brand-blue-light: #2d6cb5;
-  --color-brand-green: #8dc643;
-  --color-brand-green-light: #a5d466;
+  --color-brand-ink: #2d2622;
+  --color-brand-blue: #2d2622;
+  --color-brand-blue-light: #4d433c;
+  --color-brand-muted: #6f655c;
+  --color-brand-deep: #1f1815;
+  --color-brand-deep-mid: #3a2d26;
+  --color-brand-green: #9a7348;
+  --color-brand-green-light: #f7efe4;
+  --color-brand-accent: #f06520;
+  --color-brand-accent-light: #ff7a38;
+  --color-brand-accent-dark: #d45516;
+  --color-brand-highlight: #e8c992;
+  --color-brand-warm: #fcfaf7;
+  --color-brand-surface: #f5efe6;
+  --color-brand-surface-raised: #ffffff;
+  --color-brand-border: #e6ddd3;
+  --color-brand-red: #e03c2f;
+  --color-brand-cyan: #0d9488;
 
   --font-heading: var(--font-quicksand);
   --font-body: var(--font-quicksand);
+
+  --shadow-brand-soft: 0 4px 24px -4px rgb(45 38 34 / 0.07);
+  --shadow-brand-card: 0 1px 2px rgb(45 38 34 / 0.04), 0 12px 32px -12px rgb(45 38 34 / 0.12);
+  --shadow-brand-glow: 0 0 0 1px rgb(240 101 32 / 0.08), 0 8px 32px -8px rgb(240 101 32 / 0.18);
 }
 
 @layer base {
@@ -16,13 +38,140 @@
   }
 
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply bg-brand-warm text-brand-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-accent/18 text-brand-ink;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-brand-ink;
+  }
+
+  a:not([class]) {
+    @apply text-brand-accent-dark underline-offset-4 hover:text-brand-accent hover:underline;
   }
 }
 
 @layer components {
   .brand-card {
-    @apply rounded-xl border border-gray-100 bg-white shadow-sm;
+    @apply rounded-2xl border border-brand-border/90 bg-brand-surface-raised shadow-[var(--shadow-brand-card)];
+  }
+
+  .brand-card-interactive {
+    @apply rounded-2xl border border-brand-border/90 bg-brand-surface-raised shadow-[var(--shadow-brand-card)] transition duration-300 hover:border-brand-accent/20 hover:shadow-[var(--shadow-brand-glow)];
+  }
+
+  .section-surface {
+    @apply bg-brand-surface;
+  }
+
+  .section-elevated {
+    @apply bg-brand-surface-raised;
+  }
+
+  .section-warm {
+    @apply bg-brand-warm;
+  }
+
+  .hero-backdrop {
+    background-color: var(--color-brand-warm);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 100% 0%, rgb(240 101 32 / 0.07), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 0% 100%, rgb(232 201 146 / 0.12), transparent 50%),
+      linear-gradient(180deg, var(--color-brand-warm) 0%, #ffffff 45%, var(--color-brand-surface) 100%);
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.2em] text-brand-green;
+  }
+
+  .eyebrow-on-dark {
+    @apply text-xs font-bold uppercase tracking-[0.2em] text-brand-highlight;
+  }
+
+  .heading-display {
+    @apply font-heading font-black tracking-tight text-brand-ink;
+  }
+
+  .text-body {
+    @apply leading-relaxed text-brand-muted;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-brand-accent px-8 py-3.5 text-center text-base font-bold text-white shadow-[0_4px_16px_-3px_rgb(240_101_32/0.45)] transition duration-200 hover:bg-brand-accent-light hover:shadow-[0_6px_22px_-3px_rgb(240_101_32/0.5)] active:scale-[0.98];
+  }
+
+  .btn-primary-sm {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-accent px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_-2px_rgb(240_101_32/0.4)] transition duration-200 hover:bg-brand-accent-light active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-border bg-white px-8 py-3.5 text-center text-base font-bold text-brand-ink transition duration-200 hover:border-brand-accent/30 hover:bg-brand-green-light/50 active:scale-[0.98];
+  }
+
+  .btn-on-dark {
+    @apply inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-bold text-brand-deep shadow-lg transition duration-200 hover:bg-brand-highlight active:scale-[0.98];
+  }
+
+  .btn-ghost-on-dark {
+    @apply inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-8 py-3.5 text-lg font-bold text-white backdrop-blur-sm transition duration-200 hover:border-white/40 hover:bg-white/18 active:scale-[0.98];
+  }
+
+  .link-accent {
+    @apply font-semibold text-brand-accent-dark transition-colors hover:text-brand-accent;
+  }
+
+  .nav-link {
+    @apply font-medium text-brand-muted transition-colors hover:text-brand-ink;
+  }
+
+  .site-header {
+    @apply sticky top-0 z-50 border-b border-brand-border/70 bg-brand-warm/85 shadow-[var(--shadow-brand-soft)] backdrop-blur-xl supports-[backdrop-filter]:bg-brand-warm/75;
+  }
+
+  .banner-primary {
+    @apply bg-gradient-to-br from-brand-deep via-brand-deep-mid to-brand-accent-dark text-white;
+  }
+
+  .surface-dark {
+    @apply bg-brand-deep text-white;
+  }
+
+  .surface-info {
+    @apply rounded-xl border border-brand-accent/12 bg-gradient-to-br from-brand-green-light/80 to-white;
+  }
+
+  .mini-stat {
+    @apply rounded-xl border border-brand-border/80 bg-brand-warm px-4 py-3 text-center;
+  }
+
+  .step-badge {
+    @apply flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent text-xs font-bold text-white shadow-sm;
+  }
+
+  .stat-value {
+    @apply font-heading text-4xl font-bold tabular-nums text-brand-accent md:text-5xl;
+  }
+
+  .stat-value-muted {
+    @apply font-heading text-4xl font-bold tabular-nums text-brand-ink md:text-5xl;
+  }
+
+  .faq-item {
+    @apply rounded-2xl border border-transparent bg-brand-warm transition-all duration-300;
+  }
+
+  .faq-item-open {
+    @apply border-brand-border bg-white shadow-[var(--shadow-brand-card)];
+  }
+
+  .faq-item-closed {
+    @apply hover:border-brand-border/80 hover:bg-white hover:shadow-[var(--shadow-brand-soft)];
   }
 }
 
@@ -42,5 +191,13 @@
 
   .animate-scroll:hover {
     animation-play-state: paused;
+  }
+
+  .text-on-primary {
+    @apply text-white/90;
+  }
+
+  .focus-ring {
+    @apply focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/22;
   }
 }

@@ -35,26 +35,26 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
       vi: {
         title: "Về Chúng Tôi",
         description:
-          "Tìm hiểu về Quỹ Tony Buổi Sáng — sứ mệnh gieo mầm hy vọng và minh bạch tài chính.",
+          "Tìm hiểu về Dự án Nuôi Em — sứ mệnh gieo mầm hy vọng và minh bạch tài chính.",
       },
       en: {
         title: "About Us",
         description:
-          "Learn about the Tony Buoi Sang Fund — planting seeds of hope with financial transparency.",
+          "Learn about the Nuoi Em Project — planting seeds of hope with financial transparency.",
       },
     },
     hero: {
       vi: {
-        eyebrow: "Quỹ bảo trợ trẻ mồ côi",
-        title: "Gieo mầm Hy Vọng",
+        eyebrow: "Nuôi cơm trưa — giúp trẻ tới trường",
+        title: "Dự án Nuôi Em",
         description:
-          "Chúng tôi tin rằng mọi trẻ em đều xứng đáng có một tương lai tươi sáng, nơi những ước mơ được chắp cánh và tình thương được lan tỏa.",
+          "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm.",
       },
       en: {
-        eyebrow: "Orphan child sponsorship fund",
-        title: "Planting Seeds of Hope",
+        eyebrow: "School lunches — keeping children in class",
+        title: "Nuoi Em Project",
         description:
-          "We believe every child deserves a bright future where dreams can take flight and compassion spreads.",
+          "Connecting sponsors with children in remote areas through transparent NE codes. 150,000 VND per month helps children eat well and stay in school.",
       },
     },
   },
@@ -62,11 +62,11 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Tầm nhìn sứ mệnh",
-        description: "Tầm nhìn, sứ mệnh và tôn chỉ hoạt động của Quỹ Tony Buổi Sáng.",
+        description: "Tầm nhìn, sứ mệnh và tôn chỉ hoạt động của Dự án Nuôi Em.",
       },
       en: {
         title: "Vision & Mission",
-        description: "Vision, mission, and core principles of the Tony Buoi Sang Fund.",
+        description: "Vision, mission, and core principles of the Nuoi Em Project.",
       },
     },
     hero: {
@@ -86,18 +86,18 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Lịch sử hình thành",
-        description: "Hành trình phát triển của Quỹ Tony Buổi Sáng qua các cột mốc đáng nhớ.",
+        description: "Hành trình phát triển của Dự án Nuôi Em qua các cột mốc đáng nhớ.",
       },
       en: {
         title: "Our History",
-        description: "Key milestones in the journey of the Tony Buoi Sang Fund.",
+        description: "Key milestones in the journey of the Nuoi Em Project.",
       },
     },
     hero: {
       vi: {
         title: "Lịch sử hình thành",
         description:
-          "Hành trình gieo mầm hy vọng và lan tỏa yêu thương của Quỹ Tony Buổi Sáng qua các cột mốc đáng nhớ.",
+          "Hành trình gieo mầm hy vọng và lan tỏa yêu thương của Dự án Nuôi Em qua các cột mốc đáng nhớ.",
       },
       en: {
         title: "Our History",
@@ -110,11 +110,11 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Câu chuyện logo",
-        description: "Ý nghĩa và cấu trúc thiết kế logo Quỹ Tony Buổi Sáng.",
+        description: "Ý nghĩa và cấu trúc thiết kế logo Dự án Nuôi Em.",
       },
       en: {
         title: "Logo Story",
-        description: "Meaning and design structure of the Tony Buoi Sang Fund logo.",
+        description: "Meaning and design structure of the Nuoi Em Project logo.",
       },
     },
     hero: {
@@ -162,11 +162,11 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Liên hệ",
-        description: "Thông tin liên hệ Ban điều hành Quỹ Tony Buổi Sáng.",
+        description: "Thông tin liên hệ Ban điều hành Dự án Nuôi Em.",
       },
       en: {
         title: "Contact",
-        description: "Contact information for the Tony Buoi Sang Fund executive board.",
+        description: "Contact information for the Nuoi Em Project executive board.",
       },
     },
     hero: {
@@ -184,22 +184,22 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Đóng góp",
-        description: "Thông tin chuyển khoản và quyên góp cho Quỹ Tony Buổi Sáng.",
+        description: "Thông tin chuyển khoản và quyên góp cho Dự án Nuôi Em.",
       },
       en: {
         title: "Donate",
-        description: "Bank transfer details to support the Tony Buoi Sang Fund.",
+        description: "Bank transfer details to support the Nuoi Em Project.",
       },
     },
     hero: {
       vi: {
         eyebrow: "CHUNG TAY GÓP SỨC",
-        title: "Đồng Hành Cùng Quỹ Tony Buổi Sáng",
+        title: "Đồng Hành Cùng Dự án Nuôi Em",
         description: "Mọi sự đóng góp của bạn đều trân quý và giúp các em nhỏ có thêm cơ hội đến trường.",
       },
       en: {
         eyebrow: "JOIN US",
-        title: "Partner With Tony Buoi Sang Fund",
+        title: "Partner With Nuoi Em Project",
         description: "Every contribution helps children gain more opportunities to stay in school.",
       },
     },
@@ -269,7 +269,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         eyebrow: "Chung tay vì cộng đồng",
         title: "Đăng ký trở thành Tình nguyện viên",
         description:
-          "Quỹ Tony Buổi Sáng cảm ơn Bạn đã quan tâm đăng ký trở thành Tình nguyện viên đồng hành với Quỹ và các con trẻ mồ côi đang được bảo trợ!",
+          "Dự án Nuôi Em cảm ơn Bạn đã quan tâm đăng ký trở thành Tình nguyện viên đồng hành với Quỹ và các con trẻ mồ côi đang được bảo trợ!",
       },
       en: {
         eyebrow: "For the community",
@@ -283,11 +283,11 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Biên bản ghi nhớ (MOU)",
-        description: "Hợp tác doanh nghiệp với Quỹ Tony Buổi Sáng qua MOU.",
+        description: "Hợp tác doanh nghiệp với Dự án Nuôi Em qua MOU.",
       },
       en: {
         title: "Memorandum of Understanding",
-        description: "Corporate partnership with the Tony Buoi Sang Fund through MOU.",
+        description: "Corporate partnership with the Nuoi Em Project through MOU.",
       },
     },
     hero: {
@@ -307,11 +307,11 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Thành viên Quỹ",
-        description: "Các doanh nghiệp đồng hành và tài trợ Quỹ Tony Buổi Sáng.",
+        description: "Các doanh nghiệp đồng hành và tài trợ Dự án Nuôi Em.",
       },
       en: {
         title: "Fund Members",
-        description: "Partner businesses supporting the Tony Buoi Sang Fund.",
+        description: "Partner businesses supporting the Nuoi Em Project.",
       },
     },
     hero: {
@@ -333,11 +333,11 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Tuyển dụng",
-        description: "Cơ hội nghề nghiệp tại Quỹ Tony Buổi Sáng.",
+        description: "Cơ hội nghề nghiệp tại Dự án Nuôi Em.",
       },
       en: {
         title: "Careers",
-        description: "Career opportunities at the Tony Buoi Sang Fund.",
+        description: "Career opportunities at the Nuoi Em Project.",
       },
     },
     hero: {
@@ -345,13 +345,13 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         eyebrow: "CƠ HỘI NGHỀ NGHIỆP",
         title: "Nhân viên Thư ký Quỹ",
         description:
-          "Cùng Quỹ Tony Buổi Sáng tiếp bước tới trường và sẻ chia yêu thương đến những hoàn cảnh khó khăn.",
+          "Cùng Dự án Nuôi Em tiếp bước tới trường và sẻ chia yêu thương đến những hoàn cảnh khó khăn.",
       },
       en: {
         eyebrow: "CAREER OPPORTUNITY",
         title: "Fund Secretary",
         description:
-          "Join the Tony Buoi Sang Fund in helping children reach school and sharing compassion with those in need.",
+          "Join the Nuoi Em Project in helping children reach school and sharing compassion with those in need.",
       },
     },
   },
@@ -461,7 +461,7 @@ export const logoStorySections: Localized<
     {
       title: "Bỗng dưng muốn bé",
       paragraphs: [
-        "Là muốn bé lại như ngày xưa. Nhưng quy luật tự nhiên là phát triển — ai rồi cũng sẽ lớn. Và Quỹ Tony Buổi Sáng cũng vậy.",
+        "Là muốn bé lại như ngày xưa. Nhưng quy luật tự nhiên là phát triển — ai rồi cũng sẽ lớn. Và Dự án Nuôi Em cũng vậy.",
         "Logo Quỹ là tổ hợp hình và chữ, gồm 2 màu xanh lá và xanh dương trên nền trắng — diện mạo mới khẳng định sứ mệnh lớn lao hơn.",
       ],
     },
@@ -480,7 +480,7 @@ export const logoStorySections: Localized<
         {
           title: "Phần Chữ",
           items: [
-            'Dòng chữ "QUỸ TONY BUỔI SÁNG" viết hoa, màu xanh dương đậm — tri ân Tác giả Tony Buổi Sáng.',
+            'Dòng chữ "DỰ ÁN NUÔI EM" viết hoa, màu xanh dương đậm — tri ân Tác giả Nuôi Em.',
           ],
         },
       ],
@@ -499,7 +499,7 @@ export const logoStorySections: Localized<
     {
       title: "Growing up",
       paragraphs: [
-        "We sometimes wish to be small again — yet growth is natural. The Tony Buoi Sang Fund has matured the same way.",
+        "We sometimes wish to be small again — yet growth is natural. The Nuoi Em Project has matured the same way.",
         "The logo combines icon and wordmark in green and blue on white — a new identity for a greater mission.",
       ],
     },
@@ -517,7 +517,7 @@ export const logoStorySections: Localized<
         },
         {
           title: "Wordmark",
-          items: ['"TONY BUOI SANG FUND" in bold blue — honoring author Tony Buoi Sang.'],
+          items: ['"TONY BUOI SANG FUND" in bold blue — honoring author Nuoi Em.'],
         },
       ],
     },
@@ -769,7 +769,7 @@ export const mouContent: Localized<{
     ],
     quote:
       "Doanh nghiệp mong muốn hợp tác với Quỹ nhằm đóng góp cho xã hội, giúp trẻ em mồ côi có hoàn cảnh khó khăn — vui lòng liên hệ để trao đổi chi tiết về MOU.",
-    cta: "Liên hệ: bandieuhanh@quytnbs.com",
+    cta: "Liên hệ: duannuoiem@gmail.com",
   },
   en: {
     definition:
@@ -781,7 +781,7 @@ export const mouContent: Localized<{
     ],
     quote:
       "Businesses wishing to partner with the Fund to support orphaned children in difficult circumstances — please contact us to discuss MOU details.",
-    cta: "Contact: bandieuhanh@quytnbs.com",
+    cta: "Contact: duannuoiem@gmail.com",
   },
 };
 
@@ -860,18 +860,18 @@ export const contactInfo: Localized<{
   warning: string;
 }> = {
   vi: {
-    address: "Số 383 đường Nguyễn Duy Trinh, phường Bình Trưng, TP. HCM",
-    email: "bandieuhanh@quytnbs.com",
-    phone: "0989 501 287",
-    donationNote: "Quỹ chỉ tiếp nhận quyên góp qua số tài khoản công khai trên trang Đóng góp.",
-    warning: "Vui lòng cảnh giác với các hành vi mạo danh.",
+    address: "Dự án hỗ trợ trẻ bản cao tại hơn 25 tỉnh thành trên cả nước",
+    email: "duannuoiem@gmail.com",
+    phone: "0975 302 307",
+    donationNote: "Dự án chỉ tiếp nhận quyên góp qua số tài khoản công khai trên trang Đóng góp. Bắt buộc ghi mã NE khi chuyển khoản.",
+    warning: "Vui lòng cảnh giác với các hành vi mạo danh. Báo cáo tài chính tại taichinh.nuoiem.com",
   },
   en: {
-    address: "383 Nguyen Duy Trinh Street, Binh Trung Ward, Ho Chi Minh City",
-    email: "bandieuhanh@quytnbs.com",
-    phone: "0989 501 287",
-    donationNote: "The Fund only accepts donations via the public bank account on the Donate page.",
-    warning: "Please beware of impersonation scams.",
+    address: "Supporting children in remote areas across 25+ provinces in Vietnam",
+    email: "duannuoiem@gmail.com",
+    phone: "0975 302 307",
+    donationNote: "Donations are accepted only via the public bank account on the Donate page. Include your NE code in the transfer note.",
+    warning: "Please beware of impersonation scams. Financial reports at taichinh.nuoiem.com",
   },
 };
 
@@ -884,20 +884,20 @@ export const donateInfo: Localized<{
   transferExample: string;
 }> = {
   vi: {
-    bank: "MB Bank - Ngân hàng Quân Đội",
-    branch: "Chi nhánh: PGD Tân Hương",
-    accountName: "QUY TONY BUOI SANG",
-    accountNumber: "2010",
-    transferFormat: "[04 số điện thoại cuối] [Tên tổ chức/cá nhân] [Nội dung]",
-    transferExample: "9999 Nguyen Van A Ung ho quy",
+    bank: "Vietcombank",
+    branch: "Chi nhánh Thanh Xuân - Hà Nội",
+    accountName: "Hoàng Hoa Trung",
+    accountNumber: "0711000280294",
+    transferFormat: "“Mã bé nhận nuôi” + Tên bạn (bắt buộc có mã NE)",
+    transferExample: "NE00123 Nguyen Van A",
   },
   en: {
-    bank: "MB Bank - Military Bank",
-    branch: "Branch: PGD Tan Huong",
-    accountName: "QUY TONY BUOI SANG",
-    accountNumber: "2010",
-    transferFormat: "[Last 4 digits of phone] [Name] [Purpose]",
-    transferExample: "9999 Nguyen Van A Fund donation",
+    bank: "Vietcombank",
+    branch: "Thanh Xuan Branch - Hanoi",
+    accountName: "Hoang Hoa Trung",
+    accountNumber: "0711000280294",
+    transferFormat: "\"Child sponsorship code\" + Your name (NE code required)",
+    transferExample: "NE00123 Nguyen Van A",
   },
 };
 

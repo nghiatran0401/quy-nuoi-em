@@ -18,7 +18,7 @@ export default async function NewsPage({ params }: PageProps) {
   const locale = (await resolveLocale(params)) as Locale;
 
   return (
-    <article className="min-h-screen bg-gray-50 pb-20">
+    <article className="min-h-screen bg-brand-surface pb-20">
       <DataPageHeader {...getDataPageHero("news", locale)} />
       <NewsGrid articles={getAllNews()} readMoreLabel={getDataUiLabel(locale, "readMore")} />
     </article>

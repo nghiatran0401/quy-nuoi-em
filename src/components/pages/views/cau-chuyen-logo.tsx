@@ -19,7 +19,7 @@ export function LogoStoryView({ locale }: { locale: Locale }) {
             ))}
             {section.bullets?.map((group) => (
               <div key={group.title} className="mt-6">
-                <h3 className="font-semibold text-brand-green">{group.title}</h3>
+                <h3 className="font-semibold text-brand-accent">{group.title}</h3>
                 <ul className="mt-3 list-inside list-disc space-y-2 text-gray-600">
                   {group.items.map((item) => (
                     <li key={item}>{item}</li>
@@ -40,7 +40,13 @@ export function LogoStoryView({ locale }: { locale: Locale }) {
           </section>
         ))}
         <div className="flex justify-center py-8">
-          <Image src="/logo/logo-quytnbs.svg" alt="Logo" width={280} height={120} className="h-auto w-64" />
+          <Image
+            src="/logo/logo-ne.png"
+            alt="Dự án Nuôi Em"
+            width={200}
+            height={202}
+            className="h-auto w-48"
+          />
         </div>
       </div>
     </StaticPageShell>

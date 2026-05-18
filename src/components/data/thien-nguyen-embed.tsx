@@ -6,7 +6,7 @@ export function ThienNguyenEmbed() {
       <div className="mx-auto h-[calc(100vh-80px)] px-4 sm:px-6 lg:px-8">
         <iframe
           src={EMBED_URL}
-          title="Sao kê tài khoản Quỹ Tony Buổi Sáng"
+          title="Sao kê tài chính Dự án Nuôi Em"
           className="h-full w-full rounded-lg border-0 shadow-sm"
           loading="lazy"
         />

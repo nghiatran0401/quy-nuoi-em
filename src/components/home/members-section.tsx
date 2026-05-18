@@ -20,15 +20,15 @@ export function MembersSection({ locale }: Props) {
   const copy = membersSectionCopy[locale];
 
   return (
-    <section className="overflow-hidden bg-white py-20 lg:py-24">
+    <section className="section-warm overflow-hidden py-20 lg:py-24">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
           <div className="order-2 w-full lg:order-1 lg:w-5/12">
-            <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-brand-green">{copy.eyebrow}</h2>
-            <h3 className="mb-6 font-heading text-3xl font-black leading-tight text-brand-blue md:text-5xl">
+            <h2 className="eyebrow mb-4">{copy.eyebrow}</h2>
+            <h3 className="heading-display mb-6 text-3xl leading-tight md:text-5xl">
               {copy.title}
             </h3>
-            <div className="space-y-5 text-justify font-body text-lg leading-relaxed text-gray-600 lg:text-left">
+            <div className="text-body space-y-5 text-justify text-lg lg:text-left">
               {copy.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 20)}>{paragraph}</p>
               ))}
@@ -36,7 +36,7 @@ export function MembersSection({ locale }: Props) {
             <div className="mt-10 flex justify-center lg:justify-start">
               <Link
                 href="/thanh-vien-quy"
-                className="group inline-flex items-center gap-2 rounded-full bg-brand-blue px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-brand-blue/90 hover:shadow-lg"
+                className="btn-primary group gap-2 px-8 py-4 text-lg"
               >
                 {copy.cta}
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />

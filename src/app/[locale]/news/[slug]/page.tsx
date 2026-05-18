@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = getNewsBySlug(slug);
   if (!article) return {};
 
-  const siteName = locale === "vi" ? "Quỹ Tony Buổi Sáng" : "Tony Buoi Sang Fund";
+  const siteName = locale === "vi" ? "Dự án Nuôi Em" : "Nuoi Em Project";
   return {
     title: `${article.title} | ${siteName}`,
     description: article.excerpt,
@@ -36,7 +36,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
   if (!article) notFound();
 
   return (
-    <article className="min-h-screen bg-gray-50 pb-20">
+    <article className="min-h-screen bg-brand-surface pb-20">
       <div className="mx-auto max-w-3xl px-4 pt-10 pb-16 sm:px-6">
         <Link
           href="/news"
@@ -50,7 +50,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
             <Image src={article.imageUrl} alt="" fill className="object-cover" priority />
           </div>
         ) : null}
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand-green">
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-accent">
           {getDataUiLabel(locale, "publishedOn")} {article.date}
         </p>
         <ArticleContent content={article.content} />

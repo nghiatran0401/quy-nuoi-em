@@ -33,8 +33,8 @@ export function ScoringGrid({
             <h3 className="mt-2 font-heading font-bold text-brand-blue">{category.title}</h3>
             <ul className="mt-4 space-y-3">
               {category.items.map((item) => (
-                <li key={item.label} className="rounded-lg bg-gray-50 p-3 text-sm">
-                  <p className="font-semibold text-brand-green">{item.priority}</p>
+                <li key={item.label} className="rounded-lg bg-brand-warm p-3 text-sm">
+                  <p className="font-semibold text-brand-accent">{item.priority}</p>
                   <p className="font-medium text-gray-800">{item.label}</p>
                   <p className="text-brand-blue">{item.points}</p>
                 </li>

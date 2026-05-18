@@ -11,11 +11,11 @@ const pages = {
     meta: {
       vi: {
         title: "Danh sách trẻ em",
-        description: "Danh sách các em nhỏ đang nhận được sự hỗ trợ từ Quỹ Tony Buổi Sáng.",
+        description: "Danh sách các em nhỏ đang nhận được sự hỗ trợ từ Dự án Nuôi Em.",
       },
       en: {
         title: "Children",
-        description: "Children receiving support from the Tony Buoi Sang Fund.",
+        description: "Children receiving support from the Nuoi Em Project.",
       },
     },
     hero: {
@@ -46,7 +46,7 @@ const pages = {
       vi: {
         title: "Minh bạch tài chính",
         description:
-          "Chúng tôi cam kết công khai chi tiết mọi khoản đóng góp và chi tiêu. Niềm tin của cộng đồng chính là tài sản quý giá nhất của Quỹ Tony Buổi Sáng.",
+          "Chúng tôi cam kết công khai chi tiết mọi khoản đóng góp và chi tiêu. Niềm tin của cộng đồng chính là tài sản quý giá nhất của Dự án Nuôi Em.",
       },
       en: {
         title: "Financial transparency",
@@ -59,11 +59,11 @@ const pages = {
     meta: {
       vi: {
         title: "Bản tin & Hoạt động",
-        description: "Tin tức và hoạt động cộng đồng từ Quỹ Tony Buổi Sáng.",
+        description: "Tin tức và hoạt động cộng đồng từ Dự án Nuôi Em.",
       },
       en: {
         title: "News & Activities",
-        description: "News and community activities from the Tony Buoi Sang Fund.",
+        description: "News and community activities from the Nuoi Em Project.",
       },
     },
     hero: {
@@ -71,12 +71,12 @@ const pages = {
         eyebrow: "Cập nhật mới nhất",
         title: "Bản tin & Hoạt động",
         description:
-          "Những câu chuyện về hành trình gieo mầm yêu thương và các hoạt động cộng đồng từ Quỹ Tony Buổi Sáng.",
+          "Những câu chuyện về hành trình gieo mầm yêu thương và các hoạt động cộng đồng từ Dự án Nuôi Em.",
       },
       en: {
         eyebrow: "Latest updates",
         title: "News & Activities",
-        description: "Stories of compassion and community activities from the Tony Buoi Sang Fund.",
+        description: "Stories of compassion and community activities from the Nuoi Em Project.",
       },
     },
   },

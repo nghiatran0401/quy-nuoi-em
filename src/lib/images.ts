@@ -1,7 +1,22 @@
-const SITE_ORIGIN = "https://quytonybuoisang.com";
+import { brandVisual } from "@/config/brand-visual";
+import {
+  nuoiEmImage,
+  nuoiEmMediaLogos,
+  nuoiEmMemberGallery,
+} from "@/lib/nuoiem-images";
+import manifest from "@/data/nuoiem-images.json";
 
-export function siteImage(path: string) {
-  return `${SITE_ORIGIN}${path.startsWith("/") ? path : `/${path}`}`;
+const legacyPathMap: Record<string, string> = {
+  "/images/about/digital-heart-hero.png": nuoiEmImage("heSinhThai"),
+  "/images/scoring/reference.png": nuoiEmImage("processGuide"),
+};
+
+/** Resolve a site asset path to a local public URL. */
+export function siteImage(path: string): string {
+  if (path.startsWith("/")) {
+    return legacyPathMap[path] ?? path;
+  }
+  return `/${path.replace(/^\//, "")}`;
 }
 
 export function partnerLogo(slug: string) {
@@ -9,7 +24,18 @@ export function partnerLogo(slug: string) {
 }
 
 export const siteImages = {
-  heroHomepage: siteImage("/hero-hompage.jpg"),
-  ctaBackground: siteImage("/call-to-action-bg.png"),
-  member: (n: number) => siteImage(`/home-members/member-${n}.jpg`),
+  hero: nuoiEmImage("hero"),
+  heroHomepage: nuoiEmImage("hero"),
+  ctaBackground: nuoiEmImage("ctaVisit"),
+  donateQr: nuoiEmImage("donateQr"),
+  member: (index: number) => {
+    const src = nuoiEmMemberGallery[index - 1];
+    return src ?? nuoiEmMemberGallery[0] ?? nuoiEmImage("hero");
+  },
+  mou: (index: number) => {
+    const gallery = manifest.mouGallery;
+    return gallery[index - 1] ?? gallery[0] ?? nuoiEmImage("hero");
+  },
 };
+
+export { nuoiEmMediaLogos, nuoiEmMemberGallery, nuoiEmImage };

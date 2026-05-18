@@ -13,7 +13,7 @@ export function ArticleContent({ content }: ArticleContentProps) {
       {lines.map((line, index) => {
         if (line.startsWith("# ")) {
           return (
-            <h1 key={index} className="mb-6 font-heading text-3xl font-bold text-brand-blue">
+            <h1 key={index} className="mb-6 heading-display text-3xl font-bold">
               {line.slice(2)}
             </h1>
           );

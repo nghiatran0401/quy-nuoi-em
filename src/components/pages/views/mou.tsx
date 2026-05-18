@@ -2,9 +2,9 @@ import Image from "next/image";
 import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { getStaticPageHero, getUiLabel, mouContent } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
-import { siteImage } from "@/lib/images";
+import { siteImages } from "@/lib/images";
 
-const mouImages = ["/images/mou/mou-1.jpg", "/images/mou/mou-2.jpg", "/images/mou/mou-3.jpg"];
+const mouImages = [siteImages.mou(1), siteImages.mou(2), siteImages.mou(3)];
 
 export function MouView({ locale }: { locale: Locale }) {
   const content = mouContent[locale];
@@ -17,12 +17,12 @@ export function MouView({ locale }: { locale: Locale }) {
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {content.pillars.map((pillar) => (
             <article key={pillar.title} className="brand-card p-5">
-              <h3 className="font-semibold text-brand-green">{pillar.title}</h3>
+              <h3 className="font-semibold text-brand-accent">{pillar.title}</h3>
               <p className="mt-2 text-sm text-gray-600">{pillar.description}</p>
             </article>
           ))}
         </div>
-        <blockquote className="mt-10 border-l-4 border-brand-green pl-4 italic text-gray-700">
+        <blockquote className="mt-10 border-l-4 border-brand-accent pl-4 italic text-gray-700">
           {content.quote}
         </blockquote>
         <p className="mt-6 font-semibold text-brand-blue">
@@ -36,7 +36,7 @@ export function MouView({ locale }: { locale: Locale }) {
         <div className="grid gap-4 sm:grid-cols-3">
           {mouImages.map((src) => (
             <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-xl">
-              <Image src={siteImage(src)} alt="" fill className="object-cover" />
+              <Image src={src} alt="" fill className="object-cover" />
             </div>
           ))}
         </div>

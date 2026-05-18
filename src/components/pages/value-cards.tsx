@@ -13,7 +13,7 @@ export function ValueCards({ heading, items, footer }: ValueCardsProps) {
       <div className="grid gap-6 md:grid-cols-3">
         {items.map((item) => (
           <article key={item.title} className="brand-card p-6">
-            <h3 className="font-heading text-lg font-bold text-brand-green">{item.title}</h3>
+            <h3 className="font-heading text-lg font-bold text-brand-accent">{item.title}</h3>
             <p className="mt-3 text-gray-600">{item.description}</p>
           </article>
         ))}

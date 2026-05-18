@@ -27,7 +27,7 @@ type ChildrenTableProps = {
 };
 
 const selectClassName =
-  "rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue";
+  "rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent";
 
 export function ChildrenTable({
   records,
@@ -68,7 +68,7 @@ export function ChildrenTable({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={labels.searchPlaceholder}
-            className="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 text-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue"
+            className="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 text-sm focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
         <select
@@ -99,7 +99,7 @@ export function ChildrenTable({
 
       <div className="overflow-x-auto rounded-xl border border-gray-100 bg-white shadow-sm">
         <table className="min-w-full divide-y divide-gray-200 text-left text-sm">
-          <thead className="bg-gray-50 text-xs font-bold uppercase tracking-wide text-brand-blue">
+          <thead className="bg-brand-warm text-xs font-bold uppercase tracking-wide text-brand-blue">
             <tr>
               <th className="px-4 py-3">{labels.profileCode}</th>
               <th className="px-4 py-3">{labels.fullName}</th>
@@ -111,7 +111,7 @@ export function ChildrenTable({
           </thead>
           <tbody className="divide-y divide-gray-200">
             {filtered.map((child) => (
-              <tr key={child.code} className="hover:bg-brand-blue/5">
+              <tr key={child.code} className="hover:bg-brand-surface">
                 <td className="px-4 py-3 font-mono text-brand-blue">
                   <Link href={`/danh-sach-bao-tro/${child.code}`} className="hover:underline">
                     {child.code}

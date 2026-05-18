@@ -19,7 +19,7 @@ export const sponsorshipRoundData = [
 ];
 
 export const homeMemberImages = [
-  { src: "/home-members/member-1.jpg", alt: "Tập thể thành viên Quỹ Tony Buổi Sáng" },
+  { src: "/home-members/member-1.jpg", alt: "Tập thể thành viên Dự án Nuôi Em" },
   { src: "/home-members/member-2.jpg", alt: "Hoạt động thăm hỏi" },
   { src: "/home-members/member-3.jpg", alt: "Trao quà Tết" },
   { src: "/home-members/member-4.jpg", alt: "Hoạt động ngoại khóa" },

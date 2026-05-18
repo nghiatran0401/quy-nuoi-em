@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const child = getChildByCode(code);
   if (!child) return {};
 
-  const siteName = locale === "vi" ? "Quỹ Tony Buổi Sáng" : "Tony Buoi Sang Fund";
+  const siteName = locale === "vi" ? "Dự án Nuôi Em" : "Nuoi Em Project";
   return {
     title: `${child.name} (${child.code}) | ${siteName}`,
     description: `${child.name} — ${child.province}, ${child.status}`,
@@ -37,7 +37,7 @@ export default async function ChildDetailPage({ params }: PageProps) {
   const age = new Date().getFullYear() - child.birthYear;
 
   return (
-    <article className="min-h-screen bg-gray-50 pb-20">
+    <article className="min-h-screen bg-brand-surface pb-20">
       <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
         <Link
           href="/danh-sach-bao-tro"
@@ -47,7 +47,7 @@ export default async function ChildDetailPage({ params }: PageProps) {
           {getDataUiLabel(locale, "backToList")}
         </Link>
         <div className="brand-card p-8">
-          <p className="font-mono text-sm font-bold text-brand-green">{child.code}</p>
+          <p className="font-mono text-sm font-bold text-brand-accent">{child.code}</p>
           <h1 className="mt-2 font-heading text-3xl font-bold text-gray-900">{child.name}</h1>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <div>

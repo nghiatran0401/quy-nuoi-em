@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="mt-4 text-gray-600">Trang bạn tìm chưa có trong giai đoạn 1.</p>
       <Link
         href="/"
-        className="mt-8 rounded-full bg-brand-blue px-6 py-3 font-medium text-white hover:opacity-90"
+        className="mt-8 rounded-full bg-brand-accent px-6 py-3 font-medium text-white hover:opacity-90"
       >
         Về trang chủ
       </Link>

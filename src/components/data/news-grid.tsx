@@ -30,14 +30,14 @@ export function NewsGrid({ articles, readMoreLabel }: NewsGridProps) {
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
             ) : (
-              <div className="flex h-full min-h-[200px] items-center justify-center bg-gray-50 text-5xl text-gray-300">
+              <div className="flex h-full min-h-[200px] items-center justify-center bg-brand-warm text-5xl text-gray-300">
                 📰
               </div>
             )}
           </div>
           <div className="flex flex-1 flex-col justify-between p-6">
             <div>
-              <h2 className="mb-2 line-clamp-2 text-xl font-bold leading-tight text-gray-900 transition-colors group-hover:text-brand-blue">
+              <h2 className="mb-2 line-clamp-2 text-xl font-bold leading-tight text-gray-900 transition-colors group-hover:text-brand-accent">
                 <Link href={`/news/${article.slug}`}>{article.title}</Link>
               </h2>
               <div className="mb-3 flex flex-wrap items-center gap-4 text-xs text-gray-500">

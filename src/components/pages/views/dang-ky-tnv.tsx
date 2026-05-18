@@ -13,7 +13,7 @@ export function VolunteerView({ locale }: { locale: Locale }) {
           href={content.formUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-brand-green px-8 py-4 font-bold text-white hover:bg-brand-green/90"
+          className="btn-primary inline-flex items-center gap-2 px-8 py-4"
         >
           {getUiLabel(locale, "registerNow")}
           <ExternalLink className="h-5 w-5" />
@@ -39,7 +39,7 @@ export function VolunteerView({ locale }: { locale: Locale }) {
         <div className="grid gap-6 md:grid-cols-3">
           {content.audiences.map((audience) => (
             <article key={audience.title} className="brand-card p-6">
-              <h3 className="font-semibold text-brand-green">{audience.title}</h3>
+              <h3 className="font-semibold text-brand-accent">{audience.title}</h3>
               <p className="mt-3 text-gray-600">{audience.description}</p>
             </article>
           ))}

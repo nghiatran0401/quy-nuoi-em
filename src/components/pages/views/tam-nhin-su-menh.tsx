@@ -27,14 +27,14 @@ export function VisionView({ locale }: { locale: Locale }) {
             : "These children will grow up appreciating what they have, living responsibly, and giving back to their communities."}
         </p>
       </div>
-      <p className="mt-10 text-center text-sm font-bold uppercase tracking-widest text-brand-green">
+      <p className="mt-10 text-center text-sm font-bold uppercase tracking-widest text-brand-accent">
         {locale === "vi" ? "Giá trị cốt lõi" : "Core values"}
       </p>
       <ValueCards heading={values.heading} items={values.items} footer={values.cta} />
       <p className="text-center">
         <Link
           href="/bao-cao"
-          className="inline-flex rounded-full bg-brand-blue px-8 py-3 font-bold text-white hover:bg-brand-blue/90"
+          className="inline-flex rounded-full bg-brand-accent px-8 py-3 font-bold text-white hover:bg-brand-accent-dark"
         >
           {getUiLabel(locale, "viewReports")}
         </Link>

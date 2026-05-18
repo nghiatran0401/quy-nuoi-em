@@ -1,9 +1,9 @@
 "use client";
 
 import { Heart, Menu, X } from "lucide-react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { BrandLogo } from "@/components/brand/logo";
 import { Link } from "@/i18n/navigation";
 import { mainNavItems } from "@/lib/navigation";
 import { LocaleSwitcher } from "./locale-switcher";
@@ -13,19 +13,12 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/20 bg-white/70 shadow-sm backdrop-blur-md transition-all duration-300 supports-[backdrop-filter]:bg-white/60">
+    <nav className="site-header transition-all duration-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <div className="flex shrink-0 items-center">
             <Link href="/" className="block" onClick={() => setMobileOpen(false)}>
-              <Image
-                src="/logo/logo-quytnbs.svg"
-                alt="Quỹ Tony Buổi Sáng"
-                width={120}
-                height={48}
-                className="h-12 w-auto"
-                priority
-              />
+              <BrandLogo priority className="h-11 w-auto" />
             </Link>
           </div>
 
@@ -34,7 +27,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-600 transition-colors hover:text-brand-blue"
+                className="nav-link"
               >
                 {t(item.labelKey)}
               </Link>
@@ -45,9 +38,9 @@ export function SiteHeader() {
             <LocaleSwitcher />
             <Link
               href="/dong-gop"
-              className="flex items-center gap-2 rounded-full bg-brand-blue px-6 py-2 font-medium text-white transition-all hover:opacity-90"
+              className="btn-primary-sm"
             >
-              <Heart className="h-5 w-5 fill-current text-brand-green" aria-hidden />
+              <Heart className="h-5 w-5 fill-current text-brand-highlight" aria-hidden />
               <span>{t("donate")}</span>
             </Link>
           </div>
@@ -55,7 +48,7 @@ export function SiteHeader() {
           <div className="flex items-center md:hidden">
             <button
               type="button"
-              className="p-2 text-gray-600 transition-colors hover:text-brand-blue focus:outline-none"
+              className="p-2 text-brand-muted transition-colors hover:text-brand-ink focus:outline-none"
               aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((open) => !open)}
@@ -66,12 +59,12 @@ export function SiteHeader() {
         </div>
 
         {mobileOpen ? (
-          <div className="space-y-1 border-t border-gray-100 pb-4 pt-3 md:hidden">
+          <div className="space-y-1 border-t border-brand-border pb-4 pt-3 md:hidden">
             {mainNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-50 hover:text-brand-blue"
+                className="block rounded-lg px-3 py-2 text-brand-ink hover:bg-brand-surface"
                 onClick={() => setMobileOpen(false)}
               >
                 {t(item.labelKey)}
@@ -81,10 +74,10 @@ export function SiteHeader() {
               <LocaleSwitcher />
               <Link
                 href="/dong-gop"
-                className="flex flex-1 items-center justify-center gap-2 rounded-full bg-brand-blue px-4 py-2 font-medium text-white"
+                className="btn-primary-sm flex flex-1 justify-center"
                 onClick={() => setMobileOpen(false)}
               >
-                <Heart className="h-5 w-5 fill-current text-brand-green" aria-hidden />
+                <Heart className="h-5 w-5 fill-current text-brand-highlight" aria-hidden />
                 <span>{t("donate")}</span>
               </Link>
             </div>

@@ -15,7 +15,7 @@ export function ChildrenSummaryCards({ summary, labels }: ChildrenSummaryProps) 
   const items = [
     { value: summary.total, label: labels.totalChildren, color: "text-gray-900" },
     { value: summary.active, label: labels.active, color: "text-green-700" },
-    { value: summary.completed, label: labels.completed, color: "text-blue-700" },
+    { value: summary.completed, label: labels.completed, color: "text-brand-blue" },
     { value: summary.terminated, label: labels.terminated, color: "text-red-700" },
   ];
 
@@ -46,7 +46,7 @@ export function ChildrenSummaryCards({ summary, labels }: ChildrenSummaryProps) 
             title={`${labels.active}: ${summary.active} (${activePct}%)`}
           />
           <div
-            className="bg-blue-500 transition-all"
+            className="bg-brand-accent transition-all"
             style={{ width: `${completedPct}%` }}
             title={`${labels.completed}: ${summary.completed} (${completedPct}%)`}
           />
@@ -62,7 +62,7 @@ export function ChildrenSummaryCards({ summary, labels }: ChildrenSummaryProps) 
             {labels.active}: {summary.active} ({activePct}%)
           </span>
           <span className="flex items-center gap-1.5 text-gray-600">
-            <span className="inline-block h-2.5 w-2.5 rounded-full bg-blue-500" />
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-brand-blue" />
             {labels.completed}: {summary.completed} ({completedPct}%)
           </span>
           <span className="flex items-center gap-1.5 text-gray-600">

@@ -7,9 +7,9 @@ export function DataPageHeader({ eyebrow, title, description }: DataPageHeaderPr
     <div className="border-b border-gray-200 bg-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {eyebrow ? (
-          <p className="mb-2 text-sm font-bold uppercase tracking-widest text-brand-green">{eyebrow}</p>
+          <p className="eyebrow mb-2">{eyebrow}</p>
         ) : null}
-        <h1 className="mb-4 text-3xl font-bold text-gray-900">{title}</h1>
+        <h1 className="heading-display mb-4 text-3xl">{title}</h1>
         {description ? <p className="max-w-2xl text-gray-600">{description}</p> : null}
       </div>
     </div>

@@ -16,16 +16,16 @@ export function HomeNewsSection({ locale }: Props) {
   const articles = getLatestNews(3);
 
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-brand-surface py-20">
       <div className="container mx-auto px-4">
         <div className="mb-12 flex flex-col items-end justify-between gap-4 md:flex-row">
           <div>
-            <h2 className="mb-2 text-sm font-bold uppercase tracking-widest text-brand-green">{copy.eyebrow}</h2>
-            <h3 className="font-heading text-3xl font-bold text-brand-blue md:text-4xl">{copy.title}</h3>
+            <h2 className="eyebrow mb-2">{copy.eyebrow}</h2>
+            <h3 className="heading-display text-3xl font-bold md:text-4xl">{copy.title}</h3>
           </div>
           <Link
             href="/news"
-            className="group flex items-center gap-2 font-bold text-brand-blue transition-all hover:gap-3"
+            className="link-accent group flex items-center gap-2 transition-all hover:gap-3"
           >
             {copy.viewAll}
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -35,10 +35,10 @@ export function HomeNewsSection({ locale }: Props) {
           {articles.map((article) => (
             <article
               key={article.slug}
-              className="group overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="brand-card-interactive group overflow-hidden"
             >
               <div className="flex h-full flex-col md:flex-row">
-                <div className="relative aspect-video w-full overflow-hidden bg-gray-100 md:aspect-auto md:w-2/5">
+                <div className="relative aspect-video w-full overflow-hidden bg-brand-surface md:aspect-auto md:w-2/5">
                   {article.imageUrl ? (
                     <Image
                       src={article.imageUrl}
@@ -48,36 +48,36 @@ export function HomeNewsSection({ locale }: Props) {
                       sizes="(max-width: 768px) 100vw, 240px"
                     />
                   ) : (
-                    <div className="flex min-h-[200px] h-full w-full items-center justify-center bg-gray-50 text-5xl text-gray-300">
+                    <div className="flex min-h-[200px] h-full w-full items-center justify-center bg-brand-warm text-5xl text-gray-300">
                       📰
                     </div>
                   )}
                 </div>
                 <div className="flex flex-1 flex-col justify-between p-6">
                   <div>
-                    <h3 className="mb-2 line-clamp-2 text-xl font-bold leading-tight text-gray-900 transition-colors group-hover:text-brand-blue">
+                    <h3 className="mb-2 line-clamp-2 text-xl font-bold leading-tight text-brand-ink transition-colors group-hover:text-brand-accent">
                       <Link href={`/news/${article.slug}`}>{article.title}</Link>
                     </h3>
-                    <div className="mb-3 flex flex-wrap items-center gap-4 text-xs text-gray-500">
+                    <div className="mb-3 flex flex-wrap items-center gap-4 text-xs text-brand-muted">
                       <div className="flex items-center gap-1.5">
-                        <User className="h-3.5 w-3.5 text-brand-blue" />
+                        <User className="h-3.5 w-3.5 text-brand-green" />
                         <span className="font-medium">{copy.author}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Calendar className="h-3.5 w-3.5 text-brand-blue" />
+                        <Calendar className="h-3.5 w-3.5 text-brand-green" />
                         <span>{formatNewsDate(article.date)}</span>
                       </div>
                     </div>
                     {article.excerpt ? (
-                      <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-gray-500">
+                      <p className="text-body mb-4 line-clamp-3 text-sm">
                         {article.excerpt.replace(/[*#\[\]]/g, "").slice(0, 160)}
                       </p>
                     ) : null}
                   </div>
-                  <div className="mt-auto border-t border-gray-50 pt-4">
+                  <div className="mt-auto border-t border-brand-border/60 pt-4">
                     <Link
                       href={`/news/${article.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition-all hover:gap-3"
+                      className="link-accent inline-flex items-center gap-2 text-sm transition-all hover:gap-3"
                     >
                       {copy.readMore}
                       <ChevronRight className="h-4 w-4" />
