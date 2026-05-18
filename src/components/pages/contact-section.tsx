@@ -21,7 +21,7 @@ export function ContactSection({
   donateWarningLabel,
 }: ContactSectionProps) {
   return (
-    <section className="mx-auto max-w-4xl px-4 pb-16">
+    <section>
       <h2 className="mb-8 font-heading text-2xl font-bold text-brand-blue">{heading}</h2>
       <div className="grid gap-6 md:grid-cols-3">
         <article className="brand-card p-6">

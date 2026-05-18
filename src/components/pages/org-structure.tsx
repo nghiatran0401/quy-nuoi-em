@@ -12,7 +12,7 @@ const { orgChart, departments } = orgData as {
 
 export function OrgStructure({ chartTitle }: OrgStructureProps) {
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-16">
+    <section>
       <h2 className="mb-8 text-center font-heading text-2xl font-bold text-brand-blue">{chartTitle}</h2>
       <div className="mb-12 flex flex-wrap justify-center gap-3">
         {orgChart.map((node) => (

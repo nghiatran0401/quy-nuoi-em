@@ -1,7 +1,13 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { StatsGrid } from "@/components/pages/stats-grid";
-import { homeStats } from "@/content/shared/site-stats";
-import { Link } from "@/i18n/navigation";
+import { setRequestLocale } from "next-intl/server";
+import { CallToActionSection } from "@/components/home/call-to-action-section";
+import { FaqSection } from "@/components/home/faq-section";
+import { HeroSection } from "@/components/home/hero-section";
+import { HomeNewsSection } from "@/components/home/home-news-section";
+import { HomeStatsSection } from "@/components/home/home-stats-section";
+import { MembersSection } from "@/components/home/members-section";
+import { SponsorshipRoundsSection } from "@/components/home/sponsorship-rounds-section";
+import { PartnersMarquee } from "@/components/pages/partners-marquee";
+import { partnersHomeTitle } from "@/content/home-sections";
 import type { Locale } from "@/i18n/config";
 
 type HomePageProps = {
@@ -11,46 +17,18 @@ type HomePageProps = {
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("home");
+  const resolvedLocale = locale as Locale;
 
   return (
-    <section className="relative overflow-hidden bg-white py-12 lg:py-20">
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-20">
-          <div className="w-full text-center lg:w-1/2 lg:text-left">
-            <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-brand-green">
-              {t("eyebrow")}
-            </h2>
-            <h1 className="mb-6 font-heading text-4xl font-black leading-tight text-brand-blue md:text-6xl">
-              {t("title")}
-            </h1>
-            <p className="mb-10 text-justify font-body text-lg leading-relaxed text-gray-600 md:text-xl lg:text-left">
-              {t("description")}
-            </p>
-            <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-              <Link
-                href="/danh-sach-bao-tro"
-                className="rounded-full bg-brand-blue px-8 py-4 text-center text-lg font-bold text-white transition-all hover:bg-brand-blue/90 hover:shadow-lg"
-              >
-                {t("sponsorNow")}
-              </Link>
-              <Link
-                href="/about"
-                className="rounded-full border-2 border-brand-green bg-white px-8 py-4 text-center text-lg font-bold text-brand-green transition-all hover:bg-brand-green hover:text-white"
-              >
-                {t("learnMore")}
-              </Link>
-            </div>
-          </div>
-
-          <div className="relative w-full lg:w-1/2">
-            <div className="absolute top-1/2 left-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-green/10 blur-3xl" />
-            <div className="rotate-2 rounded-3xl border-4 border-white bg-gradient-to-br from-brand-blue/10 via-white to-brand-green/20 p-10 shadow-xl transition-transform duration-500 hover:rotate-0">
-              <StatsGrid stats={homeStats[locale as Locale]} columns={2} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div className="relative">
+      <HeroSection />
+      <HomeStatsSection locale={resolvedLocale} />
+      <SponsorshipRoundsSection locale={resolvedLocale} />
+      <CallToActionSection locale={resolvedLocale} />
+      <MembersSection locale={resolvedLocale} />
+      <HomeNewsSection locale={resolvedLocale} />
+      <FaqSection locale={resolvedLocale} />
+      <PartnersMarquee title={partnersHomeTitle[resolvedLocale]} variant="home" />
+    </div>
   );
 }

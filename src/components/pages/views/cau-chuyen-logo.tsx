@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PageHero } from "@/components/pages/page-hero";
+import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { getStaticPageHero, logoStorySections } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
 
@@ -7,9 +7,8 @@ export function LogoStoryView({ locale }: { locale: Locale }) {
   const sections = logoStorySections[locale];
 
   return (
-    <article className="pb-16">
-      <PageHero {...getStaticPageHero("logoStory", locale)} />
-      <div className="mx-auto max-w-4xl space-y-12 px-4">
+    <StaticPageShell {...getStaticPageHero("logoStory", locale)} contentClassName="max-w-4xl">
+      <div className="space-y-12">
         {sections.map((section) => (
           <section key={section.title}>
             <h2 className="font-heading text-2xl font-bold text-brand-blue">{section.title}</h2>
@@ -44,6 +43,6 @@ export function LogoStoryView({ locale }: { locale: Locale }) {
           <Image src="/logo/logo-quytnbs.svg" alt="Logo" width={280} height={120} className="h-auto w-64" />
         </div>
       </div>
-    </article>
+    </StaticPageShell>
   );
 }

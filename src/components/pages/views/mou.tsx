@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PageHero } from "@/components/pages/page-hero";
+import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { getStaticPageHero, getUiLabel, mouContent } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
 import { siteImage } from "@/lib/images";
@@ -10,9 +10,8 @@ export function MouView({ locale }: { locale: Locale }) {
   const content = mouContent[locale];
 
   return (
-    <article className="pb-16">
-      <PageHero {...getStaticPageHero("mou", locale)} />
-      <div className="mx-auto max-w-3xl px-4">
+    <StaticPageShell {...getStaticPageHero("mou", locale)} contentClassName="max-w-5xl">
+      <div className="max-w-3xl">
         <h2 className="font-heading text-xl font-bold text-brand-blue">{getUiLabel(locale, "whatIsMou")}</h2>
         <p className="mt-4 text-gray-600">{content.definition}</p>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -30,7 +29,7 @@ export function MouView({ locale }: { locale: Locale }) {
           <a href={`mailto:${content.cta.split(": ")[1]}`}>{content.cta}</a>
         </p>
       </div>
-      <section className="mx-auto mt-12 max-w-5xl px-4">
+      <section className="mt-12">
         <h2 className="mb-6 text-center font-heading text-xl font-bold text-brand-blue">
           {getUiLabel(locale, "mouGallery")}
         </h2>
@@ -42,6 +41,6 @@ export function MouView({ locale }: { locale: Locale }) {
           ))}
         </div>
       </section>
-    </article>
+    </StaticPageShell>
   );
 }

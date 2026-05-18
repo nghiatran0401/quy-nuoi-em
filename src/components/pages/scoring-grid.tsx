@@ -19,7 +19,7 @@ export function ScoringGrid({
   processLinkLabel,
 }: ScoringGridProps) {
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-16">
+    <div>
       <div className="mb-10 text-center">
         <p className="text-sm font-semibold text-gray-500">{totalLabel}</p>
         <p className="font-heading text-4xl font-black text-brand-blue">

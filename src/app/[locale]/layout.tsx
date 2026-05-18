@@ -1,18 +1,11 @@
-import { Quicksand } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
+import { HtmlLang } from "@/components/layout/html-lang";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { locales, type Locale } from "@/i18n/config";
-import "../globals.css";
-
-const quicksand = Quicksand({
-  subsets: ["latin", "vietnamese"],
-  variable: "--font-quicksand",
-  display: "swap",
-});
 
 type LocaleLayoutProps = {
   children: ReactNode;
@@ -44,16 +37,13 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body className={`${quicksand.variable} font-sans antialiased`}>
-        <NextIntlClientProvider messages={messages}>
-          <div className="flex min-h-screen flex-col">
-            <SiteHeader />
-            <main className="flex-grow">{children}</main>
-            <SiteFooter />
-          </div>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <HtmlLang />
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        <main className="flex-grow">{children}</main>
+        <SiteFooter />
+      </div>
+    </NextIntlClientProvider>
   );
 }

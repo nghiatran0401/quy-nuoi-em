@@ -6,7 +6,7 @@ type ProcessStepsProps = {
 
 export function ProcessSteps({ steps }: ProcessStepsProps) {
   return (
-    <ol className="mx-auto max-w-4xl space-y-6 px-4">
+    <ol className="space-y-6">
       {steps.map((step, index) => (
         <li key={step.round} className="brand-card flex gap-6 p-6">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-blue font-heading text-lg font-bold text-white">

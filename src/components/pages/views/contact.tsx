@@ -1,5 +1,5 @@
 import { ContactSection } from "@/components/pages/contact-section";
-import { PageHero } from "@/components/pages/page-hero";
+import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { contactInfo, getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
 
@@ -7,8 +7,7 @@ export function ContactView({ locale }: { locale: Locale }) {
   const info = contactInfo[locale];
 
   return (
-    <article className="pb-16">
-      <PageHero {...getStaticPageHero("contact", locale)} />
+    <StaticPageShell {...getStaticPageHero("contact", locale)}>
       <ContactSection
         heading={getUiLabel(locale, "contactInfo")}
         address={info.address}
@@ -18,6 +17,6 @@ export function ContactView({ locale }: { locale: Locale }) {
         warning={info.warning}
         donateWarningLabel={getUiLabel(locale, "donateWarning")}
       />
-    </article>
+    </StaticPageShell>
   );
 }

@@ -1,5 +1,5 @@
 import { ExternalLink } from "lucide-react";
-import { PageHero } from "@/components/pages/page-hero";
+import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { getStaticPageHero, getUiLabel, volunteerContent } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
 
@@ -7,9 +7,8 @@ export function VolunteerView({ locale }: { locale: Locale }) {
   const content = volunteerContent[locale];
 
   return (
-    <article className="pb-16">
-      <PageHero {...getStaticPageHero("volunteer", locale)} />
-      <div className="mx-auto max-w-4xl px-4 text-center">
+    <StaticPageShell {...getStaticPageHero("volunteer", locale)} contentClassName="max-w-5xl">
+      <div className="text-center">
         <a
           href={content.formUrl}
           target="_blank"
@@ -20,7 +19,7 @@ export function VolunteerView({ locale }: { locale: Locale }) {
           <ExternalLink className="h-5 w-5" />
         </a>
       </div>
-      <section className="mx-auto mt-12 max-w-4xl px-4">
+      <section className="mt-12">
         <h2 className="font-heading text-xl font-bold text-brand-blue">{content.roles.title}</h2>
         <p className="mb-4 text-gray-500">
           {locale === "vi" ? "Những việc làm nhỏ bé nhưng mang lại ý nghĩa lớn lao" : "Small acts with great meaning"}
@@ -33,7 +32,7 @@ export function VolunteerView({ locale }: { locale: Locale }) {
           ))}
         </ul>
       </section>
-      <section className="mx-auto mt-12 max-w-5xl px-4">
+      <section className="mt-12">
         <h2 className="mb-6 text-center font-heading text-xl font-bold text-brand-blue">
           {locale === "vi" ? "Thành phần tham gia" : "Who can join"}
         </h2>
@@ -47,6 +46,6 @@ export function VolunteerView({ locale }: { locale: Locale }) {
         </div>
         <p className="mt-8 text-center text-gray-600">{content.commitment}</p>
       </section>
-    </article>
+    </StaticPageShell>
   );
 }

@@ -70,8 +70,16 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
       },
     },
     hero: {
-      vi: { title: "TẦM NHÌN, SỨ MỆNH" },
-      en: { title: "VISION & MISSION" },
+      vi: {
+        title: "TẦM NHÌN, SỨ MỆNH",
+        description:
+          "Giúp trẻ em thiệt thòi không may mồ côi cha mẹ trên khắp mọi miền tổ quốc được tiếp bước đến trường cho đến tuổi trưởng thành và có thể tự lao động kiếm sống.",
+      },
+      en: {
+        title: "VISION & MISSION",
+        description:
+          "Help disadvantaged orphan children nationwide stay in school through adulthood and become self-sufficient.",
+      },
     },
   },
   history: {
