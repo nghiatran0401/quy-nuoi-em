@@ -127,12 +127,29 @@
     @apply font-semibold text-brand-accent-dark transition-colors hover:text-brand-accent;
   }
 
+  .back-link {
+    @apply inline-flex items-center gap-2 text-sm font-semibold text-brand-accent-dark transition-colors hover:text-brand-accent;
+  }
+
+  .heading-section {
+    @apply font-heading text-2xl font-bold text-brand-ink md:text-3xl;
+  }
+
   .nav-link {
     @apply font-medium text-brand-muted transition-colors hover:text-brand-green;
   }
 
   .site-header {
     @apply sticky top-0 z-50 border-b border-brand-border/50 bg-white/90 shadow-[var(--shadow-brand-soft)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/85;
+  }
+
+  /* Transparent logo — subtle halo so mark reads on white header */
+  .logo-wrap {
+    @apply rounded-xl bg-gradient-to-br from-brand-peach/25 via-transparent to-brand-sky-soft/40 px-1.5 py-0.5;
+  }
+
+  .logo-wrap[data-logo-variant="wide"] {
+    @apply bg-transparent px-0 py-0;
   }
 
   /* Light, hopeful page heroes — no dark bands */

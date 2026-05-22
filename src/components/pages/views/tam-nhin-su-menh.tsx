@@ -16,7 +16,7 @@ export function VisionView({ locale }: { locale: Locale }) {
 
   return (
     <StaticPageShell {...hero} contentClassName="max-w-3xl">
-      <div className="space-y-6 text-lg leading-relaxed text-brand-muted">
+      <div className="text-body space-y-6 text-lg">
         {mission.intro.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
@@ -34,7 +34,7 @@ export function VisionView({ locale }: { locale: Locale }) {
       <p className="text-center">
         <Link
           href="/bao-cao"
-          className="inline-flex rounded-full bg-brand-accent px-8 py-3 font-bold text-white hover:bg-brand-accent-dark"
+          className="btn-primary"
         >
           {getUiLabel(locale, "viewReports")}
         </Link>

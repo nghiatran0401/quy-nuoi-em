@@ -122,7 +122,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         eyebrow: "Nhận diện thương hiệu",
         title: "Câu Chuyện Logo",
         description:
-          "Như trẻ vào tuổi trưởng thành cần Căn cước công dân, Quỹ khi phát triển cũng cần pháp nhân và logo mới để khẳng định mình.",
+          "Như trẻ vào tuổi trưởng thành cần Căn cước công dân, Dự án Nuôi Em khi phát triển cũng cần pháp nhân và logo mới để khẳng định mình.",
       },
       en: {
         eyebrow: "Brand identity",
@@ -136,7 +136,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Cơ cấu tổ chức",
-        description: "Sơ đồ tổ chức và đội ngũ các Ban chức năng của Quỹ.",
+        description: "Sơ đồ tổ chức và đội ngũ các Ban chức năng của Dự án Nuôi Em.",
       },
       en: {
         title: "Organization",
@@ -257,7 +257,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
       vi: {
         title: "Đăng ký tình nguyện viên",
-        description: "Đăng ký đồng hành cùng Quỹ và các em nhỏ được bảo trợ.",
+        description: "Đăng ký đồng hành cùng Dự án Nuôi Em và các em nhỏ được bảo trợ.",
       },
       en: {
         title: "Volunteer Registration",
@@ -269,7 +269,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         eyebrow: "Chung tay vì cộng đồng",
         title: "Đăng ký trở thành Tình nguyện viên",
         description:
-          "Dự án Nuôi Em cảm ơn Bạn đã quan tâm đăng ký trở thành Tình nguyện viên đồng hành với Quỹ và các con trẻ mồ côi đang được bảo trợ!",
+          "Dự án Nuôi Em cảm ơn Bạn đã quan tâm đăng ký trở thành Tình nguyện viên đồng hành với Dự án Nuôi Em và các con trẻ mồ côi đang được bảo trợ!",
       },
       en: {
         eyebrow: "For the community",
@@ -306,7 +306,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
   members: {
     meta: {
       vi: {
-        title: "Thành viên Quỹ",
+        title: "Đối tác đồng hành",
         description: "Các doanh nghiệp đồng hành và tài trợ Dự án Nuôi Em.",
       },
       en: {
@@ -317,9 +317,9 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     hero: {
       vi: {
         eyebrow: "Đối tác & Đồng hành",
-        title: "Thành viên Quỹ",
+        title: "Đối tác đồng hành",
         description:
-          "Những cánh tay nối dài yêu thương — Cùng chung tay vì tương lai trẻ em Việt Nam. Quỹ trân trọng sự đồng hành quý báu của các Doanh nghiệp thành viên.",
+          "Những cánh tay nối dài yêu thương — Cùng chung tay vì tương lai trẻ em Việt Nam. Dự án Nuôi Em trân trọng sự đồng hành quý báu của các Doanh nghiệp thành viên.",
       },
       en: {
         eyebrow: "Partners & Supporters",
@@ -343,7 +343,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     hero: {
       vi: {
         eyebrow: "CƠ HỘI NGHỀ NGHIỆP",
-        title: "Nhân viên Thư ký Quỹ",
+        title: "Nhân viên Thư ký Dự án Nuôi Em",
         description:
           "Cùng Dự án Nuôi Em tiếp bước tới trường và sẻ chia yêu thương đến những hoàn cảnh khó khăn.",
       },
@@ -389,16 +389,16 @@ export const visionValues: Localized<{ heading: string; items: ValueCard[]; cta:
       {
         title: "CÔNG TÂM",
         description:
-          "Mọi quy trình, hoạt động đều vì mục đích chung của Quỹ, chính trực, không tư lợi, thiên vị hay chịu sự tác động của bên thứ ba.",
+          "Mọi quy trình, hoạt động đều vì mục đích chung của Dự án Nuôi Em, chính trực, không tư lợi, thiên vị hay chịu sự tác động của bên thứ ba.",
       },
       {
         title: "CÔNG KHAI",
         description:
-          "Mọi thông tin đều được công khai, minh bạch tại Fanpage và các phương tiện truyền thông chính thức của Quỹ.",
+          "Mọi thông tin đều được công khai, minh bạch tại Fanpage và các phương tiện truyền thông chính thức của Dự án Nuôi Em.",
       },
       {
         title: "CÔNG BẰNG",
-        description: "Các hoạt động của Quỹ luôn đảm bảo công bằng dựa trên các tiêu chí đã đặt ra.",
+        description: "Các hoạt động của Dự án Nuôi Em luôn đảm bảo công bằng dựa trên các tiêu chí đã đặt ra.",
       },
     ],
     cta: "Chúng tôi cam kết duy trì sự minh bạch và công tâm trong mọi hoạt động để xứng đáng với niềm tin của cộng đồng.",
@@ -426,7 +426,7 @@ export const visionValues: Localized<{ heading: string; items: ValueCard[]; cta:
 
 export const historyTimeline: Localized<TimelineEvent[]> = {
   vi: [
-    { date: "Tháng 10/2020", title: "Tiền thân nhóm Quỹ", description: "Nhóm trẻ thành lập để cứu trợ bà con miền Trung bị thiệt hại do lũ lụt." },
+    { date: "Tháng 10/2020", title: "Tiền thân nhóm thiện nguyện", description: "Nhóm trẻ thành lập để cứu trợ bà con miền Trung bị thiệt hại do lũ lụt." },
     { date: "Tháng 12/2020", title: "17 trẻ được bảo trợ", description: "Tổng số trẻ mồ côi được nhận bảo trợ là 17 trẻ." },
     { date: "Tháng 01/2021", title: "Thành lập các Ban", description: "Ban điều hành, xét duyệt, truyền thông, thư ký, tài chính." },
     { date: "Tháng 12/2021", title: "77 trẻ được bảo trợ" },
@@ -459,10 +459,10 @@ export const logoStorySections: Localized<
 > = {
   vi: [
     {
-      title: "Bỗng dưng muốn bé",
+      title: "Ngọn lửa nuôi dưỡng",
       paragraphs: [
-        "Là muốn bé lại như ngày xưa. Nhưng quy luật tự nhiên là phát triển — ai rồi cũng sẽ lớn. Và Dự án Nuôi Em cũng vậy.",
-        "Logo Quỹ là tổ hợp hình và chữ, gồm 2 màu xanh lá và xanh dương trên nền trắng — diện mạo mới khẳng định sứ mệnh lớn lao hơn.",
+        "Logo Dự án Nuôi Em là biểu tượng của sự ấm áp, nghị lực và lòng trắc ẩn — giống như một ngọn lửa nhỏ được thắp lên để sưởi ấm hành trình của các em.",
+        "Biểu tượng kết hợp ngọn lửa cách điệo với dòng chữ “DỰ ÁN NUÔI EM”, trên nền sáng — thể hiện tinh thần Open Hearts: gần gũi, minh bạch và đầy hy vọng.",
       ],
     },
     {
@@ -470,17 +470,18 @@ export const logoStorySections: Localized<
       paragraphs: [],
       bullets: [
         {
-          title: "Phần Hình",
+          title: "Phần hình — ngọn lửa",
           items: [
-            "Mô phỏng hình người với hai tay hướng lên, vươn vai đón bình minh.",
-            "Thân người cách điệu từ chữ V — Việt Nam kiêu hãnh vươn cao.",
-            "Hai vòng cung xanh lá tượng trưng sự bao bọc, dung dưỡng, tiếp nối các thế hệ.",
+            "Ngọn lửa tượng trưng cho nghị lực, sự sưởi ấm và niềm tin được lan tỏa từ cộng đồng.",
+            "Đường cong mềm mại gợi sự bao bọc, dung dưỡng — mỗi đóng góp là một tia sáng thêm vào ngọn lửa chung.",
+            "Tông cam san hô là điểm nhấn thương hiệu, hài hòa với bảng màu sky – peach – sage trên website.",
           ],
         },
         {
-          title: "Phần Chữ",
+          title: "Phần chữ",
           items: [
-            'Dòng chữ "DỰ ÁN NUÔI EM" viết hoa, màu xanh dương đậm — tri ân Tác giả Nuôi Em.',
+            'Dòng chữ “DỰ ÁN NUÔI EM” viết hoa, rõ ràng — tên gọi chính thức của dự án thiện nguyện Nuôi cơm trưa và giúp trẻ tới trường.',
+            "Phiên bản ngang có thêm dòng “Ánh Sáng Núi Rừng” khi cần nhận diện đối tác sáng lập.",
           ],
         },
       ],
@@ -489,18 +490,19 @@ export const logoStorySections: Localized<
       title: "Ý nghĩa màu sắc",
       paragraphs: [],
       colors: [
-        { name: "Màu Trắng", meaning: "Nền tảng & Sự minh bạch" },
-        { name: "Màu Xanh Dương", meaning: "Niềm tin & Sự vững chắc" },
-        { name: "Màu Xanh Lá", meaning: "Hy vọng & Sự phát triển" },
+        { name: "Cam san hô (#f0784a)", meaning: "Ấm áp, nghị lực & điểm nhấn thương hiệu" },
+        { name: "Vàng kim (#ffe4a8)", meaning: "Hy vọng, ánh sáng & sự lan tỏa yêu thương" },
+        { name: "Đỏ ấm (#d85a52)", meaning: "Trái tim, sự sẻ chia & cam kết vì trẻ em" },
+        { name: "Xanh sage", meaning: "Phát triển bền vững & sự tin cậy" },
       ],
     },
   ],
   en: [
     {
-      title: "Growing up",
+      title: "A flame that nurtures",
       paragraphs: [
-        "We sometimes wish to be small again — yet growth is natural. The Nuoi Em Project has matured the same way.",
-        "The logo combines icon and wordmark in green and blue on white — a new identity for a greater mission.",
+        "The Nuoi Em Project logo stands for warmth, resilience, and compassion — like a small flame lit to guide children on their journey.",
+        "The mark pairs a stylized flame with the wordmark “NUOI EM PROJECT” on a light background — aligned with our Open Hearts visual system.",
       ],
     },
     {
@@ -508,16 +510,19 @@ export const logoStorySections: Localized<
       paragraphs: [],
       bullets: [
         {
-          title: "Icon",
+          title: "Icon — the flame",
           items: [
-            "A stylized figure with raised arms greeting a new dawn.",
-            "Body shaped from the letter V — proud Vietnam reaching upward.",
-            "Green arcs symbolize nurture and continuity across generations.",
+            "The flame symbolizes hope, warmth, and community energy.",
+            "Soft curves suggest care and protection around every child.",
+            "Coral orange is the primary accent, paired with sky, peach, and sage on the site.",
           ],
         },
         {
           title: "Wordmark",
-          items: ['"TONY BUOI SANG FUND" in bold blue — honoring author Nuoi Em.'],
+          items: [
+            '“NUOI EM PROJECT” in clear capitals — the official name of the charity initiative.',
+            "A horizontal lockup includes “Anh Sang Nui Rung” when partner recognition is needed.",
+          ],
         },
       ],
     },
@@ -525,9 +530,10 @@ export const logoStorySections: Localized<
       title: "Color meaning",
       paragraphs: [],
       colors: [
-        { name: "White", meaning: "Foundation & transparency" },
-        { name: "Blue", meaning: "Trust & stability" },
-        { name: "Green", meaning: "Hope & growth" },
+        { name: "Coral (#f0784a)", meaning: "Warmth, energy & brand accent" },
+        { name: "Gold (#ffe4a8)", meaning: "Hope, light & spreading kindness" },
+        { name: "Warm red (#d85a52)", meaning: "Heart, sharing & commitment" },
+        { name: "Sage green", meaning: "Sustainable growth & trust" },
       ],
     },
   ],
@@ -539,7 +545,7 @@ export const processSteps: Localized<ProcessStep[]> = {
       round: "Vòng 01",
       title: "THU THẬP THÔNG TIN",
       description:
-        "Quỹ nhận hồ sơ trẻ mồ côi, khó khăn do đọc giả và mạnh thường quân giới thiệu và tiến hành thu thập thông tin.",
+        "Dự án Nuôi Em nhận hồ sơ trẻ mồ côi, khó khăn do đọc giả và mạnh thường quân giới thiệu và tiến hành thu thập thông tin.",
     },
     {
       round: "Vòng 02",
@@ -562,7 +568,7 @@ export const processSteps: Localized<ProcessStep[]> = {
     },
     {
       round: "Vòng 05",
-      title: "TRÌNH BAN ĐIỀU HÀNH QUỸ",
+      title: "TRÌNH BAN ĐIỀU HÀNH DỰ ÁN",
       subTitle: "THÔNG QUA DANH SÁCH BẢO TRỢ",
       description: "Ban điều hành phê duyệt danh sách trẻ mồ côi được bảo trợ chính thức.",
     },
@@ -709,8 +715,8 @@ export const volunteerContent: Localized<{
       title: "Vai trò của bạn",
       items: [
         "Cập nhật tình hình sinh hoạt/học tập của con trên trường/lớp.",
-        "Động viên con tham gia hoạt động phong trào của trường, Quỹ, cộng đồng.",
-        "Tham gia/đồng tổ chức các hoạt động chung của Quỹ tại địa phương.",
+        "Động viên con tham gia hoạt động phong trào của trường, Dự án Nuôi Em, cộng đồng.",
+        "Tham gia/đồng tổ chức các hoạt động chung của Dự án Nuôi Em tại địa phương.",
         "Thăm hỏi, động viên, lắng nghe con chia sẻ như người con/cháu của mình.",
       ],
     },
@@ -729,7 +735,7 @@ export const volunteerContent: Localized<{
       },
     ],
     commitment:
-      "Để đảm bảo hiệu quả đồng hành, Quỹ mong muốn Tình nguyện viên cam kết thời gian và phối hợp thường xuyên với Ban Vận hành.",
+      "Để đảm bảo hiệu quả đồng hành, Dự án Nuôi Em mong muốn Tình nguyện viên cam kết thời gian và phối hợp thường xuyên với Ban Vận hành.",
   },
   en: {
     formUrl:
@@ -768,7 +774,7 @@ export const mouContent: Localized<{
       { title: "Trách nhiệm các bên", description: "Quy định phạm vi trách nhiệm sau khi thống nhất mục tiêu và vai trò." },
     ],
     quote:
-      "Doanh nghiệp mong muốn hợp tác với Quỹ nhằm đóng góp cho xã hội, giúp trẻ em mồ côi có hoàn cảnh khó khăn — vui lòng liên hệ để trao đổi chi tiết về MOU.",
+      "Doanh nghiệp mong muốn hợp tác với Dự án Nuôi Em nhằm đóng góp cho xã hội, giúp trẻ em mồ côi có hoàn cảnh khó khăn — vui lòng liên hệ để trao đổi chi tiết về MOU.",
     cta: "Liên hệ: duannuoiem@gmail.com",
   },
   en: {

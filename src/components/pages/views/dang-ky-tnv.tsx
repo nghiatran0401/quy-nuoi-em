@@ -20,7 +20,7 @@ export function VolunteerView({ locale }: { locale: Locale }) {
         </a>
       </div>
       <section className="mt-12">
-        <h2 className="font-heading text-xl font-bold text-brand-blue">{content.roles.title}</h2>
+        <h2 className="heading-section text-xl">{content.roles.title}</h2>
         <p className="mb-4 text-brand-muted">
           {locale === "vi" ? "Những việc làm nhỏ bé nhưng mang lại ý nghĩa lớn lao" : "Small acts with great meaning"}
         </p>
@@ -33,7 +33,7 @@ export function VolunteerView({ locale }: { locale: Locale }) {
         </ul>
       </section>
       <section className="mt-12">
-        <h2 className="mb-6 text-center font-heading text-xl font-bold text-brand-blue">
+        <h2 className="heading-section mb-6 text-center text-xl">
           {locale === "vi" ? "Thành phần tham gia" : "Who can join"}
         </h2>
         <div className="grid gap-6 md:grid-cols-3">

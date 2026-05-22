@@ -12,7 +12,7 @@ export function MouView({ locale }: { locale: Locale }) {
   return (
     <StaticPageShell {...getStaticPageHero("mou", locale)} contentClassName="max-w-5xl">
       <div className="max-w-3xl">
-        <h2 className="font-heading text-xl font-bold text-brand-blue">{getUiLabel(locale, "whatIsMou")}</h2>
+        <h2 className="heading-section text-xl md:text-2xl">{getUiLabel(locale, "whatIsMou")}</h2>
         <p className="mt-4 text-brand-muted">{content.definition}</p>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {content.pillars.map((pillar) => (
@@ -25,17 +25,20 @@ export function MouView({ locale }: { locale: Locale }) {
         <blockquote className="mt-10 border-l-4 border-brand-accent pl-4 italic text-brand-muted">
           {content.quote}
         </blockquote>
-        <p className="mt-6 font-semibold text-brand-blue">
+        <p className="mt-6 font-semibold text-brand-ink">
           <a href={`mailto:${content.cta.split(": ")[1]}`}>{content.cta}</a>
         </p>
       </div>
       <section className="mt-12">
-        <h2 className="mb-6 text-center font-heading text-xl font-bold text-brand-blue">
+        <h2 className="heading-section mb-6 text-center text-xl md:text-2xl">
           {getUiLabel(locale, "mouGallery")}
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
           {mouImages.map((src) => (
-            <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-xl">
+            <div
+              key={src}
+              className="relative aspect-[4/3] overflow-hidden rounded-xl border border-brand-border/60 shadow-sm"
+            >
               <Image src={src} alt="" fill className="object-cover" />
             </div>
           ))}

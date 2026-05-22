@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ChildrenSummaryCards } from "@/components/data/children-summary";
 import { ChildrenTable } from "@/components/data/children-table";
 import { DataPageBanner } from "@/components/pages/data-page-banner";
-import { getDataPageHero, getDataPageMeta, getDataUiLabel } from "@/content/pages/data-pages";
+import { getDataPageHero, getDataUiLabel } from "@/content/pages/data-pages";
 import {
   childrenSummary,
   getAllChildren,
@@ -10,14 +10,14 @@ import {
   getStatuses,
 } from "@/lib/data/children";
 import type { Locale } from "@/i18n/config";
-import { createPageMetadata } from "@/lib/page-metadata";
+import { createDataPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/locale-page";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const locale = await resolveLocale(params);
-  return createPageMetadata(getDataPageMeta("children", locale), locale);
+  return createDataPageMetadata("children", locale);
 }
 
 export default async function ChildrenListPage({ params }: PageProps) {

@@ -18,10 +18,11 @@ export const sponsorshipRoundData = [
   { round: "Đ17", count: 35 },
 ];
 
+/** Alt text for home members collage (images from `siteImages.member`). */
 export const homeMemberImages = [
-  { src: "/home-members/member-1.jpg", alt: "Tập thể thành viên Dự án Nuôi Em" },
-  { src: "/home-members/member-2.jpg", alt: "Hoạt động thăm hỏi" },
-  { src: "/home-members/member-3.jpg", alt: "Trao quà Tết" },
-  { src: "/home-members/member-4.jpg", alt: "Hoạt động ngoại khóa" },
-  { src: "/home-members/member-5.jpg", alt: "Đoàn viên thanh niên Quỹ" },
-];
+  { alt: "Tập thể đối tác đồng hành Dự án Nuôi Em" },
+  { alt: "Hoạt động thăm hỏi trẻ được bảo trợ" },
+  { alt: "Trao quà và sẻ chia dịp lễ" },
+  { alt: "Hoạt động ngoại khóa cùng các em" },
+  { alt: "Đoàn viên thanh niên đồng hành" },
+] as const;

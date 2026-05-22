@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { ShareButtons } from "@/components/seo/share-buttons";
 import { donateInfo, getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
 import { siteImages } from "@/lib/images";
+import { absoluteUrl } from "@/lib/seo/paths";
 
 export function DonateView({ locale }: { locale: Locale }) {
   const hero = getStaticPageHero("donate", locale);
@@ -78,6 +80,14 @@ export function DonateView({ locale }: { locale: Locale }) {
             </div>
             <ArrowRight className="h-6 w-6 text-brand-accent transition-transform group-hover:translate-x-1" />
           </Link>
+        </div>
+
+        <div className="brand-card mx-auto mt-12 max-w-3xl p-6">
+          <ShareButtons
+            locale={locale}
+            title={hero.title}
+            url={absoluteUrl("/dong-gop", locale)}
+          />
         </div>
       </section>
     </article>

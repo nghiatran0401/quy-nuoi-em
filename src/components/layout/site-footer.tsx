@@ -17,8 +17,8 @@ export async function SiteFooter() {
     <footer className="site-footer py-12">
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 lg:grid-cols-5">
         <div className="space-y-4 lg:col-span-2">
-          <Link href="/" className="block w-fit pb-3">
-            <BrandLogo className="h-10 w-auto object-contain" />
+          <Link href="/" className="block w-fit max-w-[240px] pb-3 transition-opacity hover:opacity-90">
+            <BrandLogo variant="wide" className="h-12 w-auto max-h-14 object-contain object-left" />
           </Link>
           <div className="space-y-4 text-sm leading-relaxed text-brand-muted">
             <div>

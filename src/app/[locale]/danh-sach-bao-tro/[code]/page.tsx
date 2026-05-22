@@ -3,10 +3,16 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { StatusBadge } from "@/components/data/status-badge";
+import { JsonLd } from "@/components/seo/json-ld";
+import { ShareButtons } from "@/components/seo/share-buttons";
+import { getDataPageMeta } from "@/content/pages/data-pages";
 import { getDataUiLabel } from "@/content/pages/data-pages";
 import { getAllChildren, getChildByCode } from "@/lib/data/children";
 import type { Locale } from "@/i18n/config";
 import { resolveLocale } from "@/lib/locale-page";
+import { breadcrumbJsonLd, childProfileJsonLd } from "@/lib/seo/json-ld";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { absoluteUrl } from "@/lib/seo/paths";
 
 type PageProps = { params: Promise<{ locale: string; code: string }> };
 
@@ -16,15 +22,27 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { code } = await params;
-  const locale = await resolveLocale(params);
+  const locale = (await resolveLocale(params)) as Locale;
   const child = getChildByCode(code);
   if (!child) return {};
 
-  const siteName = locale === "vi" ? "Dự án Nuôi Em" : "Nuoi Em Project";
-  return {
-    title: `${child.name} (${child.code}) | ${siteName}`,
-    description: `${child.name} — ${child.province}, ${child.status}`,
-  };
+  const listMeta = getDataPageMeta("children", locale);
+  const title =
+    locale === "vi"
+      ? `${child.name} (${child.code})`
+      : `${child.name} (${child.code})`;
+  const description =
+    locale === "vi"
+      ? `Hồ sơ bảo trợ ${child.code} — ${child.name}, ${child.province}. ${listMeta.description}`
+      : `Sponsorship profile ${child.code} — ${child.name}, ${child.province}. ${listMeta.description}`;
+
+  return buildMetadata({
+    locale,
+    title,
+    description,
+    pathname: `/danh-sach-bao-tro/${child.code}`,
+    ogType: "website",
+  });
 }
 
 export default async function ChildDetailPage({ params }: PageProps) {
@@ -35,20 +53,33 @@ export default async function ChildDetailPage({ params }: PageProps) {
   if (!child) notFound();
 
   const age = new Date().getFullYear() - child.birthYear;
+  const listMeta = getDataPageMeta("children", locale);
+  const pathname = `/danh-sach-bao-tro/${child.code}`;
+  const shareUrl = absoluteUrl(pathname, locale);
+  const shareTitle = `${child.name} (${child.code})`;
 
   return (
-    <article className="min-h-screen bg-brand-surface pb-20">
+    <article className="min-h-screen bg-brand-warm pb-20">
+      <JsonLd
+        data={[
+          childProfileJsonLd({ locale, code: child.code, name: child.name, pathname }),
+          breadcrumbJsonLd(
+            [
+              { name: listMeta.title, pathname: "/danh-sach-bao-tro" },
+              { name: child.code, pathname },
+            ],
+            locale,
+          ),
+        ]}
+      />
       <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-        <Link
-          href="/danh-sach-bao-tro"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:underline"
-        >
+        <Link href="/danh-sach-bao-tro" className="back-link mb-8">
           <ArrowLeft className="h-4 w-4" />
           {getDataUiLabel(locale, "backToList")}
         </Link>
         <div className="brand-card p-8">
           <p className="font-mono text-sm font-bold text-brand-accent">{child.code}</p>
-          <h1 className="mt-2 font-heading text-3xl font-bold text-brand-ink">{child.name}</h1>
+          <h1 className="heading-display mt-2 text-3xl">{child.name}</h1>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <div>
               <p className="text-sm text-brand-muted">{getDataUiLabel(locale, "birthYear")}</p>
@@ -71,6 +102,12 @@ export default async function ChildDetailPage({ params }: PageProps) {
             <p className="mb-2 text-sm text-brand-muted">{getDataUiLabel(locale, "status")}</p>
             <StatusBadge status={child.status} />
           </div>
+          <ShareButtons
+            className="mt-8 border-t border-brand-border/60 pt-6"
+            locale={locale}
+            title={shareTitle}
+            url={shareUrl}
+          />
         </div>
       </div>
     </article>

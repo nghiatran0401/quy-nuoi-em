@@ -1,31 +1,64 @@
 import type { Localized, StatItem } from "@/content/types";
 
+/** Snapshot from https://nuoiem-lovat.vercel.app/ — school year 9/2025–5/2026 */
 export const siteStats: Localized<StatItem[]> = {
   vi: [
-    { value: "387", label: "Tổng số trẻ", hint: "Đã được bảo trợ" },
-    { value: "51.3 Tỷ+", label: "Tổng Tiền Nhận", hint: "Đóng góp từ cộng đồng" },
-    { value: "23.8 Tỷ+", label: "Tổng Tiền Chi", hint: "Hỗ trợ trực tiếp" },
-    { value: "27.5 Tỷ+", label: "Số Tiền Còn Lại", hint: "Minh bạch tài chính" },
+    {
+      value: "81.937",
+      label: "Tổng số em nuôi",
+      hint: "Năm học 9/2025–5/2026",
+    },
+    {
+      value: "56,9 Tỷ",
+      label: "Tổng tiền đã nhận",
+      hint: "Chi tiết: 56.890.334.781đ",
+    },
+    { value: "761", label: "Tổng trường học", hint: "Trong danh mục công khai" },
+    {
+      value: "40.690",
+      label: "Đã có người nuôi",
+      hint: "49,7% tổng số em nuôi",
+    },
+    {
+      value: "41.247",
+      label: "Chưa có người nuôi",
+      hint: "50,3% tổng số em nuôi",
+    },
   ],
   en: [
-    { value: "387", label: "Children supported", hint: "Total sponsored" },
-    { value: "51.3B+", label: "Total received", hint: "Community contributions" },
-    { value: "23.8B+", label: "Total disbursed", hint: "Direct support" },
-    { value: "27.5B+", label: "Remaining balance", hint: "Financial transparency" },
+    {
+      value: "81,937",
+      label: "Children in catalog",
+      hint: "School year Sep 2025–May 2026",
+    },
+    {
+      value: "56.9B VND",
+      label: "Total received",
+      hint: "Detail: 56,890,334,781 VND",
+    },
+    { value: "761", label: "Partner schools", hint: "In the public catalog" },
+    {
+      value: "40,690",
+      label: "With a sponsor",
+      hint: "49.7% of all children",
+    },
+    {
+      value: "41,247",
+      label: "Awaiting a sponsor",
+      hint: "50.3% of all children",
+    },
   ],
 };
 
-export const homeStats: Localized<StatItem[]> = {
+export const catalogBreakdownStats: Localized<StatItem[]> = {
   vi: [
-    { value: "387", label: "Trẻ được bảo trợ" },
-    { value: "17", label: "Đợt bảo trợ" },
-    { value: "51.3T+", label: "Tổng tiền nhận" },
-    { value: "27.5T+", label: "Số tiền còn lại" },
+    { value: "29.322", label: "Đang ăn", hint: "Đang trong chương trình" },
+    { value: "52.615", label: "Rút khỏi dự án", hint: "Đã rút khỏi danh mục" },
   ],
   en: [
-    { value: "387", label: "Children sponsored" },
-    { value: "17", label: "Sponsorship rounds" },
-    { value: "51.3B+", label: "Total received" },
-    { value: "27.5B+", label: "Remaining balance" },
+    { value: "29,322", label: "Currently enrolled", hint: "Active in the program" },
+    { value: "52,615", label: "Withdrawn", hint: "Left the catalog" },
   ],
 };
+
+export const homeStats: Localized<StatItem[]> = siteStats;

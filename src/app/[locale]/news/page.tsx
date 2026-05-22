@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { NewsGrid } from "@/components/data/news-grid";
 import { DataPageBanner } from "@/components/pages/data-page-banner";
-import { getDataPageHero, getDataPageMeta, getDataUiLabel } from "@/content/pages/data-pages";
+import { getDataPageHero, getDataUiLabel } from "@/content/pages/data-pages";
 import { getAllNews } from "@/lib/data/news";
 import type { Locale } from "@/i18n/config";
-import { createPageMetadata } from "@/lib/page-metadata";
+import { createDataPageMetadata } from "@/lib/page-metadata";
 import { resolveLocale } from "@/lib/locale-page";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const locale = await resolveLocale(params);
-  return createPageMetadata(getDataPageMeta("news", locale), locale);
+  return createDataPageMetadata("news", locale);
 }
 
 export default async function NewsPage({ params }: PageProps) {

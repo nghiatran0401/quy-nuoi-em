@@ -11,7 +11,7 @@ export function MembersView({ locale }: { locale: Locale }) {
         {nuoiEmMediaLogos.map((logo) => (
           <li
             key={logo.src}
-            className="flex aspect-square items-center justify-center rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm"
+            className="brand-card flex aspect-square items-center justify-center p-4"
           >
             <Image
               src={logo.src}

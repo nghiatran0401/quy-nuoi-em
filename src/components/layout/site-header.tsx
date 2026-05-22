@@ -17,8 +17,12 @@ export function SiteHeader() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <div className="flex shrink-0 items-center">
-            <Link href="/" className="block" onClick={() => setMobileOpen(false)}>
-              <BrandLogo priority className="h-11 w-auto" />
+            <Link
+              href="/"
+              className="block rounded-xl transition-opacity hover:opacity-90"
+              onClick={() => setMobileOpen(false)}
+            >
+              <BrandLogo priority className="h-11 w-auto max-w-[140px]" />
             </Link>
           </div>
 

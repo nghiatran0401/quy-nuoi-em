@@ -99,7 +99,7 @@ export function ChildrenTable({
 
       <div className="overflow-x-auto rounded-xl border border-brand-border/60 bg-white shadow-sm">
         <table className="min-w-full divide-y divide-brand-border text-left text-sm">
-          <thead className="bg-brand-warm text-xs font-bold uppercase tracking-wide text-brand-blue">
+          <thead className="bg-brand-sky-soft text-xs font-bold uppercase tracking-wide text-brand-ink">
             <tr>
               <th className="px-4 py-3">{labels.profileCode}</th>
               <th className="px-4 py-3">{labels.fullName}</th>
@@ -112,8 +112,8 @@ export function ChildrenTable({
           <tbody className="divide-y divide-brand-border">
             {filtered.map((child) => (
               <tr key={child.code} className="hover:bg-brand-surface">
-                <td className="px-4 py-3 font-mono text-brand-blue">
-                  <Link href={`/danh-sach-bao-tro/${child.code}`} className="hover:underline">
+                <td className="px-4 py-3 font-mono">
+                  <Link href={`/danh-sach-bao-tro/${child.code}`} className="link-accent text-sm">
                     {child.code}
                   </Link>
                 </td>

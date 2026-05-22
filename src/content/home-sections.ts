@@ -73,13 +73,13 @@ export const membersSectionCopy: Record<
   }
 > = {
   vi: {
-    eyebrow: "Thành viên Quỹ",
+    eyebrow: "Đối tác đồng hành",
     title: "Gắn Kết Yêu Thương",
     paragraphs: [
-      "Bắt đầu từ con số 20 thành viên Quỹ là các anh chị trong nhóm sản xuất Nuôi Em, các thành viên rải rác khắp tỉnh thành trên nước Việt Nam. Giờ đây, sau ba năm con số thành viên Quỹ đã tăng lên gần gấp đôi.",
-      "Nhóm Quỹ vẫn đang từng bước nỗ lực hơn mỗi ngày để có thể bảo trợ nhiều trẻ hơn và mang lại nhiều niềm vui hơn cho các con!",
+      "Bắt đầu từ con số 20 đối tác đồng hành là các anh chị trong nhóm sản xuất Nuôi Em, các thành viên rải rác khắp tỉnh thành trên nước Việt Nam. Giờ đây, sau ba năm con số đối tác đồng hành đã tăng lên gần gấp đôi.",
+      "Dự án Nuôi Em vẫn đang từng bước nỗ lực hơn mỗi ngày để có thể bảo trợ nhiều trẻ hơn và mang lại nhiều niềm vui hơn cho các con!",
     ],
-    cta: "Thành viên Quỹ",
+    cta: "Đối tác đồng hành",
   },
   en: {
     eyebrow: "Fund members",
@@ -138,7 +138,7 @@ export const faqSectionCopy: Record<
         id: "address",
         question: "Địa chỉ văn phòng của Dự án Nuôi Em ở đâu?",
         type: "address",
-        body: "Xin mời cả nhà, các anh chị ghé thăm văn phòng Quỹ để cùng lắng nghe những câu chuyện, để hiểu về hành trình mà Quỹ đang làm cho các con.",
+        body: "Xin mời cả nhà, các anh chị ghé thăm văn phòng Dự án Nuôi Em để cùng lắng nghe những câu chuyện, để hiểu về hành trình mà Dự án Nuôi Em đang làm cho các con.",
         address: "Số 383 đường Nguyễn Duy Trinh, phường Bình Trưng, TP. HCM.",
       },
       {
@@ -155,7 +155,7 @@ export const faqSectionCopy: Record<
           "Chấm điểm và phân loại hồ sơ",
           "Xếp hạng và lựa chọn hồ sơ phỏng vấn/khảo sát trực tiếp",
           "BXD họp chốt danh sách trẻ mồ côi được bảo trợ theo từng quý",
-          "Trình Ban điều hành Quỹ thông qua danh sách bảo trợ trẻ mồ côi",
+          "Trình Ban điều hành Dự án Nuôi Em thông qua danh sách bảo trợ trẻ mồ côi",
         ],
       },
     ],

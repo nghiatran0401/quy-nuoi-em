@@ -22,7 +22,7 @@ export function ContactSection({
 }: ContactSectionProps) {
   return (
     <section>
-      <h2 className="mb-8 font-heading text-2xl font-bold text-brand-blue">{heading}</h2>
+      <h2 className="heading-section mb-8">{heading}</h2>
       <div className="grid gap-6 md:grid-cols-3">
         <article className="brand-card p-6">
           <MapPin className="h-6 w-6 text-brand-accent" />
@@ -32,14 +32,14 @@ export function ContactSection({
         <article className="brand-card p-6">
           <Mail className="h-6 w-6 text-brand-accent" />
           <h3 className="mt-3 font-semibold text-brand-ink">Email</h3>
-          <a href={`mailto:${email}`} className="mt-2 block text-brand-blue hover:underline">
+          <a href={`mailto:${email}`} className="link-accent mt-2 block">
             {email}
           </a>
         </article>
         <article className="brand-card p-6">
           <Phone className="h-6 w-6 text-brand-accent" />
           <h3 className="mt-3 font-semibold text-brand-ink">Hotline</h3>
-          <a href={`tel:${phone.replace(/\s/g, "")}`} className="mt-2 block text-brand-blue hover:underline">
+          <a href={`tel:${phone.replace(/\s/g, "")}`} className="link-accent mt-2 block">
             {phone}
           </a>
         </article>
@@ -51,7 +51,7 @@ export function ContactSection({
             <h3 className="font-semibold text-brand-ink">{donateWarningLabel}</h3>
             <p className="mt-2 text-brand-muted">
               {donationNote}{" "}
-              <Link href="/dong-gop" className="font-semibold underline">
+              <Link href="/dong-gop" className="link-accent underline-offset-2">
                 Đóng góp
               </Link>
               .

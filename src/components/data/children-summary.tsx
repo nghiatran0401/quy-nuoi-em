@@ -29,7 +29,7 @@ export function ChildrenSummaryCards({ summary, labels }: ChildrenSummaryProps) 
         {items.map((item) => (
           <div
             key={item.label}
-            className="rounded-2xl border border-brand-border/60 bg-white p-5 shadow-sm"
+            className="brand-card p-5"
           >
             <p className="text-sm text-brand-muted">{item.label}</p>
             <p className={`mt-1 text-3xl font-bold ${item.color}`}>{item.value}</p>
@@ -37,7 +37,7 @@ export function ChildrenSummaryCards({ summary, labels }: ChildrenSummaryProps) 
         ))}
       </div>
 
-      <div className="rounded-2xl border border-brand-border/60 bg-white p-6 shadow-sm">
+      <div className="brand-card p-6">
         <h3 className="mb-3 text-base font-semibold text-brand-ink">{labels.statusBreakdown}</h3>
         <div className="flex h-4 overflow-hidden rounded-full">
           <div

@@ -12,9 +12,9 @@ export function AboutView({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <section className="bg-gradient-to-b from-brand-blue/5 to-white pb-8">
+      <section className="bg-gradient-to-b from-brand-sky-soft via-brand-warm to-white pb-8">
         <div className="relative mx-auto max-w-5xl px-4 pt-8">
-          <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl">
+          <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-brand-border/60 shadow-[var(--shadow-brand-card)]">
             <Image
               src={siteImage("/images/about/digital-heart-hero.png")}
               alt=""

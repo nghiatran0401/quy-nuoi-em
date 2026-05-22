@@ -94,7 +94,7 @@ const pages = {
     hero: {
       vi: {
         title: "Sao kê tài khoản",
-        description: "Theo dõi giao dịch minh bạch trên tài khoản thiện nguyện MB Bank của Quỹ.",
+        description: "Theo dõi giao dịch minh bạch trên tài khoản thiện nguyện MB Bank của Dự án Nuôi Em.",
       },
       en: {
         title: "Account statements",

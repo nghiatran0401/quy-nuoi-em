@@ -10,14 +10,14 @@ export function CareersView({ locale }: { locale: Locale }) {
     <StaticPageShell {...getStaticPageHero("careers", locale)} contentClassName="max-w-3xl">
       <div className="flex flex-wrap justify-center gap-4 text-sm text-brand-muted">
         <span className="rounded-full bg-white px-4 py-2 shadow-sm">{content.location}</span>
-        <span className="rounded-full bg-brand-green-light px-4 py-2 font-medium text-brand-blue">
+        <span className="rounded-full bg-brand-green-light px-4 py-2 font-medium text-brand-ink">
           {content.deadline}
         </span>
       </div>
       <div className="mt-10 space-y-10">
         {content.sections.map((section) => (
           <section key={section.title}>
-            <h2 className="font-heading text-xl font-bold text-brand-blue">{section.title}</h2>
+            <h2 className="font-heading text-xl font-bold text-brand-ink">{section.title}</h2>
             <ul className="mt-4 list-inside list-disc space-y-2 text-brand-muted">
               {section.items.map((item) => (
                 <li key={item}>{item}</li>
@@ -29,7 +29,7 @@ export function CareersView({ locale }: { locale: Locale }) {
       <p className="mt-12 text-center">
         <a
           href="mailto:duannuoiem@gmail.com"
-          className="inline-flex items-center gap-2 rounded-full bg-brand-accent px-8 py-3 font-bold text-white hover:bg-brand-accent-dark"
+          className="btn-primary inline-flex items-center gap-2"
         >
           <Mail className="h-5 w-5" />
           {getUiLabel(locale, "applyNow")}

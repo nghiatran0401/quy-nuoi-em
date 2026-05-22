@@ -2,13 +2,19 @@
   "name": "quy-nuoi-em",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "generate:data": "node scripts/generate-data.mjs",
-    "download:nuoiem-images": "node scripts/download-nuoiem-images.mjs"
+    "download:nuoiem-images": "node scripts/download-nuoiem-images.mjs",
+    "logos:transparent": "python3 scripts/make-transparent-logos.py",
+    "favicons": "python3 scripts/generate-favicons.py",
+    "brand:sanitize": "node scripts/sanitize-brand-data.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",
@@ -25,6 +31,7 @@
     "@types/react-dom": "^19.2.0",
     "eslint": "^9.28.0",
     "eslint-config-next": "^16.2.6",
+    "napi-postinstall": "^0.3.4",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3"
   }

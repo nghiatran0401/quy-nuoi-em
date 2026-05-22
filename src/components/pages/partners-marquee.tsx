@@ -12,15 +12,15 @@ export function PartnersMarquee({ title, variant = "about" }: PartnersMarqueePro
 
   return (
     <section
-      className={isHome ? "overflow-hidden bg-white py-12" : "bg-brand-surface py-12"}
+      className={isHome ? "section-surface overflow-hidden py-12" : "section-surface py-12"}
       data-testid="partner-marquee"
     >
       <div className={`mx-auto max-w-7xl px-4 ${isHome ? "mb-8 text-center" : "sm:px-6"}`}>
         <h3
           className={
             isHome
-              ? "text-xl font-bold uppercase tracking-widest text-brand-muted"
-              : "mb-8 text-center font-heading text-2xl font-bold text-brand-blue"
+              ? "eyebrow"
+              : "heading-section mb-8 text-center"
           }
         >
           {title}
@@ -29,8 +29,8 @@ export function PartnersMarquee({ title, variant = "about" }: PartnersMarqueePro
       <div className="relative w-full overflow-hidden">
         {isHome ? (
           <>
-            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-white to-transparent" />
-            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-white to-transparent" />
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-brand-surface to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-brand-surface to-transparent" />
           </>
         ) : null}
         <div className="animate-scroll flex w-max gap-8 hover:[animation-play-state:paused]">

@@ -1,7 +1,17 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { getMetadataBase } from "@/config/site";
 import { defaultLocale } from "@/i18n/config";
 import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: getMetadataBase(),
+  icons: {
+    icon: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+    apple: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+  },
+};
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "vietnamese"],

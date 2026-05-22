@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BrandLogo } from "@/components/brand/logo";
 import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { getStaticPageHero, logoStorySections } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
@@ -11,7 +11,7 @@ export function LogoStoryView({ locale }: { locale: Locale }) {
       <div className="space-y-12">
         {sections.map((section) => (
           <section key={section.title}>
-            <h2 className="font-heading text-2xl font-bold text-brand-blue">{section.title}</h2>
+            <h2 className="heading-section text-2xl">{section.title}</h2>
             {section.paragraphs.map((p) => (
               <p key={p} className="mt-4 text-brand-muted">
                 {p}
@@ -31,7 +31,7 @@ export function LogoStoryView({ locale }: { locale: Locale }) {
               <ul className="mt-6 grid gap-4 sm:grid-cols-3">
                 {section.colors.map((color) => (
                   <li key={color.name} className="brand-card p-4">
-                    <p className="font-semibold text-brand-blue">{color.name}</p>
+                    <p className="font-semibold text-brand-ink">{color.name}</p>
                     <p className="mt-2 text-sm text-brand-muted">{color.meaning}</p>
                   </li>
                 ))}
@@ -40,13 +40,7 @@ export function LogoStoryView({ locale }: { locale: Locale }) {
           </section>
         ))}
         <div className="flex justify-center py-8">
-          <Image
-            src="/logo/logo-ne.png"
-            alt="Dự án Nuôi Em"
-            width={200}
-            height={202}
-            className="h-auto w-48"
-          />
+          <BrandLogo className="h-auto w-48 max-w-[200px]" />
         </div>
       </div>
     </StaticPageShell>

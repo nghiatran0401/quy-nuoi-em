@@ -12,10 +12,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "quytonybuoisang.com",
-      },
-      {
-        protocol: "https",
         hostname: "static.wixstatic.com",
       },
       {
@@ -23,6 +19,20 @@ const nextConfig: NextConfig = {
         hostname: "**.fbcdn.net",
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/news/quy-tony-buoi-sang-can-tim",
+        destination: "/news/du-an-nuoi-em-tuyen-giam-doc",
+        permanent: true,
+      },
+      {
+        source: "/en/news/quy-tony-buoi-sang-can-tim",
+        destination: "/en/news/du-an-nuoi-em-tuyen-giam-doc",
+        permanent: true,
+      },
+    ];
   },
 };
 

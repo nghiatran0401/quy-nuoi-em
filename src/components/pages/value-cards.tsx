@@ -9,7 +9,7 @@ type ValueCardsProps = {
 export function ValueCards({ heading, items, footer }: ValueCardsProps) {
   return (
     <section className="py-10">
-      <h2 className="mb-8 text-center font-heading text-2xl font-bold text-brand-blue">{heading}</h2>
+      <h2 className="heading-section mb-8 text-center">{heading}</h2>
       <div className="grid gap-6 md:grid-cols-3">
         {items.map((item) => (
           <article key={item.title} className="brand-card p-6">

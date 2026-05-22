@@ -40,7 +40,7 @@ export const footerDocumentLinks: FooterLink[] = [
 ];
 
 export const footerLibraryLinks: FooterLink[] = [
-  { href: "#", labelKey: "photos" },
-  { href: "#", labelKey: "activities" },
-  { href: "#", labelKey: "letters" },
+  { href: "/news", labelKey: "photos" },
+  { href: "/bao-cao", labelKey: "activities" },
+  { href: "/contact", labelKey: "letters" },
 ];
