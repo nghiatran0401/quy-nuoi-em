@@ -19,7 +19,7 @@ export function PartnersMarquee({ title, variant = "about" }: PartnersMarqueePro
         <h3
           className={
             isHome
-              ? "text-xl font-bold uppercase tracking-widest text-gray-500"
+              ? "text-xl font-bold uppercase tracking-widest text-brand-muted"
               : "mb-8 text-center font-heading text-2xl font-bold text-brand-blue"
           }
         >

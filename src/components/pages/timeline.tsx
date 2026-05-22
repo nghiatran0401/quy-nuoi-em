@@ -12,7 +12,7 @@ export function Timeline({ events }: TimelineProps) {
           <span className="absolute -left-[2.35rem] top-1 flex h-4 w-4 rounded-full border-4 border-white bg-brand-accent" />
           <p className="text-sm font-bold uppercase tracking-wide text-brand-accent">{event.date}</p>
           <h3 className="mt-1 font-heading text-xl font-bold text-brand-blue">{event.title}</h3>
-          {event.description ? <p className="mt-2 text-gray-600">{event.description}</p> : null}
+          {event.description ? <p className="mt-2 text-brand-muted">{event.description}</p> : null}
         </li>
       ))}
     </ol>

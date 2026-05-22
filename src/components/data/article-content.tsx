@@ -27,7 +27,7 @@ export function ArticleContent({ content }: ArticleContentProps) {
         }
         if (line.startsWith("- ")) {
           return (
-            <li key={index} className="ml-4 list-disc text-gray-600">
+            <li key={index} className="ml-4 list-disc text-brand-muted">
               {line.slice(2)}
             </li>
           );
@@ -35,7 +35,7 @@ export function ArticleContent({ content }: ArticleContentProps) {
         if (line.startsWith("![")) return null;
         if (line.startsWith("[")) return null;
         return (
-          <p key={index} className="mb-4 leading-relaxed text-gray-600">
+          <p key={index} className="mb-4 leading-relaxed text-brand-muted">
             {line}
           </p>
         );

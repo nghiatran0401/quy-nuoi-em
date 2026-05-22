@@ -22,7 +22,7 @@ export function OrgStructure({ chartTitle }: OrgStructureProps) {
             className="brand-card min-w-[140px] px-4 py-3 text-center transition hover:border-brand-accent/30"
           >
             <p className="font-semibold text-brand-blue">{node.title}</p>
-            <p className="mt-1 text-xs text-gray-500">{node.subtitle}</p>
+            <p className="mt-1 text-xs text-brand-muted">{node.subtitle}</p>
           </a>
         ))}
       </div>
@@ -30,7 +30,7 @@ export function OrgStructure({ chartTitle }: OrgStructureProps) {
         {departments.map((dept) => (
           <section key={dept.id} id={dept.id} className="scroll-mt-24">
             <h3 className="font-heading text-xl font-bold text-brand-blue">{dept.title}</h3>
-            <p className="mt-2 max-w-3xl text-gray-600">{dept.description}</p>
+            <p className="mt-2 max-w-3xl text-brand-muted">{dept.description}</p>
             <p className="mt-2 text-sm text-brand-accent">
               Vinh danh {dept.members.length} thành viên
             </p>
@@ -40,9 +40,9 @@ export function OrgStructure({ chartTitle }: OrgStructureProps) {
                   <p className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-accent/10 font-bold text-brand-blue">
                     {member.name.charAt(0)}
                   </p>
-                  <h4 className="mt-3 font-semibold text-gray-900">{member.name}</h4>
+                  <h4 className="mt-3 font-semibold text-brand-ink">{member.name}</h4>
                   <p className="mt-1 text-sm text-brand-accent">{member.role}</p>
-                  <p className="mt-1 text-sm text-gray-500">{member.company}</p>
+                  <p className="mt-1 text-sm text-brand-muted">{member.company}</p>
                 </li>
               ))}
             </ul>

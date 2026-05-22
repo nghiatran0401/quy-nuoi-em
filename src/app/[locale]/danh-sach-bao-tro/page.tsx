@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ChildrenSummaryCards } from "@/components/data/children-summary";
 import { ChildrenTable } from "@/components/data/children-table";
-import { DataPageHeader } from "@/components/pages/data-page-header";
+import { DataPageBanner } from "@/components/pages/data-page-banner";
 import { getDataPageHero, getDataPageMeta, getDataUiLabel } from "@/content/pages/data-pages";
 import {
   childrenSummary,
@@ -44,8 +44,8 @@ export default async function ChildrenListPage({ params }: PageProps) {
   };
 
   return (
-    <article className="min-h-screen bg-brand-surface pb-20">
-      <DataPageHeader {...getDataPageHero("children", locale)} />
+    <article className="min-h-screen bg-brand-warm pb-20">
+      <DataPageBanner {...getDataPageHero("children", locale)} />
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
         <ChildrenSummaryCards summary={childrenSummary} labels={labels} />
         <ChildrenTable

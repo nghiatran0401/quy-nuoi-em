@@ -46,7 +46,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
           {getDataUiLabel(locale, "backToNews")}
         </Link>
         {article.imageUrl ? (
-          <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm">
+          <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-2xl border border-brand-border/60 bg-white shadow-sm">
             <Image src={article.imageUrl} alt="" fill className="object-cover" priority />
           </div>
         ) : null}

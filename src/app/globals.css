@@ -1,35 +1,48 @@
 @import "tailwindcss";
 
 /*
- * Nuôi Em — warm ember & wheat (logo: flame orange, gold rings, ember red)
- * Use accent sparingly; ink + muted for reading; gold for labels on light.
+ * Nuôi Em — Open Hearts
+ * Light, caring palette for a children's fund: soft sky, peach glow, sage hope.
+ * Logo flame stays as warm coral accent — never heavy dark browns on main UI.
  */
 @theme {
-  --color-brand-ink: #2d2622;
-  --color-brand-blue: #2d2622;
-  --color-brand-blue-light: #4d433c;
-  --color-brand-muted: #6f655c;
-  --color-brand-deep: #1f1815;
-  --color-brand-deep-mid: #3a2d26;
-  --color-brand-green: #9a7348;
-  --color-brand-green-light: #f7efe4;
-  --color-brand-accent: #f06520;
-  --color-brand-accent-light: #ff7a38;
-  --color-brand-accent-dark: #d45516;
-  --color-brand-highlight: #e8c992;
-  --color-brand-warm: #fcfaf7;
-  --color-brand-surface: #f5efe6;
+  --color-brand-ink: #3a332e;
+  --color-brand-blue: #3a332e;
+  --color-brand-blue-light: #5c534c;
+  --color-brand-muted: #6f6760;
+  --color-brand-deep: #4a7c6a;
+  --color-brand-deep-mid: #6b9a87;
+  --color-brand-green: #4a7c6a;
+  --color-brand-green-light: #e8f5ee;
+  --color-brand-sky: #d8ecf8;
+  --color-brand-sky-soft: #f0f8fc;
+  --color-brand-peach: #ffe8d6;
+  --color-brand-peach-deep: #ffd4b8;
+  --color-brand-accent: #f0784a;
+  --color-brand-accent-light: #ff9468;
+  --color-brand-accent-dark: #d85e32;
+  --color-brand-highlight: #ffe4a8;
+  --color-brand-highlight-soft: #fff8e6;
+  --color-brand-warm: #fffcf8;
+  --color-brand-surface: #fff5ed;
   --color-brand-surface-raised: #ffffff;
-  --color-brand-border: #e6ddd3;
-  --color-brand-red: #e03c2f;
-  --color-brand-cyan: #0d9488;
+  --color-brand-border: #ead9cc;
+  --color-brand-red: #d85a52;
+  --color-brand-cyan: #5ba8b0;
+  --color-brand-success: #4a8f6a;
+  --color-brand-success-soft: #e5f4eb;
+  --color-brand-danger: #c45c52;
+  --color-brand-danger-soft: #fdeeed;
+  --color-brand-rose: #e88a7a;
+  --color-brand-rose-soft: #fde8e4;
 
-  --font-heading: var(--font-quicksand);
-  --font-body: var(--font-quicksand);
+  --font-heading: var(--font-plus-jakarta);
+  --font-body: var(--font-plus-jakarta);
 
-  --shadow-brand-soft: 0 4px 24px -4px rgb(45 38 34 / 0.07);
-  --shadow-brand-card: 0 1px 2px rgb(45 38 34 / 0.04), 0 12px 32px -12px rgb(45 38 34 / 0.12);
-  --shadow-brand-glow: 0 0 0 1px rgb(240 101 32 / 0.08), 0 8px 32px -8px rgb(240 101 32 / 0.18);
+  --shadow-brand-soft: 0 4px 24px -6px rgb(74 124 106 / 0.1);
+  --shadow-brand-card: 0 1px 2px rgb(58 51 46 / 0.04), 0 12px 32px -12px rgb(240 120 74 / 0.12);
+  --shadow-brand-glow: 0 0 0 1px rgb(240 120 74 / 0.12), 0 10px 32px -10px rgb(240 120 74 / 0.18);
+  --shadow-brand-lift: 0 18px 40px -14px rgb(74 124 106 / 0.15);
 }
 
 @layer base {
@@ -38,18 +51,18 @@
   }
 
   body {
-    @apply bg-brand-warm text-brand-ink antialiased;
+    @apply bg-brand-warm font-body text-brand-ink antialiased;
   }
 
   ::selection {
-    @apply bg-brand-accent/18 text-brand-ink;
+    @apply bg-brand-sky/60 text-brand-ink;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply text-brand-ink;
+    @apply font-heading text-brand-ink;
   }
 
   a:not([class]) {
@@ -59,11 +72,11 @@
 
 @layer components {
   .brand-card {
-    @apply rounded-2xl border border-brand-border/90 bg-brand-surface-raised shadow-[var(--shadow-brand-card)];
+    @apply rounded-2xl border border-brand-border/70 bg-brand-surface-raised shadow-[var(--shadow-brand-card)];
   }
 
   .brand-card-interactive {
-    @apply rounded-2xl border border-brand-border/90 bg-brand-surface-raised shadow-[var(--shadow-brand-card)] transition duration-300 hover:border-brand-accent/20 hover:shadow-[var(--shadow-brand-glow)];
+    @apply rounded-2xl border border-brand-border/70 bg-brand-surface-raised shadow-[var(--shadow-brand-card)] transition duration-300 hover:-translate-y-0.5 hover:border-brand-accent/30 hover:shadow-[var(--shadow-brand-glow)];
   }
 
   .section-surface {
@@ -81,21 +94,17 @@
   .hero-backdrop {
     background-color: var(--color-brand-warm);
     background-image:
-      radial-gradient(ellipse 80% 50% at 100% 0%, rgb(240 101 32 / 0.07), transparent 55%),
-      radial-gradient(ellipse 60% 40% at 0% 100%, rgb(232 201 146 / 0.12), transparent 50%),
-      linear-gradient(180deg, var(--color-brand-warm) 0%, #ffffff 45%, var(--color-brand-surface) 100%);
+      radial-gradient(ellipse 85% 50% at 100% 0%, rgb(216 236 248 / 0.85), transparent 58%),
+      radial-gradient(ellipse 70% 45% at 0% 100%, rgb(255 232 214 / 0.9), transparent 52%),
+      linear-gradient(180deg, var(--color-brand-warm) 0%, #ffffff 50%, var(--color-brand-sky-soft) 100%);
   }
 
   .eyebrow {
     @apply text-xs font-bold uppercase tracking-[0.2em] text-brand-green;
   }
 
-  .eyebrow-on-dark {
-    @apply text-xs font-bold uppercase tracking-[0.2em] text-brand-highlight;
-  }
-
   .heading-display {
-    @apply font-heading font-black tracking-tight text-brand-ink;
+    @apply font-heading font-extrabold tracking-tight text-brand-ink;
   }
 
   .text-body {
@@ -103,23 +112,15 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-brand-accent px-8 py-3.5 text-center text-base font-bold text-white shadow-[0_4px_16px_-3px_rgb(240_101_32/0.45)] transition duration-200 hover:bg-brand-accent-light hover:shadow-[0_6px_22px_-3px_rgb(240_101_32/0.5)] active:scale-[0.98];
+    @apply inline-flex items-center justify-center rounded-full bg-brand-accent px-8 py-3.5 text-center text-base font-bold text-white shadow-[0_4px_16px_-4px_rgb(240_120_74/0.45)] transition duration-200 hover:bg-brand-accent-light hover:shadow-[0_6px_22px_-4px_rgb(240_120_74/0.4)] active:scale-[0.98];
   }
 
   .btn-primary-sm {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-accent px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_-2px_rgb(240_101_32/0.4)] transition duration-200 hover:bg-brand-accent-light active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-accent px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_-2px_rgb(240_120_74/0.4)] transition duration-200 hover:bg-brand-accent-light active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-border bg-white px-8 py-3.5 text-center text-base font-bold text-brand-ink transition duration-200 hover:border-brand-accent/30 hover:bg-brand-green-light/50 active:scale-[0.98];
-  }
-
-  .btn-on-dark {
-    @apply inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-bold text-brand-deep shadow-lg transition duration-200 hover:bg-brand-highlight active:scale-[0.98];
-  }
-
-  .btn-ghost-on-dark {
-    @apply inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-8 py-3.5 text-lg font-bold text-white backdrop-blur-sm transition duration-200 hover:border-white/40 hover:bg-white/18 active:scale-[0.98];
+    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-border bg-white px-8 py-3.5 text-center text-base font-bold text-brand-ink transition duration-200 hover:border-brand-green/40 hover:bg-brand-sky-soft active:scale-[0.98];
   }
 
   .link-accent {
@@ -127,27 +128,45 @@
   }
 
   .nav-link {
-    @apply font-medium text-brand-muted transition-colors hover:text-brand-ink;
+    @apply font-medium text-brand-muted transition-colors hover:text-brand-green;
   }
 
   .site-header {
-    @apply sticky top-0 z-50 border-b border-brand-border/70 bg-brand-warm/85 shadow-[var(--shadow-brand-soft)] backdrop-blur-xl supports-[backdrop-filter]:bg-brand-warm/75;
+    @apply sticky top-0 z-50 border-b border-brand-border/50 bg-white/90 shadow-[var(--shadow-brand-soft)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/85;
   }
 
+  /* Light, hopeful page heroes — no dark bands */
   .banner-primary {
-    @apply bg-gradient-to-br from-brand-deep via-brand-deep-mid to-brand-accent-dark text-white;
+    @apply relative overflow-hidden border-b border-brand-border/40 bg-gradient-to-br from-brand-sky-soft via-brand-warm to-brand-peach/40;
+  }
+
+  .banner-primary::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0;
+    background:
+      radial-gradient(ellipse 55% 70% at 95% 15%, rgb(240 120 74 / 0.14), transparent 55%),
+      radial-gradient(ellipse 45% 55% at 5% 85%, rgb(74 124 106 / 0.1), transparent 50%),
+      radial-gradient(ellipse 40% 40% at 50% 0%, rgb(255 228 168 / 0.35), transparent 60%);
+  }
+
+  .banner-primary > * {
+    @apply relative z-10;
   }
 
   .surface-dark {
-    @apply bg-brand-deep text-white;
+    @apply bg-gradient-to-br from-brand-green-light via-brand-sky-soft to-brand-peach text-brand-ink;
   }
 
   .surface-info {
-    @apply rounded-xl border border-brand-accent/12 bg-gradient-to-br from-brand-green-light/80 to-white;
+    @apply rounded-xl border border-brand-green/15 bg-gradient-to-br from-brand-sky-soft to-white;
+  }
+
+  .notice-info {
+    @apply rounded-xl border border-brand-sky bg-brand-sky-soft px-4 py-3 text-center text-sm leading-relaxed text-brand-muted;
   }
 
   .mini-stat {
-    @apply rounded-xl border border-brand-border/80 bg-brand-warm px-4 py-3 text-center;
+    @apply rounded-xl border border-brand-border/60 bg-white px-4 py-3 text-center shadow-sm;
   }
 
   .step-badge {
@@ -167,11 +186,45 @@
   }
 
   .faq-item-open {
-    @apply border-brand-border bg-white shadow-[var(--shadow-brand-card)];
+    @apply border-brand-border/80 bg-white shadow-[var(--shadow-brand-card)];
   }
 
   .faq-item-closed {
     @apply hover:border-brand-border/80 hover:bg-white hover:shadow-[var(--shadow-brand-soft)];
+  }
+
+  .pill-active {
+    @apply rounded-full bg-brand-accent px-4 py-2 text-sm font-semibold text-white shadow-sm;
+  }
+
+  .pill-inactive {
+    @apply rounded-full border border-brand-border bg-white px-4 py-2 text-sm font-semibold text-brand-muted transition-colors hover:border-brand-accent/35 hover:text-brand-ink;
+  }
+
+  .income-chip {
+    @apply rounded-lg bg-brand-success-soft p-3;
+  }
+
+  .expense-chip {
+    @apply rounded-lg bg-brand-rose-soft p-3;
+  }
+
+  .prose-muted {
+    @apply leading-relaxed text-brand-muted;
+  }
+
+  .site-footer {
+    @apply border-t border-brand-border/60 bg-gradient-to-b from-brand-sky-soft via-brand-warm to-brand-surface text-brand-ink;
+  }
+
+  .cta-warm {
+    @apply relative overflow-hidden bg-gradient-to-br from-brand-peach/80 via-brand-highlight-soft to-brand-sky-soft py-20;
+  }
+
+  .cta-warm::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0 opacity-40;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgb(240 120 74 / 0.2), transparent 65%);
   }
 }
 
@@ -193,11 +246,7 @@
     animation-play-state: paused;
   }
 
-  .text-on-primary {
-    @apply text-white/90;
-  }
-
   .focus-ring {
-    @apply focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/22;
+    @apply focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25;
   }
 }

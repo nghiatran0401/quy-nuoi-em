@@ -16,7 +16,7 @@ export function HomeNewsSection({ locale }: Props) {
   const articles = getLatestNews(3);
 
   return (
-    <section className="bg-brand-surface py-20">
+    <section className="bg-brand-sky-soft/50 py-20">
       <div className="container mx-auto px-4">
         <div className="mb-12 flex flex-col items-end justify-between gap-4 md:flex-row">
           <div>
@@ -48,7 +48,7 @@ export function HomeNewsSection({ locale }: Props) {
                       sizes="(max-width: 768px) 100vw, 240px"
                     />
                   ) : (
-                    <div className="flex min-h-[200px] h-full w-full items-center justify-center bg-brand-warm text-5xl text-gray-300">
+                    <div className="flex min-h-[200px] h-full w-full items-center justify-center bg-brand-warm text-5xl text-brand-muted/40">
                       📰
                     </div>
                   )}

@@ -21,12 +21,12 @@ export function VolunteerView({ locale }: { locale: Locale }) {
       </div>
       <section className="mt-12">
         <h2 className="font-heading text-xl font-bold text-brand-blue">{content.roles.title}</h2>
-        <p className="mb-4 text-gray-500">
+        <p className="mb-4 text-brand-muted">
           {locale === "vi" ? "Những việc làm nhỏ bé nhưng mang lại ý nghĩa lớn lao" : "Small acts with great meaning"}
         </p>
         <ul className="grid gap-3 sm:grid-cols-2">
           {content.roles.items.map((item) => (
-            <li key={item} className="brand-card p-4 text-gray-600">
+            <li key={item} className="brand-card p-4 text-brand-muted">
               {item}
             </li>
           ))}
@@ -40,11 +40,11 @@ export function VolunteerView({ locale }: { locale: Locale }) {
           {content.audiences.map((audience) => (
             <article key={audience.title} className="brand-card p-6">
               <h3 className="font-semibold text-brand-accent">{audience.title}</h3>
-              <p className="mt-3 text-gray-600">{audience.description}</p>
+              <p className="mt-3 text-brand-muted">{audience.description}</p>
             </article>
           ))}
         </div>
-        <p className="mt-8 text-center text-gray-600">{content.commitment}</p>
+        <p className="mt-8 text-center text-brand-muted">{content.commitment}</p>
       </section>
     </StaticPageShell>
   );

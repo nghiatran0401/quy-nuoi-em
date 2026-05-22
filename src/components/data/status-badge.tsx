@@ -1,10 +1,10 @@
 import type { ChildStatus } from "@/lib/data/types";
 
 const statusStyles: Record<ChildStatus, string> = {
-  "Đang nhận bảo trợ": "bg-brand-green-light text-brand-blue",
-  "Hoàn thành bảo trợ": "bg-blue-50 text-brand-blue",
-  "Chấm dứt bảo trợ": "bg-gray-100 text-gray-600",
-  "Tạm ngưng": "bg-amber-50 text-amber-800",
+  "Đang nhận bảo trợ": "bg-brand-success-soft text-brand-success",
+  "Hoàn thành bảo trợ": "bg-brand-highlight-soft text-brand-ink",
+  "Chấm dứt bảo trợ": "bg-brand-surface text-brand-muted",
+  "Tạm ngưng": "bg-brand-highlight-soft text-brand-accent-dark",
 };
 
 type StatusBadgeProps = {

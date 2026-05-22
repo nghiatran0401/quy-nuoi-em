@@ -16,7 +16,7 @@ export function LocaleSwitcher() {
     <button
       type="button"
       onClick={() => router.replace(pathname, { locale: nextLocale })}
-      className="flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/80 px-3 py-1.5 text-sm font-medium text-gray-700 backdrop-blur-sm transition-all duration-200 hover:border-gray-300 hover:bg-gray-50"
+      className="flex items-center gap-1.5 rounded-full border border-brand-border bg-white/90 px-3 py-1.5 text-sm font-medium text-brand-muted shadow-sm transition-all duration-200 hover:border-brand-accent/25 hover:text-brand-ink"
       aria-label={nextLocale === "en" ? t("switchToEnglish") : t("switchToVietnamese")}
     >
       <span className="text-base leading-none">{nextLocale === "en" ? "🇬🇧" : "🇻🇳"}</span>

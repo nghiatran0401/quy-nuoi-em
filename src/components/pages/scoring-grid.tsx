@@ -21,9 +21,9 @@ export function ScoringGrid({
   return (
     <div>
       <div className="mb-10 text-center">
-        <p className="text-sm font-semibold text-gray-500">{totalLabel}</p>
+        <p className="text-sm font-semibold text-brand-muted">{totalLabel}</p>
         <p className="font-heading text-4xl font-black text-brand-blue">
-          0<span className="text-2xl text-gray-400">{maxLabel}</span>
+          0<span className="text-2xl text-brand-muted/70">{maxLabel}</span>
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -35,7 +35,7 @@ export function ScoringGrid({
               {category.items.map((item) => (
                 <li key={item.label} className="rounded-lg bg-brand-warm p-3 text-sm">
                   <p className="font-semibold text-brand-accent">{item.priority}</p>
-                  <p className="font-medium text-gray-800">{item.label}</p>
+                  <p className="font-medium text-brand-ink">{item.label}</p>
                   <p className="text-brand-blue">{item.points}</p>
                 </li>
               ))}
@@ -45,7 +45,7 @@ export function ScoringGrid({
       </div>
       <section className="mt-12">
         <h2 className="mb-4 text-center font-heading text-xl font-bold text-brand-blue">{referenceLabel}</h2>
-        <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-gray-100">
+        <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-brand-border/60">
           <Image
             src={siteImage("/images/scoring/reference.png")}
             alt={referenceLabel}

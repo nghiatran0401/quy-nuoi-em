@@ -48,27 +48,27 @@ export default async function ChildDetailPage({ params }: PageProps) {
         </Link>
         <div className="brand-card p-8">
           <p className="font-mono text-sm font-bold text-brand-accent">{child.code}</p>
-          <h1 className="mt-2 font-heading text-3xl font-bold text-gray-900">{child.name}</h1>
+          <h1 className="mt-2 font-heading text-3xl font-bold text-brand-ink">{child.name}</h1>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <div>
-              <p className="text-sm text-gray-500">{getDataUiLabel(locale, "birthYear")}</p>
-              <p className="font-medium text-gray-900">{child.birthYear}</p>
+              <p className="text-sm text-brand-muted">{getDataUiLabel(locale, "birthYear")}</p>
+              <p className="font-medium text-brand-ink">{child.birthYear}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-500">{getDataUiLabel(locale, "age")}</p>
-              <p className="font-medium text-gray-900">{age}</p>
+              <p className="text-sm text-brand-muted">{getDataUiLabel(locale, "age")}</p>
+              <p className="font-medium text-brand-ink">{age}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-500">{getDataUiLabel(locale, "gender")}</p>
-              <p className="font-medium text-gray-900">{child.gender}</p>
+              <p className="text-sm text-brand-muted">{getDataUiLabel(locale, "gender")}</p>
+              <p className="font-medium text-brand-ink">{child.gender}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-500">{getDataUiLabel(locale, "province")}</p>
-              <p className="font-medium text-gray-900">{child.province}</p>
+              <p className="text-sm text-brand-muted">{getDataUiLabel(locale, "province")}</p>
+              <p className="font-medium text-brand-ink">{child.province}</p>
             </div>
           </div>
           <div className="mt-6">
-            <p className="mb-2 text-sm text-gray-500">{getDataUiLabel(locale, "status")}</p>
+            <p className="mb-2 text-sm text-brand-muted">{getDataUiLabel(locale, "status")}</p>
             <StatusBadge status={child.status} />
           </div>
         </div>

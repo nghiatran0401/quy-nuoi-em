@@ -1,11 +1,11 @@
-import { Quicksand } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import { defaultLocale } from "@/i18n/config";
 import "./globals.css";
 
-const quicksand = Quicksand({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "vietnamese"],
-  variable: "--font-quicksand",
+  variable: "--font-plus-jakarta",
   display: "swap",
 });
 
@@ -16,7 +16,7 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang={defaultLocale} suppressHydrationWarning>
-      <body className={`${quicksand.variable} font-sans antialiased`}>{children}</body>
+      <body className={`${plusJakarta.variable} font-sans antialiased`}>{children}</body>
     </html>
   );
 }

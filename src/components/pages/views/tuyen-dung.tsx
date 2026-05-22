@@ -8,7 +8,7 @@ export function CareersView({ locale }: { locale: Locale }) {
 
   return (
     <StaticPageShell {...getStaticPageHero("careers", locale)} contentClassName="max-w-3xl">
-      <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+      <div className="flex flex-wrap justify-center gap-4 text-sm text-brand-muted">
         <span className="rounded-full bg-white px-4 py-2 shadow-sm">{content.location}</span>
         <span className="rounded-full bg-brand-green-light px-4 py-2 font-medium text-brand-blue">
           {content.deadline}
@@ -18,7 +18,7 @@ export function CareersView({ locale }: { locale: Locale }) {
         {content.sections.map((section) => (
           <section key={section.title}>
             <h2 className="font-heading text-xl font-bold text-brand-blue">{section.title}</h2>
-            <ul className="mt-4 list-inside list-disc space-y-2 text-gray-600">
+            <ul className="mt-4 list-inside list-disc space-y-2 text-brand-muted">
               {section.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}

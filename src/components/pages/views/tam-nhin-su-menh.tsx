@@ -16,7 +16,7 @@ export function VisionView({ locale }: { locale: Locale }) {
 
   return (
     <StaticPageShell {...hero} contentClassName="max-w-3xl">
-      <div className="space-y-6 text-lg leading-relaxed text-gray-600">
+      <div className="space-y-6 text-lg leading-relaxed text-brand-muted">
         {mission.intro.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}

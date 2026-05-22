@@ -13,16 +13,16 @@ export function MouView({ locale }: { locale: Locale }) {
     <StaticPageShell {...getStaticPageHero("mou", locale)} contentClassName="max-w-5xl">
       <div className="max-w-3xl">
         <h2 className="font-heading text-xl font-bold text-brand-blue">{getUiLabel(locale, "whatIsMou")}</h2>
-        <p className="mt-4 text-gray-600">{content.definition}</p>
+        <p className="mt-4 text-brand-muted">{content.definition}</p>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {content.pillars.map((pillar) => (
             <article key={pillar.title} className="brand-card p-5">
               <h3 className="font-semibold text-brand-accent">{pillar.title}</h3>
-              <p className="mt-2 text-sm text-gray-600">{pillar.description}</p>
+              <p className="mt-2 text-sm text-brand-muted">{pillar.description}</p>
             </article>
           ))}
         </div>
-        <blockquote className="mt-10 border-l-4 border-brand-accent pl-4 italic text-gray-700">
+        <blockquote className="mt-10 border-l-4 border-brand-accent pl-4 italic text-brand-muted">
           {content.quote}
         </blockquote>
         <p className="mt-6 font-semibold text-brand-blue">

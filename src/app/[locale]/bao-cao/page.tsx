@@ -19,7 +19,7 @@ export default async function ReportsPage({ params }: PageProps) {
   const reports = getAllReports();
 
   return (
-    <article>
+    <article className="min-h-screen bg-brand-warm">
       <DataPageBanner {...getDataPageHero("reports", locale)} />
       <ReportsList
         reports={reports}

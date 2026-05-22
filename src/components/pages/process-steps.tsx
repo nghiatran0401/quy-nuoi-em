@@ -32,9 +32,9 @@ export function ProcessSteps({ steps }: ProcessStepsProps) {
             <p className="text-sm font-bold uppercase text-brand-accent">{step.round}</p>
             <h3 className="mt-1 font-heading text-xl font-bold text-brand-blue">{step.title}</h3>
             {step.subTitle ? (
-              <p className="mt-1 text-sm font-semibold text-gray-500">{step.subTitle}</p>
+              <p className="mt-1 text-sm font-semibold text-brand-muted">{step.subTitle}</p>
             ) : null}
-            <p className="mt-3 text-gray-600">{step.description}</p>
+            <p className="mt-3 text-brand-muted">{step.description}</p>
           </div>
         </li>
       ))}

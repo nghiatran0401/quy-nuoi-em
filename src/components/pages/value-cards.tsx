@@ -14,12 +14,12 @@ export function ValueCards({ heading, items, footer }: ValueCardsProps) {
         {items.map((item) => (
           <article key={item.title} className="brand-card p-6">
             <h3 className="font-heading text-lg font-bold text-brand-accent">{item.title}</h3>
-            <p className="mt-3 text-gray-600">{item.description}</p>
+            <p className="mt-3 text-brand-muted">{item.description}</p>
           </article>
         ))}
       </div>
       {footer ? (
-        <p className="mx-auto mt-10 max-w-3xl text-center text-lg text-gray-600">{footer}</p>
+        <p className="mx-auto mt-10 max-w-3xl text-center text-lg text-brand-muted">{footer}</p>
       ) : null}
     </section>
   );

@@ -15,7 +15,7 @@ export function PageHero({ eyebrow, title, description, centered = true, classNa
       ) : null}
       <h1 className="heading-display text-3xl md:text-5xl">{title}</h1>
       {description ? (
-        <p className="mt-4 text-lg leading-relaxed text-gray-600">{description}</p>
+        <p className="text-body mt-4 text-lg">{description}</p>
       ) : null}
     </header>
   );

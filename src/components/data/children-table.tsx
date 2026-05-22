@@ -27,7 +27,7 @@ type ChildrenTableProps = {
 };
 
 const selectClassName =
-  "rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent";
+  "rounded-lg border border-brand-border bg-white px-4 py-3 text-sm text-brand-muted focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent";
 
 export function ChildrenTable({
   records,
@@ -54,21 +54,21 @@ export function ChildrenTable({
 
   return (
     <section>
-      <p className="mb-4 text-center text-sm text-amber-700">
+      <p className="notice-info mx-auto mb-6 max-w-2xl">
         {labels.sampleDataNote.replace("{shown}", String(records.length))}
       </p>
 
-      <div className="mb-8 flex flex-col gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm lg:flex-row">
+      <div className="mb-8 flex flex-col gap-4 rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm lg:flex-row">
         <div className="relative flex-grow">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <Search className="h-5 w-5 text-gray-400" aria-hidden />
+            <Search className="h-5 w-5 text-brand-muted/70" aria-hidden />
           </div>
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={labels.searchPlaceholder}
-            className="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-4 text-sm focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="w-full rounded-lg border border-brand-border py-3 pl-10 pr-4 text-sm focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
         </div>
         <select
@@ -97,8 +97,8 @@ export function ChildrenTable({
         </select>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-gray-100 bg-white shadow-sm">
-        <table className="min-w-full divide-y divide-gray-200 text-left text-sm">
+      <div className="overflow-x-auto rounded-xl border border-brand-border/60 bg-white shadow-sm">
+        <table className="min-w-full divide-y divide-brand-border text-left text-sm">
           <thead className="bg-brand-warm text-xs font-bold uppercase tracking-wide text-brand-blue">
             <tr>
               <th className="px-4 py-3">{labels.profileCode}</th>
@@ -109,7 +109,7 @@ export function ChildrenTable({
               <th className="px-4 py-3">{labels.status}</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-brand-border">
             {filtered.map((child) => (
               <tr key={child.code} className="hover:bg-brand-surface">
                 <td className="px-4 py-3 font-mono text-brand-blue">
@@ -117,10 +117,10 @@ export function ChildrenTable({
                     {child.code}
                   </Link>
                 </td>
-                <td className="px-4 py-3 font-medium text-gray-900">{child.name}</td>
-                <td className="px-4 py-3 text-gray-700">{child.birthYear}</td>
-                <td className="px-4 py-3 text-gray-700">{child.gender}</td>
-                <td className="px-4 py-3 text-gray-700">{child.province}</td>
+                <td className="px-4 py-3 font-medium text-brand-ink">{child.name}</td>
+                <td className="px-4 py-3 text-brand-muted">{child.birthYear}</td>
+                <td className="px-4 py-3 text-brand-muted">{child.gender}</td>
+                <td className="px-4 py-3 text-brand-muted">{child.province}</td>
                 <td className="px-4 py-3">
                   <StatusBadge status={child.status} />
                 </td>
@@ -129,10 +129,10 @@ export function ChildrenTable({
           </tbody>
         </table>
         {filtered.length === 0 ? (
-          <p className="p-8 text-center text-gray-500">{labels.noResults}</p>
+          <p className="p-8 text-center text-brand-muted">{labels.noResults}</p>
         ) : null}
       </div>
-      <p className="mt-3 text-right text-xs text-gray-400">
+      <p className="mt-3 text-right text-xs text-brand-muted/70">
         {filtered.length} / {summaryTotal}
       </p>
     </section>

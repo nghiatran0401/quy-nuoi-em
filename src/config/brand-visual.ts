@@ -1,6 +1,6 @@
 /**
  * Dự án Nuôi Em — brand, content, and visual identity.
- * Colors: see `src/app/globals.css` (flame orange, ember brown, gold highlights).
+ * Colors: see `src/app/globals.css` (Open Hearts — light sky, peach, sage, warm coral).
  */
 export const brandVisual = {
   name: "Dự án Nuôi Em",

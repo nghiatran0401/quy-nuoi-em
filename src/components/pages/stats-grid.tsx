@@ -13,8 +13,8 @@ export function StatsGrid({ stats, columns = 4 }: StatsGridProps) {
       {stats.map((stat) => (
         <div key={stat.label} className="brand-card p-6 text-center">
           <p className="heading-display text-3xl font-bold md:text-4xl">{stat.value}</p>
-          <p className="mt-1 font-semibold text-gray-800">{stat.label}</p>
-          {stat.hint ? <p className="mt-1 text-sm text-gray-500">{stat.hint}</p> : null}
+          <p className="mt-1 font-semibold text-brand-ink">{stat.label}</p>
+          {stat.hint ? <p className="mt-1 text-sm text-brand-muted">{stat.hint}</p> : null}
         </div>
       ))}
     </div>
