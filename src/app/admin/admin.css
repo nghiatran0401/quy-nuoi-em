@@ -1,0 +1,39 @@
+@reference "../globals.css";
+
+.admin-app {
+  --admin-sidebar-w: 17rem;
+  --admin-accent: #f0784a;
+  --admin-accent-hover: #ff9468;
+  --admin-surface: #ffffff;
+  --admin-muted: #64748b;
+  --admin-border: #e2e8f0;
+  --admin-bg: #f1f5f9;
+}
+
+.admin-app .admin-input {
+  @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm transition placeholder:text-slate-400;
+}
+
+.admin-app .admin-input:focus {
+  @apply border-[var(--admin-accent)] outline-none ring-2 ring-[color-mix(in_srgb,var(--admin-accent)_25%,transparent)];
+}
+
+.admin-app .admin-label {
+  @apply mb-1.5 block text-sm font-medium text-slate-700;
+}
+
+.admin-app .admin-btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--admin-accent)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--admin-accent-hover)] active:scale-[0.98];
+}
+
+.admin-app .admin-btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 active:scale-[0.98];
+}
+
+.admin-app .admin-btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
+}
+
+.admin-app .admin-card {
+  @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm;
+}

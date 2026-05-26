@@ -36,7 +36,12 @@ export type FinancialReport = {
 export type NewsArticle = {
   slug: string;
   title: string;
+  /** Human-readable display date (Vietnamese locale formatted). */
   date: string;
+  /** ISO 8601 publish timestamp for SEO/OG (`article:published_time`). */
+  publishedAt?: string;
+  /** ISO 8601 last update timestamp for SEO/OG (`article:modified_time`). */
+  updatedAt?: string;
   excerpt?: string;
   imageUrl?: string;
 };

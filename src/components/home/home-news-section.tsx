@@ -11,9 +11,9 @@ function formatNewsDate(date: string) {
   return date.replace(/^Thứ \w+,\s*/i, "").replace(/^\w+,\s*/i, "");
 }
 
-export function HomeNewsSection({ locale }: Props) {
+export async function HomeNewsSection({ locale }: Props) {
   const copy = newsSectionCopy[locale];
-  const articles = getLatestNews(3);
+  const articles = await getLatestNews(3, locale);
 
   return (
     <section className="bg-brand-sky-soft/50 py-20">
@@ -31,6 +31,11 @@ export function HomeNewsSection({ locale }: Props) {
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
+        {articles.length === 0 ? (
+          <p className="text-center text-brand-muted">
+            {locale === "vi" ? "Chưa có tin tức. Vui lòng quay lại sau." : "No news posts yet. Please check back soon."}
+          </p>
+        ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {articles.map((article) => (
             <article
@@ -88,6 +93,7 @@ export function HomeNewsSection({ locale }: Props) {
             </article>
           ))}
         </div>
+        )}
       </div>
     </section>
   );

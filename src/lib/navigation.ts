@@ -2,6 +2,7 @@ export type NavItem = {
   href: string;
   labelKey:
     | "about"
+    | "process2026"
     | "children"
     | "reports"
     | "news"
@@ -11,6 +12,7 @@ export type NavItem = {
 
 export const mainNavItems: NavItem[] = [
   { href: "/about", labelKey: "about" },
+  { href: "/quy-trinh-cap-ma-2026", labelKey: "process2026" },
   { href: "/danh-sach-bao-tro", labelKey: "children" },
   { href: "/bao-cao", labelKey: "reports" },
   { href: "/news", labelKey: "news" },

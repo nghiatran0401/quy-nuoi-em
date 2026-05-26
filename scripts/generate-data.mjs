@@ -60,34 +60,13 @@ function parseReports(md) {
   return reports;
 }
 
-function parseNews() {
-  const list = [];
-  const bodies = {};
-  for (const page of data.filter((d) => d.metadata?.sourceURL?.includes("/news/"))) {
-    const slug = page.metadata.sourceURL.split("/news/")[1];
-    const title = page.markdown.match(/^# (.+)/m)?.[1] ?? page.metadata.title;
-    const date = page.markdown.match(/Đăng ngày (.+)/)?.[1] ?? "";
-    const excerpt = page.markdown
-      .split("\n\n")
-      .find((l) => l.length > 40 && !l.startsWith("#") && !l.startsWith("["))
-      ?.slice(0, 200);
-    const imgMatch = page.markdown.match(/!\[[^\]]*\]\((https:[^)]+)\)/);
-    list.push({ slug, title, date, excerpt, imageUrl: imgMatch?.[1] });
-    bodies[slug] = { title, date, imageUrl: imgMatch?.[1], content: page.markdown };
-  }
-  return { list, bodies };
-}
-
 const childMd =
   data.find((d) => d.metadata?.sourceURL?.endsWith("/danh-sach-bao-tro"))?.markdown ?? "";
 const reportMd = data.find((d) => d.metadata?.sourceURL?.endsWith("/bao-cao"))?.markdown ?? "";
-const { list: news, bodies: newsArticles } = parseNews();
 
 const outDir = path.join(root, "src/data");
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(path.join(outDir, "children.json"), JSON.stringify(parseChildren(childMd), null, 2));
 fs.writeFileSync(path.join(outDir, "reports.json"), JSON.stringify(parseReports(reportMd), null, 2));
-fs.writeFileSync(path.join(outDir, "news.json"), JSON.stringify(news, null, 2));
-fs.writeFileSync(path.join(outDir, "news-articles.json"), JSON.stringify(newsArticles, null, 2));
 
 console.log("Generated data in src/data/");

@@ -1,8 +1,5 @@
 const LEGACY_SITE = /quytonybuoisang\.com/gi;
 const LEGACY_HASHTAG = /#Quỹ[_\s]*TNBS/gi;
-const TONY_SLUG = "quy-tony-buoi-sang-can-tim";
-const NEW_SLUG = "du-an-nuoi-em-tuyen-giam-doc";
-
 /** Unwrap Next.js image optimizer URLs to the underlying CDN URL. */
 export function unwrapProxiedImageUrl(url: string | undefined): string | undefined {
   if (!url?.trim()) return undefined;
@@ -47,10 +44,6 @@ export function sanitizeBrandText(text: string): string {
   return out.replace(/\n{3,}/g, "\n\n").trim();
 }
 
-export function normalizeNewsSlug(slug: string): string {
-  return slug === TONY_SLUG ? NEW_SLUG : slug;
-}
-
 export function isAllowedNewsImage(url: string | undefined): boolean {
   if (!url) return false;
   const clean = unwrapProxiedImageUrl(url) ?? url;
@@ -64,7 +57,3 @@ export function isAllowedNewsImage(url: string | undefined): boolean {
   );
 }
 
-export const legacyNewsSlugRedirect = {
-  from: TONY_SLUG,
-  to: NEW_SLUG,
-} as const;

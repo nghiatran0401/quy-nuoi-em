@@ -10,21 +10,28 @@ import { getDataUiLabel } from "@/content/pages/data-pages";
 import { getNewsBySlug, getNewsSlugs } from "@/lib/data/news";
 import type { Locale } from "@/i18n/config";
 import { resolveLocale } from "@/lib/locale-page";
-import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
+import {
+  articleJsonLd,
+  siteBreadcrumb,
+  webPageJsonLd,
+} from "@/lib/seo/json-ld";
 import { getDataPageMeta } from "@/content/pages/data-pages";
 import { buildMetadata, stripMarkdown } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/paths";
 
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 
-export function generateStaticParams() {
-  return getNewsSlugs().map((slug) => ({ slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const slugs = await getNewsSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const locale = (await resolveLocale(params)) as Locale;
-  const article = getNewsBySlug(slug);
+  const article = await getNewsBySlug(slug, locale);
   if (!article) return {};
 
   const description =
@@ -32,20 +39,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     stripMarkdown(article.content.slice(0, 500), 160) ||
     getDataPageMeta("news", locale).description;
 
+  const sectionLabel = getDataPageMeta("news", locale).title;
+
   return buildMetadata({
     locale,
     title: article.title,
     description,
     pathname: `/news/${slug}`,
     ogImage: article.imageUrl,
+    ogImageAlt: article.title,
     ogType: "article",
+    publishedTime: article.publishedAt,
+    modifiedTime: article.updatedAt ?? article.publishedAt,
+    articleSection: sectionLabel,
+    articleAuthors: [
+      locale === "vi" ? "Dự án Nuôi Em" : "Nuoi Em Project",
+    ],
+    articleTags:
+      locale === "vi"
+        ? ["Dự án Nuôi Em", "bản tin", "hoạt động", "trẻ em vùng cao"]
+        : ["Nuoi Em Project", "news", "activities", "highland children"],
   });
 }
 
 export default async function NewsArticlePage({ params }: PageProps) {
   const { slug } = await params;
   const locale = (await resolveLocale(params)) as Locale;
-  const article = getNewsBySlug(slug);
+  const article = await getNewsBySlug(slug, locale);
 
   if (!article) notFound();
 
@@ -56,24 +76,44 @@ export default async function NewsArticlePage({ params }: PageProps) {
 
   const newsListMeta = getDataPageMeta("news", locale);
   const pathname = `/news/${slug}`;
+  const articleUrl = absoluteUrl(pathname, locale);
+  const breadcrumbId = `${articleUrl}#breadcrumb`;
 
   return (
     <article className="min-h-screen bg-brand-warm pb-20">
       <JsonLd
         data={[
+          webPageJsonLd({
+            locale,
+            title: article.title,
+            description,
+            pathname,
+            imageUrl: article.imageUrl,
+            datePublished: article.publishedAt,
+            dateModified: article.updatedAt ?? article.publishedAt,
+            breadcrumbId,
+          }),
           articleJsonLd({
             locale,
             title: article.title,
             description,
             pathname,
             imageUrl: article.imageUrl,
+            datePublished: article.publishedAt,
+            dateModified: article.updatedAt ?? article.publishedAt,
+            section: newsListMeta.title,
+            tags:
+              locale === "vi"
+                ? ["Dự án Nuôi Em", "bản tin", "hoạt động", "trẻ vùng cao"]
+                : ["Nuoi Em Project", "news", "activities", "highland children"],
           }),
-          breadcrumbJsonLd(
+          siteBreadcrumb(
             [
               { name: newsListMeta.title, pathname: "/news" },
               { name: article.title, pathname },
             ],
             locale,
+            breadcrumbId,
           ),
         ]}
       />

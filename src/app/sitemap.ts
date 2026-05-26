@@ -2,14 +2,18 @@ import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/config/site";
 import { getAllSitemapEntries } from "@/lib/seo/routes";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl();
-  const lastModified = new Date();
+  const buildTime = new Date();
+  const entries = await getAllSitemapEntries();
 
-  return getAllSitemapEntries().map((entry) => ({
+  return entries.map((entry) => ({
     url: `${base}${entry.pathname === "/" ? "" : entry.pathname}`,
-    lastModified,
+    lastModified: entry.lastModified ? new Date(entry.lastModified) : buildTime,
     changeFrequency: entry.changeFrequency,
     priority: entry.priority,
+    alternates: {
+      languages: entry.alternates,
+    },
   }));
 }

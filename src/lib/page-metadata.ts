@@ -10,7 +10,16 @@ import { DATA_PAGE_PATHS, STATIC_PAGE_PATHS } from "@/lib/seo/routes";
 
 type PageMetadataOptions = Pick<
   BuildMetadataOptions,
-  "ogImage" | "ogType" | "publishedTime" | "keywords" | "noIndex"
+  | "ogImage"
+  | "ogImageAlt"
+  | "ogType"
+  | "publishedTime"
+  | "modifiedTime"
+  | "keywords"
+  | "noIndex"
+  | "articleSection"
+  | "articleAuthors"
+  | "articleTags"
 >;
 
 export function createPageMetadata(

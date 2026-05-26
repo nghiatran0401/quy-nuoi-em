@@ -7,6 +7,7 @@ import { HtmlLang } from "@/components/layout/html-lang";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { locales, type Locale } from "@/i18n/config";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 import { buildRootMetadata } from "@/lib/seo/metadata";
 
@@ -41,11 +42,20 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const resolvedLocale = locale as Locale;
   setRequestLocale(resolvedLocale);
   const messages = await getMessages();
+  const supabaseUrl = isSupabaseConfigured()
+    ? process.env.NEXT_PUBLIC_SUPABASE_URL
+    : undefined;
 
   return (
     <NextIntlClientProvider messages={messages}>
       <HtmlLang />
       <JsonLd data={[organizationJsonLd(resolvedLocale), websiteJsonLd(resolvedLocale)]} />
+      {supabaseUrl ? (
+        <>
+          <link rel="preconnect" href={supabaseUrl} crossOrigin="anonymous" />
+          <link rel="dns-prefetch" href={supabaseUrl} />
+        </>
+      ) : null}
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
         <main className="flex-grow">{children}</main>

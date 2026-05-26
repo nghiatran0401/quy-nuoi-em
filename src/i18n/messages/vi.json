@@ -6,6 +6,7 @@
   },
   "nav": {
     "about": "Giới thiệu",
+    "process2026": "Quy trình 2026",
     "children": "Danh sách trẻ",
     "reports": "Báo cáo",
     "news": "Bản tin",
@@ -44,7 +45,7 @@
   "home": {
     "eyebrow": "Bữa cơm níu chân trẻ tới trường",
     "title": "Dự án Nuôi Em",
-    "description": "150.000đ mỗi tháng giúp bé vùng cao no bụng, đi học đầy đủ. Biết rõ bé nào, có thể đi thăm — mỗi em một mã NE, mỗi em một người nuôi.",
+    "description": "150.000đ - 170.000đ mỗi tháng giúp bé vùng cao no bụng, đi học đầy đủ. Biết rõ bé nào, có thể đi thăm — mỗi em một mã NE, mỗi em một người nuôi.",
     "sponsorNow": "Đóng góp ngay",
     "learnMore": "Tìm hiểu thêm"
   }

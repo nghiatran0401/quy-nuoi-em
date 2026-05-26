@@ -1,0 +1,173 @@
+import Link from "next/link";
+import { Archive, FileText, Globe2, Plus, Radio } from "lucide-react";
+import type { NewsArticleRow } from "@/types/supabase";
+import { archiveNewsArticle, deleteNewsArticle } from "@/app/admin/(dashboard)/news/actions";
+import { AdminAlert } from "@/components/admin/admin-alert";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
+import { NewsRowActions } from "@/components/admin/news-row-actions";
+import { requireAdminSession } from "@/lib/admin-auth";
+import { formatAdminMessage, decodeAdminParam } from "@/lib/admin/messages";
+import { createAdminClient } from "@/lib/supabase/admin";
+
+function statusStyles(status: NewsArticleRow["status"]) {
+  switch (status) {
+    case "published":
+      return "bg-emerald-50 text-emerald-700 ring-emerald-600/20";
+    case "archived":
+      return "bg-slate-100 text-slate-600 ring-slate-500/20";
+    case "draft":
+      return "bg-amber-50 text-amber-800 ring-amber-600/20";
+    default:
+      return "bg-slate-100 text-slate-600 ring-slate-500/20";
+  }
+}
+
+function formatDate(value: string | null) {
+  if (!value) return "—";
+  return new Intl.DateTimeFormat("vi-VN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+}
+
+type AdminNewsPageProps = {
+  searchParams: Promise<{ error?: string; message?: string }>;
+};
+
+export default async function AdminNewsPage({ searchParams }: AdminNewsPageProps) {
+  await requireAdminSession();
+  const params = await searchParams;
+  let data: unknown[] = [];
+  let error: { message: string } | null = null;
+
+  try {
+    const supabase = createAdminClient();
+    const result = await supabase
+      .from("news_articles")
+      .select("id, slug, title, status, locale, published_at, updated_at")
+      .order("updated_at", { ascending: false })
+      .limit(50);
+
+    data = (result.data ?? []) as unknown[];
+    error = result.error;
+  } catch (caught) {
+    error = {
+      message: caught instanceof Error ? caught.message : "Could not initialize admin database client.",
+    };
+  }
+
+  const rows = (data ?? []) as Pick<
+    NewsArticleRow,
+    "id" | "slug" | "title" | "status" | "locale" | "published_at" | "updated_at"
+  >[];
+
+  const stats = {
+    total: rows.length,
+    published: rows.filter((row) => row.status === "published").length,
+    draft: rows.filter((row) => row.status === "draft").length,
+    archived: rows.filter((row) => row.status === "archived").length,
+  };
+
+  const successMessage = formatAdminMessage(params.message);
+  const errorMessage = decodeAdminParam(params.error);
+
+  return (
+    <>
+      <AdminPageHeader
+        title="News"
+        description="Create, publish, and manage articles shown on the public site."
+        actions={
+          <Link href="/admin/news/new" className="admin-btn-primary">
+            <Plus className="h-4 w-4" />
+            New article
+          </Link>
+        }
+      />
+
+      <div className="space-y-3">
+        {successMessage ? <AdminAlert variant="success" message={successMessage} /> : null}
+        {errorMessage ? <AdminAlert variant="error" message={errorMessage} /> : null}
+        {error ? <AdminAlert variant="error" message={`Could not load articles: ${error.message}`} /> : null}
+      </div>
+
+      <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { label: "Total", value: stats.total, icon: FileText, tone: "text-slate-600 bg-slate-100" },
+          { label: "Published", value: stats.published, icon: Radio, tone: "text-emerald-700 bg-emerald-50" },
+          { label: "Drafts", value: stats.draft, icon: Globe2, tone: "text-amber-800 bg-amber-50" },
+          { label: "Archived", value: stats.archived, icon: Archive, tone: "text-slate-600 bg-slate-100" },
+        ].map((item) => {
+          const Icon = item.icon;
+          return (
+            <div key={item.label} className="admin-card flex items-center gap-4 p-4">
+              <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${item.tone}`}>
+                <Icon className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold tabular-nums text-slate-900">{item.value}</p>
+                <p className="text-sm text-slate-500">{item.label}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="admin-card overflow-hidden">
+        {rows.length === 0 ? (
+          <div className="flex flex-col items-center justify-center px-6 py-16 text-center">
+            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-500">
+              <FileText className="h-7 w-7" />
+            </div>
+            <h2 className="text-lg font-semibold text-slate-900">No articles yet</h2>
+            <p className="mt-2 max-w-sm text-sm text-slate-600">
+              Publish your first news post to show it on the homepage and news page.
+            </p>
+            <Link href="/admin/news/new" className="admin-btn-primary mt-6">
+              <Plus className="h-4 w-4" />
+              Create first article
+            </Link>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-slate-100 bg-slate-50/80 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  <th className="px-5 py-3.5">Article</th>
+                  <th className="px-5 py-3.5">Status</th>
+                  <th className="hidden px-5 py-3.5 md:table-cell">Locale</th>
+                  <th className="hidden px-5 py-3.5 lg:table-cell">Published</th>
+                  <th className="hidden px-5 py-3.5 sm:table-cell">Updated</th>
+                  <th className="px-5 py-3.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {rows.map((row) => (
+                  <tr key={row.id} className="transition hover:bg-slate-50/60">
+                    <td className="px-5 py-4">
+                      <Link href={`/admin/news/${row.id}/edit`} className="group block max-w-md">
+                        <p className="font-medium text-slate-900 group-hover:text-[var(--admin-accent)]">
+                          {row.title}
+                        </p>
+                        <p className="mt-0.5 truncate font-mono text-xs text-slate-500">/{row.slug}</p>
+                      </Link>
+                    </td>
+                    <td className="px-5 py-4">
+                      <span
+                        className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold capitalize ring-1 ring-inset ${statusStyles(row.status)}`}
+                      >
+                        {row.status}
+                      </span>
+                    </td>
+                    <td className="hidden px-5 py-4 uppercase text-slate-600 md:table-cell">{row.locale}</td>
+                    <td className="hidden px-5 py-4 text-slate-600 lg:table-cell">{formatDate(row.published_at)}</td>
+                    <td className="hidden px-5 py-4 text-slate-600 sm:table-cell">{formatDate(row.updated_at)}</td>
+                    <td className="px-5 py-4">
+                      <NewsRowActions row={row} archiveAction={archiveNewsArticle} deleteAction={deleteNewsArticle} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}

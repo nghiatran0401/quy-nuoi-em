@@ -6,12 +6,18 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: siteConfig.name,
     short_name: siteConfig.shortName,
-    description: siteConfig.tagline,
+    description:
+      "Dự án Nuôi Em — kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. 150.000đ/tháng giúp bé no bụng và đến trường.",
     start_url: "/",
+    scope: "/",
+    id: "/",
     display: "standalone",
+    orientation: "portrait",
     background_color: "#fffcf8",
     theme_color: "#f0784a",
-    lang: "vi",
+    lang: "vi-VN",
+    dir: "ltr",
+    categories: ["education", "social", "lifestyle"],
     icons: [
       {
         src: "/icon-192.png",
@@ -30,6 +36,26 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: "200x202",
         type: "image/png",
         purpose: "maskable",
+      },
+    ],
+    shortcuts: [
+      {
+        name: "Đóng góp",
+        short_name: "Đóng góp",
+        description: "Trang đóng góp & thông tin chuyển khoản",
+        url: "/dong-gop",
+      },
+      {
+        name: "Danh sách trẻ",
+        short_name: "Danh sách",
+        description: "Danh sách trẻ đang được bảo trợ",
+        url: "/danh-sach-bao-tro",
+      },
+      {
+        name: "Bản tin",
+        short_name: "Bản tin",
+        description: "Tin tức & hoạt động mới nhất",
+        url: "/news",
       },
     ],
   };

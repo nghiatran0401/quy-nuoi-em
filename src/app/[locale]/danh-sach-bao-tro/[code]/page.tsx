@@ -10,7 +10,7 @@ import { getDataUiLabel } from "@/content/pages/data-pages";
 import { getAllChildren, getChildByCode } from "@/lib/data/children";
 import type { Locale } from "@/i18n/config";
 import { resolveLocale } from "@/lib/locale-page";
-import { breadcrumbJsonLd, childProfileJsonLd } from "@/lib/seo/json-ld";
+import { childProfileJsonLd, siteBreadcrumb } from "@/lib/seo/json-ld";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/paths";
 
@@ -62,11 +62,17 @@ export default async function ChildDetailPage({ params }: PageProps) {
     <article className="min-h-screen bg-brand-warm pb-20">
       <JsonLd
         data={[
-          childProfileJsonLd({ locale, code: child.code, name: child.name, pathname }),
-          breadcrumbJsonLd(
+          childProfileJsonLd({
+            locale,
+            code: child.code,
+            name: child.name,
+            province: child.province,
+            pathname,
+          }),
+          siteBreadcrumb(
             [
               { name: listMeta.title, pathname: "/danh-sach-bao-tro" },
-              { name: child.code, pathname },
+              { name: `${child.code} — ${child.name}`, pathname },
             ],
             locale,
           ),

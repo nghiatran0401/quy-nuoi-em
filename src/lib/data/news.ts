@@ -1,19 +1,10 @@
-import newsJson from "@/data/news.json";
-import articlesJson from "@/data/news-articles.json";
+import type { Locale } from "@/i18n/config";
+import { isAllowedNewsImage, sanitizeBrandText, unwrapProxiedImageUrl } from "@/lib/brand-sanitize";
 import { nuoiEmImage } from "@/lib/nuoiem-images";
-import {
-  isAllowedNewsImage,
-  normalizeNewsSlug,
-  sanitizeBrandText,
-  unwrapProxiedImageUrl,
-} from "@/lib/brand-sanitize";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { NewsArticle, NewsArticleDetail } from "@/lib/data/types";
-
-const articles = newsJson as NewsArticle[];
-const articleBodies = articlesJson as Record<
-  string,
-  { title: string; date: string; imageUrl?: string; content: string }
->;
+import type { NewsArticleRow } from "@/types/supabase";
 
 const FALLBACK_NEWS_IMAGE = nuoiEmImage("hero");
 
@@ -28,41 +19,124 @@ function normalizeImage(url: string | undefined): string | undefined {
 function normalizeArticle(article: NewsArticle): NewsArticle {
   return {
     ...article,
-    slug: normalizeNewsSlug(article.slug),
+    slug: article.slug,
     title: sanitizeBrandText(article.title),
     excerpt: article.excerpt ? sanitizeBrandText(article.excerpt) : undefined,
     imageUrl: normalizeImage(article.imageUrl),
+    publishedAt: article.publishedAt,
+    updatedAt: article.updatedAt,
   };
 }
 
-export function getAllNews(): NewsArticle[] {
-  return articles.map(normalizeArticle).sort((a, b) => b.date.localeCompare(a.date, "vi"));
+function formatPublishedDate(row: Pick<NewsArticleRow, "display_date" | "published_at">): string {
+  if (row.display_date) return row.display_date;
+  if (!row.published_at) return "";
+  return new Intl.DateTimeFormat("vi-VN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(row.published_at));
 }
 
-export function getNewsBySlug(slug: string): NewsArticleDetail | undefined {
-  const resolvedSlug = normalizeNewsSlug(slug);
-  const summary = articles.find((article) => normalizeNewsSlug(article.slug) === resolvedSlug);
-  const body = articleBodies[resolvedSlug] ?? articleBodies[slug];
+function rowToArticle(row: NewsArticleRow): NewsArticle {
+  return normalizeArticle({
+    slug: row.slug,
+    title: row.title,
+    date: formatPublishedDate(row),
+    publishedAt: row.published_at ?? undefined,
+    updatedAt: row.updated_at ?? undefined,
+    excerpt: row.excerpt ?? undefined,
+    imageUrl: row.image_url ?? undefined,
+  });
+}
 
-  if (!summary && !body) return undefined;
-
-  const title = sanitizeBrandText(body?.title ?? summary?.title ?? resolvedSlug);
-  const imageUrl = normalizeImage(body?.imageUrl ?? summary?.imageUrl);
-
+function rowToDetail(row: NewsArticleRow): NewsArticleDetail {
+  const base = rowToArticle(row);
   return {
-    slug: resolvedSlug,
-    title,
-    date: body?.date ?? summary?.date ?? "",
-    excerpt: summary?.excerpt ? sanitizeBrandText(summary.excerpt) : undefined,
-    imageUrl,
-    content: body?.content ? sanitizeBrandText(body.content) : "",
+    ...base,
+    content: sanitizeBrandText(row.content),
   };
 }
 
-export function getNewsSlugs(): string[] {
-  return articles.map((article) => normalizeNewsSlug(article.slug));
+async function fetchSupabasePublished(locale: Locale): Promise<NewsArticleRow[]> {
+  if (!isSupabaseConfigured()) return [];
+
+  const supabase = createPublicClient();
+  const { data, error } = await supabase
+    .from("news_articles")
+    .select("*")
+    .eq("status", "published")
+    .eq("locale", locale)
+    .order("published_at", { ascending: false, nullsFirst: false });
+
+  if (error) {
+    console.error("[news] Supabase fetch failed:", error.message);
+    return [];
+  }
+
+  return (data ?? []) as NewsArticleRow[];
 }
 
-export function getLatestNews(limit = 3): NewsArticle[] {
-  return getAllNews().slice(0, limit);
+function sortByDateDesc(items: NewsArticle[]): NewsArticle[] {
+  return [...items].sort((a, b) => b.date.localeCompare(a.date, "vi"));
+}
+
+export async function getAllNews(locale: Locale = "vi"): Promise<NewsArticle[]> {
+  const rows = await fetchSupabasePublished(locale);
+  return sortByDateDesc(rows.map(rowToArticle));
+}
+
+export async function getNewsBySlug(slug: string, locale: Locale = "vi"): Promise<NewsArticleDetail | undefined> {
+  if (!isSupabaseConfigured()) return undefined;
+
+  const supabase = createPublicClient();
+  const { data } = await supabase
+    .from("news_articles")
+    .select("*")
+    .eq("status", "published")
+    .eq("locale", locale)
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (!data) return undefined;
+  return rowToDetail(data as NewsArticleRow);
+}
+
+export async function getNewsSlugs(): Promise<string[]> {
+  const slugs = new Set<string>();
+
+  for (const locale of ["vi", "en"] as const) {
+    const rows = await fetchSupabasePublished(locale);
+    for (const row of rows) {
+      slugs.add(row.slug);
+    }
+  }
+
+  return [...slugs];
+}
+
+/** Slug + latest known modification time (ISO) — used by the sitemap. */
+export async function getNewsSitemapEntries(): Promise<
+  Array<{ slug: string; lastModified?: string }>
+> {
+  const map = new Map<string, string | undefined>();
+
+  for (const locale of ["vi", "en"] as const) {
+    const rows = await fetchSupabasePublished(locale);
+    for (const row of rows) {
+      const candidate = row.updated_at || row.published_at || undefined;
+      const current = map.get(row.slug);
+      if (!current || (candidate && candidate > current)) {
+        map.set(row.slug, candidate);
+      }
+    }
+  }
+
+  return [...map.entries()].map(([slug, lastModified]) => ({ slug, lastModified }));
+}
+
+export async function getLatestNews(limit = 3, locale: Locale = "vi"): Promise<NewsArticle[]> {
+  const all = await getAllNews(locale);
+  return all.slice(0, limit);
 }

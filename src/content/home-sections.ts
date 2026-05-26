@@ -73,13 +73,13 @@ export const membersSectionCopy: Record<
   }
 > = {
   vi: {
-    eyebrow: "Đối tác đồng hành",
-    title: "Gắn Kết Yêu Thương",
+    eyebrow: "Ảnh minh hoạ",
+    title: "Hình ảnh hoạt động",
     paragraphs: [
-      "Bắt đầu từ con số 20 đối tác đồng hành là các anh chị trong nhóm sản xuất Nuôi Em, các thành viên rải rác khắp tỉnh thành trên nước Việt Nam. Giờ đây, sau ba năm con số đối tác đồng hành đã tăng lên gần gấp đôi.",
-      "Dự án Nuôi Em vẫn đang từng bước nỗ lực hơn mỗi ngày để có thể bảo trợ nhiều trẻ hơn và mang lại nhiều niềm vui hơn cho các con!",
+      "Đây là các hình ảnh minh hoạ cho hoạt động đồng hành, bảo trợ và kết nối cộng đồng của Dự án Nuôi Em.",
+      "Nội dung ảnh có thể thay đổi theo từng giai đoạn để phản ánh hành trình hỗ trợ các em nhỏ trên nhiều tỉnh thành.",
     ],
-    cta: "Đối tác đồng hành",
+    cta: "Xem thêm hình ảnh",
   },
   en: {
     eyebrow: "Fund members",

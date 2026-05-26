@@ -6,13 +6,22 @@ import type { NewsArticle } from "@/lib/data/types";
 type NewsGridProps = {
   articles: NewsArticle[];
   readMoreLabel: string;
+  emptyLabel?: string;
 };
 
 function stripExcerpt(text: string) {
   return text.replace(/[*#[\]]/g, "").replace(/!\[[^\]]*\]\([^)]+\)/g, "").trim();
 }
 
-export function NewsGrid({ articles, readMoreLabel }: NewsGridProps) {
+export function NewsGrid({ articles, readMoreLabel, emptyLabel }: NewsGridProps) {
+  if (articles.length === 0) {
+    return (
+      <p className="mx-auto max-w-3xl px-4 py-12 text-center text-brand-muted sm:px-6">
+        {emptyLabel ?? "Chưa có bài viết."}
+      </p>
+    );
+  }
+
   return (
     <ul className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8">
       {articles.map((article) => (

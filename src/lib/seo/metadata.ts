@@ -18,9 +18,15 @@ export type BuildMetadataOptions = {
   pathname: string;
   keywords?: string[];
   ogImage?: string | null;
+  /** Optional explicit OG image alt; falls back to title. */
+  ogImageAlt?: string;
   ogType?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  /** Article-only OG metadata */
+  articleSection?: string;
+  articleAuthors?: string[];
+  articleTags?: string[];
   noIndex?: boolean;
   /** Override canonical path (defaults to pathname) */
   canonicalPathname?: string;
@@ -54,9 +60,13 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     pathname,
     keywords,
     ogImage,
+    ogImageAlt,
     ogType = "website",
     publishedTime,
     modifiedTime,
+    articleSection,
+    articleAuthors,
+    articleTags,
     noIndex = false,
     canonicalPathname = pathname,
   } = options;
@@ -80,13 +90,17 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
         url: imageUrl,
         width: 1200,
         height: 630,
-        alt: title,
+        alt: ogImageAlt ?? title,
+        type: "image/jpeg",
       },
     ],
-    ...(ogType === "article" && publishedTime
+    ...(ogType === "article"
       ? {
-          publishedTime,
+          ...(publishedTime ? { publishedTime } : {}),
           ...(modifiedTime ? { modifiedTime } : {}),
+          ...(articleSection ? { section: articleSection } : {}),
+          ...(articleAuthors?.length ? { authors: articleAuthors } : {}),
+          ...(articleTags?.length ? { tags: articleTags } : {}),
         }
       : {}),
   };
@@ -95,7 +109,12 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     card: "summary_large_image",
     title,
     description: desc,
-    images: [imageUrl],
+    images: [
+      {
+        url: imageUrl,
+        alt: ogImageAlt ?? title,
+      },
+    ],
     ...(siteConfig.twitterHandle
       ? { site: siteConfig.twitterHandle, creator: siteConfig.twitterHandle }
       : {}),
@@ -106,6 +125,16 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     description: desc,
     keywords: keywords?.length ? keywords : undefined,
     metadataBase: getMetadataBase(),
+    applicationName: name,
+    authors: [{ name }],
+    creator: name,
+    publisher: name,
+    category: locale === "vi" ? "Thiện nguyện" : "Charity",
+    formatDetection: {
+      telephone: false,
+      address: false,
+      email: false,
+    },
     alternates: {
       canonical,
       languages,
@@ -113,7 +142,18 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     openGraph,
     twitter,
     robots: noIndex
-      ? { index: false, follow: false }
+      ? {
+          index: false,
+          follow: false,
+          nocache: true,
+          googleBot: {
+            index: false,
+            follow: false,
+            noimageindex: true,
+            "max-image-preview": "none",
+            "max-snippet": 0,
+          },
+        }
       : {
           index: true,
           follow: true,

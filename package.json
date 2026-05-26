@@ -17,6 +17,8 @@
     "brand:sanitize": "node scripts/sanitize-brand-data.mjs"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.106.1",
     "lucide-react": "^0.511.0",
     "next": "^16.2.6",
     "next-intl": "^4.3.4",
