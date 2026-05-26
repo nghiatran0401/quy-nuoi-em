@@ -16,14 +16,14 @@ export function LoginForm({ action, error }: LoginFormProps) {
           <div className="relative mx-auto mb-4 h-14 w-14 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200/80">
             <Image src="/logo/logo-ne.png" alt="Dự án Nuôi Em" fill className="object-contain p-2" sizes="56px" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Admin console</h1>
-          <p className="mt-2 text-sm text-slate-600">Sign in to manage news and site content.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Trang quản trị</h1>
+          <p className="mt-2 text-sm text-slate-600">Đăng nhập để quản lý bài viết và nội dung website.</p>
         </div>
 
         <form action={action} className="space-y-5 p-6 sm:p-8">
           <div>
             <label htmlFor="username" className="admin-label">
-              Username
+              Tên đăng nhập
             </label>
             <input
               id="username"
@@ -38,7 +38,7 @@ export function LoginForm({ action, error }: LoginFormProps) {
 
           <div>
             <label htmlFor="password" className="admin-label">
-              Password
+              Mật khẩu
             </label>
             <input
               id="password"
@@ -53,7 +53,7 @@ export function LoginForm({ action, error }: LoginFormProps) {
 
           <button type="submit" className="admin-btn-primary w-full">
             <LockKeyhole className="h-4 w-4" />
-            Sign in
+            Đăng nhập
           </button>
 
           {error ? (
@@ -65,7 +65,7 @@ export function LoginForm({ action, error }: LoginFormProps) {
       </div>
 
       <p className="mt-6 text-center text-xs text-slate-500">
-        Authorized staff only. Activity may be logged.
+        Chỉ dành cho quản trị viên được cấp quyền.
       </p>
     </div>
   );

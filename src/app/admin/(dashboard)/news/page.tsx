@@ -49,7 +49,7 @@ export default async function AdminNewsPage({ searchParams }: AdminNewsPageProps
     error = result.error;
   } catch (caught) {
     error = {
-      message: caught instanceof Error ? caught.message : "Could not initialize admin database client.",
+      message: caught instanceof Error ? caught.message : "Không thể khởi tạo kết nối cơ sở dữ liệu quản trị.",
     };
   }
 
@@ -71,12 +71,12 @@ export default async function AdminNewsPage({ searchParams }: AdminNewsPageProps
   return (
     <>
       <AdminPageHeader
-        title="News"
-        description="Create, publish, and manage articles shown on the public site."
+        title="Tin tức"
+        description="Tạo, xuất bản và quản lý các bài viết hiển thị trên website công khai."
         actions={
           <Link href="/admin/news/new" className="admin-btn-primary">
             <Plus className="h-4 w-4" />
-            New article
+            Bài viết mới
           </Link>
         }
       />
@@ -84,15 +84,15 @@ export default async function AdminNewsPage({ searchParams }: AdminNewsPageProps
       <div className="space-y-3">
         {successMessage ? <AdminAlert variant="success" message={successMessage} /> : null}
         {errorMessage ? <AdminAlert variant="error" message={errorMessage} /> : null}
-        {error ? <AdminAlert variant="error" message={`Could not load articles: ${error.message}`} /> : null}
+        {error ? <AdminAlert variant="error" message={`Không thể tải danh sách bài viết: ${error.message}`} /> : null}
       </div>
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { label: "Total", value: stats.total, icon: FileText, tone: "text-slate-600 bg-slate-100" },
-          { label: "Published", value: stats.published, icon: Radio, tone: "text-emerald-700 bg-emerald-50" },
-          { label: "Drafts", value: stats.draft, icon: Globe2, tone: "text-amber-800 bg-amber-50" },
-          { label: "Archived", value: stats.archived, icon: Archive, tone: "text-slate-600 bg-slate-100" },
+          { label: "Tổng", value: stats.total, icon: FileText, tone: "text-slate-600 bg-slate-100" },
+          { label: "Đã xuất bản", value: stats.published, icon: Radio, tone: "text-emerald-700 bg-emerald-50" },
+          { label: "Bản nháp", value: stats.draft, icon: Globe2, tone: "text-amber-800 bg-amber-50" },
+          { label: "Lưu trữ", value: stats.archived, icon: Archive, tone: "text-slate-600 bg-slate-100" },
         ].map((item) => {
           const Icon = item.icon;
           return (
@@ -115,13 +115,13 @@ export default async function AdminNewsPage({ searchParams }: AdminNewsPageProps
             <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-500">
               <FileText className="h-7 w-7" />
             </div>
-            <h2 className="text-lg font-semibold text-slate-900">No articles yet</h2>
+            <h2 className="text-lg font-semibold text-slate-900">Chưa có bài viết nào</h2>
             <p className="mt-2 max-w-sm text-sm text-slate-600">
-              Publish your first news post to show it on the homepage and news page.
+              Hãy tạo và xuất bản bài viết đầu tiên để hiển thị trên trang chủ và trang tin tức.
             </p>
             <Link href="/admin/news/new" className="admin-btn-primary mt-6">
               <Plus className="h-4 w-4" />
-              Create first article
+              Tạo bài viết đầu tiên
             </Link>
           </div>
         ) : (
@@ -129,12 +129,12 @@ export default async function AdminNewsPage({ searchParams }: AdminNewsPageProps
             <table className="min-w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-slate-100 bg-slate-50/80 text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  <th className="px-5 py-3.5">Article</th>
-                  <th className="px-5 py-3.5">Status</th>
-                  <th className="hidden px-5 py-3.5 md:table-cell">Locale</th>
-                  <th className="hidden px-5 py-3.5 lg:table-cell">Published</th>
-                  <th className="hidden px-5 py-3.5 sm:table-cell">Updated</th>
-                  <th className="px-5 py-3.5 text-right">Actions</th>
+                  <th className="px-5 py-3.5">Bài viết</th>
+                  <th className="px-5 py-3.5">Trạng thái</th>
+                  <th className="hidden px-5 py-3.5 md:table-cell">Ngôn ngữ</th>
+                  <th className="hidden px-5 py-3.5 lg:table-cell">Ngày đăng</th>
+                  <th className="hidden px-5 py-3.5 sm:table-cell">Cập nhật</th>
+                  <th className="px-5 py-3.5 text-right">Thao tác</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">

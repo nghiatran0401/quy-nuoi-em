@@ -11,7 +11,7 @@ export async function loginWithPassword(formData: FormData) {
   const password = (formData.get("password") as string | null) ?? "";
 
   if (!isValidAdminCredentials(username, password)) {
-    redirect("/admin/login?error=Invalid%20username%20or%20password");
+    redirect("/admin/login?error=Sai%20t%C3%AAn%20%C4%91%C4%83ng%20nh%E1%BA%ADp%20ho%E1%BA%B7c%20m%E1%BA%ADt%20kh%E1%BA%A9u");
   }
 
   await createAdminSession();

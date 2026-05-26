@@ -15,7 +15,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
   const [open, setOpen] = useState(false);
 
   function confirmDelete(event: MouseEvent<HTMLButtonElement>) {
-    const ok = window.confirm(`Permanently delete "${row.title}"?\n\nThis cannot be undone.`);
+    const ok = window.confirm(`Xóa vĩnh viễn "${row.title}"?\n\nHành động này không thể hoàn tác.`);
     if (!ok) event.preventDefault();
     setOpen(false);
   }
@@ -25,7 +25,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
       <Link
         href={`/admin/news/${row.id}/edit`}
         className="admin-btn-ghost hidden px-2.5 sm:inline-flex"
-        title="Edit"
+        title="Sửa"
       >
         <Pencil className="h-4 w-4" />
       </Link>
@@ -35,7 +35,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
           target="_blank"
           rel="noopener noreferrer"
           className="admin-btn-ghost hidden px-2.5 sm:inline-flex"
-          title="View live"
+          title="Xem bài viết"
         >
           <ExternalLink className="h-4 w-4" />
         </Link>
@@ -49,7 +49,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
         onClick={() => setOpen((value) => !value)}
       >
         <MoreHorizontal className="h-4 w-4" />
-        <span className="sr-only">Actions</span>
+        <span className="sr-only">Thao tác</span>
       </button>
 
       {open ? (
@@ -57,7 +57,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
           <button
             type="button"
             className="fixed inset-0 z-10"
-            aria-label="Close menu"
+            aria-label="Đóng menu"
             onClick={() => setOpen(false)}
           />
           <div
@@ -71,7 +71,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
               onClick={() => setOpen(false)}
             >
               <Pencil className="h-4 w-4" />
-              Edit
+              Sửa
             </Link>
             {row.status === "published" ? (
               <Link
@@ -83,7 +83,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
                 onClick={() => setOpen(false)}
               >
                 <ExternalLink className="h-4 w-4" />
-                View live
+                Xem bài viết
               </Link>
             ) : null}
             {row.status !== "archived" ? (
@@ -96,7 +96,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
                   onClick={() => setOpen(false)}
                 >
                   <Archive className="h-4 w-4" />
-                  Archive
+                  Lưu trữ
                 </button>
               </form>
             ) : null}
@@ -109,7 +109,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
                 onClick={confirmDelete}
               >
                 <Trash2 className="h-4 w-4" />
-                Delete
+                Xóa
               </button>
             </form>
           </div>

@@ -10,9 +10,10 @@ import { MembersSection } from "@/components/home/members-section";
 import { SponsorshipRoundsSection } from "@/components/home/sponsorship-rounds-section";
 import { PartnersMarquee } from "@/components/pages/partners-marquee";
 import { JsonLd } from "@/components/seo/json-ld";
-import { faqSectionCopy, partnersHomeTitle } from "@/content/home-sections";
+import { partnersHomeTitle } from "@/content/home-sections";
 import { donateInfo } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
+import { getHomePageContent, type HomeFaqItem } from "@/lib/data/homepage";
 import { getLatestNews } from "@/lib/data/news";
 import { faqPageJsonLd, itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { buildMetadata } from "@/lib/seo/metadata";
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
 }
 
 function faqAnswerText(
-  item: (typeof faqSectionCopy)["vi"]["items"][number],
+  item: HomeFaqItem,
   locale: Locale,
 ): string {
   const bank = donateInfo[locale];
@@ -62,7 +63,8 @@ export default async function HomePage({ params }: HomePageProps) {
   const resolvedLocale = locale as Locale;
   const t = await getTranslations({ locale, namespace: "metadata" });
 
-  const faq = faqSectionCopy[resolvedLocale];
+  const homeContent = await getHomePageContent(resolvedLocale);
+  const faq = homeContent.faq;
   const faqEntries = faq.items.map((item) => ({
     question: item.question,
     answer: faqAnswerText(item, resolvedLocale),
@@ -103,13 +105,13 @@ export default async function HomePage({ params }: HomePageProps) {
             : []),
         ]}
       />
-      <HeroSection />
-      <HomeStatsSection locale={resolvedLocale} />
+      <HeroSection locale={resolvedLocale} content={homeContent.hero} />
+      <HomeStatsSection locale={resolvedLocale} stats={homeContent.stats} />
       <SponsorshipRoundsSection locale={resolvedLocale} />
-      <CallToActionSection locale={resolvedLocale} />
-      <MembersSection locale={resolvedLocale} />
+      <CallToActionSection locale={resolvedLocale} content={homeContent.cta} />
+      <MembersSection locale={resolvedLocale} content={homeContent.members} />
       <HomeNewsSection locale={resolvedLocale} />
-      <FaqSection locale={resolvedLocale} />
+      <FaqSection locale={resolvedLocale} content={homeContent.faq} />
       <PartnersMarquee title={partnersHomeTitle[resolvedLocale]} variant="home" />
     </div>
   );

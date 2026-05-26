@@ -61,10 +61,10 @@ async function resolveImageUrl(
 
   if (file instanceof File && file.size > 0) {
     if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
-      throw new Error("Cover image must be JPEG, PNG, WebP, or AVIF.");
+      throw new Error("Ảnh bìa chỉ hỗ trợ định dạng JPEG, PNG, WebP hoặc AVIF.");
     }
     if (file.size > MAX_IMAGE_BYTES) {
-      throw new Error("Cover image must be under 5 MB.");
+      throw new Error("Ảnh bìa phải nhỏ hơn 5 MB.");
     }
 
     const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
@@ -77,7 +77,7 @@ async function resolveImageUrl(
     });
 
     if (error) {
-      throw new Error(`Image upload failed: ${error.message}`);
+      throw new Error(`Tải ảnh lên thất bại: ${error.message}`);
     }
 
     const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(path);
@@ -107,13 +107,13 @@ async function parseNewsForm(formData: FormData, supabase: SupabaseClient) {
       : null;
 
   if (!title) {
-    throw new Error("Title is required.");
+    throw new Error("Tiêu đề là bắt buộc.");
   }
   if (!slug) {
-    throw new Error("Slug is required.");
+    throw new Error("Đường dẫn slug là bắt buộc.");
   }
   if (!content) {
-    throw new Error("Content is required.");
+    throw new Error("Nội dung là bắt buộc.");
   }
 
   const image_url = await resolveImageUrl(formData, supabase);
@@ -144,7 +144,7 @@ export async function createNewsArticle(formData: FormData) {
       throw new Error(error.message);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Could not create article.";
+    const message = error instanceof Error ? error.message : "Không thể tạo bài viết.";
     redirect(`/admin/news/new?error=${encodeMessage(message)}`);
   }
 
@@ -164,7 +164,7 @@ export async function updateNewsArticle(id: string, formData: FormData) {
       throw new Error(error.message);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Could not update article.";
+    const message = error instanceof Error ? error.message : "Không thể cập nhật bài viết.";
     redirect(`/admin/news/${id}/edit?error=${encodeMessage(message)}`);
   }
 
@@ -195,7 +195,7 @@ export async function archiveNewsArticle(formData: FormData) {
       revalidateNewsPaths(article.slug, article.locale);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Could not archive article.";
+    const message = error instanceof Error ? error.message : "Không thể lưu trữ bài viết.";
     redirect(`/admin/news?error=${encodeMessage(message)}`);
   }
 
@@ -225,7 +225,7 @@ export async function deleteNewsArticle(formData: FormData) {
       revalidateNewsPaths(article.slug, article.locale);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Could not delete article.";
+    const message = error instanceof Error ? error.message : "Không thể xóa bài viết.";
     redirect(`/admin/news?error=${encodeMessage(message)}`);
   }
 

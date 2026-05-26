@@ -6,8 +6,9 @@ import { brandVisual } from "@/config/brand-visual";
 import { faqSectionCopy } from "@/content/home-sections";
 import { donateInfo } from "@/content/pages/static-pages";
 import type { Locale } from "@/i18n/config";
+import type { HomeFaqContent } from "@/lib/data/homepage";
 
-type Props = { locale: Locale };
+type Props = { locale: Locale; content?: HomeFaqContent };
 
 const icons = {
   address: MapPin,
@@ -15,8 +16,8 @@ const icons = {
   process: FileCheck,
 } as const;
 
-export function FaqSection({ locale }: Props) {
-  const copy = faqSectionCopy[locale];
+export function FaqSection({ locale, content }: Props) {
+  const copy = content ?? faqSectionCopy[locale];
   const bank = donateInfo[locale];
   const [openId, setOpenId] = useState(copy.items[0]?.id ?? "");
 

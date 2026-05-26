@@ -5,8 +5,9 @@ import { homeMemberImages } from "@/content/home";
 import { membersSectionCopy } from "@/content/home-sections";
 import { siteImages } from "@/lib/images";
 import type { Locale } from "@/i18n/config";
+import type { HomeMembersContent } from "@/lib/data/homepage";
 
-type Props = { locale: Locale };
+type Props = { locale: Locale; content?: HomeMembersContent };
 
 const memberLayout = [
   { index: 1, className: "col-span-full aspect-[4/3] md:col-span-4" },
@@ -16,8 +17,8 @@ const memberLayout = [
   { index: 5, className: "col-span-full aspect-video md:col-span-2 md:aspect-square" },
 ] as const;
 
-export function MembersSection({ locale }: Props) {
-  const copy = membersSectionCopy[locale];
+export function MembersSection({ locale, content }: Props) {
+  const copy = content ?? membersSectionCopy[locale];
 
   return (
     <section className="section-warm overflow-hidden py-20 lg:py-24">

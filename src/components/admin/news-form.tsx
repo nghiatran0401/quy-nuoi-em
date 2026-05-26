@@ -38,17 +38,17 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
     <div className="space-y-6">
       <Link href="/admin/news" className="admin-btn-ghost -ml-2 w-fit">
         <ArrowLeft className="h-4 w-4" />
-        Back to news
+        Quay lại danh sách tin tức
       </Link>
 
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-          {mode === "create" ? "New article" : "Edit article"}
+          {mode === "create" ? "Tạo bài viết mới" : "Chỉnh sửa bài viết"}
         </h1>
         <p className="mt-1.5 text-sm text-slate-600">
           {mode === "create"
-            ? "Draft your story, set visibility, then publish when ready."
-            : "Update content and publishing settings."}
+            ? "Soạn nội dung, chọn trạng thái và xuất bản khi sẵn sàng."
+            : "Cập nhật nội dung và thiết lập xuất bản."}
         </p>
       </div>
 
@@ -61,7 +61,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Content</h2>
             <div>
               <label htmlFor="title" className="admin-label">
-                Title
+                Tiêu đề
               </label>
               <input
                 id="title"
@@ -74,7 +74,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
             </div>
             <div>
               <label htmlFor="slug" className="admin-label">
-                URL slug
+                Đường dẫn URL
               </label>
               <div className="flex rounded-xl border border-slate-200 bg-slate-50 shadow-sm focus-within:border-[var(--admin-accent)] focus-within:ring-2 focus-within:ring-[color-mix(in_srgb,var(--admin-accent)_25%,transparent)]">
                 <span className="flex items-center border-r border-slate-200 px-3 text-xs text-slate-500">/news/</span>
@@ -83,27 +83,27 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
                   name="slug"
                   required
                   defaultValue={values?.slug ?? ""}
-                  placeholder="my-article-slug"
+                  placeholder="tieu-de-bai-viet"
                   className="min-w-0 flex-1 border-0 bg-transparent px-3 py-2.5 text-sm focus:outline-none"
                 />
               </div>
             </div>
             <div>
               <label htmlFor="excerpt" className="admin-label">
-                Excerpt
+                Tóm tắt
               </label>
               <textarea
                 id="excerpt"
                 name="excerpt"
                 rows={3}
                 defaultValue={values?.excerpt ?? ""}
-                placeholder="Short summary for cards and SEO"
+                placeholder="Mô tả ngắn để hiển thị ở thẻ tin và SEO"
                 className="admin-input resize-y"
               />
             </div>
             <div>
               <label htmlFor="content" className="admin-label">
-                Body
+                Nội dung
               </label>
               <textarea
                 id="content"
@@ -111,7 +111,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
                 required
                 rows={18}
                 defaultValue={values?.content ?? ""}
-                placeholder="Write in markdown (# headings, - bullets)"
+                placeholder="Viết nội dung theo markdown (# tiêu đề, - danh sách)"
                 className="admin-input resize-y font-mono text-sm leading-relaxed"
               />
             </div>
@@ -123,26 +123,26 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Publish</h2>
             <div>
               <label htmlFor="status" className="admin-label">
-                Status
+                Trạng thái
               </label>
               <select id="status" name="status" defaultValue={values?.status ?? "draft"} className="admin-input">
-                <option value="draft">Draft</option>
-                <option value="published">Published</option>
-                <option value="archived">Archived</option>
+                <option value="draft">Bản nháp</option>
+                <option value="published">Đã xuất bản</option>
+                <option value="archived">Lưu trữ</option>
               </select>
             </div>
             <div>
               <label htmlFor="locale" className="admin-label">
-                Language
+                Ngôn ngữ
               </label>
               <select id="locale" name="locale" defaultValue={values?.locale ?? "vi"} className="admin-input">
-                <option value="vi">Vietnamese (vi)</option>
-                <option value="en">English (en)</option>
+                <option value="vi">Tiếng Việt (vi)</option>
+                <option value="en">Tiếng Anh (en)</option>
               </select>
             </div>
             <div>
               <label htmlFor="published_at" className="admin-label">
-                Publish date
+                Thời gian đăng
               </label>
               <input
                 id="published_at"
@@ -151,7 +151,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
                 defaultValue={toDatetimeLocal(values?.published_at)}
                 className="admin-input"
               />
-              <p className="mt-1.5 text-xs text-slate-500">Used when status is published. Defaults to now if empty.</p>
+              <p className="mt-1.5 text-xs text-slate-500">Áp dụng khi trạng thái là đã xuất bản. Để trống sẽ dùng thời gian hiện tại.</p>
             </div>
             <button type="submit" className="admin-btn-primary w-full">
               <Save className="h-4 w-4" />
@@ -162,7 +162,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
           <div className="admin-card space-y-4 p-5">
             <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
               <ImageIcon className="h-4 w-4" />
-              Cover image
+              Ảnh bìa
             </h2>
             {values?.image_url ? (
               <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
@@ -171,7 +171,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
             ) : null}
             <div>
               <label htmlFor="cover_image" className="admin-label">
-                Upload file
+                Tải ảnh lên
               </label>
               <input
                 id="cover_image"
@@ -180,11 +180,11 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
                 accept="image/jpeg,image/png,image/webp,image/avif"
                 className="admin-input file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-slate-700"
               />
-              <p className="mt-1.5 text-xs text-slate-500">JPEG, PNG, WebP, or AVIF · max 5 MB</p>
+              <p className="mt-1.5 text-xs text-slate-500">Hỗ trợ JPEG, PNG, WebP, AVIF · tối đa 5 MB</p>
             </div>
             <div>
               <label htmlFor="image_url" className="admin-label">
-                Or paste URL
+                Hoặc dán URL ảnh
               </label>
               <input
                 id="image_url"

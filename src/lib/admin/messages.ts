@@ -1,8 +1,11 @@
 const MESSAGE_LABELS: Record<string, string> = {
-  created: "Article created successfully.",
-  saved: "Changes saved.",
-  archived: "Article archived.",
-  deleted: "Article deleted permanently.",
+  created: "Đã tạo bài viết thành công.",
+  saved: "Đã lưu thay đổi.",
+  archived: "Đã lưu trữ bài viết.",
+  deleted: "Đã xóa vĩnh viễn bài viết.",
+  homepage_saved: "Đã lưu nội dung trang chủ.",
+  about_saved: "Đã lưu nội dung trang giới thiệu.",
+  process_2026_saved: "Đã lưu nội dung quy trình cấp mã 2026.",
 };
 
 export function decodeAdminParam(value: string | undefined): string | undefined {

@@ -18,7 +18,7 @@ export function AdminShell({ children, footer }: AdminShellProps) {
       {mobileOpen ? (
         <button
           type="button"
-          aria-label="Close menu"
+          aria-label="Đóng menu"
           className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
@@ -36,14 +36,14 @@ export function AdminShell({ children, footer }: AdminShellProps) {
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Dự án Nuôi Em</p>
-              <p className="text-sm font-bold text-slate-900">Admin</p>
+              <p className="text-sm font-bold text-slate-900">Quản trị</p>
             </div>
           </div>
           <button
             type="button"
             className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 lg:hidden"
             onClick={() => setMobileOpen(false)}
-            aria-label="Close sidebar"
+            aria-label="Đóng thanh bên"
           >
             <X className="h-5 w-5" />
           </button>
@@ -62,11 +62,11 @@ export function AdminShell({ children, footer }: AdminShellProps) {
             type="button"
             className="rounded-lg border border-slate-200 p-2 text-slate-600 hover:bg-slate-50"
             onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
+            aria-label="Mở menu"
           >
             <Menu className="h-5 w-5" />
           </button>
-          <p className="text-sm font-semibold text-slate-900">Admin console</p>
+          <p className="text-sm font-semibold text-slate-900">Bảng điều khiển quản trị</p>
         </header>
 
         <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:py-8">{children}</main>

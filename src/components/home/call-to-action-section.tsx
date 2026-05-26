@@ -3,11 +3,12 @@ import { Link } from "@/i18n/navigation";
 import { ctaSectionCopy } from "@/content/home-sections";
 import { siteImages } from "@/lib/images";
 import type { Locale } from "@/i18n/config";
+import type { HomeCtaContent } from "@/lib/data/homepage";
 
-type Props = { locale: Locale };
+type Props = { locale: Locale; content?: HomeCtaContent };
 
-export function CallToActionSection({ locale }: Props) {
-  const copy = ctaSectionCopy[locale];
+export function CallToActionSection({ locale, content }: Props) {
+  const copy = content ?? ctaSectionCopy[locale];
 
   return (
     <section className="cta-warm">

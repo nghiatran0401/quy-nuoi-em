@@ -2,10 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ExternalLink, Newspaper } from "lucide-react";
+import { ExternalLink, House, Info, ListOrdered, Newspaper } from "lucide-react";
 
 const navItems = [
-  { href: "/admin/news", label: "News", icon: Newspaper, match: "/admin/news" },
+  { href: "/admin/homepage", label: "Trang chủ", icon: House, match: "/admin/homepage" },
+  { href: "/admin/about", label: "Giới thiệu", icon: Info, match: "/admin/about" },
+  {
+    href: "/admin/quy-trinh-cap-ma-2026",
+    label: "Quy trình cấp mã",
+    icon: ListOrdered,
+    match: "/admin/quy-trinh-cap-ma-2026",
+  },
+  { href: "/admin/news", label: "Tin tức", icon: Newspaper, match: "/admin/news" },
 ] as const;
 
 export function AdminSidebarNav() {
@@ -39,7 +47,7 @@ export function AdminSidebarNav() {
         className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
       >
         <ExternalLink className="h-4 w-4 shrink-0 text-slate-400" />
-        View public site
+        Xem website công khai
       </a>
     </nav>
   );

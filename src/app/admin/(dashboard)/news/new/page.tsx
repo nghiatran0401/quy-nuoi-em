@@ -11,7 +11,7 @@ export default async function NewNewsPage({ searchParams }: NewNewsPageProps) {
   return (
     <NewsForm
       mode="create"
-      submitLabel="Create article"
+      submitLabel="Tạo bài viết"
       action={createNewsArticle}
       error={params.error}
       message={params.message}

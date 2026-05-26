@@ -26,7 +26,7 @@ export default async function EditNewsPage({ params, searchParams }: EditNewsPag
   return (
     <NewsForm
       mode="edit"
-      submitLabel="Save changes"
+      submitLabel="Lưu thay đổi"
       action={action}
       values={values}
       error={query.error}

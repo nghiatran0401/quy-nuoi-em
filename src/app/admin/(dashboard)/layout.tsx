@@ -21,13 +21,13 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
   const footer = (
     <div className="space-y-3">
       <div className="rounded-xl bg-slate-50 px-3 py-2.5">
-        <p className="text-xs font-medium text-slate-500">Signed in as</p>
-        <p className="truncate text-sm font-semibold text-slate-800">Administrator</p>
+        <p className="text-xs font-medium text-slate-500">Đăng nhập với vai trò</p>
+        <p className="truncate text-sm font-semibold text-slate-800">Quản trị viên</p>
       </div>
       <form action={signOut}>
         <button type="submit" className="admin-btn-secondary w-full">
           <LogOut className="h-4 w-4" />
-          Sign out
+          Đăng xuất
         </button>
       </form>
     </div>
