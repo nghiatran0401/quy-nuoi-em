@@ -3,8 +3,12 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { homeProcessOverview } from "@/content/home-process-overview";
 
-export function ProcessOverviewSection() {
-  const copy = homeProcessOverview;
+export function ProcessOverviewSection({
+  content,
+}: {
+  content?: typeof homeProcessOverview;
+}) {
+  const copy = content ?? homeProcessOverview;
 
   return (
     <section className="relative overflow-hidden section-warm py-20 lg:py-24">
@@ -33,41 +37,31 @@ export function ProcessOverviewSection() {
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {copy.cards.map((card) => {
-            const cardContent = (
-              <article className="group relative flex h-full min-h-[360px] flex-col overflow-hidden rounded-2xl border border-brand-border/80 bg-white transition duration-200 hover:-translate-y-0.5 hover:border-brand-accent/40 hover:shadow-[var(--shadow-brand-card)]">
-                <span className="absolute left-3 top-2 z-10 font-heading text-5xl font-black leading-none text-brand-accent/90">
-                  {card.number}
-                </span>
-                <div className="relative aspect-[5/3] w-full overflow-hidden border-b border-brand-border/70 bg-brand-sky-soft pl-8 pt-4">
-                  <Image src={card.image} alt="" fill className="object-contain p-3 opacity-95" sizes="(max-width: 768px) 100vw, 33vw" />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-sky-soft/80 to-transparent" />
-                </div>
-                <div className="flex flex-1 flex-col px-4 pb-4 pt-3 md:px-5">
-                  <h3 className="font-heading text-lg font-bold text-brand-ink md:text-xl">{card.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-muted">{card.summary}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-accent-dark">
-                    {card.ctaLabel}
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </div>
-              </article>
-            );
+          {copy.cards.map((card) => (
+            <article
+              key={card.number}
+              className="relative flex h-full min-h-[360px] flex-col overflow-hidden rounded-2xl border border-brand-border/80 bg-white"
+            >
+              <span className="absolute left-3 top-2 z-10 font-heading text-5xl font-black leading-none text-brand-accent/90">
+                {card.number}
+              </span>
+              <div className="relative aspect-[5/3] w-full overflow-hidden border-b border-brand-border/70 bg-brand-sky-soft pl-8 pt-4">
+                <Image src={card.image} alt="" fill className="object-contain p-3 opacity-95" sizes="(max-width: 768px) 100vw, 33vw" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-sky-soft/80 to-transparent" />
+              </div>
+              <div className="flex flex-1 flex-col px-4 pb-4 pt-3 md:px-5">
+                <h3 className="font-heading text-lg font-bold text-brand-ink md:text-xl">{card.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-muted">{card.summary}</p>
+              </div>
+            </article>
+          ))}
+        </div>
 
-            if (card.external) {
-              return (
-                <a key={card.number} href={card.href} target="_blank" rel="noreferrer" className="block">
-                  {cardContent}
-                </a>
-              );
-            }
-
-            return (
-              <Link key={card.number} href={card.href} className="block">
-                {cardContent}
-              </Link>
-            );
-          })}
+        <div className="mt-8 flex justify-center">
+          <Link href="/quy-trinh-cap-ma-2026" className="btn-secondary inline-flex items-center gap-2 px-6 py-3 text-sm">
+            Tìm hiểu thêm
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
+          </Link>
         </div>
 
         <div className="mt-8 rounded-2xl border border-brand-accent/25 bg-brand-highlight-soft p-5 text-brand-ink shadow-[var(--shadow-brand-soft)]">

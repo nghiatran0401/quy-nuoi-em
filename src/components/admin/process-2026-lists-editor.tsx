@@ -72,7 +72,7 @@ export function PaymentScenariosEditor({ name, initialItems }: PaymentScenariosE
               value={item.label}
               onChange={(event) => updateItem(setItems, index, { label: event.target.value })}
               className="admin-input"
-              placeholder="Nhãn (vd. 1 lần)"
+              placeholder="Nhãn (ví dụ 1 lần)"
             />
             <input
               value={item.tag ?? ""}

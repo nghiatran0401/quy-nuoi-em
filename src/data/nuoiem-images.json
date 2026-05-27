@@ -52,6 +52,7 @@
     "59fb4d0b9bc14c499ef70892/fe9d715e9a48568fafafdbb3194c586b-20220214173551.png": "/images/nuoiem/fe9d715e9a48568fafafdbb3194c586b-20220214173551.png",
     "59fb4d0b9bc14c499ef70892/finish-20220415045146.png": "/images/nuoiem/finish-20220415045146.png",
     "59fb4d0b9bc14c499ef70892/he-sinh-thai-nuoi-em-20200604061052.jpg": "/images/nuoiem/he-sinh-thai-nuoi-em-20200604061052.jpg",
+    "59fb4d0b9bc14c499ef70892/he-sinh-thai-nuoi-em-la-day.jpg": "/images/nuoiem/he-sinh-thai-nuoi-em-la-day.jpg",
     "59fb4d0b9bc14c499ef70892/home-1528463943.jpg": "/images/nuoiem/home-1528463943.jpg",
     "59fb4d0b9bc14c499ef70892/huong-dan-20230303073502-pkf7d.jpeg": "/images/nuoiem/huong-dan-20230303073502-pkf7d.jpeg",
     "59fb4d0b9bc14c499ef70892/huong-dan-6-buoc-nhan-ma--20240825115002-lnudk.jpg": "/images/nuoiem/huong-dan-6-buoc-nhan-ma--20240825115002-lnudk.jpg",
@@ -83,6 +84,7 @@
   "aliases": {
     "hero": "/images/nuoiem/home-1528463943.jpg",
     "heSinhThai": "/images/nuoiem/he-sinh-thai-nuoi-em-20200604061052.jpg",
+    "heSinhThaiAbout": "/images/nuoiem/he-sinh-thai-nuoi-em-la-day.jpg",
     "processGuide": "/images/nuoiem/huong-dan-6-buoc-nhan-ma--20240825115002-lnudk.jpg",
     "donateQr": "/qr.png",
     "mascotASang": "/images/nuoiem/a-sang-png-20201227081205.png",

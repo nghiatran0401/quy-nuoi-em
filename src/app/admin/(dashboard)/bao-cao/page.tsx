@@ -29,11 +29,7 @@ export default async function ReportsAdminPage({ searchParams }: PageProps) {
       </div>
 
       {reports.length === 0 ? (
-        <p className="text-sm text-slate-600">
-          Chưa có báo cáo trong cơ sở dữ liệu. Chạy{" "}
-          <code className="rounded bg-slate-100 px-1">node --env-file=.env scripts/seed-financial-reports.mjs</code>{" "}
-          để nhập từ reports.json.
-        </p>
+        <p className="text-sm text-slate-600">Chưa có báo cáo tài chính.</p>
       ) : (
         <div className="admin-card divide-y divide-slate-200 p-5">
           {reports.map((report) => (

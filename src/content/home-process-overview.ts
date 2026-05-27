@@ -21,13 +21,12 @@ export const homeProcessOverview = {
     number: step.number,
     title: step.title,
     summary: step.summary,
-    // Aliases are processStep1..6 (no leading zero in key names).
-    image: nuoiEmImage(`processStep${Number(step.number)}` as const),
+    image: nuoiEmImage(resolveProcessStepAlias(step.number)),
     ctaLabel:
       step.number === "01"
         ? "Nhận mã"
         : step.number === "03"
-          ? "Tham gia group"
+          ? "Tham gia nhóm Facebook"
           : step.number === "06"
             ? "Xem lịch thăm em"
             : "Tìm hiểu",
@@ -44,3 +43,22 @@ export const homeProcessOverview = {
   notesTitle: "Lưu ý quan trọng",
   notes: [...importantNotes],
 } as const;
+
+function resolveProcessStepAlias(number: string) {
+  switch (number) {
+    case "01":
+      return "processStep1";
+    case "02":
+      return "processStep2";
+    case "03":
+      return "processStep3";
+    case "04":
+      return "processStep4";
+    case "05":
+      return "processStep5";
+    case "06":
+      return "processStep6";
+    default:
+      return "processStep1";
+  }
+}

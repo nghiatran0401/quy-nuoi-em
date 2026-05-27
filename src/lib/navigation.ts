@@ -1,4 +1,5 @@
-import { siteCopy, type FooterLabelKey, type NavLabelKey } from "@/content/site-copy";
+import { siteCopy, type NavLabelKey } from "@/content/site-copy";
+import { STATIC_PAGE_PATHS } from "@/lib/seo/routes";
 
 export type NavItem = {
   href: string;
@@ -15,33 +16,14 @@ export const mainNavItems: NavItem[] = [
   { href: "/contact", labelKey: "contact" },
 ];
 
-export type FooterLink = {
-  href: string;
-  labelKey: FooterLabelKey;
-};
-
-export const footerInfoLinks: FooterLink[] = [
-  { href: "https://web.sucmanh2000.com/", labelKey: "vision" },
-  { href: "https://phongtinhocchoem.nuoiem.com/", labelKey: "history" },
-  { href: "https://bepgascongnghiep.nuoiem.com/", labelKey: "organization" },
+export const footerSiteLinks: NavItem[] = [
+  ...mainNavItems,
+  { href: STATIC_PAGE_PATHS.donate, labelKey: "donate" },
 ];
 
-export const footerDocumentLinks: FooterLink[] = [
-  { href: "https://web.sucmanh2000.com/", labelKey: "process" },
-  { href: "https://phongtinhocchoem.nuoiem.com/", labelKey: "scoring" },
-  { href: "https://bepgascongnghiep.nuoiem.com/", labelKey: "volunteer" },
-];
-
-export const footerLibraryLinks: FooterLink[] = [
-  { href: "https://web.sucmanh2000.com/", labelKey: "photos" },
-  { href: "https://phongtinhocchoem.nuoiem.com/", labelKey: "activities" },
-  { href: "https://bepgascongnghiep.nuoiem.com/", labelKey: "letters" },
-];
+export const footerSitePrimaryLinks: NavItem[] = footerSiteLinks.slice(0, 4);
+export const footerSiteSecondaryLinks: NavItem[] = footerSiteLinks.slice(4);
 
 export function navLabel(key: NavLabelKey): string {
   return siteCopy.nav[key];
-}
-
-export function footerLabel(key: FooterLabelKey): string {
-  return siteCopy.footer[key];
 }

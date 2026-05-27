@@ -55,7 +55,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
       {successMessage ? <AdminAlert variant="success" message={successMessage} /> : null}
       {errorMessage ? <AdminAlert variant="error" message={errorMessage} /> : null}
 
-      <form action={action} encType="multipart/form-data" className="grid gap-6 lg:grid-cols-[1fr_280px]">
+      <form action={action} className="grid gap-6 lg:grid-cols-[1fr_280px]">
         <div className="admin-card space-y-6 p-5 sm:p-6">
           <section className="space-y-4">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Content</h2>

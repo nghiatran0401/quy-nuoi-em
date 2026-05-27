@@ -44,8 +44,8 @@ async function fetchReportsFromDb(): Promise<FinancialReport[] | null> {
       .order("year", { ascending: false })
       .order("sort_order", { ascending: false });
 
-    if (error || !data?.length) return null;
-    return (data as FinancialReportRow[]).map(rowToReport);
+    if (error) return null;
+    return ((data ?? []) as FinancialReportRow[]).map(rowToReport);
   } catch {
     return null;
   }
@@ -53,6 +53,18 @@ async function fetchReportsFromDb(): Promise<FinancialReport[] | null> {
 
 export async function getAllReports(): Promise<FinancialReport[]> {
   return (await fetchReportsFromDb()) ?? jsonFallback;
+}
+
+export async function getReportsPayload(): Promise<{
+  reports: FinancialReport[];
+  usedFallback: boolean;
+}> {
+  const reportsFromDb = await fetchReportsFromDb();
+  if (reportsFromDb !== null) {
+    return { reports: reportsFromDb, usedFallback: false };
+  }
+
+  return { reports: jsonFallback, usedFallback: true };
 }
 
 export async function getReportYears(): Promise<number[]> {
@@ -82,6 +94,7 @@ export async function listFinancialReportsForAdmin(): Promise<FinancialReportAdm
       document_url: r.documentUrl ?? null,
       total_income: r.totalIncome,
       total_expense: r.totalExpense,
+      summary: null,
       year: r.year,
       sort_order: index,
     }));
@@ -94,7 +107,7 @@ export async function listFinancialReportsForAdmin(): Promise<FinancialReportAdm
     .order("year", { ascending: false })
     .order("sort_order", { ascending: false });
 
-  if (error || !data?.length) {
+  if (error) {
     return jsonFallback.map((r, index) => ({
       id: r.id,
       title: r.title,
@@ -102,12 +115,13 @@ export async function listFinancialReportsForAdmin(): Promise<FinancialReportAdm
       document_url: r.documentUrl ?? null,
       total_income: r.totalIncome,
       total_expense: r.totalExpense,
+      summary: null,
       year: r.year,
       sort_order: index,
     }));
   }
 
-  return data as FinancialReportAdminRow[];
+  return (data ?? []) as FinancialReportAdminRow[];
 }
 
 export const FINANCIAL_REPORTS_STORAGE_FOLDER = "bao-cao";

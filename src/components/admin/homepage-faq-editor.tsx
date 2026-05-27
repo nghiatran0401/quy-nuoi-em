@@ -228,7 +228,7 @@ function FaqItemCard({
           {item.type === "ngan-hang" ? (
             <div className="space-y-3 rounded-lg border border-amber-100 bg-amber-50/50 p-3">
               <p className="text-xs leading-relaxed text-amber-950">
-                Khối ngân hàng (MB, STK, QR, cú pháp) chỉnh ở mục{" "}
+                Khối ngân hàng (tên ngân hàng, số tài khoản, mã QR, cú pháp) chỉnh ở mục{" "}
                 <strong>Thông tin chuyển khoản</strong> bên dưới form. Ở đây chỉ cần sửa câu hỏi.
               </p>
               <FaqBankPreview bank={donateInfo} question={item.question} />

@@ -80,7 +80,7 @@ export function organizationJsonLd(): JsonLdObject {
     areaServed: { "@type": "Country", name: "Việt Nam" },
     nonprofitStatus: "NonprofitType",
     knowsAbout: [
-      "Bảo trợ trẻ mồ côi",
+      "Bảo trợ trẻ có hoàn cảnh khó khăn",
       "Hỗ trợ giáo dục vùng cao",
       "Minh bạch tài chính thiện nguyện",
       "Cơm trưa học đường",

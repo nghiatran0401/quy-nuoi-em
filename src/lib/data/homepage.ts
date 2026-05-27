@@ -17,6 +17,7 @@ import {
 import type { StatItem } from "@/content/types";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createPublicClient } from "@/lib/supabase/public";
+import { defaultHomeSectionsContent } from "@/lib/data/homepage-sections";
 
 export type HomeHeroContent = {
   eyebrow: string;
@@ -190,5 +191,6 @@ export function getDefaultHomepageUpsertPayload() {
     cta: content.cta,
     members: content.members,
     faq: content.faq,
+    sections: defaultHomeSectionsContent,
   };
 }

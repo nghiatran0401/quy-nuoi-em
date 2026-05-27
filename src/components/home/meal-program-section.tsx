@@ -4,8 +4,12 @@ import { MessageCircle } from "lucide-react";
 import { mealProgramSectionCopy } from "@/content/home-meal";
 import { YoutubeEmbed } from "@/components/shared/youtube-embed";
 
-export function MealProgramSection() {
-  const copy = mealProgramSectionCopy;
+type MealProgramSectionProps = {
+  content?: typeof mealProgramSectionCopy;
+};
+
+export function MealProgramSection({ content }: MealProgramSectionProps) {
+  const copy = content ?? mealProgramSectionCopy;
 
   return (
     <section

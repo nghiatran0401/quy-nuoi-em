@@ -150,7 +150,7 @@ export function isTestOrEnglishProcess2026Timeline(
 
 export function isTestOrEnglishProcess2026Notes(
   notesIntro: { eyebrow?: string; title?: string } | null | undefined,
-  importantNotes: string[] | null | undefined,
+  importantNotes: readonly string[] | null | undefined,
   codeMeaningUrl: string | null | undefined,
 ): boolean {
   if (notesIntro?.eyebrow === "n" && notesIntro?.title === "nt") return true;
@@ -198,6 +198,8 @@ export function isTestOrEnglishProcess2026Row(row: {
     meta?: { title?: string; description?: string } | null;
     hero?: { title?: string; description?: string; eyebrow?: string; messengerCta?: string; groupCta?: string } | null;
     notesIntro?: { eyebrow?: string; title?: string } | null;
+    importantNotes?: readonly string[] | null;
+    codeMeaningUrl?: string | null;
     finance?: { eyebrow?: string; title?: string; body?: string } | null;
   } | null;
 } | null | undefined): boolean {

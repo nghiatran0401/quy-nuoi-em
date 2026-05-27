@@ -48,7 +48,7 @@ const pages = {
     hero: {
         title: "Sao kê tài khoản",
         description:
-          "Theo dõi sao kê MB Bank và hoạt động quyên góp minh bạch trên nền tảng Thiện Nguyện (tài khoản đã xác thực).",
+          "Theo dõi sao kê Ngân hàng Quân đội (MB) và hoạt động quyên góp minh bạch trên nền tảng Thiện Nguyện.",
     },
   },
 } as const satisfies Record<string, DataPageContent>;
@@ -93,7 +93,7 @@ export const dataUiLabels: Record<string, string> = {
     readMore: "Xem chi tiết",
     backToNews: "Quay lại bản tin",
     publishedOn: "Đăng ngày",
-    embedNote: "Dữ liệu sao kê được cung cấp bởi nền tảng Thiện Nguyện (MBBank).",
+    embedNote: "Dữ liệu sao kê được cung cấp bởi nền tảng Thiện Nguyện (Ngân hàng Quân đội).",
     openFullPage: "Mở trang sao kê đầy đủ",
     sampleDataNote:
       "Hiển thị {shown} hồ sơ mẫu từ dữ liệu crawl. Kết nối Supabase (Phase 4) để tải đủ 387 hồ sơ.",

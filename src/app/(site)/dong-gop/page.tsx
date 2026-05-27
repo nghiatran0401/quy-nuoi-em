@@ -11,10 +11,10 @@ export const metadata: Metadata = createStaticPageMetadata("donate", {
   keywords: [
     "đóng góp Nuôi Em",
     "quyên góp trẻ vùng cao",
-    "ủng hộ trẻ mồ côi",
-    "tài khoản thiện nguyện MB Bank",
+    "ủng hộ trẻ vùng cao",
+    "tài khoản thiện nguyện Ngân hàng Quân đội",
     "mã NE",
-    "chuyển khoản MB Bank",
+    "chuyển khoản Ngân hàng Quân đội",
     "QUY NUOI EM",
   ],
 });

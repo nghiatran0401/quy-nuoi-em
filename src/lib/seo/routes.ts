@@ -6,10 +6,7 @@ import { localizedPath } from "@/lib/seo/paths";
 
 export const STATIC_PAGE_PATHS: Record<StaticPageKey, string> = {
   about: "/about",
-  vision: "/tam-nhin-su-menh",
-  history: "/lich-su-hinh-thanh",
   logoStory: "/cau-chuyen-logo",
-  organization: "/co-cau-to-chuc",
   contact: "/contact",
   donate: "/dong-gop",
   process: "/quy-trinh-xet-duyet",

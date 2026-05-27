@@ -121,7 +121,7 @@ export const faqSectionCopy = {
         "Toàn dự án ăn cơm trưa từ tháng 9",
         "Nhận thông tin chi tiết từ Sở giáo dục / Nhà trường tháng 9 - 10",
         "Nhận đầy đủ thông tin học sinh và làm ảnh thẻ, đưa lên hệ thống tra cứu tháng 11",
-        "Anh chị nuôi tra cứu và vào group theo bản có thầy cô giáo cắm bản nấu ăn hàng ngày báo cáo theo tháng",
+        "Anh chị nuôi tra cứu và vào nhóm Facebook theo bản có thầy cô giáo cắm bản nấu ăn hàng ngày báo cáo theo tháng",
         "Thăm em thực tế Tháng 11-12 và Tháng 3-4",
       ],
     },

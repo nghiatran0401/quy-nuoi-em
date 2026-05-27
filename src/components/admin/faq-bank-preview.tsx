@@ -16,7 +16,7 @@ export function FaqBankPreview({ bank, question }: FaqBankPreviewProps) {
           <span className="text-slate-500">NH:</span> {bank.bank} — {bank.branch}
         </div>
         <div>
-          <span className="text-slate-500">STK:</span>{" "}
+          <span className="text-slate-500">Số tài khoản:</span>{" "}
           <span className="font-bold tabular-nums text-[var(--admin-accent)]">{bank.accountNumber}</span>
         </div>
       </div>

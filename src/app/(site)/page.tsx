@@ -16,6 +16,7 @@ import { siteCopy } from "@/content/site-copy";
 import { getDonateInfo, type DonateInfoContent } from "@/lib/data/donate-info";
 import { getHomePageContent, type HomeFaqItem } from "@/lib/data/homepage";
 import { getHomeMedia } from "@/lib/data/home-media";
+import { getHomeSectionsContent } from "@/lib/data/homepage-sections";
 import { getPartnerLogos } from "@/lib/data/partner-logos";
 import { getLatestNews } from "@/lib/data/news";
 import { faqPageJsonLd, itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
@@ -48,8 +49,9 @@ function faqAnswerText(item: HomeFaqItem, bank: DonateInfoContent): string {
 }
 
 export default async function HomePage() {
-  const [homeContent, donateInfo, partnerLogos, homeMedia] = await Promise.all([
+  const [homeContent, homeSections, donateInfo, partnerLogos, homeMedia] = await Promise.all([
     getHomePageContent(),
+    getHomeSectionsContent(),
     getDonateInfo(),
     getPartnerLogos(),
     getHomeMedia(),
@@ -91,14 +93,14 @@ export default async function HomePage() {
       <HeroSection content={homeContent.hero} heroImageUrl={homeMedia.heroImage} />
       <HomeStatsSection stats={homeContent.stats} />
       <CallToActionSection content={homeContent.cta} ctaImageUrl={homeMedia.ctaImage} />
-      <MealProgramSection />
-      <ImpactJourneySection />
-      <ProcessOverviewSection />
+      <MealProgramSection content={homeSections.meal} />
+      <ImpactJourneySection content={homeSections.impact} />
+      <ProcessOverviewSection content={homeSections.process} />
       <MembersSection content={homeContent.members} memberImageUrls={homeMedia.memberImages} />
-      <SponsoredChildrenSection />
-      <HomeNewsSection />
+      <SponsoredChildrenSection content={homeSections.sponsored} />
+      <HomeNewsSection content={homeSections.news} />
       <FaqSection content={homeContent.faq} donateInfo={donateInfo} donateQrUrl={homeMedia.donateQr} />
-      <PartnersMarquee title={partnersHomeTitle} logos={partnerLogos} variant="home" />
+      <PartnersMarquee title={homeSections.partnersTitle || partnersHomeTitle} logos={partnerLogos} variant="home" />
     </div>
   );
 }

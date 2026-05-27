@@ -62,6 +62,24 @@ describe("mergeProcess2026PageContent", () => {
     expect(merged.finance.title).toBe(fallback.finance.title);
   });
 
+  it("clears legacy nuoiem.com CTA reference from CMS rows", () => {
+    const fallback = getProcess2026PageFallback();
+    const merged = mergeProcess2026PageContent(fallback, null, {
+      cta: {
+        title: "Cần hỗ trợ?",
+        description: "desc",
+        messengerCta: "Inbox",
+        contactLinkLabel: "Liên hệ",
+        referenceLabel: "Tham khảo thêm tại",
+        referenceLinkLabel: "nuoiem.com",
+        referenceUrl: "https://www.nuoiem.com/",
+      },
+    });
+
+    expect(merged.cta.referenceUrl).toBe("");
+    expect(merged.cta.referenceLabel).toBe("");
+  });
+
   it("ignores vitest placeholder rows in the admin resolver", () => {
     const fallback = getProcess2026PageFallback();
     const testRow = {

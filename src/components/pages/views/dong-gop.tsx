@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { ThienNguyenProfileSection } from "@/components/shared/thien-nguyen-profile-section";
 import { ShareButtons } from "@/components/seo/share-buttons";
 import { getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
 import type { DonateInfoContent } from "@/lib/data/donate-info";
@@ -65,8 +64,6 @@ export function DonateView({ info, donateQrUrl }: DonateViewProps) {
             <p className="mt-4 text-center text-brand-muted">{getUiLabel("scanQr")}</p>
           </div>
         </div>
-
-        <ThienNguyenProfileSection className="mt-10" showStatementsLink />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <Link

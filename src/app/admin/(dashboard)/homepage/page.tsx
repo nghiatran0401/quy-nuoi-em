@@ -5,12 +5,18 @@ import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminImageField } from "@/components/admin/admin-image-field";
 import { DonateInfoEditor } from "@/components/admin/donate-info-editor";
 import { HomepageFaqEditor } from "@/components/admin/homepage-faq-editor";
+import { HomepageSectionsEditor } from "@/components/admin/homepage-sections-editor";
 import { ParagraphListEditor } from "@/components/admin/paragraph-list-editor";
 import { StatsListEditor } from "@/components/admin/stats-list-editor";
 import { formatAdminMessage, decodeAdminParam } from "@/lib/admin/messages";
 import { resolveDonateInfo, type DonateInfoContent } from "@/lib/data/donate-info";
 import { HOME_MEMBER_IMAGE_COUNT, resolveHomeMedia, type HomeMediaContent } from "@/lib/data/home-media";
 import { resolveHomePageContent, type HomePageContent } from "@/lib/data/homepage";
+import {
+  defaultHomeSectionsContent,
+  resolveHomeSectionsContent,
+  type HomeSectionsContent,
+} from "@/lib/data/homepage-sections";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { saveHomepageContent } from "./actions";
 
@@ -27,16 +33,19 @@ type HomePageContentRow = {
   faq: HomePageContent["faq"] | null;
   donate_info: DonateInfoContent | null;
   media: HomeMediaContent | null;
+  sections: HomeSectionsContent | null;
 };
 
 function HomepageEditorForm({
   content,
   donateInfo,
   media,
+  sections,
 }: {
   content: HomePageContent;
   donateInfo: DonateInfoContent;
   media: HomeMediaContent;
+  sections: HomeSectionsContent;
 }) {
   const locale = "vi" as const;
   const { hero, stats, cta, members, faq } = content;
@@ -55,6 +64,7 @@ function HomepageEditorForm({
         title="1. Hero — đầu trang"
         description="Banner lớn với tiêu đề Dự án Nuôi Em và hai nút hành động phía trên."
       >
+        <div id="edit-hero" />
         <AdminImageField
           label="Ảnh Hero (bên phải)"
           fileName={`${locale}_media_hero_file`}
@@ -127,8 +137,9 @@ function HomepageEditorForm({
 
       <AdminFormSection
         title="2. Thống kê"
-        description="Dải số liệu ngay dưới Hero (tổng em nuôi, thu chi, v.v.). Phần Đợt bảo trợ không chỉnh ở đây."
+        description="Dải số liệu ngay dưới Hero (tổng em nuôi, thu chi, vân vận). Phần Đợt bảo trợ không chỉnh ở đây."
       >
+        <div id="edit-stats" />
         <StatsListEditor name={`${locale}_stats_json`} initialStats={stats} />
       </AdminFormSection>
 
@@ -136,6 +147,7 @@ function HomepageEditorForm({
         title="3. Hệ sinh thái & Mở mã mùa 12"
         description="Khối 3 thẻ dự án + tiêu đề mùa mở mã + câu chuyện (nuoiem.com), trước Thành viên Quỹ. Thẻ hệ sinh thái cố định trong mã nguồn; chỉnh tiêu đề, các đoạn chuyện, ảnh và nút tại đây."
       >
+        <div id="edit-campaign" />
         <p className="text-sm text-brand-muted">
           Cột phải hiển thị video YouTube cố định (Nuôi Em / Niềm Tin). Trường ảnh CTA bên dưới không còn dùng cho
           khối này.
@@ -189,6 +201,7 @@ function HomepageEditorForm({
         title="4. Tham khảo — Bằng khen & giải thưởng"
         description="Khối THAM KHẢO trên trang chủ: tiêu đề + đoạn giới thiệu bên trái, 5 ảnh bằng khen bên phải. Để trống nhãn phụ / nút nếu không cần."
       >
+        <div id="edit-members" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: HOME_MEMBER_IMAGE_COUNT }, (_, i) => i + 1).map((index) => (
             <AdminImageField
@@ -249,6 +262,7 @@ function HomepageEditorForm({
         title="5. Câu hỏi thường gặp (FAQ)"
         description="Mỗi câu hỏi có kiểu trả lời riêng. Chỉ câu loại Tài khoản ngân hàng dùng mục 6 bên dưới."
       >
+        <div id="edit-faq" />
         <HomepageFaqEditor locale={locale} initialFaq={faq} donateInfo={donateInfo} />
       </AdminFormSection>
 
@@ -257,6 +271,7 @@ function HomepageEditorForm({
           title="6. Thông tin chuyển khoản & QR"
           description="Hiển thị trong FAQ ngân hàng, /dong-gop và quy trình cấp mã 2026."
         >
+          <div id="edit-donate-info" />
           <AdminImageField
             label="Ảnh mã QR chuyển khoản"
             fileName={`${locale}_media_qr_file`}
@@ -267,6 +282,14 @@ function HomepageEditorForm({
           <DonateInfoEditor locale={locale} initial={donateInfo} />
         </AdminFormSection>
       </div>
+
+      <AdminFormSection
+        title="7. Các khối nội dung còn lại trên trang chủ"
+        description="Chỉnh toàn bộ nội dung + media theo dạng form trực quan: Bữa cơm, Hành trình mở rộng, Quy trình 6 bước, Danh sách đã nhận nuôi, Tin tức và Đơn vị đồng hành."
+      >
+        <div id="edit-sections-json" />
+        <HomepageSectionsEditor locale={locale} initialSections={sections} />
+      </AdminFormSection>
     </div>
   );
 }
@@ -279,7 +302,7 @@ export default async function HomepageAdminPage({ searchParams }: HomePageAdminP
   const supabase = createAdminClient();
   const { data } = await supabase
     .from("homepage_content")
-    .select("locale, hero, stats, cta, members, faq, donate_info, media")
+    .select("locale, hero, stats, cta, members, faq, donate_info, media, sections")
     .eq("locale", "vi")
     .maybeSingle();
 
@@ -287,6 +310,7 @@ export default async function HomepageAdminPage({ searchParams }: HomePageAdminP
   const content = resolveHomePageContent(row);
   const donateInfo = resolveDonateInfo(row?.donate_info);
   const media = resolveHomeMedia(row?.media);
+  const sections = resolveHomeSectionsContent(row?.sections ?? defaultHomeSectionsContent);
 
   return (
     <div className="space-y-6">
@@ -300,8 +324,8 @@ export default async function HomepageAdminPage({ searchParams }: HomePageAdminP
         {error ? <AdminAlert variant="error" message={error} /> : null}
       </div>
 
-      <form action={saveHomepageContent} encType="multipart/form-data" className="space-y-6">
-        <HomepageEditorForm content={content} donateInfo={donateInfo} media={media} />
+      <form action={saveHomepageContent} className="space-y-6">
+        <HomepageEditorForm content={content} donateInfo={donateInfo} media={media} sections={sections} />
 
         <div className="sticky bottom-4 z-10 flex justify-end">
           <button type="submit" className="admin-btn-primary">

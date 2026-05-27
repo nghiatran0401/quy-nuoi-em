@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getFormText } from "@/lib/admin/form-utils";
 import { runAdminSave } from "@/lib/admin/run-save";
 import {
   deleteStoredImageIfManaged,
@@ -59,9 +58,9 @@ export async function createPartnerLogo(formData: FormData) {
   redirect(`${ADMIN_PATH}?message=partner_logo_created`);
 }
 
-export async function deletePartnerLogo(formData: FormData) {
-  const id = getFormText(formData, "id").trim();
-  if (!id) {
+export async function deletePartnerLogo(id: string) {
+  const normalizedId = id.trim();
+  if (!normalizedId) {
     redirect(`${ADMIN_PATH}?error=${encodeURIComponent("Thiếu mã logo.")}`);
   }
 
@@ -69,14 +68,14 @@ export async function deletePartnerLogo(formData: FormData) {
     const { data: existing, error: readError } = await supabase
       .from("partner_logos")
       .select("image_url")
-      .eq("id", id)
+      .eq("id", normalizedId)
       .maybeSingle();
 
     if (readError || !existing) {
       throw new Error("Không tìm thấy logo.");
     }
 
-    const { error } = await supabase.from("partner_logos").delete().eq("id", id);
+    const { error } = await supabase.from("partner_logos").delete().eq("id", normalizedId);
     if (error) {
       throw new Error(error.message);
     }

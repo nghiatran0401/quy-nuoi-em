@@ -95,7 +95,7 @@ export const campaignSectionCopy: HomeCampaignSectionContent = {
   story: {
     paragraphs: [
       "Năm 2018 thật sự là một bước chuyển mình lớn đối với dự án Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ với người làm dự án mà còn hơn 95.000+ niềm vui đến hết 2023 từ anh chị nuôi và các em tìm đến được với nhau.",
-      "Đến nay hơn 1.000 group theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
+      "Đến nay hơn 1.000 nhóm Facebook theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
       "Ngay từ bây giờ hãy đăng ký là một phần trong số +120.000 anh chị nuôi của các bé trong 2025 – 2026.",
     ],
     ctaLabel: "Tìm hiểu thêm",

@@ -104,7 +104,7 @@ function AboutEditorForm({
 
       <AdminFormSection
         title="2. Thống kê"
-        description="Dãy số liệu ngay dưới phần Hero (tổng em nuôi, thu/chi, v.v.)."
+        description="Dãy số liệu ngay dưới phần Hero (tổng em nuôi, thu/chi, vân vận)."
       >
         <StatsListEditor name={`${locale}_stats_json`} initialStats={stats} label="Chỉ số thống kê" />
       </AdminFormSection>
@@ -157,7 +157,7 @@ export default async function AboutAdminPage({ searchParams }: AboutAdminProps) 
         {error ? <AdminAlert variant="error" message={error} /> : null}
       </div>
 
-      <form action={saveAboutPageContent} encType="multipart/form-data" className="space-y-6">
+      <form action={saveAboutPageContent} className="space-y-6">
         <AboutEditorForm content={content} partnerLogos={partnerLogos} />
 
         <div className="flex justify-end">

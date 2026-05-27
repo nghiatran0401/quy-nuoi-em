@@ -9,7 +9,7 @@ export type DonateInfoContent = {
   accountNumber: string;
   /** Dòng mô tả phía trên số tài khoản lớn (khối FAQ). */
   accountHighlight: string;
-  /** Dòng STK đầy đủ trên trang Đóng góp. */
+  /** Dòng số tài khoản đầy đủ trên trang Đóng góp. */
   publicAccountLine: string;
   transferFormat: string;
   transferExample: string;
@@ -20,11 +20,24 @@ export const defaultDonateInfo: DonateInfoContent = {
   branch: staticDonateInfo.branch,
   accountName: staticDonateInfo.accountName,
   accountNumber: staticDonateInfo.accountNumber,
-  accountHighlight: "STK Minh bạch công khai 4 số QUY NUOI EM tại MB Bank",
+  accountHighlight: "Số tài khoản minh bạch công khai 4 số QUY NUOI EM tại Ngân hàng Quân đội (MB)",
   publicAccountLine: staticDonateInfo.publicAccountLine,
   transferFormat: staticDonateInfo.transferFormat,
   transferExample: staticDonateInfo.transferExample,
 };
+
+const LEGACY_TRANSFER_FORMAT = "“Mã bé nhận nuôi” + Tên bạn (bắt buộc có mã NE)";
+const LEGACY_TRANSFER_FORMAT_SDT =
+  "Mã NE + SĐT + Tên bạn (bắt buộc có mã NE mới chuyển khoản)";
+const LEGACY_TRANSFER_EXAMPLE = "NE00123 Nguyen Van A";
+
+function expandDonateAbbreviations(text: string): string {
+  return text
+    .replace(/\bSTK\b/g, "Số tài khoản")
+    .replace(/\bSĐT\b/g, "số điện thoại")
+    .replace(/\btại MB Bank\b/g, "tại Ngân hàng Quân đội (MB)")
+    .replace(/\btại MB:/g, "tại Ngân hàng Quân đội (MB):");
+}
 
 function isInvalidDonateInfo(value: DonateInfoContent | null | undefined): boolean {
   if (!value?.bank?.trim() || !value.accountNumber?.trim()) return true;
@@ -36,6 +49,29 @@ export function resolveDonateInfo(raw: DonateInfoContent | null | undefined): Do
   if (!raw || isInvalidDonateInfo(raw)) {
     return defaultDonateInfo;
   }
+
+  const trimmedTransferFormat = raw.transferFormat?.trim();
+  const normalizedTransferFormat =
+    trimmedTransferFormat === LEGACY_TRANSFER_FORMAT ||
+    trimmedTransferFormat === LEGACY_TRANSFER_FORMAT_SDT
+      ? defaultDonateInfo.transferFormat
+      : trimmedTransferFormat
+        ? expandDonateAbbreviations(trimmedTransferFormat)
+        : defaultDonateInfo.transferFormat;
+
+  const normalizedTransferExample =
+    raw.transferExample?.trim() === LEGACY_TRANSFER_EXAMPLE
+      ? defaultDonateInfo.transferExample
+      : raw.transferExample?.trim() || defaultDonateInfo.transferExample;
+
+  const accountHighlight = raw.accountHighlight?.trim()
+    ? expandDonateAbbreviations(raw.accountHighlight.trim())
+    : defaultDonateInfo.accountHighlight;
+
+  const publicAccountLine = raw.publicAccountLine?.trim()
+    ? expandDonateAbbreviations(raw.publicAccountLine.trim())
+    : defaultDonateInfo.publicAccountLine;
+
   return {
     ...defaultDonateInfo,
     ...raw,
@@ -43,10 +79,10 @@ export function resolveDonateInfo(raw: DonateInfoContent | null | undefined): Do
     branch: raw.branch.trim(),
     accountName: raw.accountName.trim(),
     accountNumber: raw.accountNumber.trim(),
-    accountHighlight: raw.accountHighlight?.trim() || defaultDonateInfo.accountHighlight,
-    publicAccountLine: raw.publicAccountLine?.trim() || defaultDonateInfo.publicAccountLine,
-    transferFormat: raw.transferFormat.trim(),
-    transferExample: raw.transferExample.trim(),
+    accountHighlight,
+    publicAccountLine,
+    transferFormat: normalizedTransferFormat,
+    transferExample: normalizedTransferExample,
   };
 }
 

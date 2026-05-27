@@ -8,8 +8,12 @@ function formatNewsDate(date: string) {
   return date.replace(/^Thứ \w+,\s*/i, "").replace(/^\w+,\s*/i, "");
 }
 
-export async function HomeNewsSection() {
-  const copy = newsSectionCopy;
+export async function HomeNewsSection({
+  content,
+}: {
+  content?: typeof newsSectionCopy;
+}) {
+  const copy = content ?? newsSectionCopy;
   const articles = await getLatestNews(3);
 
   return (

@@ -55,7 +55,7 @@ export function FaqBankPanel({ bank, donateQrUrl }: FaqBankPanelProps) {
           <div className="relative aspect-square w-full max-w-[200px] overflow-hidden rounded-2xl border border-brand-border/60 bg-white p-3 shadow-sm ring-1 ring-brand-accent/10">
             <Image
               src={homeMediaImageSrc(donateQrUrl)}
-              alt="Mã QR chuyển khoản MB Bank — Quỹ Nuôi Em"
+              alt="Mã QR chuyển khoản Ngân hàng Quân đội — Quỹ Nuôi Em"
               fill
               className="object-contain p-1"
               sizes="(max-width: 200px) 100vw, 200px"

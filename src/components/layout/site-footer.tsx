@@ -4,15 +4,10 @@ import { BrandLogo } from "@/components/brand/logo";
 import { brandVisual } from "@/config/brand-visual";
 import { siteCopy } from "@/content/site-copy";
 import {
-  footerDocumentLinks,
-  footerInfoLinks,
-  footerLabel,
-  footerLibraryLinks,
+  footerSitePrimaryLinks,
+  footerSiteSecondaryLinks,
+  navLabel,
 } from "@/lib/navigation";
-
-function isExternalHref(href: string): boolean {
-  return href.startsWith("http://") || href.startsWith("https://");
-}
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -66,9 +61,8 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <FooterColumn title={t.info} links={footerInfoLinks} />
-        <FooterColumn title={t.documents} links={footerDocumentLinks} />
-        <FooterColumn title={t.library} links={footerLibraryLinks} />
+        <FooterNavColumn title={t.quickLinks} links={footerSitePrimaryLinks} />
+        <FooterNavColumn title={t.moreLinks} links={footerSiteSecondaryLinks} />
       </div>
 
       <div className="container mx-auto mt-12 border-t border-brand-border/60 px-4 pt-8 text-center text-sm text-brand-muted">
@@ -80,12 +74,12 @@ export function SiteFooter() {
   );
 }
 
-function FooterColumn({
+function FooterNavColumn({
   title,
   links,
 }: {
   title: string;
-  links: { href: string; labelKey: Parameters<typeof footerLabel>[0] }[];
+  links: { href: string; labelKey: Parameters<typeof navLabel>[0] }[];
 }) {
   return (
     <div className="space-y-4">
@@ -93,13 +87,8 @@ function FooterColumn({
       <ul className="space-y-2 text-sm text-brand-muted">
         {links.map((link) => (
           <li key={link.href + link.labelKey}>
-            <Link
-              href={link.href}
-              className="transition-colors hover:text-brand-accent"
-              target={isExternalHref(link.href) ? "_blank" : undefined}
-              rel={isExternalHref(link.href) ? "noreferrer" : undefined}
-            >
-              {footerLabel(link.labelKey)}
+            <Link href={link.href} className="transition-colors hover:text-brand-accent">
+              {navLabel(link.labelKey)}
             </Link>
           </li>
         ))}

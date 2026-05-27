@@ -24,13 +24,15 @@ export function AboutView({ content, partnerLogos }: AboutViewProps) {
     <>
       <section className="bg-gradient-to-b from-brand-sky-soft via-brand-warm to-white pb-8">
         <div className="relative mx-auto max-w-5xl px-4 pt-8">
-          <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-brand-border/60 shadow-[var(--shadow-brand-card)]">
+          <div className="mb-8 overflow-hidden rounded-2xl border border-brand-border/60 bg-white shadow-[var(--shadow-brand-card)]">
             <Image
               src={heroImageSrc}
-              alt=""
-              fill
-              className="object-cover"
+              alt="Hệ sinh thái Nuôi Em là đây — 16 dự án hỗ trợ trẻ bản cao"
+              width={1024}
+              height={667}
+              className="h-auto w-full object-contain"
               priority
+              sizes="(max-width: 1024px) 100vw, 1024px"
             />
           </div>
           <PageHero {...hero} />

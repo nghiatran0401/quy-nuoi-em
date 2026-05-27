@@ -86,7 +86,7 @@ export function DonateInfoEditor({ locale, initial }: DonateInfoEditorProps) {
 
       <div>
         <label className="admin-label" htmlFor={`${prefix}_public_line`}>
-          Dòng STK trên trang Đóng góp
+          Dòng số tài khoản trên trang Đóng góp
         </label>
         <input
           id={`${prefix}_public_line`}
@@ -118,7 +118,7 @@ export function DonateInfoEditor({ locale, initial }: DonateInfoEditorProps) {
             name={`${prefix}_transfer_example`}
             defaultValue={initial.transferExample}
             className="admin-input font-mono text-sm"
-            placeholder="NE00123 Nguyen Van A"
+            placeholder="NE00123 09xxxxxxxx Nguyen Van A"
           />
         </div>
       </div>

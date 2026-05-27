@@ -283,12 +283,14 @@ export function QuyTrinhCapMa2026View({ content }: QuyTrinhCapMa2026ViewProps) {
               {c.cta.contactLinkLabel}
             </Link>
           </div>
-          <p className="mt-6 text-sm text-brand-muted">
-            {c.cta.referenceLabel}{" "}
-            <a href={c.cta.referenceUrl} target="_blank" rel="noreferrer" className="link-accent">
-              {c.cta.referenceLinkLabel}
-            </a>
-          </p>
+          {c.cta.referenceUrl.trim() ? (
+            <p className="mt-6 text-sm text-brand-muted">
+              {c.cta.referenceLabel}{" "}
+              <a href={c.cta.referenceUrl} target="_blank" rel="noreferrer" className="link-accent">
+                {c.cta.referenceLinkLabel}
+              </a>
+            </p>
+          ) : null}
         </div>
       </section>
     </div>

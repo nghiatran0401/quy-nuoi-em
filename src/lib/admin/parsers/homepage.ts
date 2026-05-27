@@ -1,6 +1,8 @@
 import type { StatItem } from "@/content/types";
 import type { DonateInfoContent } from "@/lib/data/donate-info";
 import type { HomeMediaContent } from "@/lib/data/home-media";
+import type { HomeSectionsContent } from "@/lib/data/homepage-sections";
+import { defaultHomeSectionsContent } from "@/lib/data/homepage-sections";
 import { campaignSectionCopy } from "@/content/home-campaign";
 import type { HomeCtaContent, HomeFaqContent, HomeHeroContent, HomeMembersContent } from "@/lib/data/homepage";
 import { getFormText, parseFormJson } from "@/lib/admin/form-utils";
@@ -56,6 +58,10 @@ export function buildHomepageUpsertPayload(formData: FormData, media: HomeMediaC
     getFormText(formData, `${locale}_faq_json`),
     "FAQ",
   );
+  const sections = parseFormJson<HomeSectionsContent>(
+    getFormText(formData, `${locale}_sections_json`),
+    "Các khối trang chủ",
+  );
 
   const donate_info: DonateInfoContent = {
     bank: getFormText(formData, `${locale}_donate_bank`),
@@ -68,5 +74,15 @@ export function buildHomepageUpsertPayload(formData: FormData, media: HomeMediaC
     transferExample: getFormText(formData, `${locale}_donate_transfer_example`),
   };
 
-  return { locale, hero, cta, members, stats, faq, donate_info, media };
+  return {
+    locale,
+    hero,
+    cta,
+    members,
+    stats,
+    faq,
+    donate_info,
+    media,
+    sections: sections ?? defaultHomeSectionsContent,
+  };
 }

@@ -71,7 +71,7 @@ const homepage = {
     title: "MỞ MÃ NUÔI EM MÙA 12 — ĐANG MỞ",
     paragraphs: [
       "Năm 2018 thật sự là một bước chuyển mình lớn đối với dự án Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ với người làm dự án mà còn hơn 95.000+ niềm vui đến hết 2023 từ anh chị nuôi và các em tìm đến được với nhau.",
-      "Đến nay hơn 1.000 group theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
+      "Đến nay hơn 1.000 nhóm Facebook theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
       "Ngay từ bây giờ hãy đăng ký là một phần trong số +120.000 anh chị nuôi của các bé trong 2025 – 2026.",
     ],
     donate: "Tìm hiểu thêm",
@@ -84,7 +84,7 @@ const homepage = {
     story: {
       paragraphs: [
         "Năm 2018 thật sự là một bước chuyển mình lớn đối với dự án Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ với người làm dự án mà còn hơn 95.000+ niềm vui đến hết 2023 từ anh chị nuôi và các em tìm đến được với nhau.",
-        "Đến nay hơn 1.000 group theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
+        "Đến nay hơn 1.000 nhóm Facebook theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
         "Ngay từ bây giờ hãy đăng ký là một phần trong số +120.000 anh chị nuôi của các bé trong 2025 – 2026.",
       ],
       ctaLabel: "Tìm hiểu thêm",
@@ -105,9 +105,11 @@ const homepage = {
     branch: "Ngân hàng TMCP Quân đội",
     accountName: "CTCP DNXH QUY NUOI EM",
     accountNumber: "1805",
-    accountHighlight: "STK Minh bạch công khai 4 số QUY NUOI EM tại MB Bank",
-    publicAccountLine: "STK Minh bạch công khai 4 số QUY NUOI EM tại MB: 1805",
-    transferFormat: "“Mã bé nhận nuôi” + Tên bạn (bắt buộc có mã NE)",
+    accountHighlight:
+      "Số tài khoản minh bạch công khai 4 số QUY NUOI EM tại Ngân hàng Quân đội (MB)",
+    publicAccountLine:
+      "Số tài khoản minh bạch công khai 4 số QUY NUOI EM tại Ngân hàng Quân đội (MB): 1805",
+    transferFormat: "Mã NE + số điện thoại + tên bạn (bắt buộc có mã NE mới chuyển khoản)",
     transferExample: "NE00123 Nguyen Van A",
   },
   faq: {
@@ -136,7 +138,7 @@ const homepage = {
           "Toàn dự án ăn cơm trưa từ tháng 9",
           "Nhận thông tin chi tiết từ Sở giáo dục / Nhà trường tháng 9 - 10",
           "Nhận đầy đủ thông tin học sinh và làm ảnh thẻ, đưa lên hệ thống tra cứu tháng 11",
-          "Anh chị nuôi tra cứu và vào group theo bản có thầy cô giáo cắm bản nấu ăn hàng ngày báo cáo theo tháng",
+          "Anh chị nuôi tra cứu và vào nhóm Facebook theo bản có thầy cô giáo cắm bản nấu ăn hàng ngày báo cáo theo tháng",
           "Thăm em thực tế Tháng 11-12 và Tháng 3-4",
         ],
       },
@@ -155,7 +157,7 @@ const about = {
     eyebrow: "Nuôi cơm trưa — giúp trẻ tới trường",
     title: "Dự án Nuôi Em",
     description:
-      "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm.",
+      "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. Từ 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm. Mã Tây Nguyên: 170.000đ/tháng.",
   },
   stats: homepage.stats,
   partners_title: "Đơn vị đồng hành & Tài trợ",

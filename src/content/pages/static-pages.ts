@@ -3,16 +3,11 @@ import type {
   PageMeta,
   ProcessStep,
   ScoringCategory,
-  TimelineEvent,
-  ValueCard,
 } from "@/content/types";
 
 export type StaticPageKey =
   | "about"
-  | "vision"
-  | "history"
   | "logoStory"
-  | "organization"
   | "contact"
   | "donate"
   | "process"
@@ -38,29 +33,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         eyebrow: "Nuôi cơm trưa — giúp trẻ tới trường",
         title: "Dự án Nuôi Em",
         description:
-          "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm.",
-    },
-  },
-  vision: {
-    meta: {
-        title: "Tầm nhìn sứ mệnh",
-        description: "Tầm nhìn, sứ mệnh và tôn chỉ hoạt động của Dự án Nuôi Em.",
-    },
-    hero: {
-        title: "TẦM NHÌN, SỨ MỆNH",
-        description:
-          "Giúp trẻ em thiệt thòi không may mồ côi cha mẹ trên khắp mọi miền tổ quốc được tiếp bước đến trường cho đến tuổi trưởng thành và có thể tự lao động kiếm sống.",
-    },
-  },
-  history: {
-    meta: {
-        title: "Lịch sử hình thành",
-        description: "Hành trình phát triển của Dự án Nuôi Em qua các cột mốc đáng nhớ.",
-    },
-    hero: {
-        title: "Lịch sử hình thành",
-        description:
-          "Hành trình gieo mầm hy vọng và lan tỏa yêu thương của Dự án Nuôi Em qua các cột mốc đáng nhớ.",
+          "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. Từ 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm. Mã Tây Nguyên: 170.000đ/tháng.",
     },
   },
   logoStory: {
@@ -73,18 +46,6 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         title: "Câu Chuyện Logo",
         description:
           "Như trẻ vào tuổi trưởng thành cần Căn cước công dân, Dự án Nuôi Em khi phát triển cũng cần pháp nhân và logo mới để khẳng định mình.",
-    },
-  },
-  organization: {
-    meta: {
-        title: "Cơ cấu tổ chức",
-        description: "Sơ đồ tổ chức và đội ngũ các Ban chức năng của Dự án Nuôi Em.",
-    },
-    hero: {
-        eyebrow: "BỘ MÁY NHÂN SỰ",
-        title: "Cơ Cấu Tổ Chức",
-        description:
-          "Quy tụ những trái tim nhiệt huyết, tài năng và trách nhiệm, cùng chung tay kiến tạo tương lai tươi sáng cho trẻ em Việt Nam.",
     },
   },
   contact: {
@@ -111,7 +72,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
   process: {
     meta: {
         title: "Quy trình xét duyệt",
-        description: "5 bước xét duyệt hồ sơ trẻ mồ côi minh bạch và công tâm.",
+        description: "5 bước xét duyệt hồ sơ trẻ có hoàn cảnh khó khăn minh bạch và công tâm.",
     },
     hero: {
         eyebrow: "Minh bạch - Công tâm - Kịp thời",
@@ -140,13 +101,13 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         eyebrow: "Chung tay vì cộng đồng",
         title: "Đăng ký trở thành Tình nguyện viên",
         description:
-          "Dự án Nuôi Em cảm ơn Bạn đã quan tâm đăng ký trở thành Tình nguyện viên đồng hành với Dự án Nuôi Em và các con trẻ mồ côi đang được bảo trợ!",
+          "Dự án Nuôi Em xin trân trọng cảm ơn Bạn đã đăng ký trở thành Tình nguyện viên - đồng hành cùng chúng mình và các em bé trên bản đang được bảo trợ!",
     },
   },
   mou: {
     meta: {
         title: "Biên bản ghi nhớ (MOU)",
-        description: "Hợp tác doanh nghiệp với Dự án Nuôi Em qua MOU.",
+        description: "Hợp tác doanh nghiệp với Dự án Nuôi Em qua biên bản ghi nhớ (MOU).",
     },
     hero: {
         eyebrow: "Hợp tác & Phát triển",
@@ -187,47 +148,6 @@ export function getStaticPageMeta(page: StaticPageKey): PageMeta {
 export function getStaticPageHero(page: StaticPageKey): PageHero {
   return pages[page].hero;
 }
-
-export const visionMission: { intro: string[]; sponsorship: string } = {
-    intro: [
-      "Giúp trẻ em thiệt thòi không may mồ côi cha mẹ trên khắp mọi miền tổ quốc được tiếp bước đến trường cho đến tuổi trưởng thành và có thể tự lao động kiếm sống.",
-    ],
-    sponsorship:
-      "Mức bảo trợ từ 1,5 – 2 triệu đồng đều đặn mỗi tháng dựa trên mức thu chi từng vùng miền, cấp học và độ tuổi của trẻ. Tiền được chuyển trực tiếp đến người đang nuôi dạy trẻ sau khi được khảo sát kỹ lưỡng và có sự giám sát chặt chẽ.",
-  };
-
-export const visionValues: { heading: string; items: ValueCard[]; cta: string } = {
-    heading: "Tôn chỉ hoạt động",
-    items: [
-      {
-        title: "CÔNG TÂM",
-        description:
-          "Mọi quy trình, hoạt động đều vì mục đích chung của Dự án Nuôi Em, chính trực, không tư lợi, thiên vị hay chịu sự tác động của bên thứ ba.",
-      },
-      {
-        title: "CÔNG KHAI",
-        description:
-          "Mọi thông tin đều được công khai, minh bạch tại Fanpage và các phương tiện truyền thông chính thức của Dự án Nuôi Em.",
-      },
-      {
-        title: "CÔNG BẰNG",
-        description: "Các hoạt động của Dự án Nuôi Em luôn đảm bảo công bằng dựa trên các tiêu chí đã đặt ra.",
-      },
-    ],
-    cta: "Chúng tôi cam kết duy trì sự minh bạch và công tâm trong mọi hoạt động để xứng đáng với niềm tin của cộng đồng.",
-  };
-
-export const historyTimeline: TimelineEvent[] = [
-    { date: "Tháng 10/2020", title: "Tiền thân nhóm thiện nguyện", description: "Nhóm trẻ thành lập để cứu trợ bà con miền Trung bị thiệt hại do lũ lụt." },
-    { date: "Tháng 12/2020", title: "17 trẻ được bảo trợ", description: "Tổng số trẻ mồ côi được nhận bảo trợ là 17 trẻ." },
-    { date: "Tháng 01/2021", title: "Thành lập các Ban", description: "Ban điều hành, xét duyệt, truyền thông, thư ký, tài chính." },
-    { date: "Tháng 12/2021", title: "77 trẻ được bảo trợ" },
-    { date: "Tháng 01/2022", title: "Bổ sung nhân sự", description: "Nhân viên Thư ký, nhân viên Truyền thông." },
-    { date: "Tháng 12/2022", title: "200 trẻ được bảo trợ" },
-    { date: "Tháng 12/2023", title: "255 trẻ được bảo trợ" },
-    { date: "Năm 2024", title: "295 trẻ được bảo trợ", description: "02 đợt xét duyệt 13 & 14. Đến 12/2024 có 73 trẻ hoàn thành bảo trợ." },
-    { date: "Đến 06/2025", title: "350 trẻ được bảo trợ", description: "02 đợt xét duyệt 15 & 16." },
-];
 
 export const logoStorySections: 
   {
@@ -282,7 +202,7 @@ export const processSteps: ProcessStep[] = [
       round: "Vòng 01",
       title: "THU THẬP THÔNG TIN",
       description:
-        "Dự án Nuôi Em nhận hồ sơ trẻ mồ côi, khó khăn do đọc giả và mạnh thường quân giới thiệu và tiến hành thu thập thông tin.",
+        "Dự án Nuôi Em nhận hồ sơ trẻ có hoàn cảnh khó khăn do đọc giả và mạnh thường quân giới thiệu và tiến hành thu thập thông tin.",
     },
     {
       round: "Vòng 02",
@@ -299,15 +219,16 @@ export const processSteps: ProcessStep[] = [
     },
     {
       round: "Vòng 04",
-      title: "BXD HỌP CHỐT DANH SÁCH",
-      subTitle: "TRẺ MỒ CÔI ĐƯỢC BẢO TRỢ THEO TỪNG QUÝ",
-      description: "Thành viên BXD thảo luận từng trường hợp và quyết định danh sách được bảo trợ.",
+      title: "BAN XÉT DUYỆT HỌP CHỐT DANH SÁCH",
+      subTitle: "TRẺ ĐƯỢC BẢO TRỢ THEO TỪNG QUÝ",
+      description:
+        "Thành viên Ban xét duyệt thảo luận từng trường hợp và quyết định danh sách được bảo trợ.",
     },
     {
       round: "Vòng 05",
       title: "TRÌNH BAN ĐIỀU HÀNH DỰ ÁN",
       subTitle: "THÔNG QUA DANH SÁCH BẢO TRỢ",
-      description: "Ban điều hành phê duyệt danh sách trẻ mồ côi được bảo trợ chính thức.",
+      description: "Ban điều hành phê duyệt danh sách trẻ được bảo trợ chính thức.",
     },
 ];
 
@@ -316,9 +237,9 @@ export const scoringCategories: ScoringCategory[] = [
       icon: "🏠",
       title: "1. HOÀN CẢNH",
       items: [
-        { label: "Mồ côi cả cha lẫn mẹ", points: "10 điểm", priority: "Ưu tiên 1" },
-        { label: "Mồ côi mẹ", points: "6 điểm", priority: "Ưu tiên 2" },
-        { label: "Mồ côi cha", points: "4 điểm", priority: "Ưu tiên 3" },
+        { label: "Không còn cha mẹ", points: "10 điểm", priority: "Ưu tiên 1" },
+        { label: "Chỉ còn cha", points: "6 điểm", priority: "Ưu tiên 2" },
+        { label: "Chỉ còn mẹ", points: "4 điểm", priority: "Ưu tiên 3" },
       ],
     },
     {
@@ -359,40 +280,8 @@ export const scoringCategories: ScoringCategory[] = [
     },
 ];
 
-export const volunteerContent: {
-  formUrl: string;
-  roles: { title: string; items: string[] };
-  audiences: { title: string; description: string }[];
-  commitment: string;
-} = {
-    formUrl:
-      "https://docs.google.com/forms/d/e/1FAIpQLSc9Ldr1JXKSbWcg9e3tj3WSP2GWXwozN5HkBPNFK7bodWRr9A/viewform",
-    roles: {
-      title: "Vai trò của bạn",
-      items: [
-        "Cập nhật tình hình sinh hoạt/học tập của con trên trường/lớp.",
-        "Động viên con tham gia hoạt động phong trào của trường, Dự án Nuôi Em, cộng đồng.",
-        "Tham gia/đồng tổ chức các hoạt động chung của Dự án Nuôi Em tại địa phương.",
-        "Thăm hỏi, động viên, lắng nghe con chia sẻ như người con/cháu của mình.",
-      ],
-    },
-    audiences: [
-      {
-        title: "Nhà trường & Giáo viên",
-        description: "Người thầy, người cô trực tiếp dạy dỗ và quan tâm sự phát triển của các em.",
-      },
-      {
-        title: "Cán bộ địa phương",
-        description: "Hội Liên hiệp Phụ nữ, Đoàn thanh niên các cấp cùng hỗ trợ cộng đồng.",
-      },
-      {
-        title: "Cá nhân hảo tâm",
-        description: "Các cá nhân mong muốn giúp trẻ em mồ côi có tương lai tươi sáng hơn.",
-      },
-    ],
-    commitment:
-      "Để đảm bảo hiệu quả đồng hành, Dự án Nuôi Em mong muốn Tình nguyện viên cam kết thời gian và phối hợp thường xuyên với Ban Vận hành.",
-  };
+/** Internal registration flow — do not link to legacy third-party forms. */
+export const volunteerRegisterPath = "/contact";
 
 export const mouContent: {
   definition: string;
@@ -408,7 +297,7 @@ export const mouContent: {
       { title: "Trách nhiệm các bên", description: "Quy định phạm vi trách nhiệm sau khi thống nhất mục tiêu và vai trò." },
     ],
     quote:
-      "Doanh nghiệp mong muốn hợp tác với Dự án Nuôi Em nhằm đóng góp cho xã hội, giúp trẻ em mồ côi có hoàn cảnh khó khăn — vui lòng liên hệ để trao đổi chi tiết về MOU.",
+      "Doanh nghiệp mong muốn hợp tác với Dự án Nuôi Em nhằm đóng góp cho xã hội, giúp trẻ em có hoàn cảnh khó khăn — vui lòng liên hệ để trao đổi chi tiết về biên bản ghi nhớ (MOU).",
     cta: "Liên hệ: duannuoiem@gmail.com",
   };
 
@@ -417,7 +306,7 @@ export const careersContent: {
   deadline: string;
   sections: { title: string; items: string[] }[];
 } = {
-    location: "Khánh Hòa / TP.HCM / Địa phương hoạt động",
+    location: "Khánh Hòa / Thành phố Hồ Chí Minh / Địa phương hoạt động",
     deadline: "Hạn nộp: 05/03/2024",
     sections: [
       {
@@ -432,7 +321,7 @@ export const careersContent: {
         title: "Công việc cụ thể",
         items: [
           "Thực hiện thanh quyết toán, văn bản, chứng từ.",
-          "Viết bài truyền thông trên Website, Fanpage.",
+          "Viết bài truyền thông trên website và trang Facebook.",
           "Thu thập và lưu trữ hình ảnh về trẻ.",
         ],
       },
@@ -474,14 +363,14 @@ export const donateInfo: {
   branch: "Ngân hàng TMCP Quân đội",
   accountName: "CTCP DNXH QUY NUOI EM",
   accountNumber: "1805",
-  publicAccountLine: "STK Minh bạch công khai 4 số QUY NUOI EM tại MB: 1805",
-  transferFormat: "“Mã bé nhận nuôi” + Tên bạn (bắt buộc có mã NE)",
-  transferExample: "NE00123 Nguyen Van A",
+  publicAccountLine:
+    "Số tài khoản minh bạch công khai 4 số QUY NUOI EM tại Ngân hàng Quân đội (MB): 1805",
+  transferFormat: "Mã NE + số điện thoại + tên bạn (bắt buộc có mã NE mới chuyển khoản)",
+  transferExample: "NE00123 09xxxxxxxx Nguyen Van A",
 };
 
 export const uiLabels: Record<string, string> = {
     partners: "Đơn vị đồng hành & Tài trợ",
-    orgChart: "Sơ đồ tổ chức",
     registerNow: "Đăng ký ngay",
     viewReports: "Xem báo cáo minh bạch",
     viewProcess: "Xem quy trình xét duyệt",
@@ -491,7 +380,7 @@ export const uiLabels: Record<string, string> = {
     registerVolunteer: "Đăng ký Tình nguyện viên",
     referChild: "Giới thiệu hồ sơ trẻ",
     scanQr: "Quét mã QR để chuyển khoản nhanh",
-    whatIsMou: "MOU là gì?",
+    whatIsMou: "Biên bản ghi nhớ (MOU) là gì?",
     mouGallery: "Hình ảnh ký kết thực tế",
     contactInfo: "Thông tin liên lạc",
     donateWarning: "Lưu ý về quyên góp",

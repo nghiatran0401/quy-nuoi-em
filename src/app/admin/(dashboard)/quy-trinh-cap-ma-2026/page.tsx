@@ -4,7 +4,6 @@ import { ExternalLink, Save } from "lucide-react";
 import { AdminAlert } from "@/components/admin/admin-alert";
 import { AdminFormSection } from "@/components/admin/admin-form-section";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
-import { isTestOrEnglishProcess2026Row } from "@/lib/cms/sanitize-cms";
 import {
   CostTiersEditor,
   PaymentScenariosEditor,
@@ -31,9 +30,20 @@ type Process2026Row = {
   content: Process2026PageContent | null;
 };
 
+const PROCESS_2026_SECTIONS = [
+  { id: "section-images", label: "1. Hình ảnh" },
+  { id: "section-links", label: "2. Liên kết ngoài" },
+  { id: "section-hero", label: "3. Hero đầu trang" },
+  { id: "section-steps", label: "4. 6 bước quy trình" },
+  { id: "section-cost", label: "5. Mức chi phí" },
+  { id: "section-transfer", label: "6. Chuyển khoản" },
+  { id: "section-timeline", label: "7. Mốc thời gian" },
+  { id: "section-notes", label: "8. Lưu ý & liên kết" },
+  { id: "section-finance-cta", label: "9. Tài chính & CTA" },
+] as const;
+
 function processEditorCard(row: Process2026Row | null) {
   const c = resolveProcess2026PageContentForAdmin(row);
-  const hasTestData = row !== null && isTestOrEnglishProcess2026Row(row);
   const p = "vi";
   const heroPreview = resolveProcess2026ImageSrc(c.media.heroImage);
   const qrPreview = resolveProcess2026ImageSrc(c.media.qrImage);
@@ -48,7 +58,7 @@ function processEditorCard(row: Process2026Row | null) {
             <Link href="/quy-trinh-cap-ma-2026" target="_blank" className="font-medium text-[var(--admin-accent)] hover:underline">
               /quy-trinh-cap-ma-2026
             </Link>
-            . Giá trị đã được đồng bộ với trang công khai (kể cả khi cơ sở dữ liệu còn dữ liệu thử).
+            .
           </p>
         </div>
         <Link
@@ -61,118 +71,126 @@ function processEditorCard(row: Process2026Row | null) {
         </Link>
       </div>
 
-      {hasTestData ? (
-        <div
-          role="status"
-          className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950"
+      <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+        <p className="text-xs font-semibold tracking-wide text-slate-700 uppercase">Đi nhanh đến mục cần sửa</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {PROCESS_2026_SECTIONS.map((section) => (
+            <a
+              key={section.id}
+              href={`#${section.id}`}
+              className="rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-[var(--admin-accent)] hover:text-[var(--admin-accent)]"
+            >
+              {section.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <section id="section-images" className="scroll-mt-24">
+        <AdminFormSection
+          title="Hình ảnh"
+          description="Ảnh sơ đồ 6 bước (hero) và mã QR chuyển khoản. Có thể dùng đường dẫn /public, URL Supabase hoặc tải file mới."
         >
-          <p>
-            Supabase đang chứa dữ liệu thử (vitest). Form hiển thị nội dung mặc định tiếng Việt giống trang công khai.
-            Nhấn <strong>Lưu</strong> để ghi nội dung thật lên cơ sở dữ liệu.
-          </p>
-        </div>
-      ) : null}
-
-      <AdminFormSection
-        title="Hình ảnh"
-        description="Ảnh sơ đồ 6 bước (hero) và mã QR chuyển khoản. Có thể dùng đường dẫn /public, URL Supabase hoặc tải file mới."
-      >
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="space-y-3">
-            <p className="text-xs font-semibold text-slate-700">Sơ đồ 6 bước (Hero)</p>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-slate-200 bg-white">
-              <Image src={heroPreview} alt="" fill className="object-contain p-2" sizes="280px" />
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="space-y-3 rounded-xl border border-slate-200 bg-white p-4">
+              <p className="text-xs font-semibold text-slate-700">Sơ đồ 6 bước (Hero)</p>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-slate-200 bg-white">
+                <Image src={heroPreview} alt="" fill className="object-contain p-2" sizes="280px" />
+              </div>
+              <input type="hidden" name={`${p}_hero_image_existing`} value={c.media.heroImage} />
+              <div>
+                <label className="admin-label" htmlFor={`${p}_hero_image_url`}>
+                  URL hoặc đường dẫn ảnh hero
+                </label>
+                <input
+                  id={`${p}_hero_image_url`}
+                  name={`${p}_hero_image_url`}
+                  defaultValue={c.media.heroImage}
+                  className="admin-input"
+                />
+              </div>
+              <div>
+                <label className="admin-label" htmlFor={`${p}_hero_image_file`}>
+                  Hoặc tải ảnh mới
+                </label>
+                <input
+                  id={`${p}_hero_image_file`}
+                  name={`${p}_hero_image_file`}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/avif"
+                  className="max-w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium"
+                />
+              </div>
             </div>
-            <input type="hidden" name={`${p}_hero_image_existing`} value={c.media.heroImage} />
+
+            <div className="space-y-3 rounded-xl border border-slate-200 bg-white p-4">
+              <p className="text-xs font-semibold text-slate-700">Mã QR chuyển khoản</p>
+              <div className="relative mx-auto aspect-square w-full max-w-[200px] overflow-hidden rounded-lg border border-slate-200 bg-white">
+                <Image src={qrPreview} alt="" fill className="object-contain p-2" sizes="200px" />
+              </div>
+              <input type="hidden" name={`${p}_qr_image_existing`} value={c.media.qrImage} />
+              <div>
+                <label className="admin-label" htmlFor={`${p}_qr_image_url`}>
+                  URL hoặc đường dẫn QR (mặc định /qr.png)
+                </label>
+                <input
+                  id={`${p}_qr_image_url`}
+                  name={`${p}_qr_image_url`}
+                  defaultValue={c.media.qrImage}
+                  className="admin-input"
+                />
+              </div>
+              <div>
+                <label className="admin-label" htmlFor={`${p}_qr_image_file`}>
+                  Hoặc tải QR mới
+                </label>
+                <input
+                  id={`${p}_qr_image_file`}
+                  name={`${p}_qr_image_file`}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/avif"
+                  className="max-w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium"
+                />
+              </div>
+            </div>
+          </div>
+        </AdminFormSection>
+      </section>
+
+      <section id="section-links" className="scroll-mt-24">
+        <AdminFormSection title="Liên kết ngoài" description="URL cho nút Messenger, nhóm Facebook và báo cáo tài chính.">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="admin-label" htmlFor={`${p}_hero_image_url`}>
-                URL hoặc đường dẫn ảnh hero
+              <label className="admin-label" htmlFor={`${p}_links_messenger`}>
+                URL Messenger / trang Facebook
               </label>
               <input
-                id={`${p}_hero_image_url`}
-                name={`${p}_hero_image_url`}
-                defaultValue={c.media.heroImage}
+                id={`${p}_links_messenger`}
+                name={`${p}_links_messenger`}
+                defaultValue={c.links.messenger}
                 className="admin-input"
               />
             </div>
             <div>
-              <label className="admin-label" htmlFor={`${p}_hero_image_file`}>
-                Hoặc tải ảnh mới
+              <label className="admin-label" htmlFor={`${p}_links_group`}>
+                URL nhóm Facebook
               </label>
               <input
-                id={`${p}_hero_image_file`}
-                name={`${p}_hero_image_file`}
-                type="file"
-                accept="image/jpeg,image/png,image/webp,image/avif"
-                className="max-w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <p className="text-xs font-semibold text-slate-700">Mã QR chuyển khoản</p>
-            <div className="relative mx-auto aspect-square w-full max-w-[200px] overflow-hidden rounded-lg border border-slate-200 bg-white">
-              <Image src={qrPreview} alt="" fill className="object-contain p-2" sizes="200px" />
-            </div>
-            <input type="hidden" name={`${p}_qr_image_existing`} value={c.media.qrImage} />
-            <div>
-              <label className="admin-label" htmlFor={`${p}_qr_image_url`}>
-                URL hoặc đường dẫn QR (mặc định /qr.png)
-              </label>
-              <input
-                id={`${p}_qr_image_url`}
-                name={`${p}_qr_image_url`}
-                defaultValue={c.media.qrImage}
+                id={`${p}_links_group`}
+                name={`${p}_links_group`}
+                defaultValue={c.links.group}
                 className="admin-input"
               />
             </div>
-            <div>
-              <label className="admin-label" htmlFor={`${p}_qr_image_file`}>
-                Hoặc tải QR mới
-              </label>
-              <input
-                id={`${p}_qr_image_file`}
-                name={`${p}_qr_image_file`}
-                type="file"
-                accept="image/jpeg,image/png,image/webp,image/avif"
-                className="max-w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium"
-              />
-            </div>
           </div>
-        </div>
-      </AdminFormSection>
+        </AdminFormSection>
+      </section>
 
-      <AdminFormSection title="Liên kết ngoài" description="URL cho nút Messenger, Group và báo cáo tài chính.">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label className="admin-label" htmlFor={`${p}_links_messenger`}>
-              URL Messenger / Fanpage
-            </label>
-            <input
-              id={`${p}_links_messenger`}
-              name={`${p}_links_messenger`}
-              defaultValue={c.links.messenger}
-              className="admin-input"
-            />
-          </div>
-          <div>
-            <label className="admin-label" htmlFor={`${p}_links_group`}>
-              URL Group Facebook
-            </label>
-            <input
-              id={`${p}_links_group`}
-              name={`${p}_links_group`}
-              defaultValue={c.links.group}
-              className="admin-input"
-            />
-          </div>
-        </div>
-      </AdminFormSection>
-
-      <AdminFormSection
-        title="Hero — đầu trang"
-        description="Tiêu đề lớn, mô tả và hai nút Messenger / Group bên cạnh sơ đồ 6 bước."
-      >
+      <section id="section-hero" className="scroll-mt-24">
+        <AdminFormSection
+          title="Hero — đầu trang"
+          description="Tiêu đề lớn, mô tả và hai nút Messenger / nhóm Facebook bên cạnh sơ đồ 6 bước."
+        >
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_hero_eyebrow`}>
@@ -224,14 +242,16 @@ function processEditorCard(row: Process2026Row | null) {
           </div>
           <div>
             <label className="admin-label" htmlFor={`${p}_hero_group_cta`}>
-              Nút Group
+              Nút nhóm Facebook
             </label>
             <input id={`${p}_hero_group_cta`} name={`${p}_hero_group_cta`} defaultValue={c.hero.groupCta} className="admin-input" />
           </div>
         </div>
-      </AdminFormSection>
+        </AdminFormSection>
+      </section>
 
-      <AdminFormSection title="Phần 6 bước" description="Danh sách bước từ nhận mã đến thăm em.">
+      <section id="section-steps" className="scroll-mt-24">
+        <AdminFormSection title="Phần 6 bước" description="Danh sách bước từ nhận mã đến thăm em.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_steps_eyebrow`}>
@@ -259,9 +279,11 @@ function processEditorCard(row: Process2026Row | null) {
           />
         </div>
         <ProcessStepsEditor name={`${p}_steps_json`} initialSteps={c.steps} />
-      </AdminFormSection>
+        </AdminFormSection>
+      </section>
 
-      <AdminFormSection title="Mức chi phí" description="Các mức đóng góp nuôi em trong năm học.">
+      <section id="section-cost" className="scroll-mt-24">
+        <AdminFormSection title="Mức chi phí" description="Các mức đóng góp nuôi em trong năm học.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_cost_eyebrow`}>
@@ -289,9 +311,11 @@ function processEditorCard(row: Process2026Row | null) {
           />
         </div>
         <CostTiersEditor name={`${p}_cost_tiers_json`} initialItems={c.costTiers} />
-      </AdminFormSection>
+        </AdminFormSection>
+      </section>
 
-      <AdminFormSection title="Chuyển khoản" description="Tài khoản, kịch bản gửi tiền và khối QR bên phải.">
+      <section id="section-transfer" className="scroll-mt-24">
+        <AdminFormSection title="Chuyển khoản" description="Tài khoản, kịch bản gửi tiền và khối QR bên phải.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_transfer_eyebrow`}>
@@ -420,9 +444,11 @@ function processEditorCard(row: Process2026Row | null) {
             <input id={`${p}_transfer_qr_cta`} name={`${p}_transfer_qr_cta`} defaultValue={c.transfer.qrCta} className="admin-input" />
           </div>
         </div>
-      </AdminFormSection>
+        </AdminFormSection>
+      </section>
 
-      <AdminFormSection title="Mốc thời gian" description="Lịch quan trọng trong năm học.">
+      <section id="section-timeline" className="scroll-mt-24">
+        <AdminFormSection title="Mốc thời gian" description="Lịch quan trọng trong năm học.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_timeline_eyebrow`}>
@@ -443,9 +469,11 @@ function processEditorCard(row: Process2026Row | null) {
           </div>
         </div>
         <TimelineEditor name={`${p}_timeline_json`} initialItems={c.timeline} />
-      </AdminFormSection>
+        </AdminFormSection>
+      </section>
 
-      <AdminFormSection title="Lưu ý & liên kết" description="Lưu ý về mã NE và link giải thích mã.">
+      <section id="section-notes" className="scroll-mt-24">
+        <AdminFormSection title="Lưu ý & liên kết" description="Lưu ý về mã NE và link giải thích mã.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_notes_eyebrow`}>
@@ -489,9 +517,11 @@ function processEditorCard(row: Process2026Row | null) {
             />
           </div>
         </div>
-      </AdminFormSection>
+        </AdminFormSection>
+      </section>
 
-      <AdminFormSection title="Minh bạch tài chính & CTA cuối trang" description="Khối tài chính và kêu gọi hỗ trợ phía dưới.">
+      <section id="section-finance-cta" className="scroll-mt-24">
+        <AdminFormSection title="Minh bạch tài chính & CTA cuối trang" description="Khối tài chính và kêu gọi hỗ trợ phía dưới.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_finance_eyebrow`}>
@@ -676,7 +706,8 @@ function processEditorCard(row: Process2026Row | null) {
             />
           </div>
         </div>
-      </AdminFormSection>
+        </AdminFormSection>
+      </section>
     </div>
   );
 }
@@ -706,13 +737,16 @@ export default async function Process2026AdminPage({ searchParams }: Process2026
         {error ? <AdminAlert variant="error" message={error} /> : null}
       </div>
 
-      <form action={saveProcess2026PageContent} encType="multipart/form-data" className="space-y-6">
+      <form action={saveProcess2026PageContent} className="space-y-6">
         {processEditorCard(viRow)}
-        <div className="sticky bottom-4 z-10 flex justify-end">
-          <button type="submit" className="admin-btn-primary">
-            <Save className="h-4 w-4" />
-            Lưu nội dung quy trình cấp mã
-          </button>
+        <div className="sticky bottom-4 z-10">
+          <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
+            <p className="text-sm text-slate-600">Kiểm tra lại các mục vừa chỉnh sửa trước khi lưu.</p>
+            <button type="submit" className="admin-btn-primary shrink-0">
+              <Save className="h-4 w-4" />
+              Lưu nội dung quy trình cấp mã
+            </button>
+          </div>
         </div>
       </form>
     </div>

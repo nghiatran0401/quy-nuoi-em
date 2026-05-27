@@ -23,8 +23,6 @@ import {
 } from "@/lib/cms/sanitize-cms";
 import { siteImage } from "@/lib/images";
 import { nuoiEmImage } from "@/lib/nuoiem-images";
-import { getHomeMedia } from "@/lib/data/home-media";
-import { getStaticMediaMap } from "@/lib/data/static-media";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createPublicClient } from "@/lib/supabase/public";
 
@@ -191,11 +189,42 @@ function normalizeFinanceFootnote(
   return { ...finance, footnoteBefore: legacyFootnote, footnoteAfter: "" };
 }
 
+const LEGACY_TAY_NGUYEN_BREAKDOWN = "170.000đ × 9 tháng + tiền cơ sở vật chất";
+const TAY_NGUYEN_BREAKDOWN = "170.000đ × 9 tháng + 120.000đ cơ sở vật chất";
+const LEGACY_COST_INTRO_DESCRIPTION =
+  "Bữa ăn ~8.500đ/suất (tiểu học), mầm non ~6.800đ/suất. Khoản cơ sở vật chất 100.000đ/mã dùng cho các dự án bổ trợ (không đóng thêm).";
+const LEGACY_IMPORTANT_NOTE_ST_SUFFIX =
+  "Mã đuôi S/T (ví dụ NE00001S, NE00001T): bé nội trú ăn 2 bữa/ngày — tách thành 2 mã, mỗi mã một người nuôi một bữa.";
+
+function normalizeCostTiers(tiers: Process2026CostTier[]): Process2026CostTier[] {
+  return tiers.map((tier) =>
+    tier.breakdown?.trim() === LEGACY_TAY_NGUYEN_BREAKDOWN
+      ? { ...tier, breakdown: TAY_NGUYEN_BREAKDOWN }
+      : tier,
+  );
+}
+
+function normalizeCostIntro(
+  intro: Process2026PageContent["costIntro"],
+  fallback: Process2026PageContent["costIntro"],
+): Process2026PageContent["costIntro"] {
+  if (intro.description?.trim() === LEGACY_COST_INTRO_DESCRIPTION) {
+    return { ...intro, description: fallback.description };
+  }
+  return intro;
+}
+
+function normalizeImportantNotes(notes: string[], fallback: string[]): string[] {
+  return notes.map((note, index) =>
+    note.trim() === LEGACY_IMPORTANT_NOTE_ST_SUFFIX ? (fallback[index] ?? note) : note,
+  );
+}
+
 const viDefaults: Process2026PageContent = {
   meta: {
     title: "Quy trình cấp và nhận mã Nuôi Em 2026",
     description:
-      "Hướng dẫn đầy đủ cho anh/chị nuôi mới: nhận mã NE qua Fanpage, chuyển khoản đúng cú pháp, vào group, tra mã, nhận ảnh hàng tháng và lịch thăm em.",
+      "Hướng dẫn đầy đủ cho anh/chị nuôi mới: nhận mã NE qua trang Facebook, chuyển khoản đúng cú pháp, vào nhóm Facebook, tra mã, nhận ảnh hàng tháng và lịch thăm em.",
   },
   media: {
     heroImage: nuoiEmImage("processGuide"),
@@ -212,7 +241,7 @@ const viDefaults: Process2026PageContent = {
     description:
       "Khi đã có mã NE, làm đúng 6 bước dưới đây để giữ mã, chuyển khoản đúng cú pháp, nhận thông tin bé và theo dõi suốt năm học. Nội dung tham chiếu từ quy trình chính thức của dự án.",
     messengerCta: "Nhận mã qua Messenger",
-    groupCta: "Tham gia group Nuôi Em",
+    groupCta: "Tham gia nhóm Facebook Nuôi Em",
   },
   stepsIntro: {
     eyebrow: "6 bước cốt lõi",
@@ -230,16 +259,16 @@ const viDefaults: Process2026PageContent = {
     eyebrow: "Mức đóng góp",
     title: "Chi phí nuôi một em / một năm học",
     description:
-      "Bữa ăn ~8.500đ/suất (tiểu học), mầm non ~6.800đ/suất. Khoản cơ sở vật chất 100.000đ/mã dùng cho các dự án bổ trợ (không đóng thêm).",
+      "Bữa ăn ~8.500đ/suất (tiểu học), mầm non ~6.800đ/suất. Khoản cơ sở vật chất 100.000đ/mã (120.000đ/mã tại một số vùng Tây Nguyên) dùng cho các dự án bổ trợ (không đóng thêm).",
   },
   costTiers: costTiers.map((tier) => ({ ...tier })),
   transfer: {
     eyebrow: "Chuyển khoản",
     title: "Thông tin tài khoản & kịch bản gửi tiền",
     warning:
-      "Bắt buộc ghi nội dung: «Mã bé nhận nuôi» + tên anh/chị. Không có mã NE → không hoàn lại, chuyển quỹ vô danh (xây trường).",
+      "Bắt buộc ghi nội dung chuyển khoản: Mã NE + số điện thoại + tên anh/chị. Không có mã NE → không hoàn lại, chuyển quỹ vô danh (xây trường).",
     accountNumber: "1805",
-    bank: "MB — Ngân hàng TMCP Quân đội",
+    bank: "Ngân hàng Quân đội (MB) — Ngân hàng TMCP Quân đội",
     accountName: "CTCP DNXH QUY NUOI EM",
     phone: brandVisual.contact.phone,
     phoneDisplay: brandVisual.contact.phoneDisplay,
@@ -278,17 +307,38 @@ const viDefaults: Process2026PageContent = {
   cta: {
     title: "Cần hỗ trợ?",
     description:
-      "Chỉ hỏi qua Messenger Fanpage Nuôi Em — không hỏi ở comment để tránh bỏ lỡ tin. Hotline khi cần gấp.",
+      "Chỉ hỏi qua Messenger Fanpage Nuôi Em — không hỏi ở comment để tránh bỏ lỡ tin.\u00a0Hotline khi cần gấp.",
     messengerCta: "Inbox Fanpage",
     contactLinkLabel: "Trang liên hệ Quỹ",
-    referenceLabel: "Tham khảo thêm tại",
-    referenceLinkLabel: "nuoiem.com",
-    referenceUrl: "https://www.nuoiem.com/",
+    referenceLabel: "",
+    referenceLinkLabel: "",
+    referenceUrl: "",
   },
 };
 
 function getFallback(): Process2026PageContent {
   return viDefaults;
+}
+
+function isLegacyNuoiemHomeReference(url: string | undefined): boolean {
+  const normalized = (url ?? "").trim().toLowerCase();
+  return (
+    normalized === "https://www.nuoiem.com" ||
+    normalized === "https://www.nuoiem.com/" ||
+    normalized === "https://nuoiem.com" ||
+    normalized === "https://nuoiem.com/"
+  );
+}
+
+function normalizeProcess2026Cta(
+  cta: Process2026PageContent["cta"],
+  fallback: Process2026PageContent["cta"],
+): Process2026PageContent["cta"] {
+  const merged = { ...fallback, ...cta };
+  if (isLegacyNuoiemHomeReference(merged.referenceUrl)) {
+    return { ...merged, referenceLabel: "", referenceLinkLabel: "", referenceUrl: "" };
+  }
+  return merged;
 }
 
 export type Process2026PageRow = {
@@ -339,12 +389,17 @@ export function mergeProcess2026PageContent(
       ? fallback.stepsIntro
       : { ...fallback.stepsIntro, ...content.stepsIntro },
     steps: isTestOrEnglishProcess2026Steps(content.steps) ? fallback.steps : (content.steps ?? fallback.steps),
-    costIntro: isTestOrEnglishProcess2026Intro(content.costIntro, "c", "ct")
-      ? fallback.costIntro
-      : { ...fallback.costIntro, ...content.costIntro },
-    costTiers: isTestOrEnglishProcess2026CostTiers(content.costTiers)
-      ? fallback.costTiers
-      : (content.costTiers ?? fallback.costTiers),
+    costIntro: normalizeCostIntro(
+      isTestOrEnglishProcess2026Intro(content.costIntro, "c", "ct")
+        ? fallback.costIntro
+        : { ...fallback.costIntro, ...content.costIntro },
+      fallback.costIntro,
+    ),
+    costTiers: normalizeCostTiers(
+      isTestOrEnglishProcess2026CostTiers(content.costTiers)
+        ? fallback.costTiers
+        : (content.costTiers ?? fallback.costTiers),
+    ),
     transfer: isTestOrEnglishProcess2026Transfer(content.transfer)
       ? fallback.transfer
       : { ...fallback.transfer, ...content.transfer },
@@ -356,14 +411,20 @@ export function mergeProcess2026PageContent(
       ? fallback.timeline
       : (content.timeline ?? fallback.timeline),
     notesIntro: notesPoisoned ? fallback.notesIntro : { ...fallback.notesIntro, ...content.notesIntro },
-    importantNotes: notesPoisoned ? fallback.importantNotes : (content.importantNotes ?? fallback.importantNotes),
+    importantNotes: normalizeImportantNotes(
+      notesPoisoned ? fallback.importantNotes : (content.importantNotes ?? fallback.importantNotes),
+      fallback.importantNotes,
+    ),
     codeMeaningLabel: notesPoisoned
       ? fallback.codeMeaningLabel
       : (content.codeMeaningLabel ?? fallback.codeMeaningLabel),
     codeMeaningUrl: notesPoisoned ? fallback.codeMeaningUrl : (content.codeMeaningUrl ?? fallback.codeMeaningUrl),
     finance: isTestOrEnglishProcess2026Finance(legacyFinance) ? fallback.finance : finance,
     schoolBuildUrl: content.schoolBuildUrl ?? fallback.schoolBuildUrl,
-    cta: isTestOrEnglishProcess2026Cta(content.cta) ? fallback.cta : { ...fallback.cta, ...content.cta },
+    cta: normalizeProcess2026Cta(
+      isTestOrEnglishProcess2026Cta(content.cta) ? fallback.cta : { ...fallback.cta, ...content.cta },
+      fallback.cta,
+    ),
   };
 }
 
@@ -381,7 +442,7 @@ export async function getProcess2026PageContent(): Promise<Process2026PageConten
   const fallback = getFallback();
 
   if (!isSupabaseConfigured()) {
-    return applyProcess2026MediaOverrides(fallback);
+    return fallback;
   }
 
   try {
@@ -393,26 +454,14 @@ export async function getProcess2026PageContent(): Promise<Process2026PageConten
       .maybeSingle();
 
     if (error || !data) {
-      return applyProcess2026MediaOverrides(fallback);
+      return fallback;
     }
 
     const row = data as Process2026PageRow;
-    const merged = resolveProcess2026PageContentForAdmin(row);
-    return applyProcess2026MediaOverrides(merged);
+    return resolveProcess2026PageContentForAdmin(row);
   } catch {
-    return applyProcess2026MediaOverrides(fallback);
+    return fallback;
   }
-}
-
-async function applyProcess2026MediaOverrides(content: Process2026PageContent): Promise<Process2026PageContent> {
-  const [staticMap, homeMedia] = await Promise.all([getStaticMediaMap(), getHomeMedia()]);
-  return {
-    ...content,
-    media: {
-      heroImage: staticMap.process_2026_diagram ?? content.media.heroImage,
-      qrImage: homeMedia.donateQr,
-    },
-  };
 }
 
 export function getProcess2026PageFallback(): Process2026PageContent {
