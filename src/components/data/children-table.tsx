@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { StatusBadge } from "@/components/data/status-badge";
 import type { Child } from "@/lib/data/types";
 

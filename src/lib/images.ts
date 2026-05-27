@@ -27,7 +27,7 @@ export const siteImages = {
   hero: nuoiEmImage("hero"),
   heroHomepage: nuoiEmImage("hero"),
   ctaBackground: nuoiEmImage("ctaVisit"),
-  donateQr: nuoiEmImage("donateQr"),
+  donateQr: brandVisual.donateQrPath,
   member: (index: number) => {
     const src = nuoiEmMemberGallery[index - 1];
     return src ?? nuoiEmMemberGallery[0] ?? nuoiEmImage("hero");

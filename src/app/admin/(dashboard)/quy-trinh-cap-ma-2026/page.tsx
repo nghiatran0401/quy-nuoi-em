@@ -1,6 +1,10 @@
-import { Save } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ExternalLink, Save } from "lucide-react";
 import { AdminAlert } from "@/components/admin/admin-alert";
+import { AdminFormSection } from "@/components/admin/admin-form-section";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
+import { isTestOrEnglishProcess2026Row } from "@/lib/cms/sanitize-cms";
 import {
   CostTiersEditor,
   PaymentScenariosEditor,
@@ -9,7 +13,11 @@ import {
 import { ProcessStepsEditor } from "@/components/admin/process-steps-editor";
 import { StringListEditor } from "@/components/admin/string-list-editor";
 import { decodeAdminParam, formatAdminMessage } from "@/lib/admin/messages";
-import { getProcess2026PageFallback, type Process2026PageContent } from "@/lib/data/process-2026-page";
+import {
+  resolveProcess2026ImageSrc,
+  resolveProcess2026PageContentForAdmin,
+  type Process2026PageContent,
+} from "@/lib/data/process-2026-page";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { saveProcess2026PageContent } from "./actions";
 
@@ -23,67 +31,148 @@ type Process2026Row = {
   content: Process2026PageContent | null;
 };
 
-function mergeRow(locale: "vi" | "en", row: Process2026Row | null): Process2026PageContent {
-  const fallback = getProcess2026PageFallback(locale);
-  if (!row?.content) {
-    return { ...fallback, meta: row?.meta ?? fallback.meta };
-  }
-  return {
-    ...fallback,
-    meta: row.meta ?? row.content.meta ?? fallback.meta,
-    hero: { ...fallback.hero, ...row.content.hero },
-    stepsIntro: { ...fallback.stepsIntro, ...row.content.stepsIntro },
-    steps: row.content.steps ?? fallback.steps,
-    costIntro: { ...fallback.costIntro, ...row.content.costIntro },
-    costTiers: row.content.costTiers ?? fallback.costTiers,
-    transfer: { ...fallback.transfer, ...row.content.transfer },
-    paymentScenarios: row.content.paymentScenarios ?? fallback.paymentScenarios,
-    timelineIntro: { ...fallback.timelineIntro, ...row.content.timelineIntro },
-    timeline: row.content.timeline ?? fallback.timeline,
-    notesIntro: { ...fallback.notesIntro, ...row.content.notesIntro },
-    importantNotes: row.content.importantNotes ?? fallback.importantNotes,
-    codeMeaningLabel: row.content.codeMeaningLabel ?? fallback.codeMeaningLabel,
-    codeMeaningUrl: row.content.codeMeaningUrl ?? fallback.codeMeaningUrl,
-    finance: { ...fallback.finance, ...row.content.finance },
-    schoolBuildUrl: row.content.schoolBuildUrl ?? fallback.schoolBuildUrl,
-    cta: { ...fallback.cta, ...row.content.cta },
-  };
-}
-
-function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
-  const c = mergeRow(locale, row);
-  const p = locale;
+function processEditorCard(row: Process2026Row | null) {
+  const c = resolveProcess2026PageContentForAdmin(row);
+  const hasTestData = row !== null && isTestOrEnglishProcess2026Row(row);
+  const p = "vi";
+  const heroPreview = resolveProcess2026ImageSrc(c.media.heroImage);
+  const qrPreview = resolveProcess2026ImageSrc(c.media.qrImage);
 
   return (
-    <div className="admin-card space-y-6 p-5" key={locale}>
-      <h2 className="text-lg font-semibold text-slate-900">
-        Ngôn ngữ: <span className="uppercase">{locale}</span>
-      </h2>
-
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">SEO</h3>
+    <div className="admin-card space-y-6 p-5" key="vi">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <label className="admin-label" htmlFor={`${p}_meta_title`}>
-            Tiêu đề SEO
-          </label>
-          <input id={`${p}_meta_title`} name={`${p}_meta_title`} defaultValue={c.meta.title} className="admin-input" />
+          <h2 className="text-lg font-semibold text-slate-900">Nội dung tiếng Việt</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Các mục theo thứ tự hiển thị trên{" "}
+            <Link href="/quy-trinh-cap-ma-2026" target="_blank" className="font-medium text-[var(--admin-accent)] hover:underline">
+              /quy-trinh-cap-ma-2026
+            </Link>
+            . Giá trị đã được đồng bộ với trang công khai (kể cả khi cơ sở dữ liệu còn dữ liệu thử).
+          </p>
         </div>
-        <div>
-          <label className="admin-label" htmlFor={`${p}_meta_description`}>
-            Mô tả SEO
-          </label>
-          <textarea
-            id={`${p}_meta_description`}
-            name={`${p}_meta_description`}
-            defaultValue={c.meta.description}
-            rows={3}
-            className="admin-input resize-y"
-          />
-        </div>
-      </section>
+        <Link
+          href="/quy-trinh-cap-ma-2026"
+          target="_blank"
+          className="admin-btn-secondary text-sm"
+        >
+          <ExternalLink className="h-4 w-4" />
+          Xem trang công khai
+        </Link>
+      </div>
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">Hero</h3>
+      {hasTestData ? (
+        <div
+          role="status"
+          className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950"
+        >
+          <p>
+            Supabase đang chứa dữ liệu thử (vitest). Form hiển thị nội dung mặc định tiếng Việt giống trang công khai.
+            Nhấn <strong>Lưu</strong> để ghi nội dung thật lên cơ sở dữ liệu.
+          </p>
+        </div>
+      ) : null}
+
+      <AdminFormSection
+        title="Hình ảnh"
+        description="Ảnh sơ đồ 6 bước (hero) và mã QR chuyển khoản. Có thể dùng đường dẫn /public, URL Supabase hoặc tải file mới."
+      >
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="space-y-3">
+            <p className="text-xs font-semibold text-slate-700">Sơ đồ 6 bước (Hero)</p>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <Image src={heroPreview} alt="" fill className="object-contain p-2" sizes="280px" />
+            </div>
+            <input type="hidden" name={`${p}_hero_image_existing`} value={c.media.heroImage} />
+            <div>
+              <label className="admin-label" htmlFor={`${p}_hero_image_url`}>
+                URL hoặc đường dẫn ảnh hero
+              </label>
+              <input
+                id={`${p}_hero_image_url`}
+                name={`${p}_hero_image_url`}
+                defaultValue={c.media.heroImage}
+                className="admin-input"
+              />
+            </div>
+            <div>
+              <label className="admin-label" htmlFor={`${p}_hero_image_file`}>
+                Hoặc tải ảnh mới
+              </label>
+              <input
+                id={`${p}_hero_image_file`}
+                name={`${p}_hero_image_file`}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/avif"
+                className="max-w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <p className="text-xs font-semibold text-slate-700">Mã QR chuyển khoản</p>
+            <div className="relative mx-auto aspect-square w-full max-w-[200px] overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <Image src={qrPreview} alt="" fill className="object-contain p-2" sizes="200px" />
+            </div>
+            <input type="hidden" name={`${p}_qr_image_existing`} value={c.media.qrImage} />
+            <div>
+              <label className="admin-label" htmlFor={`${p}_qr_image_url`}>
+                URL hoặc đường dẫn QR (mặc định /qr.png)
+              </label>
+              <input
+                id={`${p}_qr_image_url`}
+                name={`${p}_qr_image_url`}
+                defaultValue={c.media.qrImage}
+                className="admin-input"
+              />
+            </div>
+            <div>
+              <label className="admin-label" htmlFor={`${p}_qr_image_file`}>
+                Hoặc tải QR mới
+              </label>
+              <input
+                id={`${p}_qr_image_file`}
+                name={`${p}_qr_image_file`}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/avif"
+                className="max-w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-medium"
+              />
+            </div>
+          </div>
+        </div>
+      </AdminFormSection>
+
+      <AdminFormSection title="Liên kết ngoài" description="URL cho nút Messenger, Group và báo cáo tài chính.">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="admin-label" htmlFor={`${p}_links_messenger`}>
+              URL Messenger / Fanpage
+            </label>
+            <input
+              id={`${p}_links_messenger`}
+              name={`${p}_links_messenger`}
+              defaultValue={c.links.messenger}
+              className="admin-input"
+            />
+          </div>
+          <div>
+            <label className="admin-label" htmlFor={`${p}_links_group`}>
+              URL Group Facebook
+            </label>
+            <input
+              id={`${p}_links_group`}
+              name={`${p}_links_group`}
+              defaultValue={c.links.group}
+              className="admin-input"
+            />
+          </div>
+        </div>
+      </AdminFormSection>
+
+      <AdminFormSection
+        title="Hero — đầu trang"
+        description="Tiêu đề lớn, mô tả và hai nút Messenger / Group bên cạnh sơ đồ 6 bước."
+      >
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_hero_eyebrow`}>
@@ -140,10 +229,9 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
             <input id={`${p}_hero_group_cta`} name={`${p}_hero_group_cta`} defaultValue={c.hero.groupCta} className="admin-input" />
           </div>
         </div>
-      </section>
+      </AdminFormSection>
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">Phần 6 bước</h3>
+      <AdminFormSection title="Phần 6 bước" description="Danh sách bước từ nhận mã đến thăm em.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_steps_eyebrow`}>
@@ -171,10 +259,9 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
           />
         </div>
         <ProcessStepsEditor name={`${p}_steps_json`} initialSteps={c.steps} />
-      </section>
+      </AdminFormSection>
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">Mức chi phí</h3>
+      <AdminFormSection title="Mức chi phí" description="Các mức đóng góp nuôi em trong năm học.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_cost_eyebrow`}>
@@ -202,10 +289,9 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
           />
         </div>
         <CostTiersEditor name={`${p}_cost_tiers_json`} initialItems={c.costTiers} />
-      </section>
+      </AdminFormSection>
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">Chuyển khoản</h3>
+      <AdminFormSection title="Chuyển khoản" description="Tài khoản, kịch bản gửi tiền và khối QR bên phải.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_transfer_eyebrow`}>
@@ -236,6 +322,30 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
             rows={2}
             className="admin-input resize-y"
           />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="admin-label" htmlFor={`${p}_transfer_phone`}>
+              Số điện thoại (tel:)
+            </label>
+            <input
+              id={`${p}_transfer_phone`}
+              name={`${p}_transfer_phone`}
+              defaultValue={c.transfer.phone}
+              className="admin-input font-mono"
+            />
+          </div>
+          <div>
+            <label className="admin-label" htmlFor={`${p}_transfer_phone_display`}>
+              Số điện thoại hiển thị
+            </label>
+            <input
+              id={`${p}_transfer_phone_display`}
+              name={`${p}_transfer_phone_display`}
+              defaultValue={c.transfer.phoneDisplay}
+              className="admin-input"
+            />
+          </div>
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
@@ -310,10 +420,9 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
             <input id={`${p}_transfer_qr_cta`} name={`${p}_transfer_qr_cta`} defaultValue={c.transfer.qrCta} className="admin-input" />
           </div>
         </div>
-      </section>
+      </AdminFormSection>
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">Mốc thời gian</h3>
+      <AdminFormSection title="Mốc thời gian" description="Lịch quan trọng trong năm học.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_timeline_eyebrow`}>
@@ -334,10 +443,9 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
           </div>
         </div>
         <TimelineEditor name={`${p}_timeline_json`} initialItems={c.timeline} />
-      </section>
+      </AdminFormSection>
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">Lưu ý & liên kết</h3>
+      <AdminFormSection title="Lưu ý & liên kết" description="Lưu ý về mã NE và link giải thích mã.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_notes_eyebrow`}>
@@ -381,21 +489,9 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
             />
           </div>
         </div>
-        <div>
-          <label className="admin-label" htmlFor={`${p}_school_build_url`}>
-            URL dự án xây trường
-          </label>
-          <input
-            id={`${p}_school_build_url`}
-            name={`${p}_school_build_url`}
-            defaultValue={c.schoolBuildUrl}
-            className="admin-input"
-          />
-        </div>
-      </section>
+      </AdminFormSection>
 
-      <section className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">Minh bạch tài chính & CTA</h3>
+      <AdminFormSection title="Minh bạch tài chính & CTA cuối trang" description="Khối tài chính và kêu gọi hỗ trợ phía dưới.">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_finance_eyebrow`}>
@@ -416,27 +512,96 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
           </div>
         </div>
         <div>
-          <label className="admin-label" htmlFor={`${p}_finance_body`}>
-            Nội dung tài chính
+          <label className="admin-label" htmlFor={`${p}_finance_body_before`}>
+            Đoạn trước link báo cáo
+          </label>
+          <input
+            id={`${p}_finance_body_before`}
+            name={`${p}_finance_body_before`}
+            defaultValue={c.finance.bodyBefore}
+            className="admin-input"
+          />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="admin-label" htmlFor={`${p}_finance_report_link_label`}>
+              Nhãn link báo cáo
+            </label>
+            <input
+              id={`${p}_finance_report_link_label`}
+              name={`${p}_finance_report_link_label`}
+              defaultValue={c.finance.reportLinkLabel}
+              className="admin-input"
+            />
+          </div>
+          <div>
+            <label className="admin-label" htmlFor={`${p}_finance_report_link_url`}>
+              URL báo cáo tài chính
+            </label>
+            <input
+              id={`${p}_finance_report_link_url`}
+              name={`${p}_finance_report_link_url`}
+              defaultValue={c.finance.reportLinkUrl}
+              className="admin-input"
+            />
+          </div>
+        </div>
+        <div>
+          <label className="admin-label" htmlFor={`${p}_finance_body_after`}>
+            Đoạn sau link báo cáo
           </label>
           <textarea
-            id={`${p}_finance_body`}
-            name={`${p}_finance_body`}
-            defaultValue={c.finance.body}
-            rows={3}
+            id={`${p}_finance_body_after`}
+            name={`${p}_finance_body_after`}
+            defaultValue={c.finance.bodyAfter}
+            rows={2}
             className="admin-input resize-y"
           />
         </div>
         <div>
-          <label className="admin-label" htmlFor={`${p}_finance_footnote`}>
-            Ghi chú tài chính
+          <label className="admin-label" htmlFor={`${p}_finance_footnote_before`}>
+            Ghi chú — trước link xây trường
           </label>
-          <textarea
-            id={`${p}_finance_footnote`}
-            name={`${p}_finance_footnote`}
-            defaultValue={c.finance.footnote}
-            rows={2}
-            className="admin-input resize-y"
+          <input
+            id={`${p}_finance_footnote_before`}
+            name={`${p}_finance_footnote_before`}
+            defaultValue={c.finance.footnoteBefore}
+            className="admin-input"
+          />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="admin-label" htmlFor={`${p}_finance_school_build_link_label`}>
+              Nhãn link dự án xây trường
+            </label>
+            <input
+              id={`${p}_finance_school_build_link_label`}
+              name={`${p}_finance_school_build_link_label`}
+              defaultValue={c.finance.schoolBuildLinkLabel}
+              className="admin-input"
+            />
+          </div>
+          <div>
+            <label className="admin-label" htmlFor={`${p}_school_build_url`}>
+              URL dự án xây trường
+            </label>
+            <input
+              id={`${p}_school_build_url`}
+              name={`${p}_school_build_url`}
+              defaultValue={c.schoolBuildUrl}
+              className="admin-input"
+            />
+          </div>
+        </div>
+        <div>
+          <label className="admin-label" htmlFor={`${p}_finance_footnote_after`}>
+            Ghi chú — sau link xây trường
+          </label>
+          <input
+            id={`${p}_finance_footnote_after`}
+            name={`${p}_finance_footnote_after`}
+            defaultValue={c.finance.footnoteAfter}
+            className="admin-input"
           />
         </div>
         <div>
@@ -476,7 +641,7 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
             />
           </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-3">
           <div>
             <label className="admin-label" htmlFor={`${p}_cta_reference_label`}>
               Nhãn tham khảo
@@ -485,6 +650,17 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
               id={`${p}_cta_reference_label`}
               name={`${p}_cta_reference_label`}
               defaultValue={c.cta.referenceLabel}
+              className="admin-input"
+            />
+          </div>
+          <div>
+            <label className="admin-label" htmlFor={`${p}_cta_reference_link_label`}>
+              Chữ link tham khảo
+            </label>
+            <input
+              id={`${p}_cta_reference_link_label`}
+              name={`${p}_cta_reference_link_label`}
+              defaultValue={c.cta.referenceLinkLabel}
               className="admin-input"
             />
           </div>
@@ -500,7 +676,7 @@ function localeCard(locale: "vi" | "en", row: Process2026Row | null) {
             />
           </div>
         </div>
-      </section>
+      </AdminFormSection>
     </div>
   );
 }
@@ -511,16 +687,18 @@ export default async function Process2026AdminPage({ searchParams }: Process2026
   const error = decodeAdminParam(params.error);
 
   const supabase = createAdminClient();
-  const { data } = await supabase.from("process_2026_page_content").select("*").in("locale", ["vi", "en"]);
-  const rows = (data ?? []) as Process2026Row[];
-  const viRow = rows.find((row) => row.locale === "vi") ?? null;
-  const enRow = rows.find((row) => row.locale === "en") ?? null;
+  const { data } = await supabase
+    .from("process_2026_page_content")
+    .select("*")
+    .eq("locale", "vi")
+    .maybeSingle();
+  const viRow = (data as Process2026Row | null) ?? null;
 
   return (
     <div className="space-y-6">
       <AdminPageHeader
         title="Quy trình cấp mã 2026"
-        description="Chỉnh sửa nội dung trang /quy-trinh-cap-ma-2026: hero, 6 bước, chi phí, chuyển khoản, mốc thời gian và lưu ý."
+        description="Chỉnh sửa nội dung và hình ảnh trên /quy-trinh-cap-ma-2026. SEO do code quản lý."
       />
 
       <div className="space-y-3">
@@ -528,9 +706,8 @@ export default async function Process2026AdminPage({ searchParams }: Process2026
         {error ? <AdminAlert variant="error" message={error} /> : null}
       </div>
 
-      <form action={saveProcess2026PageContent} className="space-y-6">
-        {localeCard("vi", viRow)}
-        {localeCard("en", enRow)}
+      <form action={saveProcess2026PageContent} encType="multipart/form-data" className="space-y-6">
+        {processEditorCard(viRow)}
         <div className="sticky bottom-4 z-10 flex justify-end">
           <button type="submit" className="admin-btn-primary">
             <Save className="h-4 w-4" />

@@ -3,43 +3,22 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { NewsStatus } from "@/types/supabase";
+import { getFormText, getActionErrorMessage, isNavigationRedirect } from "@/lib/admin/form-utils";
+import { parseNewsFields } from "@/lib/admin/parsers/news";
+import { resolveImageUrlFromForm } from "@/lib/admin/storage-upload";
 import { requireAdminSession } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-const VALID_STATUSES: NewsStatus[] = ["draft", "published", "archived"];
-const VALID_LOCALES = ["vi", "en"] as const;
-const STORAGE_BUCKET = "images";
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
-const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/avif"]);
-
-function slugify(input: string): string {
-  return input
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-function getText(formData: FormData, key: string): string {
-  const raw = formData.get(key);
-  return typeof raw === "string" ? raw.trim() : "";
-}
+const NEWS_STORAGE_FOLDER = "tin-tuc";
 
 function encodeMessage(message: string): string {
   return encodeURIComponent(message);
 }
 
-function revalidateNewsPaths(slug: string, locale: string) {
+function revalidateNewsPaths(slug: string) {
   revalidatePath("/admin/news");
   revalidatePath("/news");
   revalidatePath(`/news/${slug}`);
-  revalidatePath("/en/news");
-  if (locale === "en") {
-    revalidatePath(`/en/news/${slug}`);
-  }
 }
 
 async function requireEditorOrAdmin() {
@@ -48,87 +27,20 @@ async function requireEditorOrAdmin() {
   return { supabase };
 }
 
-async function requireAdmin() {
-  return requireEditorOrAdmin();
-}
-
 async function resolveImageUrl(
   formData: FormData,
   supabase: SupabaseClient,
 ): Promise<string | null> {
-  const file = formData.get("cover_image");
-  const urlFromField = getText(formData, "image_url");
-
-  if (file instanceof File && file.size > 0) {
-    if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
-      throw new Error("Ảnh bìa chỉ hỗ trợ định dạng JPEG, PNG, WebP hoặc AVIF.");
-    }
-    if (file.size > MAX_IMAGE_BYTES) {
-      throw new Error("Ảnh bìa phải nhỏ hơn 5 MB.");
-    }
-
-    const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-    const path = `tin-tuc/${crypto.randomUUID()}.${ext}`;
-    const buffer = Buffer.from(await file.arrayBuffer());
-
-    const { error } = await supabase.storage.from(STORAGE_BUCKET).upload(path, buffer, {
-      contentType: file.type,
-      upsert: false,
-    });
-
-    if (error) {
-      throw new Error(`Tải ảnh lên thất bại: ${error.message}`);
-    }
-
-    const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(path);
-    return data.publicUrl;
-  }
-
-  return urlFromField || null;
+  return resolveImageUrlFromForm(formData, supabase, {
+    fileField: "cover_image",
+    urlField: "image_url",
+    storageFolder: NEWS_STORAGE_FOLDER,
+  });
 }
 
 async function parseNewsForm(formData: FormData, supabase: SupabaseClient) {
-  const title = getText(formData, "title");
-  const slugInput = getText(formData, "slug");
-  const excerpt = getText(formData, "excerpt");
-  const content = getText(formData, "content");
-  const localeInput = getText(formData, "locale");
-  const statusInput = getText(formData, "status");
-  const publishedAtInput = getText(formData, "published_at");
-
-  const slug = slugify(slugInput || title);
-  const locale = VALID_LOCALES.includes(localeInput as (typeof VALID_LOCALES)[number]) ? localeInput : "vi";
-  const status = VALID_STATUSES.includes(statusInput as NewsStatus) ? (statusInput as NewsStatus) : "draft";
-  const publishedAt =
-    status === "published"
-      ? publishedAtInput
-        ? new Date(publishedAtInput).toISOString()
-        : new Date().toISOString()
-      : null;
-
-  if (!title) {
-    throw new Error("Tiêu đề là bắt buộc.");
-  }
-  if (!slug) {
-    throw new Error("Đường dẫn slug là bắt buộc.");
-  }
-  if (!content) {
-    throw new Error("Nội dung là bắt buộc.");
-  }
-
   const image_url = await resolveImageUrl(formData, supabase);
-
-  return {
-    slug,
-    title,
-    excerpt: excerpt || null,
-    content,
-    image_url,
-    locale,
-    status,
-    published_at: publishedAt,
-    display_date: null,
-  };
+  return parseNewsFields(formData, image_url);
 }
 
 export async function createNewsArticle(formData: FormData) {
@@ -144,11 +56,14 @@ export async function createNewsArticle(formData: FormData) {
       throw new Error(error.message);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Không thể tạo bài viết.";
+    if (isNavigationRedirect(error)) {
+      throw error;
+    }
+    const message = getActionErrorMessage(error, "Không thể tạo bài viết.");
     redirect(`/admin/news/new?error=${encodeMessage(message)}`);
   }
 
-  revalidateNewsPaths(payload.slug, payload.locale);
+  revalidateNewsPaths(payload.slug);
   redirect("/admin/news?message=created");
 }
 
@@ -164,16 +79,19 @@ export async function updateNewsArticle(id: string, formData: FormData) {
       throw new Error(error.message);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Không thể cập nhật bài viết.";
+    if (isNavigationRedirect(error)) {
+      throw error;
+    }
+    const message = getActionErrorMessage(error, "Không thể cập nhật bài viết.");
     redirect(`/admin/news/${id}/edit?error=${encodeMessage(message)}`);
   }
 
-  revalidateNewsPaths(payload.slug, payload.locale);
+  revalidateNewsPaths(payload.slug);
   redirect(`/admin/news/${id}/edit?message=saved`);
 }
 
 export async function archiveNewsArticle(formData: FormData) {
-  const id = getText(formData, "id");
+  const id = getFormText(formData, "id");
   if (!id) {
     redirect("/admin/news?error=missing-id");
   }
@@ -192,10 +110,13 @@ export async function archiveNewsArticle(formData: FormData) {
     }
 
     if (article) {
-      revalidateNewsPaths(article.slug, article.locale);
+      revalidateNewsPaths(article.slug);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Không thể lưu trữ bài viết.";
+    if (isNavigationRedirect(error)) {
+      throw error;
+    }
+    const message = getActionErrorMessage(error, "Không thể lưu trữ bài viết.");
     redirect(`/admin/news?error=${encodeMessage(message)}`);
   }
 
@@ -203,13 +124,13 @@ export async function archiveNewsArticle(formData: FormData) {
 }
 
 export async function deleteNewsArticle(formData: FormData) {
-  const id = getText(formData, "id");
+  const id = getFormText(formData, "id");
   if (!id) {
     redirect("/admin/news?error=missing-id");
   }
 
   try {
-    const { supabase } = await requireAdmin();
+    const { supabase } = await requireEditorOrAdmin();
     const { data: article } = await supabase
       .from("news_articles")
       .select("slug, locale")
@@ -222,10 +143,13 @@ export async function deleteNewsArticle(formData: FormData) {
     }
 
     if (article) {
-      revalidateNewsPaths(article.slug, article.locale);
+      revalidateNewsPaths(article.slug);
     }
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Không thể xóa bài viết.";
+    if (isNavigationRedirect(error)) {
+      throw error;
+    }
+    const message = getActionErrorMessage(error, "Không thể xóa bài viết.");
     redirect(`/admin/news?error=${encodeMessage(message)}`);
   }
 

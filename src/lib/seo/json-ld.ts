@@ -1,6 +1,5 @@
 import { brandVisual } from "@/config/brand-visual";
 import { getSiteUrl, siteConfig, siteName } from "@/config/site";
-import type { Locale } from "@/i18n/config";
 import { absoluteUrl } from "@/lib/seo/paths";
 
 const SITE_URL = getSiteUrl();
@@ -10,10 +9,6 @@ export const WEBSITE_ID = `${SITE_URL}/#website`;
 const LOGO_ID = `${SITE_URL}/#logo`;
 
 type JsonLdObject = Record<string, unknown>;
-
-function inLanguage(locale: Locale): string {
-  return locale === "vi" ? "vi-VN" : "en-US";
-}
 
 function logoImageObject(): JsonLdObject {
   return {
@@ -27,84 +22,51 @@ function logoImageObject(): JsonLdObject {
 }
 
 function postalAddress(): JsonLdObject {
+  const { office } = brandVisual;
   return {
     "@type": "PostalAddress",
-    streetAddress: "383 Nguyễn Duy Trinh",
-    addressLocality: "Phường Bình Trưng",
-    addressRegion: "TP. Hồ Chí Minh",
+    streetAddress: office.street,
+    addressLocality: office.locality,
+    addressRegion: office.region,
     addressCountry: "VN",
   };
 }
 
-function contactPoints(locale: Locale): JsonLdObject[] {
-  const available = ["Vietnamese", locale === "en" ? "English" : null].filter(
-    Boolean,
-  ) as string[];
+function contactPoints(): JsonLdObject[] {
   return [
     {
       "@type": "ContactPoint",
-      contactType: locale === "vi" ? "khách hàng / nhà tài trợ" : "customer support",
+      contactType: "khách hàng / nhà tài trợ",
       telephone: `+84${brandVisual.contact.phone.replace(/^0/, "")}`,
       email: brandVisual.contact.email,
-      availableLanguage: available,
+      availableLanguage: ["Vietnamese"],
       areaServed: "VN",
     },
     {
       "@type": "ContactPoint",
       contactType: "donations",
       email: brandVisual.contact.email,
-      url: absoluteUrl("/dong-gop", locale),
-      availableLanguage: available,
+      url: absoluteUrl("/dong-gop"),
+      availableLanguage: ["Vietnamese"],
       areaServed: "VN",
     },
   ];
 }
 
-const ORGANIZATION_KEYWORDS_VI = [
-  "Dự án Nuôi Em",
-  "Nuôi Em",
-  "mã NE",
-  "bảo trợ trẻ em",
-  "trẻ vùng cao",
-  "trẻ mồ côi",
-  "cơm trưa cho trẻ",
-  "thiện nguyện minh bạch",
-  "anh chị nuôi",
-  "Ánh Sáng Núi Rừng",
-];
-
-const ORGANIZATION_KEYWORDS_EN = [
-  "Nuoi Em Project",
-  "child sponsorship Vietnam",
-  "NE code",
-  "highland children",
-  "orphan children Vietnam",
-  "school lunch program",
-  "transparent charity",
-  "Vietnam non-profit",
-];
-
-export function organizationJsonLd(locale: Locale): JsonLdObject {
-  const name = siteName(locale);
-  const description =
-    locale === "vi"
-      ? "Dự án Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — 150.000đ/tháng giúp bé no bụng và đến trường."
-      : "Nuoi Em Project connects sponsors with highland children in Vietnam through transparent NE codes — 150,000 VND per month for school meals and education.";
-
+export function organizationJsonLd(): JsonLdObject {
+  const name = siteName();
   return {
     "@context": "https://schema.org",
     "@type": ["NGO", "NonprofitOrganization"],
     "@id": ORGANIZATION_ID,
     name,
-    alternateName:
-      locale === "vi"
-        ? [brandVisual.shortName, "Nuoi Em Project"]
-        : [brandVisual.name, brandVisual.shortName],
+    alternateName: [brandVisual.shortName],
     legalName: brandVisual.name,
     url: SITE_URL,
     logo: logoImageObject(),
     image: `${SITE_URL}${brandVisual.heroImage}`,
-    description,
+    description:
+      "Dự án Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — 150.000đ/tháng giúp bé no bụng và đến trường.",
     slogan: brandVisual.tagline,
     email: brandVisual.contact.email,
     telephone: `+84${brandVisual.contact.phone.replace(/^0/, "")}`,
@@ -115,30 +77,17 @@ export function organizationJsonLd(locale: Locale): JsonLdObject {
       address: { "@type": "PostalAddress", addressCountry: "VN" },
     },
     address: postalAddress(),
-    areaServed: {
-      "@type": "Country",
-      name: "Việt Nam",
-    },
+    areaServed: { "@type": "Country", name: "Việt Nam" },
     nonprofitStatus: "NonprofitType",
-    knowsAbout:
-      locale === "vi"
-        ? [
-            "Bảo trợ trẻ mồ côi",
-            "Hỗ trợ giáo dục vùng cao",
-            "Minh bạch tài chính thiện nguyện",
-            "Cơm trưa học đường",
-          ]
-        : [
-            "Orphan child sponsorship",
-            "Highland education support",
-            "Charity financial transparency",
-            "School lunch programs",
-          ],
+    knowsAbout: [
+      "Bảo trợ trẻ mồ côi",
+      "Hỗ trợ giáo dục vùng cao",
+      "Minh bạch tài chính thiện nguyện",
+      "Cơm trưa học đường",
+    ],
     keywords:
-      locale === "vi"
-        ? ORGANIZATION_KEYWORDS_VI.join(", ")
-        : ORGANIZATION_KEYWORDS_EN.join(", "),
-    contactPoint: contactPoints(locale),
+      "Dự án Nuôi Em, Nuôi Em, mã NE, bảo trợ trẻ em, trẻ vùng cao, thiện nguyện minh bạch",
+    contactPoint: contactPoints(),
     sameAs: [
       siteConfig.social.facebook,
       siteConfig.social.messenger,
@@ -149,35 +98,33 @@ export function organizationJsonLd(locale: Locale): JsonLdObject {
       "@type": "DonateAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: absoluteUrl("/dong-gop", locale),
+        urlTemplate: absoluteUrl("/dong-gop"),
         actionPlatform: [
           "https://schema.org/DesktopWebPlatform",
           "https://schema.org/MobileWebPlatform",
         ],
       },
-      name: locale === "vi" ? "Đóng góp cho Dự án Nuôi Em" : "Donate to Nuoi Em Project",
+      name: "Đóng góp cho Dự án Nuôi Em",
       recipient: { "@id": ORGANIZATION_ID },
     },
   };
 }
 
-export function websiteJsonLd(locale: Locale): JsonLdObject {
-  const name = siteName(locale);
+export function websiteJsonLd(): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": WEBSITE_ID,
-    name,
-    alternateName: locale === "vi" ? "Nuoi Em Project" : brandVisual.name,
+    name: siteName(),
     url: SITE_URL,
     description: brandVisual.tagline,
     publisher: { "@id": ORGANIZATION_ID },
-    inLanguage: [inLanguage("vi"), inLanguage("en")],
+    inLanguage: "vi-VN",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${absoluteUrl("/danh-sach-bao-tro", locale)}?q={search_term_string}`,
+        urlTemplate: `${absoluteUrl("/danh-sach-bao-tro")}?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -185,7 +132,6 @@ export function websiteJsonLd(locale: Locale): JsonLdObject {
 }
 
 export function webPageJsonLd({
-  locale,
   title,
   description,
   pathname,
@@ -194,7 +140,6 @@ export function webPageJsonLd({
   dateModified,
   breadcrumbId,
 }: {
-  locale: Locale;
   title: string;
   description: string;
   pathname: string;
@@ -203,7 +148,7 @@ export function webPageJsonLd({
   dateModified?: string;
   breadcrumbId?: string;
 }): JsonLdObject {
-  const url = absoluteUrl(pathname, locale);
+  const url = absoluteUrl(pathname);
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -213,7 +158,7 @@ export function webPageJsonLd({
     description,
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORGANIZATION_ID },
-    inLanguage: inLanguage(locale),
+    inLanguage: "vi-VN",
     ...(imageUrl ? { primaryImageOfPage: { "@type": "ImageObject", url: imageUrl } } : {}),
     ...(datePublished ? { datePublished } : {}),
     ...(dateModified ? { dateModified } : {}),
@@ -223,11 +168,7 @@ export function webPageJsonLd({
 
 export type BreadcrumbItem = { name: string; pathname: string };
 
-export function breadcrumbJsonLd(
-  items: BreadcrumbItem[],
-  locale: Locale,
-  id?: string,
-): JsonLdObject {
+export function breadcrumbJsonLd(items: BreadcrumbItem[], id?: string): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -236,26 +177,16 @@ export function breadcrumbJsonLd(
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: absoluteUrl(item.pathname, locale),
+      item: absoluteUrl(item.pathname),
     })),
   };
 }
 
-/** Builds a localized breadcrumb starting with the home page. */
-export function siteBreadcrumb(
-  trail: BreadcrumbItem[],
-  locale: Locale,
-  id?: string,
-): JsonLdObject {
-  const home: BreadcrumbItem = {
-    name: locale === "vi" ? "Trang chủ" : "Home",
-    pathname: "/",
-  };
-  return breadcrumbJsonLd([home, ...trail], locale, id);
+export function siteBreadcrumb(trail: BreadcrumbItem[], id?: string): JsonLdObject {
+  return breadcrumbJsonLd([{ name: "Trang chủ", pathname: "/" }, ...trail], id);
 }
 
 export function articleJsonLd({
-  locale,
   title,
   description,
   pathname,
@@ -265,7 +196,6 @@ export function articleJsonLd({
   section,
   tags,
 }: {
-  locale: Locale;
   title: string;
   description: string;
   pathname: string;
@@ -275,7 +205,7 @@ export function articleJsonLd({
   section?: string;
   tags?: string[];
 }): JsonLdObject {
-  const url = absoluteUrl(pathname, locale);
+  const url = absoluteUrl(pathname);
   return {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -285,30 +215,23 @@ export function articleJsonLd({
     url,
     mainEntityOfPage: { "@type": "WebPage", "@id": `${url}#webpage` },
     image: imageUrl
-      ? [
-          {
-            "@type": "ImageObject",
-            url: imageUrl,
-            width: 1200,
-            height: 630,
-          },
-        ]
+      ? [{ "@type": "ImageObject", url: imageUrl, width: 1200, height: 630 }]
       : undefined,
     datePublished: datePublished || undefined,
     dateModified: dateModified || datePublished || undefined,
     author: {
       "@type": "Organization",
       "@id": ORGANIZATION_ID,
-      name: siteName(locale),
+      name: siteName(),
       url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
       "@id": ORGANIZATION_ID,
-      name: siteName(locale),
+      name: siteName(),
       logo: logoImageObject(),
     },
-    inLanguage: inLanguage(locale),
+    inLanguage: "vi-VN",
     isAccessibleForFree: true,
     articleSection: section,
     keywords: tags?.length ? tags.join(", ") : undefined,
@@ -316,28 +239,26 @@ export function articleJsonLd({
 }
 
 export function childProfileJsonLd({
-  locale,
   code,
   name,
   province,
   pathname,
   imageUrl,
 }: {
-  locale: Locale;
   code: string;
   name: string;
   province?: string;
   pathname: string;
   imageUrl?: string;
 }): JsonLdObject {
-  const url = absoluteUrl(pathname, locale);
+  const url = absoluteUrl(pathname);
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     "@id": `${url}#profile`,
     url,
     name: `${code} — ${name}`,
-    inLanguage: inLanguage(locale),
+    inLanguage: "vi-VN",
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORGANIZATION_ID },
     ...(imageUrl
@@ -365,18 +286,15 @@ export function childProfileJsonLd({
 
 export type FaqEntry = { question: string; answer: string };
 
-export function faqPageJsonLd(items: FaqEntry[], locale: Locale): JsonLdObject {
+export function faqPageJsonLd(items: FaqEntry[]): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    inLanguage: inLanguage(locale),
+    inLanguage: "vi-VN",
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
   };
 }
@@ -387,44 +305,40 @@ export function itemListJsonLd({
   name,
   description,
   items,
-  locale,
 }: {
   name: string;
   description?: string;
   items: ItemListEntry[];
-  locale: Locale;
 }): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name,
     description,
-    inLanguage: inLanguage(locale),
+    inLanguage: "vi-VN",
     numberOfItems: items.length,
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      url: absoluteUrl(item.pathname, locale),
+      url: absoluteUrl(item.pathname),
       ...(item.description ? { description: item.description } : {}),
     })),
   };
 }
 
 export function collectionPageJsonLd({
-  locale,
   title,
   description,
   pathname,
   hasPart,
 }: {
-  locale: Locale;
   title: string;
   description: string;
   pathname: string;
   hasPart?: JsonLdObject;
 }): JsonLdObject {
-  const url = absoluteUrl(pathname, locale);
+  const url = absoluteUrl(pathname);
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -432,7 +346,7 @@ export function collectionPageJsonLd({
     url,
     name: title,
     description,
-    inLanguage: inLanguage(locale),
+    inLanguage: "vi-VN",
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORGANIZATION_ID },
     ...(hasPart ? { hasPart } : {}),
@@ -440,17 +354,15 @@ export function collectionPageJsonLd({
 }
 
 export function donatePageJsonLd({
-  locale,
   title,
   description,
   pathname,
 }: {
-  locale: Locale;
   title: string;
   description: string;
   pathname: string;
 }): JsonLdObject {
-  const url = absoluteUrl(pathname, locale);
+  const url = absoluteUrl(pathname);
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -458,12 +370,12 @@ export function donatePageJsonLd({
     url,
     name: title,
     description,
-    inLanguage: inLanguage(locale),
+    inLanguage: "vi-VN",
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORGANIZATION_ID },
     potentialAction: {
       "@type": "DonateAction",
-      name: locale === "vi" ? "Đóng góp cho Dự án Nuôi Em" : "Donate to Nuoi Em Project",
+      name: "Đóng góp cho Dự án Nuôi Em",
       target: {
         "@type": "EntryPoint",
         urlTemplate: url,
@@ -475,10 +387,7 @@ export function donatePageJsonLd({
       recipient: { "@id": ORGANIZATION_ID },
       price: 150000,
       priceCurrency: "VND",
-      description:
-        locale === "vi"
-          ? "Mức bảo trợ tham khảo 150.000 – 170.000đ/tháng cho mỗi mã NE."
-          : "Suggested sponsorship 150,000 – 170,000 VND per month per NE code.",
+      description: "Mức bảo trợ tham khảo 150.000 – 170.000đ/tháng cho mỗi mã NE.",
     },
   };
 }

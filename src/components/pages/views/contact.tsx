@@ -1,21 +1,20 @@
 import { ContactSection } from "@/components/pages/contact-section";
 import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { contactInfo, getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
-import type { Locale } from "@/i18n/config";
 
-export function ContactView({ locale }: { locale: Locale }) {
-  const info = contactInfo[locale];
+export function ContactView() {
+  const info = contactInfo;
 
   return (
-    <StaticPageShell {...getStaticPageHero("contact", locale)}>
+    <StaticPageShell {...getStaticPageHero("contact")}>
       <ContactSection
-        heading={getUiLabel(locale, "contactInfo")}
+        heading={getUiLabel("contactInfo")}
         address={info.address}
         email={info.email}
         phone={info.phone}
         donationNote={info.donationNote}
         warning={info.warning}
-        donateWarningLabel={getUiLabel(locale, "donateWarning")}
+        donateWarningLabel={getUiLabel("donateWarning")}
       />
     </StaticPageShell>
   );

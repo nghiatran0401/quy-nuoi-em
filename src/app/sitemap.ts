@@ -12,8 +12,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: entry.lastModified ? new Date(entry.lastModified) : buildTime,
     changeFrequency: entry.changeFrequency,
     priority: entry.priority,
-    alternates: {
-      languages: entry.alternates,
-    },
   }));
 }

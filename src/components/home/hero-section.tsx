@@ -1,24 +1,17 @@
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { brandVisual } from "@/config/brand-visual";
-import type { Locale } from "@/i18n/config";
+import { siteCopy } from "@/content/site-copy";
+import { homeMediaImageSrc } from "@/lib/data/home-media";
 import type { HomeHeroContent } from "@/lib/data/homepage";
 
 type HeroSectionProps = {
-  locale: Locale;
   content?: HomeHeroContent;
+  heroImageUrl: string;
 };
 
-export async function HeroSection({ locale, content }: HeroSectionProps) {
-  const t = content ? null : await getTranslations({ locale, namespace: "home" });
-  const copy = content ?? {
-    eyebrow: t?.("eyebrow") ?? "",
-    title: t?.("title") ?? "",
-    description: t?.("description") ?? "",
-    sponsorNow: t?.("sponsorNow") ?? "",
-    learnMore: t?.("learnMore") ?? "",
-  };
+export function HeroSection({ content, heroImageUrl }: HeroSectionProps) {
+  const copy = content ?? siteCopy.home;
 
   return (
     <section className="hero-backdrop relative overflow-hidden py-14 lg:py-24">
@@ -42,7 +35,7 @@ export async function HeroSection({ locale, content }: HeroSectionProps) {
           <div className="relative w-full lg:w-1/2">
             <div className="absolute top-1/2 left-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-brand-accent/20 via-brand-highlight/25 to-transparent blur-3xl" />
             <Image
-              src={brandVisual.heroImage}
+              src={homeMediaImageSrc(heroImageUrl)}
               alt={brandVisual.name}
               width={800}
               height={600}

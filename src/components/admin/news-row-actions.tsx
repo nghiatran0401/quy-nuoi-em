@@ -31,7 +31,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
       </Link>
       {row.status === "published" ? (
         <Link
-          href={row.locale === "en" ? `/en/news/${row.slug}` : `/news/${row.slug}`}
+          href={`/news/${row.slug}`}
           target="_blank"
           rel="noopener noreferrer"
           className="admin-btn-ghost hidden px-2.5 sm:inline-flex"
@@ -75,7 +75,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
             </Link>
             {row.status === "published" ? (
               <Link
-                href={row.locale === "en" ? `/en/news/${row.slug}` : `/news/${row.slug}`}
+                href={`/news/${row.slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 role="menuitem"

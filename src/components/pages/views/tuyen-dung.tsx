@@ -1,13 +1,12 @@
 import { Mail } from "lucide-react";
 import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { careersContent, getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
-import type { Locale } from "@/i18n/config";
 
-export function CareersView({ locale }: { locale: Locale }) {
-  const content = careersContent[locale];
+export function CareersView() {
+  const content = careersContent;
 
   return (
-    <StaticPageShell {...getStaticPageHero("careers", locale)} contentClassName="max-w-3xl">
+    <StaticPageShell {...getStaticPageHero("careers")} contentClassName="max-w-3xl">
       <div className="flex flex-wrap justify-center gap-4 text-sm text-brand-muted">
         <span className="rounded-full bg-white px-4 py-2 shadow-sm">{content.location}</span>
         <span className="rounded-full bg-brand-green-light px-4 py-2 font-medium text-brand-ink">
@@ -32,7 +31,7 @@ export function CareersView({ locale }: { locale: Locale }) {
           className="btn-primary inline-flex items-center gap-2"
         >
           <Mail className="h-5 w-5" />
-          {getUiLabel(locale, "applyNow")}
+          {getUiLabel("applyNow")}
         </a>
       </p>
     </StaticPageShell>

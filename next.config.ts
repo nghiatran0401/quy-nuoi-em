@@ -1,7 +1,4 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
-
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   images: {
@@ -22,6 +19,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.fbcdn.net",
       },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+      },
     ],
   },
   async redirects() {
@@ -39,11 +40,16 @@ const nextConfig: NextConfig = {
       "buoi-sinh-hoat-tre-ha-nam",
     ];
 
-    return legacyNewsSlugs.flatMap((slug) => [
-      { source: `/news/${slug}`, destination: "/news", permanent: true },
-      { source: `/en/news/${slug}`, destination: "/en/news", permanent: true },
-    ]);
+    return [
+      ...legacyNewsSlugs.map((slug) => ({
+        source: `/news/${slug}`,
+        destination: "/news",
+        permanent: true,
+      })),
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/en/:path*", destination: "/:path*", permanent: true },
+    ];
   },
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;

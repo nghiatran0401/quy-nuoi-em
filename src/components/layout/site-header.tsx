@@ -1,15 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { Heart, Menu, X } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { BrandLogo } from "@/components/brand/logo";
-import { Link } from "@/i18n/navigation";
-import { mainNavItems } from "@/lib/navigation";
-import { LocaleSwitcher } from "./locale-switcher";
+import { mainNavItems, navLabel } from "@/lib/navigation";
 
 export function SiteHeader() {
-  const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -28,24 +25,16 @@ export function SiteHeader() {
 
           <div className="hidden items-center space-x-8 md:flex">
             {mainNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="nav-link"
-              >
-                {t(item.labelKey)}
+              <Link key={item.href} href={item.href} className="nav-link">
+                {navLabel(item.labelKey)}
               </Link>
             ))}
           </div>
 
           <div className="hidden items-center gap-4 md:flex">
-            <LocaleSwitcher />
-            <Link
-              href="/dong-gop"
-              className="btn-primary-sm"
-            >
+            <Link href="/dong-gop" className="btn-primary-sm">
               <Heart className="h-5 w-5 fill-current text-brand-highlight" aria-hidden />
-              <span>{t("donate")}</span>
+              <span>{navLabel("donate")}</span>
             </Link>
           </div>
 
@@ -53,7 +42,7 @@ export function SiteHeader() {
             <button
               type="button"
               className="p-2 text-brand-muted transition-colors hover:text-brand-ink focus:outline-none"
-              aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
+              aria-label={mobileOpen ? navLabel("closeMenu") : navLabel("openMenu")}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((open) => !open)}
             >
@@ -71,18 +60,17 @@ export function SiteHeader() {
                 className="block rounded-lg px-3 py-2 text-brand-ink hover:bg-brand-surface"
                 onClick={() => setMobileOpen(false)}
               >
-                {t(item.labelKey)}
+                {navLabel(item.labelKey)}
               </Link>
             ))}
-            <div className="flex items-center gap-3 px-3 pt-3">
-              <LocaleSwitcher />
+            <div className="px-3 pt-3">
               <Link
                 href="/dong-gop"
-                className="btn-primary-sm flex flex-1 justify-center"
+                className="btn-primary-sm flex w-full justify-center"
                 onClick={() => setMobileOpen(false)}
               >
                 <Heart className="h-5 w-5 fill-current text-brand-highlight" aria-hidden />
-                <span>{t("donate")}</span>
+                <span>{navLabel("donate")}</span>
               </Link>
             </div>
           </div>

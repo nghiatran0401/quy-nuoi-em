@@ -132,15 +132,6 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
               </select>
             </div>
             <div>
-              <label htmlFor="locale" className="admin-label">
-                Ngôn ngữ
-              </label>
-              <select id="locale" name="locale" defaultValue={values?.locale ?? "vi"} className="admin-input">
-                <option value="vi">Tiếng Việt (vi)</option>
-                <option value="en">Tiếng Anh (en)</option>
-              </select>
-            </div>
-            <div>
               <label htmlFor="published_at" className="admin-label">
                 Thời gian đăng
               </label>

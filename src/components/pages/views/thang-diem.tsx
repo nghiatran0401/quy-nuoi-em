@@ -1,17 +1,21 @@
 import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { ScoringGrid } from "@/components/pages/scoring-grid";
 import { getStaticPageHero, getUiLabel, scoringCategories } from "@/content/pages/static-pages";
-import type { Locale } from "@/i18n/config";
 
-export function ScoringView({ locale }: { locale: Locale }) {
+type ScoringViewProps = {
+  referenceImageUrl: string;
+};
+
+export function ScoringView({ referenceImageUrl }: ScoringViewProps) {
   return (
-    <StaticPageShell {...getStaticPageHero("scoring", locale)}>
+    <StaticPageShell {...getStaticPageHero("scoring")}>
       <ScoringGrid
-        categories={scoringCategories[locale]}
-        totalLabel={getUiLabel(locale, "scoringTotal")}
-        maxLabel={getUiLabel(locale, "scoringMax")}
-        referenceLabel={getUiLabel(locale, "referenceTable")}
-        processLinkLabel={getUiLabel(locale, "viewProcess")}
+        categories={scoringCategories}
+        totalLabel={getUiLabel("scoringTotal")}
+        maxLabel={getUiLabel("scoringMax")}
+        referenceLabel={getUiLabel("referenceTable")}
+        processLinkLabel={getUiLabel("viewProcess")}
+        referenceImageUrl={referenceImageUrl}
       />
     </StaticPageShell>
   );

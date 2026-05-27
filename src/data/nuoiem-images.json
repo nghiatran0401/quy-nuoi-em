@@ -84,7 +84,7 @@
     "hero": "/images/nuoiem/home-1528463943.jpg",
     "heSinhThai": "/images/nuoiem/he-sinh-thai-nuoi-em-20200604061052.jpg",
     "processGuide": "/images/nuoiem/huong-dan-6-buoc-nhan-ma--20240825115002-lnudk.jpg",
-    "donateQr": "/images/nuoiem/qr1-20221215184017-2izek.png",
+    "donateQr": "/qr.png",
     "mascotASang": "/images/nuoiem/a-sang-png-20201227081205.png",
     "processStep1": "/images/nuoiem/1-20220415031911.png",
     "processStep2": "/images/nuoiem/2-gui-tien-20220415031911.png",
@@ -93,14 +93,15 @@
     "processStep5": "/images/nuoiem/5-20220415031911.png",
     "processStep6": "/images/nuoiem/6-20220415035511.png",
     "bannerCampaign": "/images/nuoiem/banner2-500x500-20210927082345.png",
-    "ctaVisit": "/images/nuoiem/277990809_343464697848594_6364811752761374509_n-20220421153925.png"
+    "ctaVisit": "/images/nuoiem/277990809_343464697848594_6364811752761374509_n-20220421153925.png",
+    "mealProgram": "/images/nuoiem/101963261_884727818659944_768417628334063616_n-1-20200604055417.jpg"
   },
   "memberGallery": [
-    "/images/nuoiem/46521159_527116681087728_3094074975246614528_n-1543441007.jpg",
-    "/images/nuoiem/46679515_527103281089068_3479477362972688384_n-1543441007.jpg",
-    "/images/nuoiem/46733570_527677781031618_5256793945987350528_n-1543441007.jpg",
+    "/images/nuoiem/56533791_598026780663384_5568083275701813248_n-1554877453.jpg",
+    "/images/nuoiem/56823281_598026517330077_7089044586646994944_n-1554877453.jpg",
     "/images/nuoiem/56306605_598026743996721_2539029342197907456_n-1554877453.jpg",
-    "/images/nuoiem/56786130_598026613996734_1833903494399000576_n-1554877453.jpg"
+    "/images/nuoiem/56459538_598026710663391_3090318725698551808_n-1554877453.jpg",
+    "/images/nuoiem/56644778_598026633996732_1732237667132768256_n-1554877453.jpg"
   ],
   "mediaLogos": [
     { "src": "/images/nuoiem/thieunien-1554879258.png", "alt": "Báo Thiếu Niên" },
@@ -114,6 +115,18 @@
     { "src": "/images/nuoiem/logo-vov-1554881388.png", "alt": "VOV" },
     { "src": "/images/nuoiem/logo-niem-tin-1510299904291.png", "alt": "Tình nguyện Niềm Tin" },
     { "src": "/images/nuoiem/logo-asnr-1200-1538388243.png", "alt": "Ánh Sáng Núi Rừng" }
+  ],
+  "awardsGallery": [
+    "/images/nuoiem/56823281_598026517330077_7089044586646994944_n-1554877453.jpg",
+    "/images/nuoiem/56533791_598026780663384_5568083275701813248_n-1554877453.jpg",
+    "/images/nuoiem/56739276_598026660663396_7396160698503397376_n-1554877453.jpg",
+    "/images/nuoiem/56459538_598026710663391_3090318725698551808_n-1554877453.jpg",
+    "/images/nuoiem/56806620_598026687330060_5635615803865825280_n-1554877453.jpg",
+    "/images/nuoiem/56786130_598026613996734_1833903494399000576_n-1554877453.jpg",
+    "/images/nuoiem/56818996_598026567330072_6897046878362271744_n-1554877453.jpg",
+    "/images/nuoiem/56644778_598026633996732_1732237667132768256_n-1554877453.jpg",
+    "/images/nuoiem/56306605_598026743996721_2539029342197907456_n-1554877453.jpg",
+    "/images/nuoiem/56661868_598026540663408_3820566610305875968_n-1554877453.jpg"
   ],
   "mouGallery": [
     "/images/nuoiem/100961727_884727968659929_4319462667015159808_n-20200604055417.jpg",

@@ -1,14 +1,13 @@
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import type { ScoringCategory } from "@/content/types";
-import { siteImage } from "@/lib/images";
-
 type ScoringGridProps = {
   categories: ScoringCategory[];
   totalLabel: string;
   maxLabel: string;
   referenceLabel: string;
   processLinkLabel: string;
+  referenceImageUrl: string;
 };
 
 export function ScoringGrid({
@@ -17,6 +16,7 @@ export function ScoringGrid({
   maxLabel,
   referenceLabel,
   processLinkLabel,
+  referenceImageUrl,
 }: ScoringGridProps) {
   return (
     <div>
@@ -47,7 +47,7 @@ export function ScoringGrid({
         <h2 className="mb-4 text-center font-heading text-xl font-bold text-brand-ink">{referenceLabel}</h2>
         <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-brand-border/60">
           <Image
-            src={siteImage("/images/scoring/reference.png")}
+            src={referenceImageUrl}
             alt={referenceLabel}
             fill
             className="object-contain"

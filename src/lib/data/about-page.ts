@@ -1,7 +1,11 @@
 import type { PageHero, PageMeta, StatItem } from "@/content/types";
-import type { Locale } from "@/i18n/config";
-import { getStaticPageHero, getStaticPageMeta, getUiLabel } from "@/content/pages/static-pages";
-import { siteStats } from "@/content/shared/site-stats";
+import { defaultAboutPageContent } from "@/lib/cms/vietnamese-defaults";
+import {
+  isTestOrEnglishMeta,
+  isTestOrEnglishPageHero,
+  isTestOrEnglishPartnersTitle,
+  isTestOrEnglishStats,
+} from "@/lib/cms/sanitize-cms";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createPublicClient } from "@/lib/supabase/public";
 
@@ -13,8 +17,8 @@ export type AboutPageContent = {
   heroImage: string;
 };
 
-type AboutPageRow = {
-  locale: Locale;
+export type AboutPageContentRow = {
+  locale?: string;
   meta: PageMeta | null;
   hero: PageHero | null;
   stats: StatItem[] | null;
@@ -22,44 +26,56 @@ type AboutPageRow = {
   hero_image: string | null;
 };
 
-function fallback(locale: Locale): AboutPageContent {
-  return {
-    meta: getStaticPageMeta("about", locale),
-    hero: getStaticPageHero("about", locale),
-    stats: siteStats[locale],
-    partnersTitle: getUiLabel(locale, "partners"),
-    heroImage: "/images/about/digital-heart-hero.png",
-  };
+/** Same merge/sanitize rules as the public /about page (admin editor uses this). */
+export function resolveAboutPageContent(row: AboutPageContentRow | null | undefined): AboutPageContent {
+  const base = defaultAboutPageContent();
+  if (!row) {
+    return base;
+  }
+
+  const meta = isTestOrEnglishMeta(row.meta) ? base.meta : { ...base.meta, ...row.meta };
+  const hero = isTestOrEnglishPageHero(row.hero) ? base.hero : { ...base.hero, ...row.hero };
+  const stats = isTestOrEnglishStats(row.stats) ? base.stats : (row.stats ?? base.stats);
+  const partnersTitle = isTestOrEnglishPartnersTitle(row.partners_title)
+    ? base.partnersTitle
+    : (row.partners_title ?? base.partnersTitle);
+  const heroImage = row.hero_image?.trim() ? row.hero_image : base.heroImage;
+
+  return { meta, hero, stats, partnersTitle, heroImage };
 }
 
-export async function getAboutPageContent(locale: Locale): Promise<AboutPageContent> {
-  const base = fallback(locale);
-
+export async function getAboutPageContent(): Promise<AboutPageContent> {
   if (!isSupabaseConfigured()) {
-    return base;
+    return defaultAboutPageContent();
   }
 
   try {
     const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("about_page_content")
-      .select("locale, meta, hero, stats, partners_title, hero_image")
-      .eq("locale", locale)
+      .select("meta, hero, stats, partners_title, hero_image")
+      .eq("locale", "vi")
       .maybeSingle();
 
     if (error || !data) {
-      return base;
+      return defaultAboutPageContent();
     }
 
-    const row = data as AboutPageRow;
-    return {
-      meta: row.meta ?? base.meta,
-      hero: row.hero ?? base.hero,
-      stats: row.stats ?? base.stats,
-      partnersTitle: row.partners_title ?? base.partnersTitle,
-      heroImage: row.hero_image ?? base.heroImage,
-    };
+    return resolveAboutPageContent(data as AboutPageContentRow);
   } catch {
-    return base;
+    return defaultAboutPageContent();
   }
+}
+
+/** Upsert payload for restoring Vietnamese /about content in Supabase (admin/scripts). */
+export function getDefaultAboutUpsertPayload() {
+  const content = defaultAboutPageContent();
+  return {
+    locale: "vi" as const,
+    meta: content.meta,
+    hero: content.hero,
+    stats: content.stats,
+    partners_title: content.partnersTitle,
+    hero_image: content.heroImage,
+  };
 }

@@ -1,13 +1,8 @@
+import { siteCopy, type FooterLabelKey, type NavLabelKey } from "@/content/site-copy";
+
 export type NavItem = {
   href: string;
-  labelKey:
-    | "about"
-    | "process2026"
-    | "children"
-    | "reports"
-    | "news"
-    | "statements"
-    | "contact";
+  labelKey: NavLabelKey;
 };
 
 export const mainNavItems: NavItem[] = [
@@ -22,27 +17,31 @@ export const mainNavItems: NavItem[] = [
 
 export type FooterLink = {
   href: string;
-  labelKey: string;
+  labelKey: FooterLabelKey;
 };
 
 export const footerInfoLinks: FooterLink[] = [
-  { href: "/tam-nhin-su-menh", labelKey: "vision" },
-  { href: "/lich-su-hinh-thanh", labelKey: "history" },
-  { href: "/cau-chuyen-logo", labelKey: "logoStory" },
-  { href: "/co-cau-to-chuc", labelKey: "organization" },
-  { href: "/thanh-vien-quy", labelKey: "members" },
-  { href: "/tuyen-dung", labelKey: "careers" },
+  { href: "https://web.sucmanh2000.com/", labelKey: "vision" },
+  { href: "https://phongtinhocchoem.nuoiem.com/", labelKey: "history" },
+  { href: "https://bepgascongnghiep.nuoiem.com/", labelKey: "organization" },
 ];
 
 export const footerDocumentLinks: FooterLink[] = [
-  { href: "/quy-trinh-xet-duyet", labelKey: "process" },
-  { href: "/thang-diem", labelKey: "scoring" },
-  { href: "/dang-ky-tnv", labelKey: "volunteer" },
-  { href: "/mou", labelKey: "mou" },
+  { href: "https://web.sucmanh2000.com/", labelKey: "process" },
+  { href: "https://phongtinhocchoem.nuoiem.com/", labelKey: "scoring" },
+  { href: "https://bepgascongnghiep.nuoiem.com/", labelKey: "volunteer" },
 ];
 
 export const footerLibraryLinks: FooterLink[] = [
-  { href: "/news", labelKey: "photos" },
-  { href: "/bao-cao", labelKey: "activities" },
-  { href: "/contact", labelKey: "letters" },
+  { href: "https://web.sucmanh2000.com/", labelKey: "photos" },
+  { href: "https://phongtinhocchoem.nuoiem.com/", labelKey: "activities" },
+  { href: "https://bepgascongnghiep.nuoiem.com/", labelKey: "letters" },
 ];
+
+export function navLabel(key: NavLabelKey): string {
+  return siteCopy.nav[key];
+}
+
+export function footerLabel(key: FooterLabelKey): string {
+  return siteCopy.footer[key];
+}

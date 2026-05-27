@@ -1,18 +1,17 @@
 import Image from "next/image";
 import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { getStaticPageHero, getUiLabel, mouContent } from "@/content/pages/static-pages";
-import type { Locale } from "@/i18n/config";
-import { siteImages } from "@/lib/images";
+type MouViewProps = {
+  galleryImages: [string, string, string];
+};
 
-const mouImages = [siteImages.mou(1), siteImages.mou(2), siteImages.mou(3)];
-
-export function MouView({ locale }: { locale: Locale }) {
-  const content = mouContent[locale];
+export function MouView({ galleryImages }: MouViewProps) {
+  const content = mouContent;
 
   return (
-    <StaticPageShell {...getStaticPageHero("mou", locale)} contentClassName="max-w-5xl">
+    <StaticPageShell {...getStaticPageHero("mou")} contentClassName="max-w-5xl">
       <div className="max-w-3xl">
-        <h2 className="heading-section text-xl md:text-2xl">{getUiLabel(locale, "whatIsMou")}</h2>
+        <h2 className="heading-section text-xl md:text-2xl">{getUiLabel("whatIsMou")}</h2>
         <p className="mt-4 text-brand-muted">{content.definition}</p>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {content.pillars.map((pillar) => (
@@ -31,10 +30,10 @@ export function MouView({ locale }: { locale: Locale }) {
       </div>
       <section className="mt-12">
         <h2 className="heading-section mb-6 text-center text-xl md:text-2xl">
-          {getUiLabel(locale, "mouGallery")}
+          {getUiLabel("mouGallery")}
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
-          {mouImages.map((src) => (
+          {galleryImages.map((src) => (
             <div
               key={src}
               className="relative aspect-[4/3] overflow-hidden rounded-xl border border-brand-border/60 shadow-sm"

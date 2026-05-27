@@ -2,23 +2,26 @@
 
 import { useState } from "react";
 import { ChevronDown, CreditCard, FileCheck, MapPin } from "lucide-react";
-import { brandVisual } from "@/config/brand-visual";
+import { FaqBankPanel } from "@/components/home/faq-bank-panel";
 import { faqSectionCopy } from "@/content/home-sections";
-import { donateInfo } from "@/content/pages/static-pages";
-import type { Locale } from "@/i18n/config";
+import type { DonateInfoContent } from "@/lib/data/donate-info";
 import type { HomeFaqContent } from "@/lib/data/homepage";
+import { normalizeHomeFaqContent } from "@/lib/data/homepage";
 
-type Props = { locale: Locale; content?: HomeFaqContent };
+type Props = {
+  content?: HomeFaqContent;
+  donateInfo: DonateInfoContent;
+  donateQrUrl: string;
+};
 
 const icons = {
-  address: MapPin,
-  bank: CreditCard,
-  process: FileCheck,
+  "dia-chi": MapPin,
+  "ngan-hang": CreditCard,
+  "quy-trinh": FileCheck,
 } as const;
 
-export function FaqSection({ locale, content }: Props) {
-  const copy = content ?? faqSectionCopy[locale];
-  const bank = donateInfo[locale];
+export function FaqSection({ content, donateInfo, donateQrUrl }: Props) {
+  const copy = normalizeHomeFaqContent(content ?? faqSectionCopy);
   const [openId, setOpenId] = useState(copy.items[0]?.id ?? "");
 
   return (
@@ -72,8 +75,12 @@ export function FaqSection({ locale, content }: Props) {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-6 pb-8 pt-0 pl-[5.5rem] md:px-8 md:pl-[6.5rem]">
-                      {item.type === "address" ? (
+                    <div
+                      className={`px-6 pb-8 pt-0 md:px-8 ${
+                        item.type === "ngan-hang" ? "pl-6 md:pl-8" : "pl-[5.5rem] md:pl-[6.5rem]"
+                      }`}
+                    >
+                      {item.type === "dia-chi" ? (
                         <div className="text-body text-lg">
                           <p>{item.body}</p>
                           <div className="mt-3 flex items-start gap-2">
@@ -84,29 +91,10 @@ export function FaqSection({ locale, content }: Props) {
                           </div>
                         </div>
                       ) : null}
-                      {item.type === "bank" ? (
-                        <div className="surface-info mt-2 p-5">
-                          <div className="flex flex-col gap-2">
-                            <div className="flex items-center gap-2 text-brand-green">
-                              <CreditCard className="h-5 w-5" />
-                              <span className="text-sm font-semibold uppercase tracking-wide">
-                                Thông tin chuyển khoản
-                              </span>
-                            </div>
-                            <p className="font-heading text-2xl font-bold tracking-tight text-brand-ink">
-                              {bank.accountNumber}
-                            </p>
-                            <div>
-                              <p className="font-bold text-brand-ink">{brandVisual.name}</p>
-                              <p className="text-brand-muted">
-                                {bank.accountName} · {bank.bank}
-                              </p>
-                              <p className="text-sm text-brand-muted/90">{bank.branch}</p>
-                            </div>
-                          </div>
-                        </div>
+                      {item.type === "ngan-hang" ? (
+                        <FaqBankPanel bank={donateInfo} donateQrUrl={donateQrUrl} />
                       ) : null}
-                      {item.type === "process" && item.steps ? (
+                      {item.type === "quy-trinh" && item.steps ? (
                         <div className="relative pl-2 text-body text-lg">
                           <div className="absolute bottom-2 left-2 top-2 w-0.5 bg-brand-border" />
                           <ul className="space-y-4">

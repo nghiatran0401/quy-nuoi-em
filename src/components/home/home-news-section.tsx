@@ -1,19 +1,16 @@
 import Image from "next/image";
 import { ArrowRight, Calendar, ChevronRight, User } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { newsSectionCopy } from "@/content/home-sections";
 import { getLatestNews } from "@/lib/data/news";
-import type { Locale } from "@/i18n/config";
-
-type Props = { locale: Locale };
 
 function formatNewsDate(date: string) {
   return date.replace(/^Thứ \w+,\s*/i, "").replace(/^\w+,\s*/i, "");
 }
 
-export async function HomeNewsSection({ locale }: Props) {
-  const copy = newsSectionCopy[locale];
-  const articles = await getLatestNews(3, locale);
+export async function HomeNewsSection() {
+  const copy = newsSectionCopy;
+  const articles = await getLatestNews(3);
 
   return (
     <section className="bg-brand-sky-soft/50 py-20">
@@ -33,7 +30,7 @@ export async function HomeNewsSection({ locale }: Props) {
         </div>
         {articles.length === 0 ? (
           <p className="text-center text-brand-muted">
-            {locale === "vi" ? "Chưa có tin tức. Vui lòng quay lại sau." : "No news posts yet. Please check back soon."}
+            Chưa có tin tức. Vui lòng quay lại sau.
           </p>
         ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

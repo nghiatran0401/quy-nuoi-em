@@ -11,49 +11,30 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { siteConfig } from "@/config/site";
-import type { Locale } from "@/i18n/config";
 
 type ShareButtonsProps = {
   url: string;
   title: string;
-  locale: Locale;
   className?: string;
   /** Optional UTM source override (defaults to `share-button`). */
   utmSource?: string;
 };
 
-const labels = {
-  vi: {
-    share: "Chia sẻ",
-    facebook: "Facebook",
-    messenger: "Messenger",
-    zalo: "Zalo",
-    twitter: "X",
-    linkedin: "LinkedIn",
-    telegram: "Telegram",
-    whatsapp: "WhatsApp",
-    email: "Gửi email",
-    projectPage: "Trang dự án",
-    copy: "Sao chép liên kết",
-    copied: "Đã sao chép",
-    shareOn: (network: string) => `Chia sẻ qua ${network}`,
-  },
-  en: {
-    share: "Share",
-    facebook: "Facebook",
-    messenger: "Messenger",
-    zalo: "Zalo",
-    twitter: "X",
-    linkedin: "LinkedIn",
-    telegram: "Telegram",
-    whatsapp: "WhatsApp",
-    email: "Email",
-    projectPage: "Project page",
-    copy: "Copy link",
-    copied: "Copied",
-    shareOn: (network: string) => `Share on ${network}`,
-  },
-} as const;
+const t = {
+  share: "Chia sẻ",
+  facebook: "Facebook",
+  messenger: "Messenger",
+  zalo: "Zalo",
+  twitter: "X",
+  linkedin: "LinkedIn",
+  telegram: "Telegram",
+  whatsapp: "WhatsApp",
+  email: "Gửi email",
+  projectPage: "Trang dự án",
+  copy: "Sao chép liên kết",
+  copied: "Đã sao chép",
+  shareOn: (network: string) => `Chia sẻ qua ${network}`,
+};
 
 function encode(value: string) {
   return encodeURIComponent(value);
@@ -126,12 +107,10 @@ const WhatsappIcon = ({ className }: { className?: string }) => (
 export function ShareButtons({
   url,
   title,
-  locale,
   className = "",
   utmSource = "share-button",
 }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
-  const t = labels[locale];
 
   const links = useMemo<ShareLink[]>(() => {
     const fbUrl = withUtm(url, utmSource, "facebook");
@@ -143,10 +122,7 @@ export function ShareButtons({
     const whatsappUrl = withUtm(url, utmSource, "whatsapp");
     const emailUrl = withUtm(url, utmSource, "email");
 
-    const emailBody =
-      locale === "vi"
-        ? `${title}\n\nXem chi tiết: ${emailUrl}`
-        : `${title}\n\nRead more: ${emailUrl}`;
+    const emailBody = `${title}\n\nXem chi tiết: ${emailUrl}`;
 
     return [
       {
@@ -198,7 +174,7 @@ export function ShareButtons({
         icon: Mail,
       },
     ];
-  }, [locale, title, t, url, utmSource]);
+  }, [title, url, utmSource]);
 
   async function copyLink() {
     try {

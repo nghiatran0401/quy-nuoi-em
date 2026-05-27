@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ExternalLink, House, Info, ListOrdered, Newspaper } from "lucide-react";
+import { House, Info, ListOrdered, Newspaper, PieChart } from "lucide-react";
 
 const navItems = [
   { href: "/admin/homepage", label: "Trang chủ", icon: House, match: "/admin/homepage" },
@@ -13,6 +13,7 @@ const navItems = [
     icon: ListOrdered,
     match: "/admin/quy-trinh-cap-ma-2026",
   },
+  { href: "/admin/bao-cao", label: "Báo cáo", icon: PieChart, match: "/admin/bao-cao" },
   { href: "/admin/news", label: "Tin tức", icon: Newspaper, match: "/admin/news" },
 ] as const;
 
@@ -40,15 +41,6 @@ export function AdminSidebarNav() {
           </Link>
         );
       })}
-      <a
-        href="/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
-      >
-        <ExternalLink className="h-4 w-4 shrink-0 text-slate-400" />
-        Xem website công khai
-      </a>
     </nav>
   );
 }

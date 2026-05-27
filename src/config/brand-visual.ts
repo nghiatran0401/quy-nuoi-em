@@ -25,15 +25,17 @@ export const brandVisual = {
     phone: "0975302307",
     phoneDisplay: "0975 302 307",
   },
+  office: {
+    address: "15 Ngách 352/15 đường Giải Phóng - Thanh Xuân - Hà Nội",
+    street: "15 Ngách 352/15 đường Giải Phóng",
+    locality: "Thanh Xuân",
+    region: "Hà Nội",
+  },
   social: {
     facebook: "https://www.facebook.com/duannuoiem",
     messenger: "https://www.messenger.com/t/duannuoiem",
     group: "https://www.facebook.com/groups/485546695224919",
   },
   financeUrl: "https://taichinh.nuoiem.com",
-  donateQrPath: "/images/nuoiem/qr1-20221215184017-2izek.png",
+  donateQrPath: "/qr.png",
 } as const;
-
-export function siteName(locale: "vi" | "en") {
-  return locale === "vi" ? brandVisual.name : "Nuoi Em Project";
-}

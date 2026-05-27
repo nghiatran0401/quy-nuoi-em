@@ -1,4 +1,3 @@
-import type { Locale } from "@/i18n/config";
 import { isAllowedNewsImage, sanitizeBrandText, unwrapProxiedImageUrl } from "@/lib/brand-sanitize";
 import { nuoiEmImage } from "@/lib/nuoiem-images";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
@@ -59,7 +58,7 @@ function rowToDetail(row: NewsArticleRow): NewsArticleDetail {
   };
 }
 
-async function fetchSupabasePublished(locale: Locale): Promise<NewsArticleRow[]> {
+async function fetchSupabasePublished(): Promise<NewsArticleRow[]> {
   if (!isSupabaseConfigured()) return [];
 
   const supabase = createPublicClient();
@@ -67,7 +66,7 @@ async function fetchSupabasePublished(locale: Locale): Promise<NewsArticleRow[]>
     .from("news_articles")
     .select("*")
     .eq("status", "published")
-    .eq("locale", locale)
+    .eq("locale", "vi")
     .order("published_at", { ascending: false, nullsFirst: false });
 
   if (error) {
@@ -82,12 +81,12 @@ function sortByDateDesc(items: NewsArticle[]): NewsArticle[] {
   return [...items].sort((a, b) => b.date.localeCompare(a.date, "vi"));
 }
 
-export async function getAllNews(locale: Locale = "vi"): Promise<NewsArticle[]> {
-  const rows = await fetchSupabasePublished(locale);
+export async function getAllNews(): Promise<NewsArticle[]> {
+  const rows = await fetchSupabasePublished();
   return sortByDateDesc(rows.map(rowToArticle));
 }
 
-export async function getNewsBySlug(slug: string, locale: Locale = "vi"): Promise<NewsArticleDetail | undefined> {
+export async function getNewsBySlug(slug: string): Promise<NewsArticleDetail | undefined> {
   if (!isSupabaseConfigured()) return undefined;
 
   const supabase = createPublicClient();
@@ -95,7 +94,7 @@ export async function getNewsBySlug(slug: string, locale: Locale = "vi"): Promis
     .from("news_articles")
     .select("*")
     .eq("status", "published")
-    .eq("locale", locale)
+    .eq("locale", "vi")
     .eq("slug", slug)
     .maybeSingle();
 
@@ -104,39 +103,21 @@ export async function getNewsBySlug(slug: string, locale: Locale = "vi"): Promis
 }
 
 export async function getNewsSlugs(): Promise<string[]> {
-  const slugs = new Set<string>();
-
-  for (const locale of ["vi", "en"] as const) {
-    const rows = await fetchSupabasePublished(locale);
-    for (const row of rows) {
-      slugs.add(row.slug);
-    }
-  }
-
-  return [...slugs];
+  const rows = await fetchSupabasePublished();
+  return rows.map((row) => row.slug);
 }
 
-/** Slug + latest known modification time (ISO) — used by the sitemap. */
 export async function getNewsSitemapEntries(): Promise<
   Array<{ slug: string; lastModified?: string }>
 > {
-  const map = new Map<string, string | undefined>();
-
-  for (const locale of ["vi", "en"] as const) {
-    const rows = await fetchSupabasePublished(locale);
-    for (const row of rows) {
-      const candidate = row.updated_at || row.published_at || undefined;
-      const current = map.get(row.slug);
-      if (!current || (candidate && candidate > current)) {
-        map.set(row.slug, candidate);
-      }
-    }
-  }
-
-  return [...map.entries()].map(([slug, lastModified]) => ({ slug, lastModified }));
+  const rows = await fetchSupabasePublished();
+  return rows.map((row) => ({
+    slug: row.slug,
+    lastModified: row.updated_at || row.published_at || undefined,
+  }));
 }
 
-export async function getLatestNews(limit = 3, locale: Locale = "vi"): Promise<NewsArticle[]> {
-  const all = await getAllNews(locale);
+export async function getLatestNews(limit = 3): Promise<NewsArticle[]> {
+  const all = await getAllNews();
   return all.slice(0, limit);
 }

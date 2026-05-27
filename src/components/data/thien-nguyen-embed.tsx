@@ -1,21 +1,18 @@
 import { DataPageBanner } from "@/components/pages/data-page-banner";
-import { getDataPageHero } from "@/content/pages/data-pages";
-import type { Locale } from "@/i18n/config";
+import { ThienNguyenProfileSection } from "@/components/shared/thien-nguyen-profile-section";
+import { thienNguyen } from "@/config/thien-nguyen";
+import { getDataPageHero, getDataUiLabel } from "@/content/pages/data-pages";
 
-const EMBED_URL = "https://thiennguyen.app/doi-tac/minh-bach-tai-khoan/2010";
-
-type ThienNguyenEmbedProps = {
-  locale: Locale;
-};
-
-export function ThienNguyenEmbed({ locale }: ThienNguyenEmbedProps) {
+export function ThienNguyenEmbed() {
   return (
     <article className="min-h-screen bg-brand-warm pb-10">
-      <DataPageBanner {...getDataPageHero("statements", locale)} />
-      <div className="mx-auto h-[calc(100vh-12rem)] max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div className="brand-card h-full overflow-hidden p-1">
+      <DataPageBanner {...getDataPageHero("statements")} />
+      <div className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+        <ThienNguyenProfileSection showStatementsLink={false} />
+        <p className="text-center text-sm text-brand-muted">{getDataUiLabel("embedNote")}</p>
+        <div className="brand-card h-[calc(100vh-20rem)] min-h-[480px] overflow-hidden p-1">
           <iframe
-            src={EMBED_URL}
+            src={thienNguyen.statementsEmbedUrl}
             title="Sao kê tài chính Dự án Nuôi Em"
             className="h-full w-full rounded-xl border-0"
             loading="lazy"

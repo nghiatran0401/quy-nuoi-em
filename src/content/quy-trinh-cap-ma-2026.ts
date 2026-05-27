@@ -125,4 +125,4 @@ export const timelineMilestones = [
 ] as const;
 
 export const CODE_MEANING_URL = "http://bit.ly/2sLs7HC";
-export const SCHOOL_BUILD_URL = "https://sucmanh2000.com";
+export const SCHOOL_BUILD_URL = "https://web.sucmanh2000.com/";

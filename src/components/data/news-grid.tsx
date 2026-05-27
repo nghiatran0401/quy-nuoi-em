@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Calendar, ChevronRight, User } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import type { NewsArticle } from "@/lib/data/types";
 
 type NewsGridProps = {

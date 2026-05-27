@@ -47,7 +47,8 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Offset in-page anchors below sticky header (site-header is h-20). */
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -89,6 +90,10 @@
 
   .section-warm {
     @apply bg-brand-warm;
+  }
+
+  .references-gallery {
+    background-color: #e53935;
   }
 
   .hero-backdrop {

@@ -1,3 +1,4 @@
+import { brandVisual } from "@/config/brand-visual";
 import {
   CODE_MEANING_URL,
   costTiers,
@@ -7,7 +8,23 @@ import {
   SCHOOL_BUILD_URL,
   timelineMilestones,
 } from "@/content/quy-trinh-cap-ma-2026";
-import type { Locale } from "@/i18n/config";
+import {
+  isTestOrEnglishProcess2026CostTiers,
+  isTestOrEnglishProcess2026Cta,
+  isTestOrEnglishProcess2026Finance,
+  isTestOrEnglishProcess2026Hero,
+  isTestOrEnglishProcess2026Intro,
+  isTestOrEnglishProcess2026Links,
+  isTestOrEnglishProcess2026Notes,
+  isTestOrEnglishProcess2026Row,
+  isTestOrEnglishProcess2026Steps,
+  isTestOrEnglishProcess2026Timeline,
+  isTestOrEnglishProcess2026Transfer,
+} from "@/lib/cms/sanitize-cms";
+import { siteImage } from "@/lib/images";
+import { nuoiEmImage } from "@/lib/nuoiem-images";
+import { getHomeMedia } from "@/lib/data/home-media";
+import { getStaticMediaMap } from "@/lib/data/static-media";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createPublicClient } from "@/lib/supabase/public";
 
@@ -36,8 +53,38 @@ export type Process2026TimelineItem = {
   what: string;
 };
 
+export type Process2026PageMedia = {
+  heroImage: string;
+  qrImage: string;
+};
+
+export type Process2026PageLinks = {
+  messenger: string;
+  group: string;
+};
+
+export type Process2026PageFinance = {
+  eyebrow: string;
+  title: string;
+  bodyBefore: string;
+  reportLinkLabel: string;
+  reportLinkUrl: string;
+  bodyAfter: string;
+  footnoteBefore: string;
+  schoolBuildLinkLabel: string;
+  footnoteAfter: string;
+};
+
+/** @deprecated Legacy CMS rows may still include these keys. */
+type LegacyProcess2026Finance = Process2026PageFinance & {
+  body?: string;
+  footnote?: string;
+};
+
 export type Process2026PageContent = {
   meta: { title: string; description: string };
+  media: Process2026PageMedia;
+  links: Process2026PageLinks;
   hero: {
     eyebrow: string;
     title: string;
@@ -57,6 +104,8 @@ export type Process2026PageContent = {
     accountNumber: string;
     bank: string;
     accountName: string;
+    phone: string;
+    phoneDisplay: string;
     scenariosTitle: string;
     scenariosFootnote: string;
     qrCaption: string;
@@ -69,12 +118,7 @@ export type Process2026PageContent = {
   importantNotes: string[];
   codeMeaningLabel: string;
   codeMeaningUrl: string;
-  finance: {
-    eyebrow: string;
-    title: string;
-    body: string;
-    footnote: string;
-  };
+  finance: Process2026PageFinance;
   schoolBuildUrl: string;
   cta: {
     title: string;
@@ -82,21 +126,84 @@ export type Process2026PageContent = {
     messengerCta: string;
     contactLinkLabel: string;
     referenceLabel: string;
+    referenceLinkLabel: string;
     referenceUrl: string;
   };
 };
 
-type Process2026PageRow = {
-  locale: Locale;
-  meta: Process2026PageContent["meta"] | null;
-  content: Process2026PageContent | null;
-};
+export function resolveProcess2026ImageSrc(path: string): string {
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+  return siteImage(path);
+}
+
+function normalizeFinance(
+  finance: LegacyProcess2026Finance | undefined,
+  fallback: Process2026PageFinance,
+): Process2026PageFinance {
+  if (!finance) {
+    return fallback;
+  }
+
+  if (finance.bodyBefore?.trim()) {
+    return { ...fallback, ...finance };
+  }
+
+  if (finance.body?.trim()) {
+    const label = fallback.reportLinkLabel;
+    if (label && finance.body.includes(label)) {
+      const [before = "", after = ""] = finance.body.split(label);
+      return {
+        ...fallback,
+        ...finance,
+        bodyBefore: before,
+        reportLinkLabel: label,
+        reportLinkUrl: finance.reportLinkUrl || fallback.reportLinkUrl,
+        bodyAfter: after,
+      };
+    }
+    return { ...fallback, ...finance, bodyBefore: finance.body, bodyAfter: "" };
+  }
+
+  return { ...fallback, ...finance };
+}
+
+function normalizeFinanceFootnote(
+  finance: Process2026PageFinance,
+  legacyFootnote: string | undefined,
+): Process2026PageFinance {
+  if (!legacyFootnote?.trim()) {
+    return finance;
+  }
+
+  const label = finance.schoolBuildLinkLabel || "Sức mạnh 2000";
+  if (legacyFootnote.includes(label)) {
+    const [before = "", after = ""] = legacyFootnote.split(label);
+    return {
+      ...finance,
+      footnoteBefore: before,
+      schoolBuildLinkLabel: label,
+      footnoteAfter: after,
+    };
+  }
+
+  return { ...finance, footnoteBefore: legacyFootnote, footnoteAfter: "" };
+}
 
 const viDefaults: Process2026PageContent = {
   meta: {
     title: "Quy trình cấp và nhận mã Nuôi Em 2026",
     description:
       "Hướng dẫn đầy đủ cho anh/chị nuôi mới: nhận mã NE qua Fanpage, chuyển khoản đúng cú pháp, vào group, tra mã, nhận ảnh hàng tháng và lịch thăm em.",
+  },
+  media: {
+    heroImage: nuoiEmImage("processGuide"),
+    qrImage: brandVisual.donateQrPath,
+  },
+  links: {
+    messenger: brandVisual.social.messenger,
+    group: brandVisual.social.group,
   },
   hero: {
     eyebrow: "Mùa nuôi 2025 – 2026",
@@ -131,9 +238,11 @@ const viDefaults: Process2026PageContent = {
     title: "Thông tin tài khoản & kịch bản gửi tiền",
     warning:
       "Bắt buộc ghi nội dung: «Mã bé nhận nuôi» + tên anh/chị. Không có mã NE → không hoàn lại, chuyển quỹ vô danh (xây trường).",
-    accountNumber: "0711000280294",
-    bank: "Vietcombank — Chi nhánh Thanh Xuân, Hà Nội",
-    accountName: "Hoàng Hoa Trung",
+    accountNumber: "1805",
+    bank: "MB — Ngân hàng TMCP Quân đội",
+    accountName: "CTCP DNXH QUY NUOI EM",
+    phone: brandVisual.contact.phone,
+    phoneDisplay: brandVisual.contact.phoneDisplay,
     scenariosTitle: "Kịch bản chuyển tiền",
     scenariosFootnote:
       "Dù chọn kịch bản nào, cần hoàn tất 100% tiền ăn trước 31/12 mỗi năm học để dự án vận hành ổn định (trường ký hợp đồng thực phẩm từ tháng 7).",
@@ -156,9 +265,14 @@ const viDefaults: Process2026PageContent = {
   finance: {
     eyebrow: "Minh bạch tài chính",
     title: "Xác nhận chuyển khoản",
-    body: "Báo cáo công khai tại taichinh.nuoiem.com. Team tài chính xác nhận chuyển khoản thành công qua tin nhắn Facebook sau khoảng 7 ngày, kèm mã giao dịch.",
-    footnote:
-      "Số tiền chuyển dư hoặc chưa dùng hết có thể chuyển sang dự án xây trường Sức mạnh 2000.",
+    bodyBefore: "Báo cáo công khai tại ",
+    reportLinkLabel: "taichinh.nuoiem.com",
+    reportLinkUrl: brandVisual.financeUrl,
+    bodyAfter:
+      ". Team tài chính xác nhận chuyển khoản thành công qua tin nhắn Facebook sau khoảng 7 ngày, kèm mã giao dịch.",
+    footnoteBefore: "Số tiền chuyển dư hoặc chưa dùng hết có thể chuyển sang dự án xây trường ",
+    schoolBuildLinkLabel: "Sức mạnh 2000",
+    footnoteAfter: ".",
   },
   schoolBuildUrl: SCHOOL_BUILD_URL,
   cta: {
@@ -168,134 +282,139 @@ const viDefaults: Process2026PageContent = {
     messengerCta: "Inbox Fanpage",
     contactLinkLabel: "Trang liên hệ Quỹ",
     referenceLabel: "Tham khảo thêm tại",
+    referenceLinkLabel: "nuoiem.com",
     referenceUrl: "https://www.nuoiem.com/",
   },
 };
 
-const enDefaults: Process2026PageContent = {
-  ...viDefaults,
-  meta: {
-    title: "Nuoi Em code issuance & onboarding process 2026",
-    description:
-      "Complete guide for new sponsors: receive an NE code via Fanpage, transfer with the correct note, join the group, look up your code, receive monthly photos, and visit schedules.",
-  },
-  hero: {
-    eyebrow: "2025 – 2026 sponsorship season",
-    title: "Code issuance & onboarding",
-    titleAccent: " for new sponsors",
-    description:
-      "Once you have an NE code, follow these 6 steps to keep your code, transfer correctly, receive child information, and stay updated throughout the school year.",
-    messengerCta: "Get code via Messenger",
-    groupCta: "Join Nuoi Em group",
-  },
-  stepsIntro: {
-    eyebrow: "6 core steps",
-    title: "From code to visit",
-    description: "Follow in order — do not skip steps. Timing notes on each step help you plan ahead.",
-  },
-  costIntro: {
-    eyebrow: "Contribution levels",
-    title: "Cost per child / school year",
-    description:
-      "Lunch ~8,500 VND/meal (primary), kindergarten ~6,800 VND/meal. Infrastructure fee 100,000 VND/code supports supplementary projects (no extra payment).",
-  },
-  transfer: {
-    ...viDefaults.transfer,
-    eyebrow: "Bank transfer",
-    title: "Account details & payment scenarios",
-    warning:
-      "Required transfer note: child sponsorship code + your name. Without NE code → no refund, funds go to anonymous pool (school building).",
-    scenariosTitle: "Payment scenarios",
-    scenariosFootnote:
-      "Whichever scenario you choose, complete 100% of meal funds before Dec 31 each school year for stable operations.",
-    qrCaption: "Scan to transfer",
-    qrCta: "Get NE code",
-  },
-  timelineIntro: {
-    eyebrow: "Timeline",
-    title: "Important milestones in the school year",
-  },
-  notesIntro: {
-    eyebrow: "Important notes",
-    title: "About NE codes and child information",
-  },
-  codeMeaningLabel: "What does each child's code mean?",
-  finance: {
-    eyebrow: "Financial transparency",
-    title: "Transfer confirmation",
-    body: "Public reports at taichinh.nuoiem.com. Finance team confirms successful transfers via Facebook message after ~7 days with transaction ID.",
-    footnote: "Unused surplus may be transferred to the Suc Manh 2000 school-building project.",
-  },
-  cta: {
-    title: "Need help?",
-    description: "Ask only via Nuoi Em Fanpage Messenger — not in comments. Hotline for urgent cases.",
-    messengerCta: "Message Fanpage",
-    contactLinkLabel: "Fund contact page",
-    referenceLabel: "Learn more at",
-    referenceUrl: "https://www.nuoiem.com/",
-  },
-};
-
-function getFallback(locale: Locale): Process2026PageContent {
-  return locale === "en" ? enDefaults : viDefaults;
+function getFallback(): Process2026PageContent {
+  return viDefaults;
 }
 
-function mergeContent(
+export type Process2026PageRow = {
+  meta: Process2026PageContent["meta"] | null;
+  content: Partial<Process2026PageContent> | null;
+};
+
+/** Same sanitize rules as the public page — admin editor uses this. */
+export function resolveProcess2026PageContentForAdmin(
+  row: Process2026PageRow | null | undefined,
+): Process2026PageContent {
+  const fallback = getFallback();
+  if (!row || isTestOrEnglishProcess2026Row(row)) {
+    return fallback;
+  }
+  return mergeProcess2026PageContent(fallback, row.meta, row.content);
+}
+
+export function mergeProcess2026PageContent(
   fallback: Process2026PageContent,
   meta: Process2026PageContent["meta"] | null,
   content: Partial<Process2026PageContent> | null,
 ): Process2026PageContent {
   if (!content) {
-    return { ...fallback, meta: meta ?? fallback.meta };
+    return { ...fallback, meta: fallback.meta };
   }
 
+  const legacyFinance = content.finance as LegacyProcess2026Finance | undefined;
+  const finance = normalizeFinanceFootnote(
+    normalizeFinance(legacyFinance, fallback.finance),
+    legacyFinance?.footnote,
+  );
+
+  const notesPoisoned = isTestOrEnglishProcess2026Notes(
+    content.notesIntro,
+    content.importantNotes,
+    content.codeMeaningUrl,
+  );
+
   return {
-    meta: meta ?? content.meta ?? fallback.meta,
-    hero: { ...fallback.hero, ...content.hero },
-    stepsIntro: { ...fallback.stepsIntro, ...content.stepsIntro },
-    steps: content.steps ?? fallback.steps,
-    costIntro: { ...fallback.costIntro, ...content.costIntro },
-    costTiers: content.costTiers ?? fallback.costTiers,
-    transfer: { ...fallback.transfer, ...content.transfer },
+    meta: fallback.meta,
+    media: content.media?.heroImage || content.media?.qrImage ? { ...fallback.media, ...content.media } : fallback.media,
+    links: isTestOrEnglishProcess2026Links(content.links)
+      ? fallback.links
+      : { ...fallback.links, ...content.links },
+    hero: isTestOrEnglishProcess2026Hero(content.hero) ? fallback.hero : { ...fallback.hero, ...content.hero },
+    stepsIntro: isTestOrEnglishProcess2026Intro(content.stepsIntro, "s", "st")
+      ? fallback.stepsIntro
+      : { ...fallback.stepsIntro, ...content.stepsIntro },
+    steps: isTestOrEnglishProcess2026Steps(content.steps) ? fallback.steps : (content.steps ?? fallback.steps),
+    costIntro: isTestOrEnglishProcess2026Intro(content.costIntro, "c", "ct")
+      ? fallback.costIntro
+      : { ...fallback.costIntro, ...content.costIntro },
+    costTiers: isTestOrEnglishProcess2026CostTiers(content.costTiers)
+      ? fallback.costTiers
+      : (content.costTiers ?? fallback.costTiers),
+    transfer: isTestOrEnglishProcess2026Transfer(content.transfer)
+      ? fallback.transfer
+      : { ...fallback.transfer, ...content.transfer },
     paymentScenarios: content.paymentScenarios ?? fallback.paymentScenarios,
-    timelineIntro: { ...fallback.timelineIntro, ...content.timelineIntro },
-    timeline: content.timeline ?? fallback.timeline,
-    notesIntro: { ...fallback.notesIntro, ...content.notesIntro },
-    importantNotes: content.importantNotes ?? fallback.importantNotes,
-    codeMeaningLabel: content.codeMeaningLabel ?? fallback.codeMeaningLabel,
-    codeMeaningUrl: content.codeMeaningUrl ?? fallback.codeMeaningUrl,
-    finance: { ...fallback.finance, ...content.finance },
+    timelineIntro: isTestOrEnglishProcess2026Intro(content.timelineIntro, "t", "tl")
+      ? fallback.timelineIntro
+      : { ...fallback.timelineIntro, ...content.timelineIntro },
+    timeline: isTestOrEnglishProcess2026Timeline(content.timeline)
+      ? fallback.timeline
+      : (content.timeline ?? fallback.timeline),
+    notesIntro: notesPoisoned ? fallback.notesIntro : { ...fallback.notesIntro, ...content.notesIntro },
+    importantNotes: notesPoisoned ? fallback.importantNotes : (content.importantNotes ?? fallback.importantNotes),
+    codeMeaningLabel: notesPoisoned
+      ? fallback.codeMeaningLabel
+      : (content.codeMeaningLabel ?? fallback.codeMeaningLabel),
+    codeMeaningUrl: notesPoisoned ? fallback.codeMeaningUrl : (content.codeMeaningUrl ?? fallback.codeMeaningUrl),
+    finance: isTestOrEnglishProcess2026Finance(legacyFinance) ? fallback.finance : finance,
     schoolBuildUrl: content.schoolBuildUrl ?? fallback.schoolBuildUrl,
-    cta: { ...fallback.cta, ...content.cta },
+    cta: isTestOrEnglishProcess2026Cta(content.cta) ? fallback.cta : { ...fallback.cta, ...content.cta },
   };
 }
 
-export async function getProcess2026PageContent(locale: Locale): Promise<Process2026PageContent> {
-  const fallback = getFallback(locale);
+/** Upsert payload for restoring Vietnamese process page content (admin/scripts). */
+export function getDefaultProcess2026UpsertPayload() {
+  const content = getFallback();
+  return {
+    locale: "vi" as const,
+    meta: content.meta,
+    content,
+  };
+}
+
+export async function getProcess2026PageContent(): Promise<Process2026PageContent> {
+  const fallback = getFallback();
 
   if (!isSupabaseConfigured()) {
-    return fallback;
+    return applyProcess2026MediaOverrides(fallback);
   }
 
   try {
     const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("process_2026_page_content")
-      .select("locale, meta, content")
-      .eq("locale", locale)
+      .select("meta, content")
+      .eq("locale", "vi")
       .maybeSingle();
 
     if (error || !data) {
-      return fallback;
+      return applyProcess2026MediaOverrides(fallback);
     }
 
     const row = data as Process2026PageRow;
-    return mergeContent(fallback, row.meta, row.content);
+    const merged = resolveProcess2026PageContentForAdmin(row);
+    return applyProcess2026MediaOverrides(merged);
   } catch {
-    return fallback;
+    return applyProcess2026MediaOverrides(fallback);
   }
 }
 
-export function getProcess2026PageFallback(locale: Locale): Process2026PageContent {
-  return getFallback(locale);
+async function applyProcess2026MediaOverrides(content: Process2026PageContent): Promise<Process2026PageContent> {
+  const [staticMap, homeMedia] = await Promise.all([getStaticMediaMap(), getHomeMedia()]);
+  return {
+    ...content,
+    media: {
+      heroImage: staticMap.process_2026_diagram ?? content.media.heroImage,
+      qrImage: homeMedia.donateQr,
+    },
+  };
+}
+
+export function getProcess2026PageFallback(): Process2026PageContent {
+  return getFallback();
 }

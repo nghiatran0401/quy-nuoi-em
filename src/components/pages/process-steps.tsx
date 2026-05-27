@@ -1,28 +1,18 @@
 import Image from "next/image";
 import type { ProcessStep } from "@/content/types";
-import { nuoiEmImage } from "@/lib/nuoiem-images";
-
-const stepIllustrations = [
-  nuoiEmImage("processStep1"),
-  nuoiEmImage("processStep2"),
-  nuoiEmImage("processStep3"),
-  nuoiEmImage("processStep4"),
-  nuoiEmImage("processStep5"),
-  nuoiEmImage("processStep6"),
-] as const;
-
 type ProcessStepsProps = {
   steps: ProcessStep[];
+  stepImageUrls: string[];
 };
 
-export function ProcessSteps({ steps }: ProcessStepsProps) {
+export function ProcessSteps({ steps, stepImageUrls }: ProcessStepsProps) {
   return (
     <ol className="space-y-6">
       {steps.map((step, index) => (
         <li key={step.round} className="brand-card flex gap-6 p-6">
           <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-brand-warm">
             <Image
-              src={stepIllustrations[index] ?? stepIllustrations[0]}
+              src={stepImageUrls[index] ?? stepImageUrls[0] ?? ""}
               alt=""
               fill
               className="object-contain p-1"

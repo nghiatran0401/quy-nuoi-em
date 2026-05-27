@@ -1,121 +1,69 @@
-import type { Localized, PageMeta, PageHero } from "@/content/types";
-import type { Locale } from "@/i18n/config";
+import type { PageMeta, PageHero } from "@/content/types";
 
 type DataPageContent = {
-  meta: Localized<PageMeta>;
-  hero: Localized<PageHero>;
+  meta: PageMeta;
+  hero: PageHero;
 };
 
 const pages = {
   children: {
     meta: {
-      vi: {
         title: "Danh sách trẻ em",
         description: "Danh sách các em nhỏ đang nhận được sự hỗ trợ từ Dự án Nuôi Em.",
-      },
-      en: {
-        title: "Children",
-        description: "Children receiving support from the Nuoi Em Project.",
-      },
     },
     hero: {
-      vi: {
         title: "Danh sách trẻ em",
         description:
           "Mỗi em nhỏ là một câu chuyện, một ước mơ cần được chắp cánh. Hãy cùng chúng tôi viết tiếp những trang sách cuộc đời cho các em.",
-      },
-      en: {
-        title: "Children",
-        description:
-          "Every child has a story and a dream worth nurturing. Join us in writing the next chapters of their lives.",
-      },
     },
   },
   reports: {
     meta: {
-      vi: {
         title: "Báo cáo tài chính",
         description: "Minh bạch tài chính là ưu tiên hàng đầu. Xem chi tiết thu chi hàng tháng của quỹ.",
-      },
-      en: {
-        title: "Financial reports",
-        description: "Financial transparency is our priority. View monthly income and expense reports.",
-      },
     },
     hero: {
-      vi: {
         title: "Minh bạch tài chính",
         description:
           "Chúng tôi cam kết công khai chi tiết mọi khoản đóng góp và chi tiêu. Niềm tin của cộng đồng chính là tài sản quý giá nhất của Dự án Nuôi Em.",
-      },
-      en: {
-        title: "Financial transparency",
-        description:
-          "We are committed to publishing every contribution and expense in detail. Community trust is our most valuable asset.",
-      },
     },
   },
   news: {
     meta: {
-      vi: {
         title: "Bản tin & Hoạt động",
         description: "Tin tức và hoạt động cộng đồng từ Dự án Nuôi Em.",
-      },
-      en: {
-        title: "News & Activities",
-        description: "News and community activities from the Nuoi Em Project.",
-      },
     },
     hero: {
-      vi: {
         eyebrow: "Cập nhật mới nhất",
         title: "Bản tin & Hoạt động",
         description:
           "Những câu chuyện về hành trình gieo mầm yêu thương và các hoạt động cộng đồng từ Dự án Nuôi Em.",
-      },
-      en: {
-        eyebrow: "Latest updates",
-        title: "News & Activities",
-        description: "Stories of compassion and community activities from the Nuoi Em Project.",
-      },
     },
   },
   statements: {
     meta: {
-      vi: {
         title: "Sao kê tài khoản",
         description: "Thống kê tài khoản thiện nguyện minh bạch qua nền tảng Thiện Nguyện.",
-      },
-      en: {
-        title: "Account statements",
-        description: "Transparent charity account statistics via the Thien Nguyen platform.",
-      },
     },
     hero: {
-      vi: {
         title: "Sao kê tài khoản",
-        description: "Theo dõi giao dịch minh bạch trên tài khoản thiện nguyện MB Bank của Dự án Nuôi Em.",
-      },
-      en: {
-        title: "Account statements",
-        description: "Track transparent transactions on the Fund's MB Bank charity account.",
-      },
+        description:
+          "Theo dõi sao kê MB Bank và hoạt động quyên góp minh bạch trên nền tảng Thiện Nguyện (tài khoản đã xác thực).",
     },
   },
 } as const satisfies Record<string, DataPageContent>;
 
 export type DataPageKey = keyof typeof pages;
 
-export function getDataPageMeta(page: DataPageKey, locale: Locale): PageMeta {
-  return pages[page].meta[locale];
+export function getDataPageMeta(page: DataPageKey): PageMeta {
+  return pages[page].meta;
 }
 
-export function getDataPageHero(page: DataPageKey, locale: Locale): PageHero {
-  return pages[page].hero[locale];
+export function getDataPageHero(page: DataPageKey): PageHero {
+  return pages[page].hero;
 }
 
-export const dataUiLabels: Localized<Record<string, string>> = {
-  vi: {
+export const dataUiLabels: Record<string, string> = {
     totalChildren: "Tổng số trẻ",
     active: "Đang nhận bảo trợ",
     completed: "Hoàn thành bảo trợ",
@@ -149,46 +97,10 @@ export const dataUiLabels: Localized<Record<string, string>> = {
     openFullPage: "Mở trang sao kê đầy đủ",
     sampleDataNote:
       "Hiển thị {shown} hồ sơ mẫu từ dữ liệu crawl. Kết nối Supabase (Phase 4) để tải đủ 387 hồ sơ.",
-  },
-  en: {
-    totalChildren: "Total children",
-    active: "Currently sponsored",
-    completed: "Completed sponsorship",
-    terminated: "Terminated",
-    statusBreakdown: "Status breakdown",
-    allProvinces: "All provinces",
-    allStatuses: "All statuses",
-    searchPlaceholder: "Search by name or profile code...",
-    profileCode: "Profile code",
-    fullName: "Full name",
-    birthYear: "Birth year",
-    gender: "Gender",
-    province: "Province",
-    status: "Status",
-    noResults: "No matching profiles found.",
-    backToList: "Back to list",
-    age: "Age",
-    reportsCount: "reports",
-    reportsListTitle: "Report list",
-    reportsSampleNote:
-      "Showing {shown} sample reports from crawl data. The live site lists 67 reports (Supabase in Phase 4).",
-    allYears: "All",
-    year: "Year",
-    totalIncome: "Total income",
-    totalExpense: "Total expense",
-    downloadReport: "Download full report",
-    readMore: "Read more",
-    backToNews: "Back to news",
-    publishedOn: "Published",
-    embedNote: "Statement data is provided by the Thien Nguyen platform (MBBank).",
-    openFullPage: "Open full statement page",
-    sampleDataNote:
-      "Showing {shown} sample profiles from crawl data. Connect Supabase (Phase 4) for all 387 profiles.",
-  },
-};
+  };
 
-export function getDataUiLabel(locale: Locale, key: string, vars?: Record<string, string>): string {
-  let text = dataUiLabels[locale][key] ?? key;
+export function getDataUiLabel(key: string, vars?: Record<string, string>): string {
+  let text = dataUiLabels[key] ?? key;
   if (vars) {
     for (const [k, v] of Object.entries(vars)) {
       text = text.replace(`{${k}}`, v);

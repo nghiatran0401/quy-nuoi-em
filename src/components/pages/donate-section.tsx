@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { brandVisual } from "@/config/brand-visual";
 import { siteImages } from "@/lib/images";
 

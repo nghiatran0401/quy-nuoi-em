@@ -1,21 +1,22 @@
 import Image from "next/image";
 import { ArrowRight, CircleAlert, Clock3, ExternalLink, MessageCircle, Phone } from "lucide-react";
-import { Link } from "@/i18n/navigation";
-import { brandVisual } from "@/config/brand-visual";
-import { nuoiEmImage } from "@/lib/nuoiem-images";
-import type { Process2026PageContent } from "@/lib/data/process-2026-page";
-import { getProcess2026PageFallback } from "@/lib/data/process-2026-page";
-import type { Locale } from "@/i18n/config";
-
-const { contact, social, financeUrl, donateQrPath } = brandVisual;
+import Link from "next/link";
+import {
+  getProcess2026PageFallback,
+  resolveProcess2026ImageSrc,
+  type Process2026PageContent,
+} from "@/lib/data/process-2026-page";
 
 type QuyTrinhCapMa2026ViewProps = {
-  locale: Locale;
   content?: Process2026PageContent;
 };
 
-export function QuyTrinhCapMa2026View({ locale, content }: QuyTrinhCapMa2026ViewProps) {
-  const c = content ?? getProcess2026PageFallback(locale);
+export function QuyTrinhCapMa2026View({ content }: QuyTrinhCapMa2026ViewProps) {
+  const c = content ?? getProcess2026PageFallback();
+  const heroImageSrc = resolveProcess2026ImageSrc(c.media.heroImage);
+  const qrImageSrc = resolveProcess2026ImageSrc(c.media.qrImage);
+  const messengerUrl = c.links.messenger;
+  const groupUrl = c.links.group;
 
   return (
     <div className="section-warm">
@@ -30,18 +31,18 @@ export function QuyTrinhCapMa2026View({ locale, content }: QuyTrinhCapMa2026View
             </h1>
             <p className="text-body mt-5 max-w-3xl text-lg">{c.hero.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={social.messenger} target="_blank" rel="noreferrer" className="btn-primary">
+              <a href={messengerUrl} target="_blank" rel="noreferrer" className="btn-primary">
                 <MessageCircle className="mr-2 h-5 w-5" aria-hidden />
                 {c.hero.messengerCta}
               </a>
-              <a href={social.group} target="_blank" rel="noreferrer" className="btn-secondary">
+              <a href={groupUrl} target="_blank" rel="noreferrer" className="btn-secondary">
                 {c.hero.groupCta}
               </a>
             </div>
           </div>
           <div className="relative mx-auto aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl border border-brand-border/70 bg-white shadow-[var(--shadow-brand-card)] lg:max-w-none">
             <Image
-              src={nuoiEmImage("processGuide")}
+              src={heroImageSrc}
               alt="Sơ đồ 6 bước quy trình nhận mã Nuôi Em"
               fill
               className="object-contain p-2"
@@ -84,14 +85,16 @@ export function QuyTrinhCapMa2026View({ locale, content }: QuyTrinhCapMa2026View
                   </span>
                 </div>
                 <p className="leading-relaxed text-brand-muted">{step.summary}</p>
-                <ul className="space-y-2 border-t border-brand-border/60 pt-3">
-                  {step.bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-2 text-sm leading-relaxed text-brand-muted">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-accent" aria-hidden />
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
+                {step.bullets.length > 0 ? (
+                  <ul className="space-y-2 border-t border-brand-border/60 pt-3">
+                    {step.bullets.map((bullet) => (
+                      <li key={bullet} className="flex gap-2 text-sm leading-relaxed text-brand-muted">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-accent" aria-hidden />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
             </li>
           ))}
@@ -144,8 +147,8 @@ export function QuyTrinhCapMa2026View({ locale, content }: QuyTrinhCapMa2026View
               <div>
                 <dt className="text-sm font-semibold text-brand-ink">Điện thoại</dt>
                 <dd>
-                  <a href={`tel:${contact.phone}`} className="link-accent">
-                    {contact.phoneDisplay}
+                  <a href={`tel:${c.transfer.phone}`} className="link-accent">
+                    {c.transfer.phoneDisplay}
                   </a>
                 </dd>
               </div>
@@ -178,14 +181,14 @@ export function QuyTrinhCapMa2026View({ locale, content }: QuyTrinhCapMa2026View
               <p className="text-center text-sm font-semibold text-brand-ink">{c.transfer.qrCaption}</p>
               <div className="relative mx-auto mt-4 aspect-square w-full max-w-[240px]">
                 <Image
-                  src={donateQrPath}
+                  src={qrImageSrc}
                   alt="Mã QR chuyển khoản Nuôi Em"
                   fill
                   className="object-contain"
                   sizes="240px"
                 />
               </div>
-              <a href={social.messenger} target="_blank" rel="noreferrer" className="btn-primary mt-6 w-full">
+              <a href={messengerUrl} target="_blank" rel="noreferrer" className="btn-primary mt-6 w-full">
                 {c.transfer.qrCta}
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
               </a>
@@ -242,30 +245,22 @@ export function QuyTrinhCapMa2026View({ locale, content }: QuyTrinhCapMa2026View
             <p className="eyebrow">{c.finance.eyebrow}</p>
             <h3 className="mt-2 text-xl font-bold text-brand-ink">{c.finance.title}</h3>
             <p className="mt-3 leading-relaxed text-brand-muted">
-              {c.finance.body.includes("taichinh.nuoiem.com") ? (
-                <>
-                  {c.finance.body.split("taichinh.nuoiem.com")[0]}
-                  <a href={financeUrl} target="_blank" rel="noreferrer" className="link-accent">
-                    taichinh.nuoiem.com
-                  </a>
-                  {c.finance.body.split("taichinh.nuoiem.com")[1]}
-                </>
-              ) : (
-                c.finance.body
-              )}
+              {c.finance.bodyBefore}
+              {c.finance.reportLinkLabel && c.finance.reportLinkUrl ? (
+                <a href={c.finance.reportLinkUrl} target="_blank" rel="noreferrer" className="link-accent">
+                  {c.finance.reportLinkLabel}
+                </a>
+              ) : null}
+              {c.finance.bodyAfter}
             </p>
             <p className="mt-3 text-sm text-brand-muted">
-              {c.finance.footnote.includes("Sức mạnh 2000") ? (
-                <>
-                  {c.finance.footnote.split("Sức mạnh 2000")[0]}
-                  <a href={c.schoolBuildUrl} target="_blank" rel="noreferrer" className="link-accent">
-                    Sức mạnh 2000
-                  </a>
-                  {c.finance.footnote.split("Sức mạnh 2000")[1]}
-                </>
-              ) : (
-                c.finance.footnote
-              )}
+              {c.finance.footnoteBefore}
+              {c.finance.schoolBuildLinkLabel ? (
+                <a href={c.schoolBuildUrl} target="_blank" rel="noreferrer" className="link-accent">
+                  {c.finance.schoolBuildLinkLabel}
+                </a>
+              ) : null}
+              {c.finance.footnoteAfter}
             </p>
           </div>
         </div>
@@ -276,13 +271,13 @@ export function QuyTrinhCapMa2026View({ locale, content }: QuyTrinhCapMa2026View
           <h2 className="heading-section">{c.cta.title}</h2>
           <p className="text-body mx-auto mt-3 max-w-2xl">{c.cta.description}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a href={social.messenger} target="_blank" rel="noreferrer" className="btn-primary">
+            <a href={messengerUrl} target="_blank" rel="noreferrer" className="btn-primary">
               <MessageCircle className="mr-2 h-5 w-5" aria-hidden />
               {c.cta.messengerCta}
             </a>
-            <a href={`tel:${contact.phone}`} className="btn-secondary">
+            <a href={`tel:${c.transfer.phone}`} className="btn-secondary">
               <Phone className="mr-2 h-5 w-5" aria-hidden />
-              {contact.phoneDisplay}
+              {c.transfer.phoneDisplay}
             </a>
             <Link href="/contact" className="btn-secondary">
               {c.cta.contactLinkLabel}
@@ -291,7 +286,7 @@ export function QuyTrinhCapMa2026View({ locale, content }: QuyTrinhCapMa2026View
           <p className="mt-6 text-sm text-brand-muted">
             {c.cta.referenceLabel}{" "}
             <a href={c.cta.referenceUrl} target="_blank" rel="noreferrer" className="link-accent">
-              nuoiem.com
+              {c.cta.referenceLinkLabel}
             </a>
           </p>
         </div>

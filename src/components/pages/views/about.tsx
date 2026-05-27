@@ -1,22 +1,22 @@
 import Image from "next/image";
 import { PageHero } from "@/components/pages/page-hero";
 import { PartnersMarquee } from "@/components/pages/partners-marquee";
-import { StatsGrid } from "@/components/pages/stats-grid";
+import { StatsSection } from "@/components/shared/stats-section";
 import { siteStats } from "@/content/shared/site-stats";
 import { getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
 import type { AboutPageContent } from "@/lib/data/about-page";
-import type { Locale } from "@/i18n/config";
+import type { PartnerLogoDisplay } from "@/lib/data/partner-logos";
 import { siteImage } from "@/lib/images";
 
 type AboutViewProps = {
-  locale: Locale;
   content?: AboutPageContent;
+  partnerLogos: PartnerLogoDisplay[];
 };
 
-export function AboutView({ locale, content }: AboutViewProps) {
-  const hero = content?.hero ?? getStaticPageHero("about", locale);
-  const stats = content?.stats ?? siteStats[locale];
-  const partnersTitle = content?.partnersTitle ?? getUiLabel(locale, "partners");
+export function AboutView({ content, partnerLogos }: AboutViewProps) {
+  const hero = content?.hero ?? getStaticPageHero("about");
+  const stats = content?.stats ?? siteStats;
+  const partnersTitle = content?.partnersTitle ?? getUiLabel("partners");
   const heroImage = content?.heroImage ?? "/images/about/digital-heart-hero.png";
   const heroImageSrc = heroImage.startsWith("http://") || heroImage.startsWith("https://") ? heroImage : siteImage(heroImage);
 
@@ -36,10 +36,10 @@ export function AboutView({ locale, content }: AboutViewProps) {
           <PageHero {...hero} />
         </div>
         <div className="mx-auto max-w-6xl px-4 pb-12">
-          <StatsGrid stats={stats} />
+          <StatsSection stats={stats} variant="inline" />
         </div>
       </section>
-      <PartnersMarquee title={partnersTitle} />
+      <PartnersMarquee title={partnersTitle} logos={partnerLogos} />
     </>
   );
 }

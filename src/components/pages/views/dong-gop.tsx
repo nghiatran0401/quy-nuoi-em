@@ -1,15 +1,20 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
+import { ThienNguyenProfileSection } from "@/components/shared/thien-nguyen-profile-section";
 import { ShareButtons } from "@/components/seo/share-buttons";
-import { donateInfo, getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
-import type { Locale } from "@/i18n/config";
-import { siteImages } from "@/lib/images";
+import { getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
+import type { DonateInfoContent } from "@/lib/data/donate-info";
+import { homeMediaImageSrc } from "@/lib/data/home-media";
 import { absoluteUrl } from "@/lib/seo/paths";
 
-export function DonateView({ locale }: { locale: Locale }) {
-  const hero = getStaticPageHero("donate", locale);
-  const info = donateInfo[locale];
+type DonateViewProps = {
+  info: DonateInfoContent;
+  donateQrUrl: string;
+};
+
+export function DonateView({ info, donateQrUrl }: DonateViewProps) {
+  const hero = getStaticPageHero("donate");
 
   return (
     <article className="min-h-screen bg-brand-warm pb-20">
@@ -37,7 +42,9 @@ export function DonateView({ locale }: { locale: Locale }) {
             </div>
             <div className="mt-4">
               <p className="text-sm text-brand-muted">Số tài khoản thiện nguyện</p>
-              <p className="heading-display text-3xl font-bold text-brand-accent">{info.accountNumber}</p>
+              <p className="mt-2 text-lg font-semibold leading-snug text-brand-ink md:text-xl">
+                {info.publicAccountLine}
+              </p>
             </div>
             <div className="surface-info mt-6 p-5">
               <h3 className="font-semibold text-brand-ink">Cú pháp chuyển khoản</h3>
@@ -48,16 +55,18 @@ export function DonateView({ locale }: { locale: Locale }) {
           <div className="flex flex-col items-center">
             <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-brand-border/60 bg-white p-4 shadow-[var(--shadow-brand-card)]">
               <Image
-                src={siteImages.donateQr}
+                src={homeMediaImageSrc(donateQrUrl)}
                 alt="QR đóng góp"
                 fill
                 className="object-contain p-2"
                 sizes="(max-width: 512px) 100vw, 384px"
               />
             </div>
-            <p className="mt-4 text-center text-brand-muted">{getUiLabel(locale, "scanQr")}</p>
+            <p className="mt-4 text-center text-brand-muted">{getUiLabel("scanQr")}</p>
           </div>
         </div>
+
+        <ThienNguyenProfileSection className="mt-10" showStatementsLink />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <Link
@@ -83,11 +92,7 @@ export function DonateView({ locale }: { locale: Locale }) {
         </div>
 
         <div className="brand-card mx-auto mt-12 max-w-3xl p-6">
-          <ShareButtons
-            locale={locale}
-            title={hero.title}
-            url={absoluteUrl("/dong-gop", locale)}
-          />
+          <ShareButtons title={hero.title} url={absoluteUrl("/dong-gop")} />
         </div>
       </section>
     </article>

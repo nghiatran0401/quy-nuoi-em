@@ -1,13 +1,12 @@
 import { BrandLogo } from "@/components/brand/logo";
 import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { getStaticPageHero, logoStorySections } from "@/content/pages/static-pages";
-import type { Locale } from "@/i18n/config";
 
-export function LogoStoryView({ locale }: { locale: Locale }) {
-  const sections = logoStorySections[locale];
+export function LogoStoryView() {
+  const sections = logoStorySections;
 
   return (
-    <StaticPageShell {...getStaticPageHero("logoStory", locale)} contentClassName="max-w-4xl">
+    <StaticPageShell {...getStaticPageHero("logoStory")} contentClassName="max-w-4xl">
       <div className="space-y-12">
         {sections.map((section) => (
           <section key={section.title}>

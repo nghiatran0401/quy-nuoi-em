@@ -6,11 +6,9 @@ import {
   siteConfig,
   siteName,
 } from "@/config/site";
-import { locales, type Locale } from "@/i18n/config";
-import { absoluteUrl, alternateLanguages, localizedPath } from "@/lib/seo/paths";
+import { absoluteUrl } from "@/lib/seo/paths";
 
 export type BuildMetadataOptions = {
-  locale: Locale;
   /** Page title without site suffix (layout template adds site name). */
   title: string;
   description: string;
@@ -18,17 +16,14 @@ export type BuildMetadataOptions = {
   pathname: string;
   keywords?: string[];
   ogImage?: string | null;
-  /** Optional explicit OG image alt; falls back to title. */
   ogImageAlt?: string;
   ogType?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
-  /** Article-only OG metadata */
   articleSection?: string;
   articleAuthors?: string[];
   articleTags?: string[];
   noIndex?: boolean;
-  /** Override canonical path (defaults to pathname) */
   canonicalPathname?: string;
 };
 
@@ -54,7 +49,6 @@ function stripMarkdown(text: string, maxLength = 160): string {
 
 export function buildMetadata(options: BuildMetadataOptions): Metadata {
   const {
-    locale,
     title,
     description,
     pathname,
@@ -71,16 +65,14 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     canonicalPathname = pathname,
   } = options;
 
-  const name = siteName(locale);
+  const name = siteName();
   const desc = stripMarkdown(description, 200);
-  const canonical = absoluteUrl(canonicalPathname, locale);
+  const canonical = absoluteUrl(canonicalPathname);
   const imageUrl = resolveImageUrl(ogImage);
-  const languages = alternateLanguages(pathname);
 
   const openGraph: Metadata["openGraph"] = {
     type: ogType,
-    locale: localeOgLocale(locale),
-    alternateLocale: locales.filter((l) => l !== locale).map(localeOgLocale),
+    locale: localeOgLocale(),
     url: canonical,
     siteName: name,
     title,
@@ -129,7 +121,7 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     authors: [{ name }],
     creator: name,
     publisher: name,
-    category: locale === "vi" ? "Thiện nguyện" : "Charity",
+    category: "Thiện nguyện",
     formatDetection: {
       telephone: false,
       address: false,
@@ -137,7 +129,6 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     },
     alternates: {
       canonical,
-      languages,
     },
     openGraph,
     twitter,
@@ -169,19 +160,16 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
 }
 
 export function buildRootMetadata({
-  locale,
   title,
   description,
   keywords,
 }: {
-  locale: Locale;
   title: string;
   description: string;
   keywords?: string[];
 }): Metadata {
-  const name = siteName(locale);
+  const name = siteName();
   const base = buildMetadata({
-    locale,
     title,
     description,
     pathname: "/",

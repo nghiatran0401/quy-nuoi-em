@@ -1,8 +1,8 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { NavigationScroll } from "@/components/layout/navigation-scroll";
 import { getMetadataBase } from "@/config/site";
-import { defaultLocale } from "@/i18n/config";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -47,8 +47,11 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang={defaultLocale} suppressHydrationWarning>
-      <body className={`${plusJakarta.variable} font-sans antialiased`}>{children}</body>
+    <html lang="vi" suppressHydrationWarning>
+      <body className={`${plusJakarta.variable} font-sans antialiased`}>
+        <NavigationScroll />
+        {children}
+      </body>
     </html>
   );
 }

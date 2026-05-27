@@ -1,199 +1,131 @@
-import type { Locale } from "@/i18n/config";
+import { brandVisual } from "@/config/brand-visual";
+import { campaignSectionCopy } from "@/content/home-campaign";
 
-export const sponsorshipSectionCopy: Record<
-  Locale,
-  {
-    title: string;
-    description: string;
-    rounds: string;
-    children: string;
-    years: string;
-    cta: string;
-    chartLabel: string;
-  }
-> = {
-  vi: {
-    title: "Các Đợt Bảo Trợ",
-    description:
-      "Hành trình đồng hành cùng các em nhỏ mồ côi qua từng đợt bảo trợ, mang đến cơ hội và hy vọng cho tương lai.",
-    rounds: "Đợt bảo trợ",
-    children: "trẻ",
-    years: "Năm hoạt động",
-    cta: "Xem danh sách bảo trợ",
-    chartLabel: "Biểu đồ bảo trợ: 387 trẻ em qua 17 đợt",
-  },
-  en: {
-    title: "Sponsorship rounds",
-    description:
-      "Walking alongside orphaned children through each sponsorship round, bringing opportunity and hope for the future.",
-    rounds: "Rounds",
-    children: "children",
-    years: "Years active",
-    cta: "View sponsorship list",
-    chartLabel: "Sponsorship chart: 387 children across 17 rounds",
+/** Homepage campaign block (hệ sinh thái + mùa mở mã + câu chuyện) — CMS shape. */
+export const ctaSectionCopy = {
+  title: campaignSectionCopy.campaign.headline,
+  paragraphs: [...campaignSectionCopy.story.paragraphs],
+  donate: campaignSectionCopy.story.ctaLabel,
+  reports: "Báo cáo tài chính",
+  campaign: campaignSectionCopy.campaign,
+  story: {
+    paragraphs: [...campaignSectionCopy.story.paragraphs],
+    ctaLabel: campaignSectionCopy.story.ctaLabel,
+    ctaHref: campaignSectionCopy.story.ctaHref,
   },
 };
 
-export const ctaSectionCopy: Record<
-  Locale,
-  {
-    title: string;
-    paragraphs: string[];
-    donate: string;
-    reports: string;
-  }
-> = {
-  vi: {
-    title: "Lời Kêu Gọi",
-    paragraphs: [
-      "Chúng tôi mong muốn nhận được sự đồng hành của quý độc giả từ khắp mọi miền trên đất nước, bằng cách giới thiệu trẻ mồ côi (cha, mẹ hoặc cả cha lẫn mẹ) có hoàn cảnh khó khăn về cho chúng tôi.",
-      'Hãy cùng chúng tôi tạo ra giá trị tốt đẹp cho cộng đồng, giúp xã hội ngày càng nhân ái nhân văn, phát huy truyền thống bác ái hào sảng của một dân tộc "thương người như thể thương thân".',
-    ],
-    donate: "Đóng góp",
-    reports: "Thống kê báo cáo",
-  },
-  en: {
-    title: "Call to action",
-    paragraphs: [
-      "We hope for companionship from readers nationwide by referring orphaned children (father, mother, or both) in difficult circumstances to us.",
-      "Join us in creating good for the community and nurturing a more humane society.",
-    ],
-    donate: "Donate",
-    reports: "View reports",
-  },
+export const sponsoredChildrenSectionCopy = {
+  title: "DANH SÁCH ĐÃ ĐƯỢC NHẬN NUÔI",
+  titleNote: "(Tham khảo, dữ liệu từ 2024-2025)",
+  subtitle:
+    "Có ảnh hơn 65.000 bé đã được nhận nuôi. Con số tiếp tục ngày đêm được tăng và đăng tải",
+  features: [
+    {
+      title: "MỖI EM CHỈ 01 MÃ",
+      description:
+        "Mỗi em một mã và 01 ảnh duy nhất, không trùng trong hàng NGHÌN em nhỏ.",
+      icon: "/images/nuoiem/1-lan-20220415042856.png",
+    },
+    {
+      title: "MỖI EM CHỈ 01 NGƯỜI NUÔI",
+      description:
+        "Để đảm bảo an toàn, bảo mật thông tin cho các bé, mỗi bé chỉ có 01 người nhận nuôi duy nhất.",
+      icon: "/images/nuoiem/2-lan-20220415042856.png",
+    },
+    {
+      title: "KHUYẾN KHÍCH NUÔI BÉ NHIỀU HƠN 1 NĂM",
+      description:
+        "Mỗi bé đều đặn đi học, vì thế chúng tôi khuyến khích bạn tham gia nuôi bé nhiều hơn 1 năm.",
+      icon: "/images/nuoiem/khuyen-khich-20220415045805.png",
+    },
+    {
+      title: "MỘT NGƯỜI CÓ THỂ NUÔI NHIỀU BÉ",
+      description: "Chúng tôi không giới hạn số lượng bé trên mỗi người nuôi.",
+      icon: "/images/nuoiem/khuyen-khic-20220415045406.png",
+    },
+  ],
+  heroImage: "/images/nuoiem/3-1541577888.png",
+  heroAlt: "Em nhỏ vùng cao — dự án Nuôi Em",
+  viewAlbum: "XEM ALBUM",
+  albums: [
+    {
+      label: "3000+ bé huyện Mường Nhé",
+      region: "Tỉnh Điện Biên",
+      href: "https://www.facebook.com/trungbatigoltn/media_set?set=a.499673950498668&type=3",
+      previewImage:
+        "/images/nuoiem/46885457_527677681031628_8450686654137499648_n-1543441007.jpg",
+    },
+    {
+      label: "3000+ bé huyện Nậm Pồ",
+      region: "Tỉnh Điện Biên",
+      href: "https://www.facebook.com/trungbatigoltn/media_set?set=a.511662429299820&type=3",
+      previewImage:
+        "/images/nuoiem/46679515_527103281089068_3479477362972688384_n-1543441007.jpg",
+    },
+    {
+      label: "3000+ bé huyện Điện Biên Đông",
+      region: "Tỉnh Điện Biên",
+      href: "https://www.facebook.com/trungbatigoltn/media_set?set=a.510028126129917&type=3",
+      previewImage:
+        "/images/nuoiem/46686056_527118954420834_8288971600615702528_n-1543441007.jpg",
+    },
+  ],
+} as const;
+
+/** Homepage block: THAM KHẢO + collage bằng khen (nuoiem.com). */
+export const membersSectionCopy = {
+  eyebrow: "",
+  title: "THAM KHẢO",
+  paragraphs: [
+    "Những giải thưởng, bằng khen cấp Quốc Gia mà nhóm, dự án và chủ nhiệm dự án đã vinh dự được nhận: 02 Giải thưởng tình nguyện Quốc Gia 2012, 2017 ...",
+  ],
+  cta: "",
 };
 
-export const membersSectionCopy: Record<
-  Locale,
-  {
-    eyebrow: string;
-    title: string;
-    paragraphs: string[];
-    cta: string;
-  }
-> = {
-  vi: {
-    eyebrow: "Ảnh minh hoạ",
-    title: "Hình ảnh hoạt động",
-    paragraphs: [
-      "Đây là các hình ảnh minh hoạ cho hoạt động đồng hành, bảo trợ và kết nối cộng đồng của Dự án Nuôi Em.",
-      "Nội dung ảnh có thể thay đổi theo từng giai đoạn để phản ánh hành trình hỗ trợ các em nhỏ trên nhiều tỉnh thành.",
-    ],
-    cta: "Xem thêm hình ảnh",
-  },
-  en: {
-    eyebrow: "Fund members",
-    title: "Bonded by love",
-    paragraphs: [
-      "Starting with 20 members from the Nuoi Em production team spread across Vietnam, the fund has nearly doubled in size over three years.",
-      "We keep working every day to sponsor more children and bring them more joy!",
-    ],
-    cta: "Fund members",
-  },
+export const newsSectionCopy = {
+  eyebrow: "Tin Tức & Sự Kiện",
+  title: "Hoạt động mới nhất",
+  viewAll: "Xem tất cả tin tức",
+  readMore: "Xem chi tiết",
+  author: "Admin",
 };
 
-export const newsSectionCopy: Record<
-  Locale,
-  { eyebrow: string; title: string; viewAll: string; readMore: string; author: string }
-> = {
-  vi: {
-    eyebrow: "Tin Tức & Sự Kiện",
-    title: "Hoạt động mới nhất",
-    viewAll: "Xem tất cả tin tức",
-    readMore: "Xem chi tiết",
-    author: "Admin",
-  },
-  en: {
-    eyebrow: "News & events",
-    title: "Latest activities",
-    viewAll: "View all news",
-    readMore: "Read more",
-    author: "Admin",
-  },
+export const faqSectionCopy = {
+  eyebrow: "Giải đáp thắc mắc",
+  title: "Câu Hỏi Thường Gặp",
+  intro:
+    "Những thông tin phổ biến nhất về Dự án Nuôi Em được tổng hợp tại đây để giải đáp nhanh các thắc mắc của bạn.",
+  items: [
+    {
+      id: "dia-chi",
+      question: "Địa chỉ văn phòng của Dự án Nuôi Em ở đâu?",
+      type: "dia-chi" as const,
+      body: "Xin mời cả nhà, các anh chị ghé thăm văn phòng Quỹ để cùng lắng nghe những câu chuyện, để hiểu về hành trình mà Quỹ đang làm cho các con.",
+      address: brandVisual.office.address,
+    },
+    {
+      id: "ngan-hang",
+      question: "Số tài khoản của Dự án Nuôi Em?",
+      type: "ngan-hang" as const,
+    },
+    {
+      id: "quy-trinh",
+      question: "Quy trình xét duyệt bảo trợ ra sao?",
+      type: "quy-trinh" as const,
+      steps: [
+        "Gửi công văn tới các Sở giáo dục và nhà trường tại các tỉnh",
+        "Thống nhất nội dung, điều kiện hỗ trợ bao gồm chưa nhận được sự hỗ trợ từ nhà nước, bữa cơm trưa ảnh hưởng việc học",
+        "Tiếp nhận thông tin, số liệu ban đầu đăng ký từ Sở giáo dục / Nhà trường",
+        "Bắt đầu cấp mã từ tháng 6-7",
+        "Toàn dự án ăn cơm trưa từ tháng 9",
+        "Nhận thông tin chi tiết từ Sở giáo dục / Nhà trường tháng 9 - 10",
+        "Nhận đầy đủ thông tin học sinh và làm ảnh thẻ, đưa lên hệ thống tra cứu tháng 11",
+        "Anh chị nuôi tra cứu và vào group theo bản có thầy cô giáo cắm bản nấu ăn hàng ngày báo cáo theo tháng",
+        "Thăm em thực tế Tháng 11-12 và Tháng 3-4",
+      ],
+    },
+  ],
 };
 
-export const faqSectionCopy: Record<
-  Locale,
-  {
-    eyebrow: string;
-    title: string;
-    intro: string;
-    items: Array<{
-      id: string;
-      question: string;
-      type: "address" | "bank" | "process";
-      body?: string;
-      address?: string;
-      steps?: string[];
-    }>;
-  }
-> = {
-  vi: {
-    eyebrow: "Giải đáp thắc mắc",
-    title: "Câu Hỏi Thường Gặp",
-    intro:
-      "Những thông tin phổ biến nhất về Dự án Nuôi Em được tổng hợp tại đây để giải đáp nhanh các thắc mắc của bạn.",
-    items: [
-      {
-        id: "address",
-        question: "Địa chỉ văn phòng của Dự án Nuôi Em ở đâu?",
-        type: "address",
-        body: "Xin mời cả nhà, các anh chị ghé thăm văn phòng Dự án Nuôi Em để cùng lắng nghe những câu chuyện, để hiểu về hành trình mà Dự án Nuôi Em đang làm cho các con.",
-        address: "Số 383 đường Nguyễn Duy Trinh, phường Bình Trưng, TP. HCM.",
-      },
-      {
-        id: "bank",
-        question: "Số tài khoản của Dự án Nuôi Em?",
-        type: "bank",
-      },
-      {
-        id: "process",
-        question: "Quy trình xét duyệt bảo trợ ra sao?",
-        type: "process",
-        steps: [
-          "Thu thập thông tin",
-          "Chấm điểm và phân loại hồ sơ",
-          "Xếp hạng và lựa chọn hồ sơ phỏng vấn/khảo sát trực tiếp",
-          "BXD họp chốt danh sách trẻ mồ côi được bảo trợ theo từng quý",
-          "Trình Ban điều hành Dự án Nuôi Em thông qua danh sách bảo trợ trẻ mồ côi",
-        ],
-      },
-    ],
-  },
-  en: {
-    eyebrow: "FAQ",
-    title: "Frequently asked questions",
-    intro: "Common information about the Nuoi Em Project, answered quickly here.",
-    items: [
-      {
-        id: "address",
-        question: "Where is the fund office?",
-        type: "address",
-        body: "We welcome you to visit our office to hear stories and understand the journey we are on for the children.",
-        address: "383 Nguyen Duy Trinh Street, Binh Trung Ward, Ho Chi Minh City.",
-      },
-      {
-        id: "bank",
-        question: "What is the fund bank account?",
-        type: "bank",
-      },
-      {
-        id: "process",
-        question: "What is the sponsorship review process?",
-        type: "process",
-        steps: [
-          "Collect information",
-          "Score and classify profiles",
-          "Rank and select profiles for interview/site visit",
-          "Board meeting to finalize quarterly sponsorship list",
-          "Executive board approval of sponsored children",
-        ],
-      },
-    ],
-  },
-};
-
-export const partnersHomeTitle: Record<Locale, string> = {
-  vi: "Đơn vị đồng hành & Tài trợ",
-  en: "Partners & sponsors",
-};
+export const partnersHomeTitle = "Đơn vị đồng hành & Tài trợ";

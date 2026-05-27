@@ -1,13 +1,12 @@
 import { ExternalLink } from "lucide-react";
 import { StaticPageShell } from "@/components/pages/static-page-shell";
 import { getStaticPageHero, getUiLabel, volunteerContent } from "@/content/pages/static-pages";
-import type { Locale } from "@/i18n/config";
 
-export function VolunteerView({ locale }: { locale: Locale }) {
-  const content = volunteerContent[locale];
+export function VolunteerView() {
+  const content = volunteerContent;
 
   return (
-    <StaticPageShell {...getStaticPageHero("volunteer", locale)} contentClassName="max-w-5xl">
+    <StaticPageShell {...getStaticPageHero("volunteer")} contentClassName="max-w-5xl">
       <div className="text-center">
         <a
           href={content.formUrl}
@@ -15,14 +14,14 @@ export function VolunteerView({ locale }: { locale: Locale }) {
           rel="noopener noreferrer"
           className="btn-primary inline-flex items-center gap-2 px-8 py-4"
         >
-          {getUiLabel(locale, "registerNow")}
+          {getUiLabel("registerNow")}
           <ExternalLink className="h-5 w-5" />
         </a>
       </div>
       <section className="mt-12">
         <h2 className="heading-section text-xl">{content.roles.title}</h2>
         <p className="mb-4 text-brand-muted">
-          {locale === "vi" ? "Những việc làm nhỏ bé nhưng mang lại ý nghĩa lớn lao" : "Small acts with great meaning"}
+          Những việc làm nhỏ bé nhưng mang lại ý nghĩa lớn lao
         </p>
         <ul className="grid gap-3 sm:grid-cols-2">
           {content.roles.items.map((item) => (
@@ -34,7 +33,7 @@ export function VolunteerView({ locale }: { locale: Locale }) {
       </section>
       <section className="mt-12">
         <h2 className="heading-section mb-6 text-center text-xl">
-          {locale === "vi" ? "Thành phần tham gia" : "Who can join"}
+          Thành phần tham gia
         </h2>
         <div className="grid gap-6 md:grid-cols-3">
           {content.audiences.map((audience) => (

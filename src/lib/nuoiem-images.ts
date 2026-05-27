@@ -8,6 +8,8 @@ export function nuoiEmImage(alias: NuoiEmImageAlias): string {
 
 export const nuoiEmMemberGallery = manifest.memberGallery;
 
+export const nuoiEmAwardsGallery = manifest.awardsGallery;
+
 export const nuoiEmMediaLogos = manifest.mediaLogos;
 
 /** Paths scraped from nuoiem.com (Ladipage CDN → public/images/nuoiem). */
