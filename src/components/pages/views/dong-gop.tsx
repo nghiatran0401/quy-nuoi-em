@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { PublicCatalogPromo } from "@/components/shared/public-catalog-promo";
 import { ShareButtons } from "@/components/seo/share-buttons";
 import { getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
 import type { DonateInfoContent } from "@/lib/data/donate-info";
@@ -76,16 +77,7 @@ export function DonateView({ info, donateQrUrl }: DonateViewProps) {
             </div>
             <ArrowRight className="h-6 w-6 text-brand-accent transition-transform group-hover:translate-x-1" />
           </Link>
-          <Link
-            href="/danh-sach-bao-tro"
-            className="brand-card-interactive group flex items-center justify-between p-6"
-          >
-            <div>
-              <h3 className="font-heading text-lg font-bold text-brand-ink">Danh sách bảo trợ</h3>
-              <p className="mt-2 text-sm text-brand-muted">Giúp đỡ những hoàn cảnh khó khăn cần hỗ trợ.</p>
-            </div>
-            <ArrowRight className="h-6 w-6 text-brand-accent transition-transform group-hover:translate-x-1" />
-          </Link>
+          <PublicCatalogPromo variant="card" />
         </div>
 
         <div className="brand-card mx-auto mt-12 max-w-3xl p-6">

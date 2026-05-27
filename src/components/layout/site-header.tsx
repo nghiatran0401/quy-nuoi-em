@@ -24,11 +24,23 @@ export function SiteHeader() {
           </div>
 
           <div className="hidden items-center space-x-8 md:flex">
-            {mainNavItems.map((item) => (
-              <Link key={item.href} href={item.href} className="nav-link">
-                {navLabel(item.labelKey)}
-              </Link>
-            ))}
+            {mainNavItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-link"
+                >
+                  {navLabel(item.labelKey)}
+                </a>
+              ) : (
+                <Link key={item.href} href={item.href} className="nav-link">
+                  {navLabel(item.labelKey)}
+                </Link>
+              ),
+            )}
           </div>
 
           <div className="hidden items-center gap-4 md:flex">
@@ -53,16 +65,29 @@ export function SiteHeader() {
 
         {mobileOpen ? (
           <div className="space-y-1 border-t border-brand-border pb-4 pt-3 md:hidden">
-            {mainNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block rounded-lg px-3 py-2 text-brand-ink hover:bg-brand-surface"
-                onClick={() => setMobileOpen(false)}
-              >
-                {navLabel(item.labelKey)}
-              </Link>
-            ))}
+            {mainNavItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-lg px-3 py-2 text-brand-ink hover:bg-brand-surface"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {navLabel(item.labelKey)}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block rounded-lg px-3 py-2 text-brand-ink hover:bg-brand-surface"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {navLabel(item.labelKey)}
+                </Link>
+              ),
+            )}
             <div className="px-3 pt-3">
               <Link
                 href="/dong-gop"

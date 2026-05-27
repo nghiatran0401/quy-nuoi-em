@@ -10,7 +10,8 @@ export const siteCopy = {
   nav: {
     about: "Giới thiệu",
     process2026: "Quy trình 2026",
-    children: "Danh sách trẻ",
+    children: "Điểm trường",
+    catalog: "Tra cứu mã",
     reports: "Báo cáo",
     news: "Bản tin",
     statements: "Sao kê",
@@ -23,6 +24,7 @@ export const siteCopy = {
     companyName: "Dự án Nuôi Em",
     tagline: "Chương trình nuôi cơm trưa cho trẻ vùng cao",
     financePrefix: "Minh bạch tài chính tại",
+    catalogPrefix: "Tra cứu mã & danh mục em nuôi tại",
     coverage: "Hỗ trợ trẻ bản cao tại hơn 25 tỉnh thành",
     quickLinks: "Điều hướng",
     moreLinks: "Xem thêm",

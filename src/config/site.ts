@@ -1,4 +1,5 @@
 import { brandVisual } from "@/config/brand-visual";
+import { publicCatalog } from "@/config/public-catalog";
 
 /** Default share image (1200×630 recommended; hero works for social previews). */
 export const DEFAULT_OG_IMAGE_PATH = brandVisual.heroImage;
@@ -9,6 +10,7 @@ export const siteConfig = {
   tagline: brandVisual.tagline,
   contact: brandVisual.contact,
   financeUrl: brandVisual.financeUrl,
+  publicCatalogUrl: publicCatalog.url,
   social: {
     facebook: brandVisual.social.facebook,
     messenger: brandVisual.social.messenger,

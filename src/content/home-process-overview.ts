@@ -1,4 +1,5 @@
 import { brandVisual } from "@/config/brand-visual";
+import { publicCatalog } from "@/config/public-catalog";
 import { importantNotes, processSteps2026 } from "@/content/quy-trinh-cap-ma-2026";
 import { nuoiEmImage } from "@/lib/nuoiem-images";
 
@@ -27,18 +28,22 @@ export const homeProcessOverview = {
         ? "Nhận mã"
         : step.number === "03"
           ? "Tham gia nhóm Facebook"
-          : step.number === "06"
-            ? "Xem lịch thăm em"
-            : "Tìm hiểu",
+          : step.number === "04"
+            ? publicCatalog.ctaLabel
+            : step.number === "06"
+              ? "Xem lịch thăm em"
+              : "Tìm hiểu",
     href:
       step.number === "01"
         ? brandVisual.social.messenger
         : step.number === "03"
           ? brandVisual.social.group
-          : step.number === "06"
-            ? "/quy-trinh-cap-ma-2026"
-            : "/quy-trinh-cap-ma-2026",
-    external: step.number === "01" || step.number === "03",
+          : step.number === "04"
+            ? publicCatalog.url
+            : step.number === "06"
+              ? "/quy-trinh-cap-ma-2026"
+              : "/quy-trinh-cap-ma-2026",
+    external: step.number === "01" || step.number === "03" || step.number === "04",
   })) as HomeProcessCard[],
   notesTitle: "Lưu ý quan trọng",
   notes: [...importantNotes],

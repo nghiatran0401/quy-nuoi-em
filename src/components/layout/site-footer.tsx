@@ -2,11 +2,13 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { BrandLogo } from "@/components/brand/logo";
 import { brandVisual } from "@/config/brand-visual";
+import { publicCatalog, publicCatalogHost } from "@/config/public-catalog";
 import { siteCopy } from "@/content/site-copy";
 import {
   footerSitePrimaryLinks,
   footerSiteSecondaryLinks,
   navLabel,
+  type NavItem,
 } from "@/lib/navigation";
 
 export function SiteFooter() {
@@ -34,6 +36,17 @@ export function SiteFooter() {
                   className="transition-colors hover:text-brand-accent"
                 >
                   taichinh.nuoiem.com
+                </a>
+              </p>
+              <p>
+                {t.catalogPrefix}{" "}
+                <a
+                  href={publicCatalog.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-brand-accent"
+                >
+                  {publicCatalogHost()}
                 </a>
               </p>
               <p>{t.coverage}</p>
@@ -79,7 +92,7 @@ function FooterNavColumn({
   links,
 }: {
   title: string;
-  links: { href: string; labelKey: Parameters<typeof navLabel>[0] }[];
+  links: NavItem[];
 }) {
   return (
     <div className="space-y-4">
@@ -87,9 +100,20 @@ function FooterNavColumn({
       <ul className="space-y-2 text-sm text-brand-muted">
         {links.map((link) => (
           <li key={link.href + link.labelKey}>
-            <Link href={link.href} className="transition-colors hover:text-brand-accent">
-              {navLabel(link.labelKey)}
-            </Link>
+            {link.external ? (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-brand-accent"
+              >
+                {navLabel(link.labelKey)}
+              </a>
+            ) : (
+              <Link href={link.href} className="transition-colors hover:text-brand-accent">
+                {navLabel(link.labelKey)}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

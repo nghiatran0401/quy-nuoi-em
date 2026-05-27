@@ -51,7 +51,8 @@ export const processSteps2026: readonly ProcessStepContent[] = [
     summary:
       "Đầu tháng 9 các bé bắt đầu ăn; cuối tháng 9 trường gửi hồ sơ; tháng 10 dự án rà soát ~70.000 hồ sơ; tháng 11 mở tra cứu trên trang Facebook.",
     bullets: [
-      "Tra cứu theo hướng dẫn chatbot trang Facebook khi có thông báo.",
+      "Tra cứu mã NE trên danh mục em nuôi công khai (nuoiem-lovat.vercel.app) khi dự án mở cổng.",
+      "Theo dõi thông báo chatbot trang Facebook Nuôi Em song song.",
       "Mỗi mã trả về thông tin và ảnh bé tương ứng sau khi xử lý dữ liệu.",
     ],
   },

@@ -8,13 +8,13 @@ type DataPageContent = {
 const pages = {
   children: {
     meta: {
-        title: "Danh sách trẻ em",
-        description: "Danh sách các em nhỏ đang nhận được sự hỗ trợ từ Dự án Nuôi Em.",
+        title: "Danh sách điểm trường hỗ trợ",
+        description: "Tra cứu điểm trường Nuôi Em theo tỉnh, quy mô học sinh và tình trạng hỗ trợ.",
     },
     hero: {
-        title: "Danh sách trẻ em",
+        title: "Danh sách điểm trường hỗ trợ",
         description:
-          "Mỗi em nhỏ là một câu chuyện, một ước mơ cần được chắp cánh. Hãy cùng chúng tôi viết tiếp những trang sách cuộc đời cho các em.",
+          "Theo dõi điểm trường theo quy mô học sinh và tra cứu nhanh theo tên trường.",
     },
   },
   reports: {

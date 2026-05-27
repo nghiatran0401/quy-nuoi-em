@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, CircleAlert, Clock3, ExternalLink, MessageCircle, Phone } from "lucide-react";
 import Link from "next/link";
+import { publicCatalog } from "@/config/public-catalog";
 import {
   getProcess2026PageFallback,
   resolveProcess2026ImageSrc,
@@ -261,6 +262,12 @@ export function QuyTrinhCapMa2026View({ content }: QuyTrinhCapMa2026ViewProps) {
                 </a>
               ) : null}
               {c.finance.footnoteAfter}
+            </p>
+            <p className="mt-4 border-t border-brand-border/60 pt-4 text-sm text-brand-muted">
+              Danh mục em nuôi & tra cứu mã NE:{" "}
+              <a href={publicCatalog.url} target="_blank" rel="noreferrer" className="link-accent">
+                {publicCatalog.ctaLabel}
+              </a>
             </p>
           </div>
         </div>
