@@ -5,6 +5,7 @@ import { defaultAboutPageContent } from "@/lib/cms/vietnamese-defaults";
 import { resolveAboutPageContent } from "@/lib/data/about-page";
 import { buildHomepageUpsertPayload } from "@/lib/admin/parsers/homepage";
 import { defaultHomeMedia } from "@/lib/data/home-media";
+import { defaultHomeSectionsContent } from "@/lib/data/homepage-sections";
 import { parseNewsFields, slugifyNews } from "@/lib/admin/parsers/news";
 import { buildProcess2026UpsertPayload } from "@/lib/admin/parsers/process-2026";
 import { getProcess2026PageFallback } from "@/lib/data/process-2026-page";
@@ -87,6 +88,8 @@ describe("homepage parser", () => {
       }),
       en_cta_paragraphs_json: JSON.stringify(["p2"]),
       en_members_paragraphs_json: JSON.stringify(["m2"]),
+      vi_sections_json: JSON.stringify(defaultHomeSectionsContent),
+      en_sections_json: JSON.stringify(defaultHomeSectionsContent),
     };
 
     const formData = makeFormData({

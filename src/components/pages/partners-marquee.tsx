@@ -26,6 +26,7 @@ function MarqueeLogo({
       width={160}
       height={80}
       className="max-h-full max-w-full object-contain"
+      style={{ width: "auto", height: "auto" }}
     />
   );
 

@@ -17,9 +17,9 @@ export async function HomeNewsSection({
   const articles = await getLatestNews(3);
 
   return (
-    <section className="bg-brand-sky-soft/50 py-20">
-      <div className="container mx-auto px-4">
-        <div className="mb-12 flex flex-col items-end justify-between gap-4 md:flex-row">
+    <section className="bg-brand-sky-soft/50 section-pad">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="mb-8 flex flex-col gap-4 sm:mb-12 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="eyebrow mb-2">{copy.eyebrow}</h2>
             <h3 className="heading-display text-3xl font-bold md:text-4xl">{copy.title}</h3>

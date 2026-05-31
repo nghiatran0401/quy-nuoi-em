@@ -1,11 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
 import { Plus, X } from "lucide-react";
 import {
   createPartnerLogo,
   deletePartnerLogo,
 } from "@/app/admin/(dashboard)/about/partner-logo-actions";
+import { AdminActionFeedback } from "@/components/admin/admin-action-form";
+import { ADMIN_ACTION_INITIAL } from "@/lib/admin/action-state";
 import { resolvePartnerLogoSrc, type PartnerLogoRecord } from "@/lib/data/partner-logos";
 
 type PartnerLogosEditorProps = {
@@ -13,14 +17,27 @@ type PartnerLogosEditorProps = {
 };
 
 export function PartnerLogosEditor({ logos }: PartnerLogosEditorProps) {
+  const router = useRouter();
+  const [createState, createFormAction] = useActionState(createPartnerLogo, ADMIN_ACTION_INITIAL);
+  const [deleteState, deleteFormAction] = useActionState(deletePartnerLogo, ADMIN_ACTION_INITIAL);
+
+  useEffect(() => {
+    if (createState?.ok || deleteState?.ok) {
+      router.refresh();
+    }
+  }, [createState, deleteState, router]);
+
   const hasFallbackOnly = logos.length > 0 && logos.every((l) => l.id.startsWith("fallback-"));
   const editableLogos = logos.filter((l) => !l.id.startsWith("fallback-"));
+  const feedback = deleteState?.message ? deleteState : createState;
 
   return (
     <div className="space-y-4 border-t border-slate-200 pt-4">
       <p className="text-xs text-slate-600">
         Logo chạy ngang trên trang chủ, giới thiệu và thành viên quỹ. Thứ tự theo thời gian thêm.
       </p>
+
+      <AdminActionFeedback state={feedback} />
 
       {hasFallbackOnly ? (
         <p className="rounded-lg border border-amber-200 bg-amber-50/80 px-3 py-2 text-sm text-amber-900">
@@ -30,33 +47,31 @@ export function PartnerLogosEditor({ logos }: PartnerLogosEditorProps) {
 
       {editableLogos.length > 0 ? (
         <ul className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-          {editableLogos.map((logo) => {
-            const deletePartnerLogoById = deletePartnerLogo.bind(null, logo.id);
-
-            return (
-              <li
-                key={logo.id}
-                className="group relative flex aspect-[4/3] items-center justify-center rounded-lg border border-slate-200 bg-white p-2"
+          {editableLogos.map((logo) => (
+            <li
+              key={logo.id}
+              className="group relative flex aspect-[4/3] items-center justify-center rounded-lg border border-slate-200 bg-white p-2"
+            >
+              <Image
+                src={resolvePartnerLogoSrc(logo.image_url)}
+                alt=""
+                width={120}
+                height={72}
+                className="max-h-full max-w-full object-contain"
+              />
+              <button
+                type="submit"
+                formAction={deleteFormAction}
+                formNoValidate
+                name="partner_logo_id"
+                value={logo.id}
+                className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-white shadow-sm opacity-90 transition hover:bg-red-700 group-hover:opacity-100"
+                aria-label="Xóa logo"
               >
-                <Image
-                  src={resolvePartnerLogoSrc(logo.image_url)}
-                  alt=""
-                  width={120}
-                  height={72}
-                  className="max-h-full max-w-full object-contain"
-                />
-                <button
-                  type="submit"
-                  formAction={deletePartnerLogoById}
-                  formNoValidate
-                  className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-white shadow-sm opacity-90 transition hover:bg-red-700 group-hover:opacity-100"
-                  aria-label="Xóa logo"
-                >
-                  <X className="h-3.5 w-3.5" />
-                </button>
-              </li>
-            );
-          })}
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </li>
+          ))}
         </ul>
       ) : (
         !hasFallbackOnly ? <p className="text-sm text-slate-500">Chưa có logo.</p> : null
@@ -73,7 +88,7 @@ export function PartnerLogosEditor({ logos }: PartnerLogosEditorProps) {
           />
           <button
             type="submit"
-            formAction={createPartnerLogo}
+            formAction={createFormAction}
             formNoValidate
             className="admin-btn-secondary text-sm"
           >

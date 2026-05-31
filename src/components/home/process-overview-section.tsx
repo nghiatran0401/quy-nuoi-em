@@ -11,7 +11,7 @@ export function ProcessOverviewSection({
   const copy = content ?? homeProcessOverview;
 
   return (
-    <section className="relative overflow-hidden section-warm py-20 lg:py-24">
+    <section className="section-warm relative overflow-hidden section-pad lg:py-24">
       <div
         className="pointer-events-none absolute inset-0 opacity-100"
         style={{
@@ -40,9 +40,9 @@ export function ProcessOverviewSection({
           {copy.cards.map((card) => (
             <article
               key={card.number}
-              className="relative flex h-full min-h-[360px] flex-col overflow-hidden rounded-2xl border border-brand-border/80 bg-white"
+              className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-brand-border/80 bg-white sm:min-h-[320px] md:min-h-[360px]"
             >
-              <span className="absolute left-3 top-2 z-10 font-heading text-5xl font-black leading-none text-brand-accent/90">
+              <span className="absolute left-3 top-2 z-10 font-heading text-4xl font-black leading-none text-brand-accent/90 sm:text-5xl">
                 {card.number}
               </span>
               <div className="relative aspect-[5/3] w-full overflow-hidden border-b border-brand-border/70 bg-brand-sky-soft pl-8 pt-4">

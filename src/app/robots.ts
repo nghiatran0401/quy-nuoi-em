@@ -9,13 +9,22 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: [
-          "/api/",
-          "/_next/",
-          "/admin",
-          "/admin/",
-          "/admin/*",
-        ],
+        disallow: ["/api/", "/_next/", "/admin", "/admin/", "/admin/*"],
+      },
+      {
+        userAgent: "facebookexternalhit",
+        allow: "/",
+        disallow: ["/admin", "/admin/", "/admin/*"],
+      },
+      {
+        userAgent: "Twitterbot",
+        allow: "/",
+        disallow: ["/admin", "/admin/", "/admin/*"],
+      },
+      {
+        userAgent: "LinkedInBot",
+        allow: "/",
+        disallow: ["/admin", "/admin/", "/admin/*"],
       },
     ],
     sitemap: `${base}/sitemap.xml`,

@@ -70,7 +70,7 @@ export function CallToActionSection({ content }: Props) {
 
   return (
     <section
-      className="relative overflow-hidden border-y border-brand-border/40 bg-[#faf6ee] py-14 lg:py-20"
+      className="relative overflow-hidden border-y border-brand-border/40 bg-[#faf6ee] section-pad"
       aria-labelledby="home-campaign-heading"
     >
       <div
@@ -100,6 +100,7 @@ export function CallToActionSection({ content }: Props) {
                 width={160}
                 height={48}
                 className={logo.className ?? "h-10 w-auto"}
+                style={{ width: "auto", height: "auto" }}
               />
             ))}
           </div>
@@ -126,7 +127,7 @@ export function CallToActionSection({ content }: Props) {
               className="pointer-events-none absolute -top-3 left-8 h-6 w-10 rounded-t-lg bg-brand-accent/20"
               aria-hidden
             />
-            <div className="space-y-4 text-justify text-[15px] leading-relaxed text-brand-ink sm:text-base">
+            <div className="space-y-4 text-[15px] leading-relaxed text-brand-ink sm:text-base">
               {copy.story.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 32)}>{paragraph}</p>
               ))}

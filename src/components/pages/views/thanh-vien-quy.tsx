@@ -24,6 +24,7 @@ export function MembersView({ partnerLogos }: MembersViewProps) {
                   width={140}
                   height={80}
                   className="max-h-16 w-auto object-contain"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </a>
             ) : (
@@ -33,6 +34,7 @@ export function MembersView({ partnerLogos }: MembersViewProps) {
                 width={140}
                 height={80}
                 className="max-h-16 w-auto object-contain"
+                style={{ width: "auto", height: "auto" }}
               />
             )}
           </li>

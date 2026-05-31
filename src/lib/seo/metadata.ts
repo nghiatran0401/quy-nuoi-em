@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import {
   DEFAULT_OG_IMAGE_PATH,
   getMetadataBase,
+  getSiteUrl,
   localeOgLocale,
   siteConfig,
   siteName,
 } from "@/config/site";
 import { absoluteUrl } from "@/lib/seo/paths";
+import { getSiteVerification, getSocialMetaOther } from "@/lib/seo/verification";
 
 export type BuildMetadataOptions = {
   /** Page title without site suffix (layout template adds site name). */
@@ -14,6 +16,8 @@ export type BuildMetadataOptions = {
   description: string;
   /** App path e.g. `/about`, `/news/my-slug` */
   pathname: string;
+  /** Social preview title when different from `title` (e.g. shorter for Facebook/Zalo). */
+  ogTitle?: string;
   keywords?: string[];
   ogImage?: string | null;
   ogImageAlt?: string;
@@ -26,6 +30,14 @@ export type BuildMetadataOptions = {
   noIndex?: boolean;
   canonicalPathname?: string;
 };
+
+function imageMimeType(path: string): string {
+  const lower = path.toLowerCase();
+  if (lower.endsWith(".png")) return "image/png";
+  if (lower.endsWith(".webp")) return "image/webp";
+  if (lower.endsWith(".gif")) return "image/gif";
+  return "image/jpeg";
+}
 
 function resolveImageUrl(imagePath: string | undefined | null): string {
   const path = imagePath?.trim() || DEFAULT_OG_IMAGE_PATH;
@@ -52,6 +64,7 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     title,
     description,
     pathname,
+    ogTitle,
     keywords,
     ogImage,
     ogImageAlt,
@@ -67,23 +80,27 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
 
   const name = siteName();
   const desc = stripMarkdown(description, 200);
+  const socialTitle = ogTitle?.trim() || title;
   const canonical = absoluteUrl(canonicalPathname);
   const imageUrl = resolveImageUrl(ogImage);
+  const imageType = imageMimeType(imageUrl);
+  const isHttps = getSiteUrl().startsWith("https://");
 
   const openGraph: Metadata["openGraph"] = {
     type: ogType,
     locale: localeOgLocale(),
     url: canonical,
     siteName: name,
-    title,
+    title: socialTitle,
     description: desc,
     images: [
       {
         url: imageUrl,
+        ...(isHttps ? { secureUrl: imageUrl } : {}),
         width: 1200,
         height: 630,
-        alt: ogImageAlt ?? title,
-        type: "image/jpeg",
+        alt: ogImageAlt ?? socialTitle,
+        type: imageType,
       },
     ],
     ...(ogType === "article"
@@ -99,18 +116,21 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
 
   const twitter: Metadata["twitter"] = {
     card: "summary_large_image",
-    title,
+    title: socialTitle,
     description: desc,
     images: [
       {
         url: imageUrl,
-        alt: ogImageAlt ?? title,
+        alt: ogImageAlt ?? socialTitle,
       },
     ],
     ...(siteConfig.twitterHandle
-      ? { site: siteConfig.twitterHandle, creator: siteConfig.twitterHandle }
+      ? { site: `@${siteConfig.twitterHandle}`, creator: `@${siteConfig.twitterHandle}` }
       : {}),
   };
+
+  const verification = getSiteVerification();
+  const socialOther = getSocialMetaOther();
 
   return {
     title,
@@ -118,10 +138,11 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     keywords: keywords?.length ? keywords : undefined,
     metadataBase: getMetadataBase(),
     applicationName: name,
-    authors: [{ name }],
+    authors: [{ name, url: getSiteUrl() }],
     creator: name,
     publisher: name,
     category: "Thiện nguyện",
+    referrer: "origin-when-cross-origin",
     formatDetection: {
       telephone: false,
       address: false,
@@ -132,6 +153,8 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
     },
     openGraph,
     twitter,
+    ...(verification ? { verification } : {}),
+    ...(Object.keys(socialOther).length > 0 ? { other: socialOther } : {}),
     robots: noIndex
       ? {
           index: false,
@@ -163,10 +186,12 @@ export function buildRootMetadata({
   title,
   description,
   keywords,
+  ogTitle,
 }: {
   title: string;
   description: string;
   keywords?: string[];
+  ogTitle?: string;
 }): Metadata {
   const name = siteName();
   const base = buildMetadata({
@@ -175,6 +200,8 @@ export function buildRootMetadata({
     pathname: "/",
     keywords,
     ogType: "website",
+    ogTitle,
+    ogImageAlt: `${name} — ${siteConfig.tagline}`,
   });
 
   return {

@@ -38,7 +38,7 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
 
   return (
     <section
-      className="border-b-[6px] border-brand-highlight bg-white py-14 lg:py-20"
+      className="border-b-[6px] border-brand-highlight bg-white section-pad"
       aria-labelledby="home-meal-heading"
     >
       <div className="container mx-auto max-w-7xl px-4">

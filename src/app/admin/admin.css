@@ -23,7 +23,7 @@
 }
 
 .admin-app .admin-btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--admin-accent)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--admin-accent-hover)] active:scale-[0.98];
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[var(--admin-accent)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--admin-accent-hover)] active:scale-[0.98];
 }
 
 .admin-app .admin-btn-secondary {
@@ -36,4 +36,9 @@
 
 .admin-app .admin-card {
   @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm;
+}
+
+.admin-app .admin-table-scroll {
+  @apply -mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0;
+  -webkit-overflow-scrolling: touch;
 }

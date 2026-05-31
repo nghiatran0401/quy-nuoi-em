@@ -1,5 +1,5 @@
 import { Save } from "lucide-react";
-import { AdminAlert } from "@/components/admin/admin-alert";
+import { AdminActionForm } from "@/components/admin/admin-action-form";
 import { AdminFormSection } from "@/components/admin/admin-form-section";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminImageField } from "@/components/admin/admin-image-field";
@@ -8,7 +8,6 @@ import { HomepageFaqEditor } from "@/components/admin/homepage-faq-editor";
 import { HomepageSectionsEditor } from "@/components/admin/homepage-sections-editor";
 import { ParagraphListEditor } from "@/components/admin/paragraph-list-editor";
 import { StatsListEditor } from "@/components/admin/stats-list-editor";
-import { formatAdminMessage, decodeAdminParam } from "@/lib/admin/messages";
 import { resolveDonateInfo, type DonateInfoContent } from "@/lib/data/donate-info";
 import { HOME_MEMBER_IMAGE_COUNT, resolveHomeMedia, type HomeMediaContent } from "@/lib/data/home-media";
 import { resolveHomePageContent, type HomePageContent } from "@/lib/data/homepage";
@@ -19,10 +18,6 @@ import {
 } from "@/lib/data/homepage-sections";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { saveHomepageContent } from "./actions";
-
-type HomePageAdminProps = {
-  searchParams: Promise<{ error?: string; message?: string }>;
-};
 
 type HomePageContentRow = {
   locale: string;
@@ -294,11 +289,7 @@ function HomepageEditorForm({
   );
 }
 
-export default async function HomepageAdminPage({ searchParams }: HomePageAdminProps) {
-  const params = await searchParams;
-  const message = formatAdminMessage(params.message);
-  const error = decodeAdminParam(params.error);
-
+export default async function HomepageAdminPage() {
   const supabase = createAdminClient();
   const { data } = await supabase
     .from("homepage_content")
@@ -319,21 +310,16 @@ export default async function HomepageAdminPage({ searchParams }: HomePageAdminP
         description="Chỉnh sửa theo từng khối trên trang chủ. Thứ tự và nhãn trường khớp với giao diện công khai."
       />
 
-      <div className="space-y-3">
-        {message ? <AdminAlert variant="success" message={message} /> : null}
-        {error ? <AdminAlert variant="error" message={error} /> : null}
-      </div>
-
-      <form action={saveHomepageContent} className="space-y-6">
+      <AdminActionForm action={saveHomepageContent} className="space-y-6">
         <HomepageEditorForm content={content} donateInfo={donateInfo} media={media} sections={sections} />
 
-        <div className="sticky bottom-4 z-10 flex justify-end">
-          <button type="submit" className="admin-btn-primary">
+        <div className="sticky bottom-4 z-10 flex justify-stretch sm:justify-end">
+          <button type="submit" className="admin-btn-primary w-full sm:w-auto">
             <Save className="h-4 w-4" />
             Lưu nội dung trang chủ
           </button>
         </div>
-      </form>
+      </AdminActionForm>
     </div>
   );
 }

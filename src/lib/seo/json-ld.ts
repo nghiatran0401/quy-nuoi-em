@@ -1,5 +1,6 @@
 import { brandVisual } from "@/config/brand-visual";
-import { getSiteUrl, siteConfig, siteName } from "@/config/site";
+import { publicCatalog } from "@/config/public-catalog";
+import { DEFAULT_OG_IMAGE_PATH, getSiteUrl, siteConfig, siteName } from "@/config/site";
 import { absoluteUrl } from "@/lib/seo/paths";
 
 const SITE_URL = getSiteUrl();
@@ -61,16 +62,16 @@ export function organizationJsonLd(): JsonLdObject {
     "@id": ORGANIZATION_ID,
     name,
     alternateName: [brandVisual.shortName],
-    legalName: brandVisual.name,
+    legalName: brandVisual.companyRegistration.legalName,
     url: SITE_URL,
     logo: logoImageObject(),
-    image: `${SITE_URL}${brandVisual.heroImage}`,
+    image: `${SITE_URL}${DEFAULT_OG_IMAGE_PATH}`,
     description:
-      "Dự án Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — 150.000đ/tháng giúp bé no bụng và đến trường.",
+      "Dự án Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — 150.000–170.000đ/tháng giúp bé no bụng và đến trường.",
     slogan: brandVisual.tagline,
     email: brandVisual.contact.email,
     telephone: `+84${brandVisual.contact.phone.replace(/^0/, "")}`,
-    foundingDate: "2020-10",
+    foundingDate: "2014",
     foundingLocation: {
       "@type": "Place",
       name: "Việt Nam",
@@ -93,6 +94,7 @@ export function organizationJsonLd(): JsonLdObject {
       siteConfig.social.messenger,
       siteConfig.social.facebookGroup,
       brandVisual.financeUrl,
+      publicCatalog.url,
     ].filter(Boolean),
     potentialAction: {
       "@type": "DonateAction",
@@ -116,18 +118,29 @@ export function websiteJsonLd(): JsonLdObject {
     "@type": "WebSite",
     "@id": WEBSITE_ID,
     name: siteName(),
+    alternateName: [brandVisual.shortName, "quynuoiem.com", "Nuôi Em"],
     url: SITE_URL,
     description: brandVisual.tagline,
     publisher: { "@id": ORGANIZATION_ID },
     inLanguage: "vi-VN",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${absoluteUrl("/danh-sach-bao-tro")}?q={search_term_string}`,
+    potentialAction: [
+      {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${absoluteUrl("/danh-sach-bao-tro")}?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
       },
-      "query-input": "required name=search_term_string",
-    },
+      {
+        "@type": "ReadAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: absoluteUrl("/dong-gop"),
+        },
+        name: "Đóng góp cho Dự án Nuôi Em",
+      },
+    ],
   };
 }
 

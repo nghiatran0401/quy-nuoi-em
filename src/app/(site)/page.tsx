@@ -26,9 +26,11 @@ export function generateMetadata(): Metadata {
   const { metadata } = siteCopy;
   return buildMetadata({
     title: metadata.title,
+    ogTitle: metadata.ogTitle,
     description: metadata.description,
     pathname: "/",
     keywords: metadata.keywords.split(",").map((k) => k.trim()),
+    ogImageAlt: `${metadata.ogTitle} — Nuôi cơm trưa, giúp trẻ tới trường`,
     ogType: "website",
   });
 }

@@ -1,8 +1,8 @@
 import { brandVisual } from "@/config/brand-visual";
 import { publicCatalog } from "@/config/public-catalog";
 
-/** Default share image (1200×630 recommended; hero works for social previews). */
-export const DEFAULT_OG_IMAGE_PATH = brandVisual.heroImage;
+/** Default share image (1200×630; committed under public/og for reliable social crawlers). */
+export const DEFAULT_OG_IMAGE_PATH = "/og/default.jpg";
 
 export const siteConfig = {
   name: brandVisual.name,
@@ -16,8 +16,11 @@ export const siteConfig = {
     messenger: brandVisual.social.messenger,
     facebookGroup: brandVisual.social.group,
   },
+  /** Optional @handle for X/Twitter cards (without @). */
   twitterHandle: undefined as string | undefined,
   defaultOgImage: DEFAULT_OG_IMAGE_PATH,
+  /** Primary brand hashtags for social copy / metadata (lowercase, no #). */
+  socialHashtags: ["nuoiem", "duannuoiem", "treemvungcao", "thiennguyen"] as const,
 } as const;
 
 export function siteName(): string {

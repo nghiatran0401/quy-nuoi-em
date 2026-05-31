@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Save } from "lucide-react";
-import { AdminAlert } from "@/components/admin/admin-alert";
+import { AdminActionForm } from "@/components/admin/admin-action-form";
 import { AdminFormSection } from "@/components/admin/admin-form-section";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import {
@@ -11,7 +11,6 @@ import {
 } from "@/components/admin/process-2026-lists-editor";
 import { ProcessStepsEditor } from "@/components/admin/process-steps-editor";
 import { StringListEditor } from "@/components/admin/string-list-editor";
-import { decodeAdminParam, formatAdminMessage } from "@/lib/admin/messages";
 import {
   resolveProcess2026ImageSrc,
   resolveProcess2026PageContentForAdmin,
@@ -19,10 +18,6 @@ import {
 } from "@/lib/data/process-2026-page";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { saveProcess2026PageContent } from "./actions";
-
-type Process2026AdminProps = {
-  searchParams: Promise<{ error?: string; message?: string }>;
-};
 
 type Process2026Row = {
   locale: "vi" | "en";
@@ -712,11 +707,7 @@ function processEditorCard(row: Process2026Row | null) {
   );
 }
 
-export default async function Process2026AdminPage({ searchParams }: Process2026AdminProps) {
-  const params = await searchParams;
-  const message = formatAdminMessage(params.message);
-  const error = decodeAdminParam(params.error);
-
+export default async function Process2026AdminPage() {
   const supabase = createAdminClient();
   const { data } = await supabase
     .from("process_2026_page_content")
@@ -732,12 +723,7 @@ export default async function Process2026AdminPage({ searchParams }: Process2026
         description="Chỉnh sửa nội dung và hình ảnh trên /quy-trinh-cap-ma-2026. SEO do code quản lý."
       />
 
-      <div className="space-y-3">
-        {message ? <AdminAlert variant="success" message={message} /> : null}
-        {error ? <AdminAlert variant="error" message={error} /> : null}
-      </div>
-
-      <form action={saveProcess2026PageContent} className="space-y-6">
+      <AdminActionForm action={saveProcess2026PageContent} className="space-y-6">
         {processEditorCard(viRow)}
         <div className="sticky bottom-4 z-10">
           <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
@@ -748,7 +734,7 @@ export default async function Process2026AdminPage({ searchParams }: Process2026
             </button>
           </div>
         </div>
-      </form>
+      </AdminActionForm>
     </div>
   );
 }

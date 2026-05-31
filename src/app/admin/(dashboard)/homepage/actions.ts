@@ -1,15 +1,19 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { buildHomeMediaFromForm } from "@/lib/admin/build-home-media";
+import { ADMIN_SUCCESS_MESSAGES } from "@/lib/admin/messages";
 import { buildHomepageUpsertPayload } from "@/lib/admin/parsers/homepage";
 import { runAdminSave } from "@/lib/admin/run-save";
+import type { AdminActionResult, AdminActionState } from "@/lib/admin/action-state";
 import { resolveHomeMedia } from "@/lib/data/home-media";
 
-export async function saveHomepageContent(formData: FormData) {
-  await runAdminSave(
-    "/admin/homepage",
+export async function saveHomepageContent(
+  _prevState: AdminActionState,
+  formData: FormData,
+): Promise<AdminActionResult> {
+  const result = await runAdminSave(
+    ADMIN_SUCCESS_MESSAGES.homepage_saved,
     "Không thể lưu nội dung trang chủ.",
     async ({ supabase }) => {
       const { data: existing } = await supabase
@@ -31,9 +35,12 @@ export async function saveHomepageContent(formData: FormData) {
     },
   );
 
-  revalidatePath("/");
-  revalidatePath("/dong-gop");
-  revalidatePath("/quy-trinh-cap-ma-2026");
-  revalidatePath("/admin/homepage");
-  redirect("/admin/homepage?message=homepage_saved");
+  if (result.ok) {
+    revalidatePath("/");
+    revalidatePath("/dong-gop");
+    revalidatePath("/quy-trinh-cap-ma-2026");
+    revalidatePath("/admin/homepage");
+  }
+
+  return result;
 }

@@ -201,7 +201,7 @@ function FaqItemCard({
                   value={item.address ?? ""}
                   onChange={(event) => onChange({ address: event.target.value })}
                   className="admin-input"
-                  placeholder="15 Ngách 352/15 đường Giải Phóng, Thanh Xuân, Hà Nội"
+                  placeholder="15 Ngách 352/15 đường Giải Phóng, Phường Phương Liệt, Thành phố Hà Nội"
                 />
               </div>
             </div>

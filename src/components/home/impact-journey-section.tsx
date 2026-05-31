@@ -71,9 +71,9 @@ function MilestoneBlock({ milestone, variant }: { milestone: ImpactMilestone; va
       <MilestoneHeading milestone={milestone} />
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
         <div id={`impact-${milestone.id}`}>
-          <p className="text-body text-justify text-[15px] leading-relaxed sm:text-base">{milestone.body}</p>
+          <p className="text-body text-[15px] leading-relaxed sm:text-base">{milestone.body}</p>
           {milestone.footer ? (
-            <p className="text-body mt-5 text-justify text-sm leading-relaxed text-brand-muted">{milestone.footer}</p>
+            <p className="text-body mt-5 text-sm leading-relaxed text-brand-muted">{milestone.footer}</p>
           ) : null}
         </div>
         <div>{variant === "grid" ? <InitiativeGrid items={milestone.initiatives} /> : <InitiativeStack items={milestone.initiatives} />}</div>
@@ -92,7 +92,7 @@ export function ImpactJourneySection({
   const infra = copy.infrastructure;
 
   return (
-    <section className="bg-white py-14 lg:py-20" aria-label="Hành trình mở rộng dự án Nuôi Em">
+    <section className="section-pad bg-white" aria-label="Hành trình mở rộng dự án Nuôi Em">
       <div className="container mx-auto max-w-7xl px-4">
         <article className="rounded-3xl border border-brand-border/70 bg-brand-warm/45 p-5 sm:p-7 lg:p-9" aria-labelledby="impact-milestones-heading">
           <h2 id="impact-milestones-heading" className="font-heading text-xl font-extrabold uppercase tracking-tight text-brand-ink sm:text-2xl">
@@ -138,7 +138,7 @@ export function ImpactJourneySection({
             </figure>
           </div>
 
-          <p className="text-body mx-auto mt-8 max-w-3xl text-justify text-[15px] leading-relaxed sm:text-base">
+          <p className="text-body mx-auto mt-8 max-w-3xl text-[15px] leading-relaxed sm:text-base">
             {infra.body.split(infra.bodyEmphasis).map((part, i, arr) =>
               i < arr.length - 1 ? (
                 <span key={part.slice(0, 12)}>

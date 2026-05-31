@@ -1,17 +1,21 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { buildProcess2026UpsertPayload } from "@/lib/admin/parsers/process-2026";
+import { ADMIN_SUCCESS_MESSAGES } from "@/lib/admin/messages";
 import { runAdminSave } from "@/lib/admin/run-save";
+import type { AdminActionResult, AdminActionState } from "@/lib/admin/action-state";
 import { resolveImageUrlFromForm } from "@/lib/admin/storage-upload";
 import { getProcess2026PageFallback } from "@/lib/data/process-2026-page";
 
 const PROCESS_2026_STORAGE_FOLDER = "quy-trinh-2026";
 
-export async function saveProcess2026PageContent(formData: FormData) {
-  await runAdminSave(
-    "/admin/quy-trinh-cap-ma-2026",
+export async function saveProcess2026PageContent(
+  _prevState: AdminActionState,
+  formData: FormData,
+): Promise<AdminActionResult> {
+  const result = await runAdminSave(
+    ADMIN_SUCCESS_MESSAGES.process_2026_saved,
     "Không thể lưu nội dung trang quy trình cấp mã.",
     async ({ supabase }) => {
       const fallback = getProcess2026PageFallback();
@@ -42,7 +46,10 @@ export async function saveProcess2026PageContent(formData: FormData) {
     },
   );
 
-  revalidatePath("/quy-trinh-cap-ma-2026");
-  revalidatePath("/admin/quy-trinh-cap-ma-2026");
-  redirect("/admin/quy-trinh-cap-ma-2026?message=process_2026_saved");
+  if (result.ok) {
+    revalidatePath("/quy-trinh-cap-ma-2026");
+    revalidatePath("/admin/quy-trinh-cap-ma-2026");
+  }
+
+  return result;
 }

@@ -26,17 +26,17 @@ export function QuyTrinhCapMa2026View({ content }: QuyTrinhCapMa2026ViewProps) {
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-20">
           <div>
             <p className="eyebrow mb-3">{c.hero.eyebrow}</p>
-            <h1 className="heading-display max-w-4xl text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="heading-display max-w-4xl text-[1.65rem] leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
               {c.hero.title}
               <span className="text-brand-accent-dark">{c.hero.titleAccent}</span>
             </h1>
             <p className="text-body mt-5 max-w-3xl text-lg">{c.hero.description}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href={messengerUrl} target="_blank" rel="noreferrer" className="btn-primary">
+            <div className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+              <a href={messengerUrl} target="_blank" rel="noreferrer" className="btn-primary w-full sm:w-auto">
                 <MessageCircle className="mr-2 h-5 w-5" aria-hidden />
                 {c.hero.messengerCta}
               </a>
-              <a href={groupUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+              <a href={groupUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full sm:w-auto">
                 {c.hero.groupCta}
               </a>
             </div>

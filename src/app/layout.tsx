@@ -2,12 +2,14 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { NavigationScroll } from "@/components/layout/navigation-scroll";
-import { getMetadataBase } from "@/config/site";
+import { getMetadataBase, siteName } from "@/config/site";
+import { getSiteVerification } from "@/lib/seo/verification";
 import "./globals.css";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fffcf8" },
     { media: "(prefers-color-scheme: dark)", color: "#f0784a" },
@@ -15,8 +17,12 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
+const verification = getSiteVerification();
+
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
+  ...(verification ? { verification } : {}),
+  referrer: "origin-when-cross-origin",
   icons: {
     icon: [
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -28,7 +34,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Nuôi Em",
+    title: siteName(),
   },
   other: {
     "mobile-web-app-capable": "yes",
@@ -48,7 +54,10 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="vi" suppressHydrationWarning>
-      <body className={`${plusJakarta.variable} font-sans antialiased`}>
+      <body
+        className={`${plusJakarta.variable} font-sans antialiased`}
+        suppressHydrationWarning
+      >
         <NavigationScroll />
         {children}
       </body>

@@ -16,6 +16,7 @@ export function generateMetadata(): Metadata {
   const { metadata } = siteCopy;
   return buildRootMetadata({
     title: metadata.title,
+    ogTitle: metadata.ogTitle,
     description: metadata.description,
     keywords: metadata.keywords.split(",").map((k) => k.trim()),
   });
@@ -35,9 +36,9 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
           <link rel="dns-prefetch" href={supabaseUrl} />
         </>
       ) : null}
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-screen min-w-0 flex-col">
         <SiteHeader />
-        <main className="flex-grow">{children}</main>
+        <main className="min-w-0 flex-grow">{children}</main>
         <SiteFooter />
       </div>
     </>

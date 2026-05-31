@@ -26,10 +26,25 @@ export const brandVisual = {
     phoneDisplay: "0975 302 307",
   },
   office: {
-    address: "15 Ngách 352/15 đường Giải Phóng - Thanh Xuân - Hà Nội",
+    address:
+      "15 Ngách 352/15 đường Giải Phóng, Phường Phương Liệt, Thành phố Hà Nội, Việt Nam",
     street: "15 Ngách 352/15 đường Giải Phóng",
-    locality: "Thanh Xuân",
-    region: "Hà Nội",
+    locality: "Phường Phương Liệt",
+    region: "Thành phố Hà Nội",
+  },
+  /** From Giấy chứng nhận đăng ký doanh nghiệp (22/05/2026). */
+  companyRegistration: {
+    legalName: "Công ty Cổ phần Doanh nghiệp Xã hội Quỹ Nuôi Em",
+    legalNameEn: "NUOI EM FOUNDATION SOCIAL ENTERPRISE JOINT STOCK COMPANY",
+    tradeName: "QUỸ NUÔI EM",
+    /** Mã số doanh nghiệp / mã số thuế */
+    enterpriseCode: "0111510373",
+    firstRegisteredAt: "22/05/2026",
+    issuedBy:
+      "Phòng Đăng ký kinh doanh và Tài chính doanh nghiệp — Sở Tài chính Thành phố Hà Nội",
+    charterCapitalVnd: "50.000.000",
+    legalRepresentative: "Hoàng Hoa Trung",
+    legalRepresentativeTitle: "Giám đốc",
   },
   social: {
     facebook: "https://www.facebook.com/duannuoiem",

@@ -1,6 +1,5 @@
 import { siteCopy, type NavLabelKey } from "@/content/site-copy";
 import { publicCatalog } from "@/config/public-catalog";
-import { STATIC_PAGE_PATHS } from "@/lib/seo/routes";
 
 export type NavItem = {
   href: string;
@@ -18,14 +17,6 @@ export const mainNavItems: NavItem[] = [
   { href: "/sao-ke-tai-khoan", labelKey: "statements" },
   { href: "/contact", labelKey: "contact" },
 ];
-
-export const footerSiteLinks: NavItem[] = [
-  ...mainNavItems,
-  { href: STATIC_PAGE_PATHS.donate, labelKey: "donate" },
-];
-
-export const footerSitePrimaryLinks: NavItem[] = footerSiteLinks.slice(0, 4);
-export const footerSiteSecondaryLinks: NavItem[] = footerSiteLinks.slice(4);
 
 export function navLabel(key: NavLabelKey): string {
   return siteCopy.nav[key];

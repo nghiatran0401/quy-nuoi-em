@@ -7,8 +7,8 @@ type StatCardProps = {
 export function StatCard({ stat }: StatCardProps) {
   return (
     <article className="brand-card flex h-full w-full flex-col px-4 py-5 sm:px-5 sm:py-6">
-      <div className="flex h-[5.25rem] items-center justify-center sm:h-[5.75rem]">
-        <p className="max-w-full text-center font-heading text-[clamp(1.75rem,2.75vw,3.25rem)] font-bold leading-none tracking-tight whitespace-nowrap text-brand-accent tabular-nums">
+      <div className="flex min-h-[4.5rem] items-center justify-center sm:min-h-[5.75rem]">
+        <p className="max-w-full text-center font-heading text-[clamp(1.5rem,5vw,3.25rem)] font-bold leading-none tracking-tight text-brand-accent tabular-nums break-words">
           {stat.value}
         </p>
       </div>

@@ -2,17 +2,20 @@
 
 import Link from "next/link";
 import { Archive, ExternalLink, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
-import { useState, type MouseEvent } from "react";
+import { useActionState, useState, type MouseEvent } from "react";
 import type { NewsArticleRow } from "@/types/supabase";
+import { ADMIN_ACTION_INITIAL, type AdminFormAction } from "@/lib/admin/action-state";
 
 type NewsRowActionsProps = {
   row: Pick<NewsArticleRow, "id" | "slug" | "title" | "status" | "locale">;
-  archiveAction: (formData: FormData) => Promise<void>;
-  deleteAction: (formData: FormData) => Promise<void>;
+  archiveAction: AdminFormAction;
+  deleteAction: AdminFormAction;
 };
 
 export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActionsProps) {
   const [open, setOpen] = useState(false);
+  const [, archiveFormAction] = useActionState(archiveAction, ADMIN_ACTION_INITIAL);
+  const [, deleteFormAction] = useActionState(deleteAction, ADMIN_ACTION_INITIAL);
 
   function confirmDelete(event: MouseEvent<HTMLButtonElement>) {
     const ok = window.confirm(`Xóa vĩnh viễn "${row.title}"?\n\nHành động này không thể hoàn tác.`);
@@ -87,7 +90,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
               </Link>
             ) : null}
             {row.status !== "archived" ? (
-              <form action={archiveAction}>
+              <form action={archiveFormAction}>
                 <input type="hidden" name="id" value={row.id} />
                 <button
                   type="submit"
@@ -100,7 +103,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
                 </button>
               </form>
             ) : null}
-            <form action={deleteAction}>
+            <form action={deleteFormAction}>
               <input type="hidden" name="id" value={row.id} />
               <button
                 type="submit"

@@ -59,7 +59,7 @@ const homepage = {
     eyebrow: "Bữa cơm níu chân trẻ tới trường",
     title: "Dự án Nuôi Em",
     description:
-      "150.000đ - 170.000đ mỗi tháng giúp bé vùng cao no bụng, đi học đầy đủ. Biết rõ bé nào, có thể đi thăm — mỗi em một mã NE, mỗi em một người nuôi.",
+      "Trên những mái nhà tranh vùng cao, 150.000–170.000đ mỗi tháng là đủ để một em no bụng và đi học đầy đủ. Anh chị biết rõ em nào, có thể đến thăm — mỗi em một mã NE, mỗi em một người nuôi.",
     sponsorNow: "Đóng góp ngay",
     learnMore: "Tìm hiểu thêm",
   },

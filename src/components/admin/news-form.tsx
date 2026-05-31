@@ -1,9 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ImageIcon, Save } from "lucide-react";
 import type { NewsArticleRow } from "@/types/supabase";
-import { AdminAlert } from "@/components/admin/admin-alert";
-import { formatAdminMessage, decodeAdminParam } from "@/lib/admin/messages";
+import { AdminActionForm } from "@/components/admin/admin-action-form";
+import type { AdminFormAction } from "@/lib/admin/action-state";
 
 type NewsFormValues = Pick<
   NewsArticleRow,
@@ -13,10 +15,8 @@ type NewsFormValues = Pick<
 type NewsFormProps = {
   mode: "create" | "edit";
   submitLabel: string;
-  action: (formData: FormData) => Promise<void>;
+  action: AdminFormAction;
   values?: Partial<NewsFormValues>;
-  error?: string;
-  message?: string;
 };
 
 function toDatetimeLocal(value: string | null | undefined): string {
@@ -30,10 +30,7 @@ function toDatetimeLocal(value: string | null | undefined): string {
   )}`;
 }
 
-export function NewsForm({ mode, submitLabel, action, values, error, message }: NewsFormProps) {
-  const successMessage = formatAdminMessage(message);
-  const errorMessage = decodeAdminParam(error);
-
+export function NewsForm({ mode, submitLabel, action, values }: NewsFormProps) {
   return (
     <div className="space-y-6">
       <Link href="/admin/news" className="admin-btn-ghost -ml-2 w-fit">
@@ -52,10 +49,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
         </p>
       </div>
 
-      {successMessage ? <AdminAlert variant="success" message={successMessage} /> : null}
-      {errorMessage ? <AdminAlert variant="error" message={errorMessage} /> : null}
-
-      <form action={action} className="grid gap-6 lg:grid-cols-[1fr_280px]">
+      <AdminActionForm action={action} className="grid gap-6 lg:grid-cols-[1fr_280px]">
         <div className="admin-card space-y-6 p-5 sm:p-6">
           <section className="space-y-4">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Content</h2>
@@ -142,7 +136,9 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
                 defaultValue={toDatetimeLocal(values?.published_at)}
                 className="admin-input"
               />
-              <p className="mt-1.5 text-xs text-slate-500">Áp dụng khi trạng thái là đã xuất bản. Để trống sẽ dùng thời gian hiện tại.</p>
+              <p className="mt-1.5 text-xs text-slate-500">
+                Áp dụng khi trạng thái là đã xuất bản. Để trống sẽ dùng thời gian hiện tại.
+              </p>
             </div>
             <button type="submit" className="admin-btn-primary w-full">
               <Save className="h-4 w-4" />
@@ -188,7 +184,7 @@ export function NewsForm({ mode, submitLabel, action, values, error, message }: 
             </div>
           </div>
         </div>
-      </form>
+      </AdminActionForm>
     </div>
   );
 }

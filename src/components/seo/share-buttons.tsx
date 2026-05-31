@@ -197,7 +197,7 @@ export function ShareButtons({
             target="_blank"
             rel="noopener noreferrer nofollow"
             aria-label={t.shareOn(label)}
-            className="inline-flex items-center gap-2 rounded-full border border-brand-border bg-white px-4 py-2 text-sm font-medium text-brand-ink transition hover:border-brand-accent/40 hover:text-brand-accent"
+            className="inline-flex min-h-10 items-center gap-2 rounded-full border border-brand-border bg-white px-3 py-2 text-sm font-medium text-brand-ink transition hover:border-brand-accent/40 hover:text-brand-accent sm:px-4"
           >
             <Icon className="h-4 w-4" />
             {label}
@@ -207,7 +207,7 @@ export function ShareButtons({
           href={siteConfig.social.facebook}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-brand-border bg-white px-4 py-2 text-sm font-medium text-brand-ink transition hover:border-brand-green/50 hover:text-brand-green"
+          className="inline-flex min-h-10 items-center gap-2 rounded-full border border-brand-border bg-white px-3 py-2 text-sm font-medium text-brand-ink transition hover:border-brand-green/50 hover:text-brand-green sm:px-4"
         >
           <Link2 className="h-4 w-4" aria-hidden />
           {t.projectPage}
@@ -216,7 +216,7 @@ export function ShareButtons({
           type="button"
           onClick={copyLink}
           aria-label={t.copy}
-          className="inline-flex items-center gap-2 rounded-full border border-brand-border bg-white px-4 py-2 text-sm font-medium text-brand-ink transition hover:border-brand-accent/40 hover:text-brand-accent"
+          className="inline-flex min-h-10 items-center gap-2 rounded-full border border-brand-border bg-white px-3 py-2 text-sm font-medium text-brand-ink transition hover:border-brand-accent/40 hover:text-brand-accent sm:px-4"
         >
           {copied ? (
             <Check className="h-4 w-4 text-brand-success" aria-hidden />

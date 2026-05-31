@@ -14,20 +14,22 @@ export function HeroSection({ content, heroImageUrl }: HeroSectionProps) {
   const copy = content ?? siteCopy.home;
 
   return (
-    <section className="hero-backdrop relative overflow-hidden py-14 lg:py-24">
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-20">
-          <div className="w-full text-center lg:w-1/2 lg:text-left">
-            <p className="eyebrow mb-4">{copy.eyebrow}</p>
-            <h1 className="heading-display mb-6 text-4xl leading-tight md:text-6xl">{copy.title}</h1>
-            <p className="text-body mb-10 text-justify text-lg md:text-xl lg:text-left">
+    <section className="hero-backdrop relative overflow-hidden py-10 sm:py-14 lg:py-24">
+      <div className="page-container relative z-10">
+        <div className="flex flex-col items-center gap-8 sm:gap-12 lg:flex-row lg:gap-20">
+          <div className="w-full min-w-0 text-center lg:w-1/2 lg:text-left">
+            <p className="eyebrow mb-3 sm:mb-4">{copy.eyebrow}</p>
+            <h1 className="heading-display mb-4 text-[1.75rem] leading-[1.15] sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
+              {copy.title}
+            </h1>
+            <p className="text-body mb-8 text-base leading-relaxed sm:mb-10 sm:text-lg md:text-xl lg:text-left">
               {copy.description}
             </p>
-            <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-              <Link href="/dong-gop" className="btn-primary px-8 py-4">
+            <div className="flex w-full flex-col justify-center gap-3 sm:flex-row sm:gap-4 lg:justify-start">
+              <Link href="/dong-gop" className="btn-primary w-full sm:w-auto">
                 {copy.sponsorNow}
               </Link>
-              <Link href="/about" className="btn-secondary px-8 py-4">
+              <Link href="/about" className="btn-secondary w-full sm:w-auto">
                 {copy.learnMore}
               </Link>
             </div>

@@ -1,4 +1,4 @@
-const MESSAGE_LABELS: Record<string, string> = {
+export const ADMIN_SUCCESS_MESSAGES = {
   created: "Đã tạo bài viết thành công.",
   saved: "Đã lưu thay đổi.",
   archived: "Đã lưu trữ bài viết.",
@@ -9,8 +9,9 @@ const MESSAGE_LABELS: Record<string, string> = {
   partner_logo_deleted: "Đã xóa logo.",
   process_2026_saved: "Đã lưu nội dung quy trình cấp mã 2026.",
   report_cover_saved: "Đã cập nhật ảnh bìa báo cáo.",
-};
+} as const;
 
+/** Decode error text passed via login redirect query (legacy). */
 export function decodeAdminParam(value: string | undefined): string | undefined {
   if (!value) return undefined;
   try {
@@ -18,9 +19,4 @@ export function decodeAdminParam(value: string | undefined): string | undefined 
   } catch {
     return value;
   }
-}
-
-export function formatAdminMessage(code: string | undefined): string | undefined {
-  if (!code) return undefined;
-  return MESSAGE_LABELS[code] ?? decodeAdminParam(code);
 }

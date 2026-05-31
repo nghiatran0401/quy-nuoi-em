@@ -7,12 +7,11 @@ import type { NewsArticleRow } from "@/types/supabase";
 
 type EditNewsPageProps = {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ error?: string; message?: string }>;
 };
 
-export default async function EditNewsPage({ params, searchParams }: EditNewsPageProps) {
+export default async function EditNewsPage({ params }: EditNewsPageProps) {
   await requireAdminSession();
-  const [{ id }, query] = await Promise.all([params, searchParams]);
+  const { id } = await params;
   const supabase = createAdminClient();
   const { data } = await supabase.from("news_articles").select("*").eq("id", id).maybeSingle();
 
@@ -23,14 +22,5 @@ export default async function EditNewsPage({ params, searchParams }: EditNewsPag
   const values = data as NewsArticleRow;
   const action = updateNewsArticle.bind(null, id);
 
-  return (
-    <NewsForm
-      mode="edit"
-      submitLabel="Lưu thay đổi"
-      action={action}
-      values={values}
-      error={query.error}
-      message={query.message}
-    />
-  );
+  return <NewsForm mode="edit" submitLabel="Lưu thay đổi" action={action} values={values} />;
 }

@@ -1,9 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { buildAboutUpsertPayload } from "@/lib/admin/parsers/about";
+import { ADMIN_SUCCESS_MESSAGES } from "@/lib/admin/messages";
 import { runAdminSave } from "@/lib/admin/run-save";
+import type { AdminActionResult, AdminActionState } from "@/lib/admin/action-state";
 import {
   deleteStoredImageIfManaged,
   resolveImageUrlFromForm,
@@ -13,9 +14,12 @@ import { resolveAboutPageContent } from "@/lib/data/about-page";
 
 const ABOUT_STORAGE_FOLDER = "about";
 
-export async function saveAboutPageContent(formData: FormData) {
-  await runAdminSave(
-    "/admin/about",
+export async function saveAboutPageContent(
+  _prevState: AdminActionState,
+  formData: FormData,
+): Promise<AdminActionResult> {
+  const result = await runAdminSave(
+    ADMIN_SUCCESS_MESSAGES.about_saved,
     "Không thể lưu nội dung trang giới thiệu.",
     async ({ supabase }) => {
       const base = defaultAboutPageContent();
@@ -38,10 +42,7 @@ export async function saveAboutPageContent(formData: FormData) {
       const payload = buildAboutUpsertPayload(formData);
       payload.hero_image = hero_image ?? resolved.heroImage ?? base.heroImage;
 
-      if (
-        existingRow?.hero_image &&
-        payload.hero_image !== existingRow.hero_image
-      ) {
+      if (existingRow?.hero_image && payload.hero_image !== existingRow.hero_image) {
         await deleteStoredImageIfManaged(supabase, existingRow.hero_image, ABOUT_STORAGE_FOLDER);
       }
 
@@ -54,7 +55,10 @@ export async function saveAboutPageContent(formData: FormData) {
     },
   );
 
-  revalidatePath("/about");
-  revalidatePath("/admin/about");
-  redirect("/admin/about?message=about_saved");
+  if (result.ok) {
+    revalidatePath("/about");
+    revalidatePath("/admin/about");
+  }
+
+  return result;
 }

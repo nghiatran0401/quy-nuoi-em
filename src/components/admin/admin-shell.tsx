@@ -69,7 +69,7 @@ export function AdminShell({ children, footer }: AdminShellProps) {
           <p className="text-sm font-semibold text-slate-900">Bảng điều khiển quản trị</p>
         </header>
 
-        <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:py-8">{children}</main>
+        <main className="mx-auto max-w-6xl px-4 py-5 pb-safe sm:px-6 sm:py-6 lg:py-8">{children}</main>
       </div>
     </div>
   );

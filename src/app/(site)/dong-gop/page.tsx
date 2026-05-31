@@ -10,11 +10,11 @@ import { donatePageJsonLd, siteBreadcrumb } from "@/lib/seo/json-ld";
 export const metadata: Metadata = createStaticPageMetadata("donate", {
   keywords: [
     "đóng góp Nuôi Em",
+    "chuyển khoản mã NE",
+    "quyên góp cơm trưa",
     "quyên góp trẻ vùng cao",
-    "ủng hộ trẻ vùng cao",
+    "MB Bank Quỹ Nuôi Em",
     "tài khoản thiện nguyện Ngân hàng Quân đội",
-    "mã NE",
-    "chuyển khoản Ngân hàng Quân đội",
     "QUY NUOI EM",
   ],
 });

@@ -27,7 +27,7 @@ type ChildrenTableProps = {
 };
 
 const selectClassName =
-  "rounded-lg border border-brand-border bg-white px-4 py-3 text-sm text-brand-muted focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent";
+  "min-h-11 w-full rounded-lg border border-brand-border bg-white px-4 py-3 text-base text-brand-muted focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent sm:text-sm lg:w-auto";
 
 export function ChildrenTable({
   records,
@@ -54,12 +54,12 @@ export function ChildrenTable({
 
   return (
     <section>
-      <p className="notice-info mx-auto mb-6 max-w-2xl">
+      <p className="notice-info mx-auto mb-6 max-w-2xl px-1">
         {labels.sampleDataNote.replace("{shown}", String(records.length))}
       </p>
 
-      <div className="mb-8 flex flex-col gap-4 rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm lg:flex-row">
-        <div className="relative flex-grow">
+      <div className="mb-6 flex flex-col gap-3 rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm sm:mb-8 sm:gap-4 lg:flex-row">
+        <div className="relative min-w-0 flex-grow">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <Search className="h-5 w-5 text-brand-muted/70" aria-hidden />
           </div>
@@ -68,13 +68,14 @@ export function ChildrenTable({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={labels.searchPlaceholder}
-            className="w-full rounded-lg border border-brand-border py-3 pl-10 pr-4 text-sm focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            className="min-h-11 w-full rounded-lg border border-brand-border py-3 pl-10 pr-4 text-base focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent sm:text-sm"
           />
         </div>
         <select
           value={province}
           onChange={(e) => setProvince(e.target.value)}
           className={selectClassName}
+          aria-label={labels.allProvinces}
         >
           <option value="">{labels.allProvinces}</option>
           {provinces.map((p) => (
@@ -87,6 +88,7 @@ export function ChildrenTable({
           value={status}
           onChange={(e) => setStatus(e.target.value)}
           className={selectClassName}
+          aria-label={labels.allStatuses}
         >
           <option value="">{labels.allStatuses}</option>
           {statuses.map((s) => (
@@ -97,8 +99,52 @@ export function ChildrenTable({
         </select>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-brand-border/60 bg-white shadow-sm">
-        <table className="min-w-full divide-y divide-brand-border text-left text-sm">
+      {/* Mobile: card list */}
+      <ul className="space-y-3 lg:hidden" aria-label={labels.fullName}>
+        {filtered.map((child) => (
+          <li
+            key={child.code}
+            className="rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm"
+          >
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <Link href={`/danh-sach-bao-tro/${child.code}`} className="link-accent font-mono text-sm">
+                {child.code}
+              </Link>
+              <StatusBadge status={child.status} />
+            </div>
+            <p className="mt-2 font-medium text-brand-ink">{child.name}</p>
+            <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-brand-muted">
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">
+                  {labels.birthYear}
+                </dt>
+                <dd className="text-brand-ink">{child.birthYear}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">
+                  {labels.gender}
+                </dt>
+                <dd className="text-brand-ink">{child.gender}</dd>
+              </div>
+              <div className="col-span-2">
+                <dt className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">
+                  {labels.province}
+                </dt>
+                <dd className="text-brand-ink">{child.province}</dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+      {filtered.length === 0 ? (
+        <p className="rounded-xl border border-brand-border/60 bg-white p-8 text-center text-brand-muted lg:hidden">
+          {labels.noResults}
+        </p>
+      ) : null}
+
+      {/* Desktop: table */}
+      <div className="table-scroll hidden rounded-xl border border-brand-border/60 bg-white shadow-sm lg:block">
+        <table className="w-full divide-y divide-brand-border text-left text-sm">
           <thead className="bg-brand-sky-soft text-xs font-bold uppercase tracking-wide text-brand-ink">
             <tr>
               <th className="px-4 py-3">{labels.profileCode}</th>
@@ -132,7 +178,8 @@ export function ChildrenTable({
           <p className="p-8 text-center text-brand-muted">{labels.noResults}</p>
         ) : null}
       </div>
-      <p className="mt-3 text-right text-xs text-brand-muted/70">
+
+      <p className="mt-3 text-center text-xs text-brand-muted/70 sm:text-right">
         {filtered.length} / {summaryTotal}
       </p>
     </section>

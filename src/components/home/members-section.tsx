@@ -8,11 +8,11 @@ type Props = { content?: HomeMembersContent; memberImageUrls: string[] };
 
 /** 5 bằng khen bên phải — lưới 3×2 như nuoiem.com */
 const awardLayout = [
-  { index: 1, className: "col-span-2 aspect-[16/10] min-h-[190px] md:min-h-[240px]" },
-  { index: 2, className: "col-span-1 aspect-[4/5] min-h-[190px] md:min-h-[240px]" },
-  { index: 3, className: "col-span-1 aspect-[16/10] min-h-[125px] md:min-h-[150px]" },
-  { index: 4, className: "col-span-1 aspect-[16/10] min-h-[125px] md:min-h-[150px]" },
-  { index: 5, className: "col-span-1 aspect-[16/10] min-h-[125px] md:min-h-[150px]" },
+  { index: 1, className: "col-span-2 aspect-[16/10] min-h-[140px] sm:min-h-[190px] md:min-h-[240px]" },
+  { index: 2, className: "col-span-1 aspect-[4/5] min-h-[140px] sm:min-h-[190px] md:min-h-[240px]" },
+  { index: 3, className: "col-span-1 aspect-[16/10] min-h-[100px] sm:min-h-[125px] md:min-h-[150px]" },
+  { index: 4, className: "col-span-1 aspect-[16/10] min-h-[100px] sm:min-h-[125px] md:min-h-[150px]" },
+  { index: 5, className: "col-span-1 aspect-[16/10] min-h-[100px] sm:min-h-[125px] md:min-h-[150px]" },
 ] as const;
 
 export function MembersSection({ content, memberImageUrls }: Props) {
@@ -20,12 +20,12 @@ export function MembersSection({ content, memberImageUrls }: Props) {
   const eyebrow = copy.eyebrow?.trim();
 
   return (
-    <section className="section-warm overflow-hidden pb-6 pt-14 lg:pb-8 lg:pt-16">
-      <div className="container mx-auto max-w-7xl px-4">
+    <section className="section-warm overflow-hidden pb-6 pt-10 sm:pt-14 lg:pb-8 lg:pt-16">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid items-start gap-7 lg:grid-cols-12 lg:gap-8">
           <div className="order-2 w-full lg:order-1 lg:col-span-5">
             {eyebrow ? <h2 className="eyebrow mb-4">{eyebrow}</h2> : null}
-            <h3 className="heading-display mb-4 text-3xl leading-tight md:text-5xl">
+            <h3 className="heading-display mb-4 text-2xl leading-tight sm:text-3xl md:text-5xl">
               {copy.title}
             </h3>
             <div className="text-body max-w-xl space-y-3 text-base leading-relaxed text-brand-muted sm:text-lg lg:text-left">

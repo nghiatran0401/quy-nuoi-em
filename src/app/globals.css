@@ -47,12 +47,26 @@
 
 @layer base {
   html {
-    /* Offset in-page anchors below sticky header (site-header is h-20). */
-    scroll-padding-top: 5rem;
+    /* Offset in-page anchors below sticky header (site-header is h-16–20). */
+    scroll-padding-top: 4.5rem;
+    overflow-x: clip;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
   }
 
   body {
     @apply bg-brand-warm font-body text-brand-ink antialiased;
+    overflow-x: clip;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
   }
 
   ::selection {
@@ -117,15 +131,15 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-brand-accent px-8 py-3.5 text-center text-base font-bold text-white shadow-[0_4px_16px_-4px_rgb(240_120_74/0.45)] transition duration-200 hover:bg-brand-accent-light hover:shadow-[0_6px_22px_-4px_rgb(240_120_74/0.4)] active:scale-[0.98];
+    @apply inline-flex min-h-11 items-center justify-center rounded-full bg-brand-accent px-6 py-3 text-center text-base font-bold text-white shadow-[0_4px_16px_-4px_rgb(240_120_74/0.45)] transition duration-200 hover:bg-brand-accent-light hover:shadow-[0_6px_22px_-4px_rgb(240_120_74/0.4)] active:scale-[0.98] sm:px-8 sm:py-3.5;
   }
 
   .btn-primary-sm {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-accent px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_-2px_rgb(240_120_74/0.4)] transition duration-200 hover:bg-brand-accent-light active:scale-[0.98];
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_-2px_rgb(240_120_74/0.4)] transition duration-200 hover:bg-brand-accent-light active:scale-[0.98] sm:px-6;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-border bg-white px-8 py-3.5 text-center text-base font-bold text-brand-ink transition duration-200 hover:border-brand-green/40 hover:bg-brand-sky-soft active:scale-[0.98];
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border-2 border-brand-border bg-white px-6 py-3 text-center text-base font-bold text-brand-ink transition duration-200 hover:border-brand-green/40 hover:bg-brand-sky-soft active:scale-[0.98] sm:px-8 sm:py-3.5;
   }
 
   .link-accent {
@@ -146,6 +160,34 @@
 
   .site-header {
     @apply sticky top-0 z-50 border-b border-brand-border/50 bg-white/90 shadow-[var(--shadow-brand-soft)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/85;
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .section-pad {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .section-pad-lg {
+    @apply py-14 sm:py-16 lg:py-24;
+  }
+
+  .page-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .table-scroll {
+    @apply -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-scroll > table {
+    @apply min-w-[40rem];
+  }
+
+  @media (min-width: 1024px) {
+    .table-scroll > table {
+      min-width: 100%;
+    }
   }
 
   /* Transparent logo — subtle halo so mark reads on white header */
@@ -268,7 +310,21 @@
     animation-play-state: paused;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scroll {
+      animation: none;
+    }
+  }
+
   .focus-ring {
     @apply focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent/25;
+  }
+
+  .touch-target {
+    @apply min-h-11 min-w-11;
+  }
+
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
   }
 }

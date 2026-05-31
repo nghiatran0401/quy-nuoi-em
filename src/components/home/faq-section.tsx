@@ -25,12 +25,12 @@ export function FaqSection({ content, donateInfo, donateQrUrl }: Props) {
   const [openId, setOpenId] = useState(copy.items[0]?.id ?? "");
 
   return (
-    <section className="section-elevated py-24">
-      <div className="container mx-auto max-w-3xl px-4">
-        <div className="mb-16 text-center">
+    <section className="section-elevated section-pad-lg">
+      <div className="container mx-auto max-w-3xl px-4 sm:px-6">
+        <div className="mb-10 text-center sm:mb-16">
           <h2 className="eyebrow mb-3">{copy.eyebrow}</h2>
-          <h3 className="heading-display mb-6 text-3xl md:text-5xl">{copy.title}</h3>
-          <p className="text-body mx-auto max-w-2xl text-lg">{copy.intro}</p>
+          <h3 className="heading-display mb-4 text-2xl sm:mb-6 sm:text-3xl md:text-5xl">{copy.title}</h3>
+          <p className="text-body mx-auto max-w-2xl text-base sm:text-lg">{copy.intro}</p>
         </div>
         <div className="flex flex-col gap-3">
           {copy.items.map((item) => {
@@ -43,12 +43,12 @@ export function FaqSection({ content, donateInfo, donateQrUrl }: Props) {
               >
                 <button
                   type="button"
-                  className="flex w-full items-center gap-5 p-6 text-left focus:outline-none md:p-8"
+                  className="focus-ring flex w-full items-center gap-3 p-4 text-left sm:gap-5 sm:p-6 md:p-8"
                   onClick={() => setOpenId(open ? "" : item.id)}
                   aria-expanded={open}
                 >
                   <div
-                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-colors ${
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors sm:h-12 sm:w-12 ${
                       open ? "bg-brand-accent text-white" : "bg-white text-brand-accent shadow-sm ring-1 ring-brand-border/80"
                     }`}
                   >
@@ -56,7 +56,7 @@ export function FaqSection({ content, donateInfo, donateQrUrl }: Props) {
                   </div>
                   <div className="flex-1">
                     <h4
-                      className={`font-heading text-lg font-bold md:text-xl ${
+                      className={`font-heading text-base font-bold sm:text-lg md:text-xl ${
                         open ? "text-brand-ink" : "text-brand-ink/90"
                       }`}
                     >
@@ -76,8 +76,10 @@ export function FaqSection({ content, donateInfo, donateQrUrl }: Props) {
                 >
                   <div className="overflow-hidden">
                     <div
-                      className={`px-6 pb-8 pt-0 md:px-8 ${
-                        item.type === "ngan-hang" ? "pl-6 md:pl-8" : "pl-[5.5rem] md:pl-[6.5rem]"
+                      className={`px-4 pb-6 pt-0 sm:px-6 sm:pb-8 md:px-8 ${
+                        item.type === "ngan-hang"
+                          ? ""
+                          : "sm:pl-[5.5rem] md:pl-[6.5rem]"
                       }`}
                     >
                       {item.type === "dia-chi" ? (

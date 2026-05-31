@@ -3,6 +3,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { buildAboutUpsertPayload } from "@/lib/admin/parsers/about";
 import { buildHomepageUpsertPayload } from "@/lib/admin/parsers/homepage";
 import { defaultHomeMedia } from "@/lib/data/home-media";
+import { defaultHomeSectionsContent } from "@/lib/data/homepage-sections";
 import { parseNewsFields } from "@/lib/admin/parsers/news";
 import { buildProcess2026UpsertPayload } from "@/lib/admin/parsers/process-2026";
 import { makeFormData } from "../helpers/form-data";
@@ -114,6 +115,7 @@ describe.skipIf(!hasIntegrationEnv())("Admin CRUD integration (Supabase)", () =>
       vi_members_cta: "Join",
       vi_stats_json: JSON.stringify([{ value: "1", label: "A", hint: "" }]),
       vi_faq_json: JSON.stringify({ eyebrow: "f", title: "t", intro: "i", items: [] }),
+      vi_sections_json: JSON.stringify(defaultHomeSectionsContent),
       vi_donate_bank: "MB",
       vi_donate_branch: "Ngân hàng TMCP Quân đội",
       vi_donate_account_name: "CTCP DNXH QUY NUOI EM",

@@ -2,28 +2,37 @@
 
 import Link from "next/link";
 import { Heart, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/brand/logo";
 import { mainNavItems, navLabel } from "@/lib/navigation";
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
   return (
     <nav className="site-header transition-all duration-300">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
-          <div className="flex shrink-0 items-center">
+      <div className="page-container">
+        <div className="flex h-16 items-center justify-between gap-3 sm:h-20">
+          <div className="flex min-w-0 shrink-0 items-center">
             <Link
               href="/"
               className="block rounded-xl transition-opacity hover:opacity-90"
               onClick={() => setMobileOpen(false)}
             >
-              <BrandLogo priority className="h-11 w-auto max-w-[140px]" />
+              <BrandLogo priority className="h-9 w-auto max-w-[120px] sm:h-11 sm:max-w-[140px]" />
             </Link>
           </div>
 
-          <div className="hidden items-center space-x-8 md:flex">
+          <div className="hidden items-center gap-6 lg:flex xl:gap-8">
             {mainNavItems.map((item) =>
               item.external ? (
                 <a
@@ -31,29 +40,29 @@ export function SiteHeader() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="nav-link"
+                  className="nav-link whitespace-nowrap"
                 >
                   {navLabel(item.labelKey)}
                 </a>
               ) : (
-                <Link key={item.href} href={item.href} className="nav-link">
+                <Link key={item.href} href={item.href} className="nav-link whitespace-nowrap">
                   {navLabel(item.labelKey)}
                 </Link>
               ),
             )}
           </div>
 
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <Link href="/dong-gop" className="btn-primary-sm">
               <Heart className="h-5 w-5 fill-current text-brand-highlight" aria-hidden />
               <span>{navLabel("donate")}</span>
             </Link>
           </div>
 
-          <div className="flex items-center md:hidden">
+          <div className="flex items-center lg:hidden">
             <button
               type="button"
-              className="p-2 text-brand-muted transition-colors hover:text-brand-ink focus:outline-none"
+              className="touch-target focus-ring inline-flex items-center justify-center rounded-lg p-2 text-brand-muted transition-colors hover:bg-brand-surface hover:text-brand-ink"
               aria-label={mobileOpen ? navLabel("closeMenu") : navLabel("openMenu")}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((open) => !open)}
@@ -64,7 +73,7 @@ export function SiteHeader() {
         </div>
 
         {mobileOpen ? (
-          <div className="space-y-1 border-t border-brand-border pb-4 pt-3 md:hidden">
+          <div className="max-h-[min(70vh,calc(100dvh-4.5rem))] space-y-1 overflow-y-auto overscroll-contain border-t border-brand-border pb-safe pt-3 lg:hidden">
             {mainNavItems.map((item) =>
               item.external ? (
                 <a
@@ -72,7 +81,7 @@ export function SiteHeader() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block rounded-lg px-3 py-2 text-brand-ink hover:bg-brand-surface"
+                  className="block min-h-11 rounded-lg px-3 py-2.5 text-base text-brand-ink hover:bg-brand-surface active:bg-brand-sky-soft"
                   onClick={() => setMobileOpen(false)}
                 >
                   {navLabel(item.labelKey)}
@@ -81,14 +90,14 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block rounded-lg px-3 py-2 text-brand-ink hover:bg-brand-surface"
+                  className="block min-h-11 rounded-lg px-3 py-2.5 text-base text-brand-ink hover:bg-brand-surface active:bg-brand-sky-soft"
                   onClick={() => setMobileOpen(false)}
                 >
                   {navLabel(item.labelKey)}
                 </Link>
               ),
             )}
-            <div className="px-3 pt-3">
+            <div className="px-3 pt-2">
               <Link
                 href="/dong-gop"
                 className="btn-primary-sm flex w-full justify-center"

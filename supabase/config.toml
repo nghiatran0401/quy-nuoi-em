@@ -6,7 +6,7 @@ project_id = "quy-nuoi-em"
 [api]
 enabled = true
 port = 54321
-schemas = ["public"]
+schemas = ["public", "graphql_public"]
 extra_search_path = ["public", "extensions"]
 max_rows = 1000
 
@@ -20,8 +20,21 @@ port = 54323
 
 [auth]
 enabled = true
-site_url = "http://localhost:3000"
-additional_redirect_urls = ["http://localhost:3000/admin/auth/callback"]
+site_url = "https://quynuoiem.com"
+additional_redirect_urls = [
+  "http://localhost:3000/admin/auth/callback",
+  "https://quynuoiem.com/admin/auth/callback",
+  "https://www.quynuoiem.com/admin/auth/callback",
+]
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+[auth.email]
+enable_confirmations = true
+max_frequency = "1m0s"
+otp_length = 8
 
 [storage]
 enabled = true

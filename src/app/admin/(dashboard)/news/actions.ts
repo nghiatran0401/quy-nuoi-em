@@ -1,19 +1,16 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { adminActionError, adminActionSuccess, type AdminActionResult, type AdminActionState } from "@/lib/admin/action-state";
 import { getFormText, getActionErrorMessage, isNavigationRedirect } from "@/lib/admin/form-utils";
+import { ADMIN_SUCCESS_MESSAGES } from "@/lib/admin/messages";
 import { parseNewsFields } from "@/lib/admin/parsers/news";
 import { resolveImageUrlFromForm } from "@/lib/admin/storage-upload";
 import { requireAdminSession } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 const NEWS_STORAGE_FOLDER = "tin-tuc";
-
-function encodeMessage(message: string): string {
-  return encodeURIComponent(message);
-}
 
 function revalidateNewsPaths(slug: string) {
   revalidatePath("/admin/news");
@@ -27,10 +24,7 @@ async function requireEditorOrAdmin() {
   return { supabase };
 }
 
-async function resolveImageUrl(
-  formData: FormData,
-  supabase: SupabaseClient,
-): Promise<string | null> {
+async function resolveImageUrl(formData: FormData, supabase: SupabaseClient): Promise<string | null> {
   return resolveImageUrlFromForm(formData, supabase, {
     fileField: "cover_image",
     urlField: "image_url",
@@ -43,57 +37,60 @@ async function parseNewsForm(formData: FormData, supabase: SupabaseClient) {
   return parseNewsFields(formData, image_url);
 }
 
-export async function createNewsArticle(formData: FormData) {
-  let payload: Awaited<ReturnType<typeof parseNewsForm>>;
-
+export async function createNewsArticle(
+  _prevState: AdminActionState,
+  formData: FormData,
+): Promise<AdminActionResult> {
   try {
     const { supabase } = await requireEditorOrAdmin();
-    payload = await parseNewsForm(formData, supabase);
+    const payload = await parseNewsForm(formData, supabase);
 
     const { error } = await supabase.from("news_articles").insert(payload);
-
     if (error) {
       throw new Error(error.message);
     }
+
+    revalidateNewsPaths(payload.slug);
+    return adminActionSuccess(ADMIN_SUCCESS_MESSAGES.created, "/admin/news");
   } catch (error) {
     if (isNavigationRedirect(error)) {
       throw error;
     }
-    const message = getActionErrorMessage(error, "Không thể tạo bài viết.");
-    redirect(`/admin/news/new?error=${encodeMessage(message)}`);
+    return adminActionError(getActionErrorMessage(error, "Không thể tạo bài viết."));
   }
-
-  revalidateNewsPaths(payload.slug);
-  redirect("/admin/news?message=created");
 }
 
-export async function updateNewsArticle(id: string, formData: FormData) {
-  let payload: Awaited<ReturnType<typeof parseNewsForm>>;
-
+export async function updateNewsArticle(
+  id: string,
+  _prevState: AdminActionState,
+  formData: FormData,
+): Promise<AdminActionResult> {
   try {
     const { supabase } = await requireEditorOrAdmin();
-    payload = await parseNewsForm(formData, supabase);
+    const payload = await parseNewsForm(formData, supabase);
 
     const { error } = await supabase.from("news_articles").update(payload).eq("id", id);
     if (error) {
       throw new Error(error.message);
     }
+
+    revalidateNewsPaths(payload.slug);
+    return adminActionSuccess(ADMIN_SUCCESS_MESSAGES.saved);
   } catch (error) {
     if (isNavigationRedirect(error)) {
       throw error;
     }
-    const message = getActionErrorMessage(error, "Không thể cập nhật bài viết.");
-    redirect(`/admin/news/${id}/edit?error=${encodeMessage(message)}`);
+    return adminActionError(getActionErrorMessage(error, "Không thể cập nhật bài viết."));
   }
-
-  revalidateNewsPaths(payload.slug);
-  redirect(`/admin/news/${id}/edit?message=saved`);
 }
 
-export async function archiveNewsArticle(formData: FormData) {
+export async function archiveNewsArticle(
+  _prevState: AdminActionState,
+  formData: FormData,
+): Promise<AdminActionResult> {
   const id = getFormText(formData, "id");
   if (!id) {
-    redirect("/admin/news?error=missing-id");
+    return adminActionError("Thiếu mã bài viết.");
   }
 
   try {
@@ -112,21 +109,23 @@ export async function archiveNewsArticle(formData: FormData) {
     if (article) {
       revalidateNewsPaths(article.slug);
     }
+
+    return adminActionSuccess(ADMIN_SUCCESS_MESSAGES.archived);
   } catch (error) {
     if (isNavigationRedirect(error)) {
       throw error;
     }
-    const message = getActionErrorMessage(error, "Không thể lưu trữ bài viết.");
-    redirect(`/admin/news?error=${encodeMessage(message)}`);
+    return adminActionError(getActionErrorMessage(error, "Không thể lưu trữ bài viết."));
   }
-
-  redirect("/admin/news?message=archived");
 }
 
-export async function deleteNewsArticle(formData: FormData) {
+export async function deleteNewsArticle(
+  _prevState: AdminActionState,
+  formData: FormData,
+): Promise<AdminActionResult> {
   const id = getFormText(formData, "id");
   if (!id) {
-    redirect("/admin/news?error=missing-id");
+    return adminActionError("Thiếu mã bài viết.");
   }
 
   try {
@@ -145,13 +144,12 @@ export async function deleteNewsArticle(formData: FormData) {
     if (article) {
       revalidateNewsPaths(article.slug);
     }
+
+    return adminActionSuccess(ADMIN_SUCCESS_MESSAGES.deleted);
   } catch (error) {
     if (isNavigationRedirect(error)) {
       throw error;
     }
-    const message = getActionErrorMessage(error, "Không thể xóa bài viết.");
-    redirect(`/admin/news?error=${encodeMessage(message)}`);
+    return adminActionError(getActionErrorMessage(error, "Không thể xóa bài viết."));
   }
-
-  redirect("/admin/news?message=deleted");
 }

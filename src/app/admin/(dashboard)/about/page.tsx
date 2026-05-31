@@ -1,12 +1,11 @@
 import { Save } from "lucide-react";
-import { AdminAlert } from "@/components/admin/admin-alert";
+import { AdminActionForm } from "@/components/admin/admin-action-form";
 import { AdminFormSection } from "@/components/admin/admin-form-section";
 import { AdminSeoEditor } from "@/components/admin/admin-seo-editor";
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { AdminImageField } from "@/components/admin/admin-image-field";
 import { PartnerLogosEditor } from "@/components/admin/partner-logos-editor";
 import { StatsListEditor } from "@/components/admin/stats-list-editor";
-import { decodeAdminParam, formatAdminMessage } from "@/lib/admin/messages";
 import {
   resolveAboutPageContent,
   type AboutPageContent,
@@ -15,10 +14,6 @@ import {
 import { listPartnerLogosForAdmin } from "@/lib/data/partner-logos";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { saveAboutPageContent } from "./actions";
-
-type AboutAdminProps = {
-  searchParams: Promise<{ error?: string; message?: string }>;
-};
 
 function AboutEditorForm({
   content,
@@ -130,11 +125,7 @@ function AboutEditorForm({
   );
 }
 
-export default async function AboutAdminPage({ searchParams }: AboutAdminProps) {
-  const params = await searchParams;
-  const message = formatAdminMessage(params.message);
-  const error = decodeAdminParam(params.error);
-
+export default async function AboutAdminPage() {
   const supabase = createAdminClient();
   const { data } = await supabase
     .from("about_page_content")
@@ -152,12 +143,7 @@ export default async function AboutAdminPage({ searchParams }: AboutAdminProps) 
         description="Chỉnh sửa theo từng khối trên trang giới thiệu. Thứ tự và nhãn trường khớp với giao diện công khai."
       />
 
-      <div className="space-y-3">
-        {message ? <AdminAlert variant="success" message={message} /> : null}
-        {error ? <AdminAlert variant="error" message={error} /> : null}
-      </div>
-
-      <form action={saveAboutPageContent} className="space-y-6">
+      <AdminActionForm action={saveAboutPageContent} className="space-y-6">
         <AboutEditorForm content={content} partnerLogos={partnerLogos} />
 
         <div className="flex justify-end">
@@ -166,7 +152,7 @@ export default async function AboutAdminPage({ searchParams }: AboutAdminProps) 
             Lưu nội dung trang giới thiệu
           </button>
         </div>
-      </form>
+      </AdminActionForm>
     </div>
   );
 }

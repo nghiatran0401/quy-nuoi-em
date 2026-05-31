@@ -37,6 +37,7 @@ export function BrandLogo({
         width={width}
         height={height}
         className={className}
+        style={{ width: "auto", height: "auto" }}
         priority={priority}
         sizes={resolved === "wide" ? "(max-width: 768px) 200px, 280px" : "(max-width: 768px) 120px, 160px"}
       />
