@@ -1,5 +1,11 @@
 import type { StatItem } from "@/content/types";
 
+/** Sponsorship counts — school year 9/2025–5/2026 (Nuôi Em dashboard). */
+export const sponsorshipCounts = {
+  withSponsor: 40_690,
+  withoutSponsor: 41_247,
+} as const;
+
 /** Snapshot from Nuôi Em dashboard — school year 9/2025–5/2026 */
 export const siteStats: StatItem[] = [
   {
@@ -18,12 +24,12 @@ export const siteStats: StatItem[] = [
     hint: "Chi tiết: 52.305.002.708đ",
   },
   {
-    value: "40.690",
+    value: new Intl.NumberFormat("vi-VN").format(sponsorshipCounts.withSponsor),
     label: "Đã có người nuôi",
     hint: "49,7% tổng số em nuôi",
   },
   {
-    value: "41.247",
+    value: new Intl.NumberFormat("vi-VN").format(sponsorshipCounts.withoutSponsor),
     label: "Chưa có người nuôi",
     hint: "50,3% tổng số em nuôi",
   },

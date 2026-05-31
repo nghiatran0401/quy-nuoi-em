@@ -10,7 +10,7 @@ export const mealProgramSectionCopy = {
   title: "Bữa cơm níu chân trẻ tới trường",
   blocks: [
     {
-      text: "Mỗi bữa, các bé được ăn thịt, đậu, canh, rau với giá 8.500đ/suất — gạo địa phương, gia đình đối ứng. Tiểu học thường ăn 4 bữa/tuần (chiều thứ Sáu thầy cô về trường chính giao ban); mầm non 5 bữa/tuần thì 6.800đ/suất.",
+      text: "2. Mỗi bữa, các bé được ăn thịt, đậu, canh, rau với chi phí 8.500đ/suất — gạo do địa phương, gia đình đối ứng. Tiểu học thường ăn 4 bữa/tuần (chiều thứ Sáu thầy cô về trường chính giao ban); mầm non ăn 5 bữa/tuần với chi phí 6.800đ/suất.",
     },
     {
       label: "Đối tượng nuôi",

@@ -1,3 +1,4 @@
+import { sponsorshipCounts } from "@/content/shared/site-stats";
 import schoolsData from "@/data/schools.json";
 
 export type SchoolRecord = {
@@ -16,8 +17,8 @@ export type SchoolRecord = {
 export type SchoolSummary = {
   totalSchools: number;
   totalStudents: number;
-  totalIssuedCodes: number;
-  totalProvinces: number;
+  withSponsor: number;
+  withoutSponsor: number;
 };
 
 const records = schoolsData as SchoolRecord[];
@@ -36,7 +37,7 @@ export function getSchoolsSummary(): SchoolSummary {
   return {
     totalSchools: records.length,
     totalStudents: records.reduce((sum, row) => sum + row.students, 0),
-    totalIssuedCodes: records.reduce((sum, row) => sum + (row.issuedCount ?? 0), 0),
-    totalProvinces: new Set(records.map((row) => row.province)).size,
+    withSponsor: sponsorshipCounts.withSponsor,
+    withoutSponsor: sponsorshipCounts.withoutSponsor,
   };
 }

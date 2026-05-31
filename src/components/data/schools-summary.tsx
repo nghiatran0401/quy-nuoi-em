@@ -12,8 +12,8 @@ export function SchoolsSummary({ summary }: SchoolsSummaryProps) {
   const cards = [
     { label: "Điểm trường", value: formatNumber(summary.totalSchools) },
     { label: "Học sinh", value: formatNumber(summary.totalStudents) },
-    { label: "Mã đã được cấp", value: formatNumber(summary.totalIssuedCodes) },
-    { label: "Tỉnh", value: formatNumber(summary.totalProvinces) },
+    { label: "Đã có người nuôi", value: formatNumber(summary.withSponsor) },
+    { label: "Chưa có người nuôi", value: formatNumber(summary.withoutSponsor) },
   ];
 
   return (

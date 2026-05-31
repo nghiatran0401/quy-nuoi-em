@@ -10,6 +10,20 @@ type Props = {
   initialSections: HomeSectionsContent;
 };
 
+type WidenLiteral<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends boolean
+      ? boolean
+      : T extends readonly (infer U)[]
+        ? WidenLiteral<U>[]
+        : T extends object
+          ? { -readonly [K in keyof T]: WidenLiteral<T[K]> }
+          : T;
+
+type EditableHomeSectionsContent = WidenLiteral<HomeSectionsContent>;
+
 type SectionCardProps = {
   title: string;
   description?: string;
@@ -80,15 +94,15 @@ function Repeater<T>({
 }
 
 export function HomepageSectionsEditor({ locale, initialSections }: Props) {
-  const [sections, setSections] = useState<HomeSectionsContent>(() =>
-    structuredClone(initialSections),
+  const [sections, setSections] = useState<EditableHomeSectionsContent>(() =>
+    structuredClone(initialSections) as unknown as EditableHomeSectionsContent,
   );
 
   const payload = useMemo(() => JSON.stringify(sections), [sections]);
 
-  const setSection = <K extends keyof HomeSectionsContent>(
+  const setSection = <K extends keyof EditableHomeSectionsContent>(
     key: K,
-    updater: (value: HomeSectionsContent[K]) => HomeSectionsContent[K],
+    updater: (value: EditableHomeSectionsContent[K]) => EditableHomeSectionsContent[K],
   ) => {
     setSections((prev) => ({ ...prev, [key]: updater(prev[key]) }));
   };

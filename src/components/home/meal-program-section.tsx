@@ -8,6 +8,31 @@ type MealProgramSectionProps = {
   content?: typeof mealProgramSectionCopy;
 };
 
+/** Keep common Vietnamese phrases on one line when the paragraph wraps. */
+function protectLineBreaks(text: string): string {
+  const phrases = [
+    "địa phương",
+    "gia đình",
+    "đối ứng",
+    "chi phí",
+    "thứ Sáu",
+    "trường chính",
+    "giao ban",
+    "mầm non",
+    "Tiểu học",
+    "Tây Nguyên",
+    "cơ sở vật chất",
+    "năm học",
+    "8.500đ/suất",
+    "6.800đ/suất",
+  ];
+
+  return phrases.reduce(
+    (result, phrase) => result.replaceAll(phrase, phrase.replace(/ /g, "\u00A0")),
+    text,
+  );
+}
+
 export function MealProgramSection({ content }: MealProgramSectionProps) {
   const copy = content ?? mealProgramSectionCopy;
 
@@ -35,13 +60,13 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
               {copy.title}
             </h2>
 
-            <div className="space-y-5 text-justify text-[15px] leading-relaxed text-brand-ink sm:text-base">
+            <div className="space-y-5 text-left text-[15px] leading-relaxed text-brand-ink sm:text-base">
               {copy.blocks.map((block) => (
                 <p key={block.label ?? block.text.slice(0, 28)}>
                   {block.label ? (
                     <span className="font-heading font-bold text-brand-ink">{block.label}: </span>
                   ) : null}
-                  {block.text}
+                  {protectLineBreaks(block.text)}
                 </p>
               ))}
             </div>

@@ -50,6 +50,9 @@ const supabase = createClient(url, serviceKey, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
+const mealFirstBlockText =
+  "2. Mỗi bữa, các bé được ăn thịt, đậu, canh, rau với chi phí 8.500đ/suất — gạo do địa phương, gia đình đối ứng. Tiểu học thường ăn 4 bữa/tuần (chiều thứ Sáu thầy cô về trường chính giao ban); mầm non ăn 5 bữa/tuần với chi phí 6.800đ/suất.";
+
 const homepage = {
   locale: "vi",
   hero: {
@@ -170,6 +173,29 @@ async function main() {
     .upsert(homepage, { onConflict: "locale" });
   if (homeError) throw homeError;
   console.log("Restored homepage_content (vi)");
+
+  const { data: homeRow } = await supabase
+    .from("homepage_content")
+    .select("sections")
+    .eq("locale", "vi")
+    .maybeSingle();
+
+  const sections = homeRow?.sections ?? {};
+  const meal = sections.meal ?? {};
+  const blocks = Array.isArray(meal.blocks) ? [...meal.blocks] : [];
+
+  if (blocks.length > 0) {
+    blocks[0] = { ...blocks[0], text: mealFirstBlockText };
+  }
+
+  if (blocks.length > 0 || meal.title) {
+    const { error: sectionsError } = await supabase
+      .from("homepage_content")
+      .update({ sections: { ...sections, meal: { ...meal, blocks } } })
+      .eq("locale", "vi");
+    if (sectionsError) throw sectionsError;
+    console.log("Updated homepage sections (meal block 1)");
+  }
 
   const { error: aboutError } = await supabase
     .from("about_page_content")
