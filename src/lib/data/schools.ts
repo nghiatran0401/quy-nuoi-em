@@ -1,3 +1,4 @@
+import { publicCatalog } from "@/config/public-catalog";
 import { sponsorshipCounts } from "@/content/shared/site-stats";
 import schoolsData from "@/data/schools.json";
 
@@ -21,7 +22,29 @@ export type SchoolSummary = {
   withoutSponsor: number;
 };
 
-const records = schoolsData as SchoolRecord[];
+function resolveSchoolOpenUrl(openUrl: string | null): string | null {
+  if (!openUrl) return null;
+  const catalogBase = publicCatalog.url.trim();
+  if (!catalogBase) return openUrl;
+  try {
+    const base = new URL(catalogBase);
+    const resolved = openUrl.startsWith("/")
+      ? new URL(openUrl, base)
+      : new URL(openUrl);
+    if (!openUrl.startsWith("/")) {
+      resolved.protocol = base.protocol;
+      resolved.host = base.host;
+    }
+    return resolved.toString();
+  } catch {
+    return openUrl;
+  }
+}
+
+const records = (schoolsData as SchoolRecord[]).map((row) => ({
+  ...row,
+  openUrl: resolveSchoolOpenUrl(row.openUrl),
+}));
 
 export function getAllSchools(): SchoolRecord[] {
   return records;

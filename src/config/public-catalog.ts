@@ -1,8 +1,8 @@
 /**
- * Public catalog & NE code lookup (aggregate stats, tra cứu mã).
- * Deployed separately from the main CMS site.
+ * Public catalog & NE code lookup (separate app at nuoiem2025.quynuoiem.com).
+ * Set NEXT_PUBLIC_PUBLIC_CATALOG_URL.
  */
-const DEFAULT_PUBLIC_CATALOG_URL = "https://nuoiem-lovat.vercel.app/";
+const DEFAULT_PUBLIC_CATALOG_URL = "https://nuoiem2025.quynuoiem.com/";
 
 export const publicCatalog = {
   url:
@@ -15,9 +15,10 @@ export const publicCatalog = {
 } as const;
 
 export function publicCatalogHost(): string {
+  if (!publicCatalog.url) return "";
   try {
     return new URL(publicCatalog.url).host;
   } catch {
-    return "nuoiem-lovat.vercel.app";
+    return "nuoiem2025.quynuoiem.com";
   }
 }

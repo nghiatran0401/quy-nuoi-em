@@ -34,7 +34,8 @@ In **Authentication → Providers**, enable Email (magic link) and/or Google.
 In **Authentication → URL configuration**, add redirect URLs:
 
 - `http://localhost:3000/admin/auth/callback`
-- `https://quy-nuoi-em.vercel.app/admin/auth/callback` (or your production domain)
+- `https://quynuoiem.com/admin/auth/callback`
+- `https://www.quynuoiem.com/admin/auth/callback`
 
 ## 4. Storage
 
@@ -57,6 +58,13 @@ SET role = 'admin'
 WHERE email = 'you@example.com';
 ```
 
-## 6. Vercel
+## 6. Production server
 
-Add the same three env vars in the Vercel project settings for Preview and Production.
+Copy `.env.example` to `.env` on the server and set all values, especially:
+
+- `NEXT_PUBLIC_SITE_URL` — `https://quynuoiem.com` (this CMS site)
+- `NEXT_PUBLIC_PUBLIC_CATALOG_URL` — `https://nuoiem2025.quynuoiem.com/` (linked catalog app)
+- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
+- `ADMIN_SESSION_SECRET` and admin credentials
+
+Run `npm run build && npm run start` (or your process manager) behind a reverse proxy with HTTPS.

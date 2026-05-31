@@ -27,7 +27,7 @@ export function toUserFacingDbError(message: string): string {
     return "Bảng dữ liệu chưa được tạo trên Supabase. Vui lòng chạy migration SQL mới nhất rồi thử lại.";
   }
   if (message.includes("Invalid API key") || message.includes("JWT")) {
-    return "Khóa Supabase không hợp lệ trên server. Kiểm tra SUPABASE_SERVICE_ROLE_KEY trên Vercel.";
+    return "Khóa Supabase không hợp lệ trên server. Kiểm tra SUPABASE_SERVICE_ROLE_KEY trong biến môi trường.";
   }
   return message;
 }
