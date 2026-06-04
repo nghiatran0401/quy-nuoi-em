@@ -92,7 +92,7 @@ export function ImpactJourneySection({
   const infra = copy.infrastructure;
 
   return (
-    <section className="section-pad bg-white" aria-label="Hành trình mở rộng dự án Nuôi Em">
+    <section className="section-pad bg-white" aria-label="Hành trình mở rộng Quỹ Nuôi Em">
       <div className="container mx-auto max-w-7xl px-4">
         <article className="rounded-3xl border border-brand-border/70 bg-brand-warm/45 p-5 sm:p-7 lg:p-9" aria-labelledby="impact-milestones-heading">
           <h2 id="impact-milestones-heading" className="font-heading text-xl font-extrabold uppercase tracking-tight text-brand-ink sm:text-2xl">

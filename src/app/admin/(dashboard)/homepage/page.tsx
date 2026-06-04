@@ -57,7 +57,7 @@ function HomepageEditorForm({
 
       <AdminFormSection
         title="1. Hero — đầu trang"
-        description="Banner lớn với tiêu đề Dự án Nuôi Em và hai nút hành động phía trên."
+        description="Banner lớn với tiêu đề Quỹ Nuôi Em và hai nút hành động phía trên."
       >
         <div id="edit-hero" />
         <AdminImageField
@@ -132,7 +132,7 @@ function HomepageEditorForm({
 
       <AdminFormSection
         title="2. Thống kê"
-        description="Dải số liệu ngay dưới Hero (tổng em nuôi, thu chi, vân vận). Phần Đợt bảo trợ không chỉnh ở đây."
+        description="Dải số liệu ngay dưới Hero (tổng em nuôi, thu chi, vân vân). Phần Đợt bảo trợ không chỉnh ở đây."
       >
         <div id="edit-stats" />
         <StatsListEditor name={`${locale}_stats_json`} initialStats={stats} />

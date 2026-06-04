@@ -1,5 +1,5 @@
 import { publicCatalog } from "@/config/public-catalog";
-import { sponsorshipCounts } from "@/content/shared/site-stats";
+import { fetchHomeMetrics } from "@/lib/data/home-metrics";
 import schoolsData from "@/data/schools.json";
 
 export type SchoolRecord = {
@@ -56,11 +56,13 @@ export function getSchoolProvinces(): string[] {
   );
 }
 
-export function getSchoolsSummary(): SchoolSummary {
+export async function getSchoolsSummary(): Promise<SchoolSummary> {
+  const metrics = await fetchHomeMetrics();
+
   return {
     totalSchools: records.length,
     totalStudents: records.reduce((sum, row) => sum + row.students, 0),
-    withSponsor: sponsorshipCounts.withSponsor,
-    withoutSponsor: sponsorshipCounts.withoutSponsor,
+    withSponsor: metrics?.children.sponsored ?? 0,
+    withoutSponsor: metrics?.children.unsponsored ?? 0,
   };
 }

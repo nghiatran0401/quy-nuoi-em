@@ -2,16 +2,17 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { publicCatalog } from "@/config/public-catalog";
 import { HomeStatsGrid } from "@/components/home/home-stats-grid";
-import { homeStats } from "@/content/shared/site-stats";
 import type { StatItem } from "@/content/types";
 
 type HomeStatsSectionProps = {
-  stats?: StatItem[];
+  stats: StatItem[];
+  directoryUrl?: string;
 };
 
-export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
-  const items = stats ?? homeStats;
+export function HomeStatsSection({ stats, directoryUrl }: HomeStatsSectionProps) {
+  const items = stats;
   const periodHint = items[0]?.hint;
+  const catalogUrl = directoryUrl?.trim() || publicCatalog.url;
 
   return (
     <section
@@ -45,7 +46,7 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
         <p className="mt-8 text-center text-sm text-brand-muted sm:mt-10">
           Số liệu tổng hợp từ danh mục em nuôi công khai —{" "}
           <Link
-            href={publicCatalog.url}
+            href={catalogUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="link-accent inline-flex items-center gap-1 font-medium"

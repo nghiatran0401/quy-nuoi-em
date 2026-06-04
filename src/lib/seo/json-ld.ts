@@ -67,7 +67,7 @@ export function organizationJsonLd(): JsonLdObject {
     logo: logoImageObject(),
     image: `${SITE_URL}${DEFAULT_OG_IMAGE_PATH}`,
     description:
-      "Dự án Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — 150.000–170.000đ/tháng giúp bé no bụng và đến trường.",
+      "Quỹ Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — 150.000–170.000đ/tháng giúp bé no bụng và đến trường.",
     slogan: brandVisual.tagline,
     email: brandVisual.contact.email,
     telephone: `+84${brandVisual.contact.phone.replace(/^0/, "")}`,
@@ -87,7 +87,7 @@ export function organizationJsonLd(): JsonLdObject {
       "Cơm trưa học đường",
     ],
     keywords:
-      "Dự án Nuôi Em, Nuôi Em, mã NE, bảo trợ trẻ em, trẻ vùng cao, thiện nguyện minh bạch",
+      "Quỹ Nuôi Em, Nuôi Em, mã NE, bảo trợ trẻ em, trẻ vùng cao, thiện nguyện minh bạch",
     contactPoint: contactPoints(),
     sameAs: [
       siteConfig.social.facebook,
@@ -106,7 +106,7 @@ export function organizationJsonLd(): JsonLdObject {
           "https://schema.org/MobileWebPlatform",
         ],
       },
-      name: "Đóng góp cho Dự án Nuôi Em",
+      name: "Đóng góp cho Quỹ Nuôi Em",
       recipient: { "@id": ORGANIZATION_ID },
     },
   };
@@ -138,7 +138,7 @@ export function websiteJsonLd(): JsonLdObject {
           "@type": "EntryPoint",
           urlTemplate: absoluteUrl("/dong-gop"),
         },
-        name: "Đóng góp cho Dự án Nuôi Em",
+        name: "Đóng góp cho Quỹ Nuôi Em",
       },
     ],
   };
@@ -388,7 +388,7 @@ export function donatePageJsonLd({
     about: { "@id": ORGANIZATION_ID },
     potentialAction: {
       "@type": "DonateAction",
-      name: "Đóng góp cho Dự án Nuôi Em",
+      name: "Đóng góp cho Quỹ Nuôi Em",
       target: {
         "@type": "EntryPoint",
         urlTemplate: url,

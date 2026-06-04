@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildMetadata({
   title: "Không tìm thấy trang",
-  description: "Trang bạn tìm không tồn tại trên Dự án Nuôi Em.",
+  description: "Trang bạn tìm không tồn tại trên Quỹ Nuôi Em.",
   pathname: "/404",
   noIndex: true,
 });

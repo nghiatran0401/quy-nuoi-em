@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import "./admin.css";
 
 export const metadata: Metadata = {
-  title: "Admin · Dự án Nuôi Em",
+  title: "Admin · Quỹ Nuôi Em",
   description: "Private admin console.",
   robots: {
     index: false,

@@ -220,6 +220,16 @@ function normalizeImportantNotes(notes: string[], fallback: string[]): string[] 
   );
 }
 
+/** Legacy CMS rows may still list 2–3 installment scenarios; site policy is one transfer only. */
+function normalizePaymentScenarios(
+  scenarios: Process2026PaymentScenario[] | undefined,
+  fallback: Process2026PaymentScenario[],
+): Process2026PaymentScenario[] {
+  if (!scenarios?.length) return fallback;
+  if (scenarios.length === 1) return scenarios;
+  return fallback;
+}
+
 const viDefaults: Process2026PageContent = {
   meta: {
     title: "Quy trình cấp và nhận mã Nuôi Em 2026",
@@ -239,7 +249,7 @@ const viDefaults: Process2026PageContent = {
     title: "Quy trình cấp và nhận mã",
     titleAccent: " cho anh/chị nuôi mới",
     description:
-      "Khi đã có mã NE, làm đúng 6 bước dưới đây để giữ mã, chuyển khoản đúng cú pháp, nhận thông tin bé và theo dõi suốt năm học. Nội dung tham chiếu từ quy trình chính thức của dự án.",
+      "Khi đã có mã NE, làm đúng 6 bước dưới đây để giữ mã, chuyển khoản đúng cú pháp, nhận thông tin bé và theo dõi suốt năm học. Nội dung tham chiếu từ quy trình chính thức của Quỹ Nuôi Em.",
     messengerCta: "Nhận mã qua Messenger",
     groupCta: "Tham gia nhóm Facebook Nuôi Em",
   },
@@ -264,7 +274,7 @@ const viDefaults: Process2026PageContent = {
   costTiers: costTiers.map((tier) => ({ ...tier })),
   transfer: {
     eyebrow: "Chuyển khoản",
-    title: "Thông tin tài khoản & kịch bản gửi tiền",
+    title: "Thông tin tài khoản & chuyển khoản một lần",
     warning:
       "Bắt buộc ghi nội dung chuyển khoản: Mã NE + số điện thoại + tên anh/chị. Không có mã NE → không hoàn lại, chuyển quỹ vô danh (xây trường).",
     accountNumber: "1805",
@@ -272,9 +282,9 @@ const viDefaults: Process2026PageContent = {
     accountName: "CTCP DNXH QUY NUOI EM",
     phone: brandVisual.contact.phone,
     phoneDisplay: brandVisual.contact.phoneDisplay,
-    scenariosTitle: "Kịch bản chuyển tiền",
+    scenariosTitle: "Quy định gửi tiền",
     scenariosFootnote:
-      "Dù chọn kịch bản nào, cần hoàn tất 100% tiền ăn trước 31/12 mỗi năm học để dự án vận hành ổn định (trường ký hợp đồng thực phẩm từ tháng 7).",
+      "Cần chuyển đủ một lần trước 31/12 mỗi năm học để quỹ vận hành ổn định (trường ký hợp đồng thực phẩm từ tháng 7).",
     qrCaption: "Quét mã chuyển khoản",
     qrCta: "Nhận mã NE",
   },
@@ -403,7 +413,7 @@ export function mergeProcess2026PageContent(
     transfer: isTestOrEnglishProcess2026Transfer(content.transfer)
       ? fallback.transfer
       : { ...fallback.transfer, ...content.transfer },
-    paymentScenarios: content.paymentScenarios ?? fallback.paymentScenarios,
+    paymentScenarios: normalizePaymentScenarios(content.paymentScenarios, fallback.paymentScenarios),
     timelineIntro: isTestOrEnglishProcess2026Intro(content.timelineIntro, "t", "tl")
       ? fallback.timelineIntro
       : { ...fallback.timelineIntro, ...content.timelineIntro },

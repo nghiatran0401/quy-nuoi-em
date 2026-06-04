@@ -98,7 +98,7 @@ export function BankTransferPanel({
             >
               <Image
                 src={donateQrUrl}
-                alt="Mã QR chuyển khoản Dự án Nuôi Em"
+                alt="Mã QR chuyển khoản Quỹ Nuôi Em"
                 fill
                 className="object-contain"
                 sizes={isEmbedded ? "168px" : "240px"}

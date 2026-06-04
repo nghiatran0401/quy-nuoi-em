@@ -57,9 +57,9 @@ const homepage = {
   locale: "vi",
   hero: {
     eyebrow: "Bữa cơm níu chân trẻ tới trường",
-    title: "Dự án Nuôi Em",
+    title: "Quỹ Nuôi Em",
     description:
-      "Trên những mái nhà tranh vùng cao, 150.000–170.000đ mỗi tháng là đủ để một em no bụng và đi học đầy đủ. Anh chị biết rõ em nào, có thể đến thăm — mỗi em một mã NE, mỗi em một người nuôi.",
+      "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. Từ 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm. Mã Tây Nguyên: 170.000đ/tháng.",
     sponsorNow: "Đóng góp ngay",
     learnMore: "Tìm hiểu thêm",
   },
@@ -73,7 +73,7 @@ const homepage = {
   cta: {
     title: "MỞ MÃ NUÔI EM MÙA 12 — ĐANG MỞ",
     paragraphs: [
-      "Năm 2018 thật sự là một bước chuyển mình lớn đối với dự án Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ với người làm dự án mà còn hơn 95.000+ niềm vui đến hết 2023 từ anh chị nuôi và các em tìm đến được với nhau.",
+      "Năm 2018 thật sự là một bước chuyển mình lớn đối với Quỹ Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ với người làm quỹ mà còn hơn 95.000+ niềm vui đến hết 2023 từ anh chị nuôi và các em tìm đến được với nhau.",
       "Đến nay hơn 1.000 nhóm Facebook theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
       "Ngay từ bây giờ hãy đăng ký là một phần trong số +120.000 anh chị nuôi của các bé trong 2025 – 2026.",
     ],
@@ -86,7 +86,7 @@ const homepage = {
     },
     story: {
       paragraphs: [
-        "Năm 2018 thật sự là một bước chuyển mình lớn đối với dự án Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ với người làm dự án mà còn hơn 95.000+ niềm vui đến hết 2023 từ anh chị nuôi và các em tìm đến được với nhau.",
+        "Năm 2018 thật sự là một bước chuyển mình lớn đối với Quỹ Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ với người làm quỹ mà còn hơn 95.000+ niềm vui đến hết 2023 từ anh chị nuôi và các em tìm đến được với nhau.",
         "Đến nay hơn 1.000 nhóm Facebook theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
         "Ngay từ bây giờ hãy đăng ký là một phần trong số +120.000 anh chị nuôi của các bé trong 2025 – 2026.",
       ],
@@ -119,16 +119,16 @@ const homepage = {
     eyebrow: "Giải đáp thắc mắc",
     title: "Câu Hỏi Thường Gặp",
     intro:
-      "Những thông tin phổ biến nhất về Dự án Nuôi Em được tổng hợp tại đây để giải đáp nhanh các thắc mắc của bạn.",
+      "Những thông tin phổ biến nhất về Quỹ Nuôi Em được tổng hợp tại đây để giải đáp nhanh các thắc mắc của bạn.",
     items: [
       {
         id: "dia-chi",
-        question: "Địa chỉ văn phòng của Dự án Nuôi Em ở đâu?",
+        question: "Địa chỉ văn phòng của Quỹ Nuôi Em ở đâu?",
         type: "dia-chi",
         body: "Xin mời cả nhà, các anh chị ghé thăm văn phòng Quỹ để cùng lắng nghe những câu chuyện, để hiểu về hành trình mà Quỹ đang làm cho các con.",
         address: "15 Ngách 352/15 đường Giải Phóng - Thanh Xuân - Hà Nội",
       },
-      { id: "ngan-hang", question: "Số tài khoản của Dự án Nuôi Em?", type: "ngan-hang" },
+      { id: "ngan-hang", question: "Số tài khoản của Quỹ Nuôi Em?", type: "ngan-hang" },
       {
         id: "quy-trinh",
         question: "Quy trình xét duyệt bảo trợ ra sao?",
@@ -154,11 +154,11 @@ const about = {
   meta: {
     title: "Về Chúng Tôi",
     description:
-      "Tìm hiểu về Dự án Nuôi Em — sứ mệnh gieo mầm hy vọng và minh bạch tài chính.",
+      "Tìm hiểu về Quỹ Nuôi Em — sứ mệnh gieo mầm hy vọng và minh bạch tài chính.",
   },
   hero: {
     eyebrow: "Nuôi cơm trưa — giúp trẻ tới trường",
-    title: "Dự án Nuôi Em",
+    title: "Quỹ Nuôi Em",
     description:
       "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. Từ 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm. Mã Tây Nguyên: 170.000đ/tháng.",
   },

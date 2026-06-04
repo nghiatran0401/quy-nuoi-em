@@ -12,7 +12,7 @@ export function VolunteerView() {
           <ArrowRight className="h-5 w-5" />
         </Link>
         <p className="mt-4 text-sm text-brand-muted">
-          Gửi thông tin qua trang Liên hệ — Ban điều hành Dự án Nuôi Em sẽ phản hồi sớm nhất.
+          Gửi thông tin qua trang Liên hệ — Ban điều hành Quỹ Nuôi Em sẽ phản hồi sớm nhất.
         </p>
       </div>
     </StaticPageShell>

@@ -1,7 +1,16 @@
 import Image from "next/image";
-import { ArrowRight, CircleAlert, Clock3, ExternalLink, MessageCircle, Phone } from "lucide-react";
+import {
+  ArrowRight,
+  Building2,
+  CircleAlert,
+  Clock3,
+  ExternalLink,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import Link from "next/link";
 import { publicCatalog } from "@/config/public-catalog";
+import { donateInfo } from "@/content/pages/static-pages";
 import {
   getProcess2026PageFallback,
   resolveProcess2026ImageSrc,
@@ -18,6 +27,7 @@ export function QuyTrinhCapMa2026View({ content }: QuyTrinhCapMa2026ViewProps) {
   const qrImageSrc = resolveProcess2026ImageSrc(c.media.qrImage);
   const messengerUrl = c.links.messenger;
   const groupUrl = c.links.group;
+  const singlePayment = c.paymentScenarios[0];
 
   return (
     <div className="section-warm">
@@ -120,73 +130,96 @@ export function QuyTrinhCapMa2026View({ content }: QuyTrinhCapMa2026ViewProps) {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <p className="eyebrow">{c.transfer.eyebrow}</p>
-            <h2 className="heading-section mt-2">{c.transfer.title}</h2>
+        <header className="mb-8 max-w-2xl">
+          <p className="eyebrow">{c.transfer.eyebrow}</p>
+          <h2 className="heading-section mt-2">{c.transfer.title}</h2>
+          <p className="text-body mt-3">
+            Sau khi có mã NE, chuyển đủ một lần trong 24 giờ — không chia nhiều đợt.
+          </p>
+        </header>
 
-            <div className="mt-5 rounded-2xl border border-brand-danger/25 bg-brand-danger-soft/60 p-4">
-              <p className="flex items-start gap-2 text-sm font-semibold text-brand-ink">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-10">
+          <div className="space-y-5">
+            <div className="rounded-2xl border border-brand-danger/25 bg-brand-danger-soft/60 p-4 sm:p-5">
+              <p className="flex items-start gap-2 text-sm font-semibold leading-relaxed text-brand-ink">
                 <CircleAlert className="mt-0.5 h-4 w-4 shrink-0 text-brand-danger" aria-hidden />
                 {c.transfer.warning}
               </p>
             </div>
 
-            <dl className="mt-6 space-y-3 text-brand-muted">
-              <div>
-                <dt className="text-sm font-semibold text-brand-ink">Số tài khoản</dt>
-                <dd className="mt-0.5 font-mono text-lg font-bold text-brand-accent">{c.transfer.accountNumber}</dd>
-              </div>
-              <div>
-                <dt className="text-sm font-semibold text-brand-ink">Ngân hàng</dt>
-                <dd>{c.transfer.bank}</dd>
-              </div>
-              <div>
-                <dt className="text-sm font-semibold text-brand-ink">Chủ tài khoản</dt>
-                <dd>{c.transfer.accountName}</dd>
-              </div>
-              <div>
-                <dt className="text-sm font-semibold text-brand-ink">Điện thoại</dt>
-                <dd>
-                  <a href={`tel:${c.transfer.phone}`} className="link-accent">
-                    {c.transfer.phoneDisplay}
-                  </a>
-                </dd>
-              </div>
-            </dl>
-
-            <h3 className="mt-8 text-lg font-bold text-brand-ink">{c.transfer.scenariosTitle}</h3>
-            <ul className="mt-4 space-y-3">
-              {c.paymentScenarios.map((scenario) => (
-                <li
-                  key={scenario.label}
-                  className="rounded-xl border border-brand-border/70 bg-brand-warm px-4 py-3"
-                >
-                  <p className="font-semibold text-brand-ink">
-                    {scenario.label}
-                    {scenario.tag ? (
-                      <span className="ml-2 rounded-full bg-brand-highlight px-2 py-0.5 text-xs font-bold text-brand-ink">
-                        {scenario.tag}
-                      </span>
-                    ) : null}
+            <div className="brand-card overflow-hidden p-5 sm:p-6">
+              <p className="flex items-center gap-2 text-sm font-semibold text-brand-green">
+                <Building2 className="h-4 w-4 shrink-0" aria-hidden />
+                Tài khoản nhận quyên góp
+              </p>
+              <div className="mt-4 grid gap-5 sm:grid-cols-2">
+                <div className="sm:col-span-2 rounded-xl border border-brand-border/60 bg-brand-warm px-4 py-4">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Số tài khoản</p>
+                  <p className="mt-1 font-mono text-3xl font-bold tabular-nums text-brand-accent">
+                    {c.transfer.accountNumber}
                   </p>
-                  <p className="mt-1 text-sm text-brand-muted">{scenario.detail}</p>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-sm text-brand-muted">{c.transfer.scenariosFootnote}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Ngân hàng</p>
+                  <p className="mt-1 text-sm leading-relaxed text-brand-ink">{c.transfer.bank}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Điện thoại</p>
+                  <p className="mt-1">
+                    <a href={`tel:${c.transfer.phone}`} className="link-accent text-sm font-semibold">
+                      {c.transfer.phoneDisplay}
+                    </a>
+                  </p>
+                </div>
+                <div className="sm:col-span-2">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Chủ tài khoản</p>
+                  <p className="mt-1 text-sm font-medium text-brand-ink">{c.transfer.accountName}</p>
+                </div>
+              </div>
+
+              <div className="mt-5 space-y-2 rounded-xl border border-brand-border/70 bg-white px-4 py-3 text-sm">
+                <p>
+                  <span className="font-semibold text-brand-ink">Cú pháp nội dung CK:</span>{" "}
+                  {donateInfo.transferFormat}
+                </p>
+                <p className="text-brand-muted">
+                  <span className="font-semibold text-brand-ink">Ví dụ:</span>{" "}
+                  <span className="font-mono text-brand-ink">{donateInfo.transferExample}</span>
+                </p>
+              </div>
+            </div>
+
+            {singlePayment ? (
+              <div className="rounded-2xl border-2 border-brand-accent/35 bg-gradient-to-br from-brand-highlight/25 via-white to-brand-warm p-5 sm:p-6">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-lg font-bold text-brand-ink">{singlePayment.label}</h3>
+                  {singlePayment.tag ? (
+                    <span className="rounded-full bg-brand-accent px-2.5 py-0.5 text-xs font-bold text-white">
+                      {singlePayment.tag}
+                    </span>
+                  ) : null}
+                </div>
+                <p className="mt-3 leading-relaxed text-brand-muted">{singlePayment.detail}</p>
+                <p className="mt-4 flex items-center gap-2 text-sm font-semibold text-brand-ink">
+                  <Clock3 className="h-4 w-4 text-brand-accent" aria-hidden />
+                  Trong vòng 24 giờ sau khi nhận mã NE
+                </p>
+              </div>
+            ) : null}
+
+            <p className="text-sm leading-relaxed text-brand-muted">{c.transfer.scenariosFootnote}</p>
           </div>
 
-          <div className="flex flex-col items-center lg:items-end">
-            <div className="w-full max-w-sm rounded-3xl border border-brand-border bg-white p-6 shadow-[var(--shadow-brand-card)]">
+          <aside className="lg:sticky lg:top-24">
+            <div className="rounded-3xl border border-brand-border bg-white p-6 shadow-[var(--shadow-brand-card)]">
               <p className="text-center text-sm font-semibold text-brand-ink">{c.transfer.qrCaption}</p>
-              <div className="relative mx-auto mt-4 aspect-square w-full max-w-[240px]">
+              <div className="relative mx-auto mt-4 aspect-square w-full max-w-[220px]">
                 <Image
                   src={qrImageSrc}
-                  alt="Mã QR chuyển khoản Nuôi Em"
+                  alt="Mã QR chuyển khoản Quỹ Nuôi Em"
                   fill
                   className="object-contain"
-                  sizes="240px"
+                  sizes="220px"
                 />
               </div>
               <a href={messengerUrl} target="_blank" rel="noreferrer" className="btn-primary mt-6 w-full">
@@ -194,7 +227,7 @@ export function QuyTrinhCapMa2026View({ content }: QuyTrinhCapMa2026ViewProps) {
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
               </a>
             </div>
-          </div>
+          </aside>
         </div>
       </section>
 

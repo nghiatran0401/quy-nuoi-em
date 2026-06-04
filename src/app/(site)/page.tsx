@@ -14,6 +14,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { partnersHomeTitle } from "@/content/home-sections";
 import { siteCopy } from "@/content/site-copy";
 import { getDonateInfo, type DonateInfoContent } from "@/lib/data/donate-info";
+import { getLiveHomeStats } from "@/lib/data/home-metrics";
 import { getHomePageContent, type HomeFaqItem } from "@/lib/data/homepage";
 import { getHomeMedia } from "@/lib/data/home-media";
 import { getHomeSectionsContent } from "@/lib/data/homepage-sections";
@@ -21,6 +22,9 @@ import { getPartnerLogos } from "@/lib/data/partner-logos";
 import { getLatestNews } from "@/lib/data/news";
 import { faqPageJsonLd, itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { buildMetadata } from "@/lib/seo/metadata";
+
+/** Match directory home-metrics API cache (max-age=300). */
+export const revalidate = 300;
 
 export function generateMetadata(): Metadata {
   const { metadata } = siteCopy;
@@ -51,13 +55,15 @@ function faqAnswerText(item: HomeFaqItem, bank: DonateInfoContent): string {
 }
 
 export default async function HomePage() {
-  const [homeContent, homeSections, donateInfo, partnerLogos, homeMedia] = await Promise.all([
-    getHomePageContent(),
-    getHomeSectionsContent(),
-    getDonateInfo(),
-    getPartnerLogos(),
-    getHomeMedia(),
-  ]);
+  const [homeContent, homeSections, donateInfo, partnerLogos, homeMedia, liveHomeStats] =
+    await Promise.all([
+      getHomePageContent(),
+      getHomeSectionsContent(),
+      getDonateInfo(),
+      getPartnerLogos(),
+      getHomeMedia(),
+      getLiveHomeStats(),
+    ]);
   const faq = homeContent.faq;
   const faqEntries = faq.items.map((item) => ({
     question: item.question,
@@ -81,7 +87,7 @@ export default async function HomePage() {
             ? [
                 itemListJsonLd({
                   name: "Bản tin & hoạt động mới nhất",
-                  description: "Những hoạt động mới nhất của Dự án Nuôi Em.",
+                  description: "Những hoạt động mới nhất của Quỹ Nuôi Em.",
                   items: latestNews.map((article) => ({
                     name: article.title,
                     pathname: `/news/${article.slug}`,
@@ -93,7 +99,10 @@ export default async function HomePage() {
         ]}
       />
       <HeroSection content={homeContent.hero} heroImageUrl={homeMedia.heroImage} />
-      <HomeStatsSection stats={homeContent.stats} />
+      <HomeStatsSection
+        stats={liveHomeStats.stats}
+        directoryUrl={liveHomeStats.directoryUrl}
+      />
       <CallToActionSection content={homeContent.cta} ctaImageUrl={homeMedia.ctaImage} />
       <MealProgramSection content={homeSections.meal} />
       <ImpactJourneySection content={homeSections.impact} />

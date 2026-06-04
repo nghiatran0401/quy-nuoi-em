@@ -25,19 +25,19 @@ const pages = {
     hero: {
         title: "Minh bạch tài chính",
         description:
-          "Chúng tôi cam kết công khai chi tiết mọi khoản đóng góp và chi tiêu. Niềm tin của cộng đồng chính là tài sản quý giá nhất của Dự án Nuôi Em.",
+          "Chúng tôi cam kết công khai chi tiết mọi khoản đóng góp và chi tiêu. Niềm tin của cộng đồng chính là tài sản quý giá nhất của Quỹ Nuôi Em.",
     },
   },
   news: {
     meta: {
         title: "Bản tin & Hoạt động",
-        description: "Tin tức và hoạt động cộng đồng từ Dự án Nuôi Em.",
+        description: "Tin tức và hoạt động cộng đồng từ Quỹ Nuôi Em.",
     },
     hero: {
         eyebrow: "Cập nhật mới nhất",
         title: "Bản tin & Hoạt động",
         description:
-          "Những câu chuyện về hành trình gieo mầm yêu thương và các hoạt động cộng đồng từ Dự án Nuôi Em.",
+          "Những câu chuyện về hành trình gieo mầm yêu thương và các hoạt động cộng đồng từ Quỹ Nuôi Em.",
     },
   },
   statements: {

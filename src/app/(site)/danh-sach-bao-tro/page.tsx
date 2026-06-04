@@ -21,10 +21,11 @@ import {
 } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = createDataPageMetadata("children");
+export const revalidate = 300;
 
-export default function ChildrenListPage() {
+export default async function ChildrenListPage() {
   const schools = getAllSchools();
-  const summary = getSchoolsSummary();
+  const summary = await getSchoolsSummary();
   const meta = getDataPageMeta("children");
 
   const itemList = itemListJsonLd({

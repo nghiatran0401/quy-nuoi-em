@@ -53,17 +53,18 @@ type PaymentScenariosEditorProps = {
 };
 
 export function PaymentScenariosEditor({ name, initialItems }: PaymentScenariosEditorProps) {
-  const [items, setItems] = useState<Process2026PaymentScenario[]>(
-    initialItems.length > 0 ? initialItems : [{ label: "", tag: null, detail: "" }],
-  );
+  const [items, setItems] = useState<Process2026PaymentScenario[]>(() => {
+    const seed = initialItems.length > 0 ? initialItems.slice(0, 1) : [{ label: "", tag: null, detail: "" }];
+    return seed;
+  });
   const payload = useMemo(() => JSON.stringify(items), [items]);
 
   return (
     <ListSection
       name={name}
       payload={payload}
-      label="Kịch bản chuyển tiền"
-      onAdd={() => setItems((prev) => [...prev, { label: "", tag: null, detail: "" }])}
+      label="Chuyển một lần (một mục duy nhất)"
+      onAdd={() => setItems((prev) => (prev.length >= 1 ? prev : [...prev, { label: "", tag: null, detail: "" }]))}
     >
       {items.map((item, index) => (
         <ItemCard key={`${name}-${index}`} index={index} onRemove={() => setItems((prev) => (prev.length === 1 ? prev : prev.filter((_, i) => i !== index)))}>
@@ -72,7 +73,7 @@ export function PaymentScenariosEditor({ name, initialItems }: PaymentScenariosE
               value={item.label}
               onChange={(event) => updateItem(setItems, index, { label: event.target.value })}
               className="admin-input"
-              placeholder="Nhãn (ví dụ 1 lần)"
+              placeholder="Nhãn (ví dụ: Chuyển một lần)"
             />
             <input
               value={item.tag ?? ""}

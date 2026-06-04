@@ -14,7 +14,7 @@ export function LoginForm({ action, error }: LoginFormProps) {
       <div className="admin-card overflow-hidden">
         <div className="border-b border-slate-100 bg-gradient-to-br from-brand-peach/30 via-white to-brand-sky-soft/40 px-6 py-8 text-center">
           <div className="relative mx-auto mb-4 h-14 w-14 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200/80">
-            <Image src="/logo/logo-ne.png" alt="Dự án Nuôi Em" fill className="object-contain p-2" sizes="56px" />
+            <Image src="/logo/logo-ne.png" alt="Quỹ Nuôi Em" fill className="object-contain p-2" sizes="56px" />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">Trang quản trị</h1>
           <p className="mt-2 text-sm text-slate-600">Đăng nhập để quản lý bài viết và nội dung website.</p>

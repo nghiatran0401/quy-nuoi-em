@@ -24,7 +24,7 @@ describe("sanitize-cms", () => {
     expect(
       isTestOrEnglishHero({
         eyebrow: "Bữa cơm níu chân trẻ tới trường",
-        title: "Dự án Nuôi Em",
+        title: "Quỹ Nuôi Em",
         description: "150.000đ mỗi tháng giúp bé vùng cao no bụng.",
         sponsorNow: "Đóng góp ngay",
         learnMore: "Tìm hiểu thêm",

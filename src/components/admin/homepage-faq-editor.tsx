@@ -173,7 +173,7 @@ function FaqItemCard({
               value={item.question}
               onChange={(event) => onChange({ question: event.target.value })}
               className="admin-input"
-              placeholder="Ví dụ: Số tài khoản của Dự án Nuôi Em?"
+              placeholder="Ví dụ: Số tài khoản của Quỹ Nuôi Em?"
             />
           </div>
 

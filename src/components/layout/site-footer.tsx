@@ -17,8 +17,7 @@ export function SiteFooter() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10">
           <FooterBrandBlock
-            projectName={t.projectName}
-            tradeName={reg.tradeName}
+            name={brandVisual.name}
             legalName={reg.legalName}
             tagline={t.tagline}
             coverage={t.coverage}
@@ -112,34 +111,29 @@ export function SiteFooter() {
 }
 
 function FooterBrandBlock({
-  projectName,
-  tradeName,
+  name,
   legalName,
   tagline,
   coverage,
 }: {
-  projectName: string;
-  tradeName: string;
+  name: string;
   legalName: string;
   tagline: string;
   coverage: string;
 }) {
   return (
-    <div className="flex flex-col gap-4 lg:pr-4">
+    <div className="flex flex-col gap-5 lg:pr-4">
       <Link href="/" className="block w-fit transition-opacity hover:opacity-90">
         <BrandLogo variant="default" className="h-11 w-auto object-contain object-left" />
       </Link>
-      <div className="space-y-1">
-        <p className="font-bold uppercase tracking-wide text-brand-ink">{projectName}</p>
-        <p className="text-base font-semibold text-brand-ink">{tradeName}</p>
-        <p className="text-xs font-semibold uppercase leading-snug tracking-wide text-brand-muted">
-          {legalName}
-        </p>
+      <div className="space-y-2">
+        <p className="text-lg font-bold tracking-tight text-brand-ink">{name}</p>
+        <p className="text-xs leading-relaxed text-brand-muted">{legalName}</p>
       </div>
-      <p className="text-sm leading-relaxed text-brand-muted">
-        {tagline}
-        <span className="mt-2 block">{coverage}</span>
-      </p>
+      <div className="space-y-1.5 text-sm leading-relaxed text-brand-muted">
+        <p>{tagline}</p>
+        <p className="text-brand-ink/75">{coverage}</p>
+      </div>
     </div>
   );
 }

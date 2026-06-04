@@ -49,7 +49,7 @@ function AboutEditorForm({
 
       <AdminFormSection
         title="1. Ảnh banner & Hero"
-        description="Ảnh lớn phía trên, tiếp theo là nhãn phụ, tiêu đề và đoạn mô tả Dự án Nuôi Em."
+        description="Ảnh lớn phía trên, tiếp theo là nhãn phụ, tiêu đề và đoạn mô tả Quỹ Nuôi Em."
       >
         <AdminImageField
           label="Ảnh banner phía trên"
@@ -99,7 +99,7 @@ function AboutEditorForm({
 
       <AdminFormSection
         title="2. Thống kê"
-        description="Dãy số liệu ngay dưới phần Hero (tổng em nuôi, thu/chi, vân vận)."
+        description="Dãy số liệu ngay dưới phần Hero (tổng em nuôi, thu/chi, vân vân)."
       >
         <StatsListEditor name={`${locale}_stats_json`} initialStats={stats} label="Chỉ số thống kê" />
       </AdminFormSection>

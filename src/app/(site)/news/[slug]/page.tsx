@@ -47,8 +47,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     publishedTime: article.publishedAt,
     modifiedTime: article.updatedAt ?? article.publishedAt,
     articleSection: sectionLabel,
-    articleAuthors: ["Dự án Nuôi Em"],
-    articleTags: ["Dự án Nuôi Em", "bản tin", "hoạt động", "trẻ em vùng cao"],
+    articleAuthors: ["Quỹ Nuôi Em"],
+    articleTags: ["Quỹ Nuôi Em", "bản tin", "hoạt động", "trẻ em vùng cao"],
   });
 }
 
@@ -89,7 +89,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
             datePublished: article.publishedAt,
             dateModified: article.updatedAt ?? article.publishedAt,
             section: newsListMeta.title,
-            tags: ["Dự án Nuôi Em", "bản tin", "hoạt động", "trẻ vùng cao"],
+            tags: ["Quỹ Nuôi Em", "bản tin", "hoạt động", "trẻ vùng cao"],
           }),
           siteBreadcrumb(
             [

@@ -112,7 +112,7 @@ function FeaturedStat({ stat }: { stat: StatItem }) {
           <Users className="h-6 w-6" strokeWidth={2.25} />
         </span>
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-accent-dark">
-          Quy mô dự án
+          Quy mô quỹ
         </p>
       </div>
       <p

@@ -35,7 +35,7 @@ export function AdminShell({ children, footer }: AdminShellProps) {
               <Image src="/logo/logo-ne.png" alt="" fill className="object-contain p-1" sizes="36px" />
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Dự án Nuôi Em</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Quỹ Nuôi Em</p>
               <p className="text-sm font-bold text-slate-900">Quản trị</p>
             </div>
           </div>

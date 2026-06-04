@@ -1,9 +1,9 @@
 /**
- * Dự án Nuôi Em — brand, content, and visual identity.
+ * Quỹ Nuôi Em — brand, content, and visual identity.
  * Colors: see `src/app/globals.css` (Open Hearts — light sky, peach, sage, warm coral).
  */
 export const brandVisual = {
-  name: "Dự án Nuôi Em",
+  name: "Quỹ Nuôi Em",
   shortName: "Nuôi Em",
   tagline: "Nuôi cơm trưa và giúp trẻ tới trường",
   logo: {

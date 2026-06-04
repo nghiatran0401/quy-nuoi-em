@@ -1,5 +1,7 @@
 const LEGACY_SITE = /quytonybuoisang\.com/gi;
 const LEGACY_HASHTAG = /#Quỹ[_\s]*TNBS/gi;
+const CANONICAL_BRAND = "Quỹ Nuôi Em";
+
 /** Unwrap Next.js image optimizer URLs to the underlying CDN URL. */
 export function unwrapProxiedImageUrl(url: string | undefined): string | undefined {
   if (!url?.trim()) return undefined;
@@ -27,18 +29,19 @@ export function sanitizeBrandText(text: string): string {
   let out = unwrapEmbeddedImageUrls(text)
     .replace(LEGACY_SITE, "")
     .replace(/\[←[^\]]*\]\([^)]*\)/g, "")
-    .replace(/\[\*\*#Quỹ\\?_TNBS\*\*\]\([^)]*\)/gi, "Dự án Nuôi Em")
-    .replace(LEGACY_HASHTAG, "Dự án Nuôi Em")
-    .replace(/TONY BUỎI SÁNG/gi, "Dự án Nuôi Em")
-    .replace(/TONY BUOI SANG/gi, "Dự án Nuôi Em")
-    .replace(/\bFund\b/gi, "Dự án Nuôi Em");
+    .replace(/\[\*\*#Quỹ\\?_TNBS\*\*\]\([^)]*\)/gi, CANONICAL_BRAND)
+    .replace(LEGACY_HASHTAG, CANONICAL_BRAND)
+    .replace(/TONY BUỎI SÁNG/gi, CANONICAL_BRAND)
+    .replace(/TONY BUOI SANG/gi, CANONICAL_BRAND)
+    .replace(/\bFund\b/gi, CANONICAL_BRAND)
+    .replace(/DỰ ÁN NUÔI EM/gi, "QUỸ NUÔI EM")
+    .replace(/Dự án Nuôi Em/gi, CANONICAL_BRAND);
 
   out = out
-    .replace(/\[\*\*#Dự án Nuôi Em\\?_TNBS\*\*\]\([^)]*\)/gi, "Dự án Nuôi Em")
-    .replace(/Dự án Nuôi Em TNBS/gi, "Dự án Nuôi Em")
+    .replace(/\[\*\*#Quỹ Nuôi Em\\?_TNBS\*\*\]\([^)]*\)/gi, CANONICAL_BRAND)
+    .replace(/Quỹ Nuôi Em TNBS/gi, CANONICAL_BRAND)
     .replace(/\bTNBS\b/g, "")
-    .replace(/Quỹ/g, "Dự án Nuôi Em")
-    .replace(/Dự án Nuôi Em Nuôi Em/g, "Dự án Nuôi Em")
+    .replace(/Quỹ Nuôi Em Nuôi Em/g, CANONICAL_BRAND)
     .replace(/ {2,}/g, " ");
 
   return out.replace(/\n{3,}/g, "\n\n").trim();
@@ -56,4 +59,3 @@ export function isAllowedNewsImage(url: string | undefined): boolean {
     clean.includes("facebook.com")
   );
 }
-

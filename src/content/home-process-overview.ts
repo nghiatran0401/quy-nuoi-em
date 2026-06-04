@@ -14,7 +14,7 @@ export type HomeProcessCard = {
 };
 
 export const homeProcessOverview = {
-  eyebrow: "Cảm ơn anh chị đã đồng hành cùng dự án NUÔI EM",
+  eyebrow: "Cảm ơn anh chị đã đồng hành cùng Quỹ Nuôi Em",
   title: "QUY TRÌNH 6 BƯỚC",
   subtitle: "Mỗi mã nuôi em tiếp tục qua 6 bước: làm theo hướng dẫn",
   guideImage: nuoiEmImage("processGuide"),

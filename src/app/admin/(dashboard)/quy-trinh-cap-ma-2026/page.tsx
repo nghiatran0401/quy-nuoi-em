@@ -310,7 +310,10 @@ function processEditorCard(row: Process2026Row | null) {
       </section>
 
       <section id="section-transfer" className="scroll-mt-24">
-        <AdminFormSection title="Chuyển khoản" description="Tài khoản, kịch bản gửi tiền và khối QR bên phải.">
+        <AdminFormSection
+          title="Chuyển khoản"
+          description="Tài khoản, quy định chuyển một lần và khối QR (trang chỉ hiển thị mục đầu nếu CMS còn nhiều kịch bản cũ)."
+        >
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="admin-label" htmlFor={`${p}_transfer_eyebrow`}>
@@ -398,7 +401,7 @@ function processEditorCard(row: Process2026Row | null) {
         </div>
         <div>
           <label className="admin-label" htmlFor={`${p}_transfer_scenarios_title`}>
-            Tiêu đề kịch bản chuyển tiền
+            Tiêu đề quy định gửi tiền (không dùng trên trang công khai)
           </label>
           <input
             id={`${p}_transfer_scenarios_title`}
@@ -410,7 +413,7 @@ function processEditorCard(row: Process2026Row | null) {
         <PaymentScenariosEditor name={`${p}_payment_scenarios_json`} initialItems={c.paymentScenarios} />
         <div>
           <label className="admin-label" htmlFor={`${p}_transfer_scenarios_footnote`}>
-            Ghi chú cuối kịch bản
+            Ghi chú hạn chót chuyển khoản
           </label>
           <textarea
             id={`${p}_transfer_scenarios_footnote`}

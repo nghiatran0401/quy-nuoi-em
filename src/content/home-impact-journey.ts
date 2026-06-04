@@ -62,12 +62,12 @@ export const impactJourneySectionCopy = {
         },
       ],
       footer:
-        "Tâm lý anh chị nuôi rất thích tặng thêm quà cho bé — dự án thống nhất: nếu tặng, nên tặng cái các em dùng chung. Một ngôi trường là điều thiết thực nhất. (Đã xây dựng thành công hơn 200 công trình trong vòng 09 năm qua.)",
+        "Tâm lý anh chị nuôi rất thích tặng thêm quà cho bé — quỹ thống nhất: nếu tặng, nên tặng cái các em dùng chung. Một ngôi trường là điều thiết thực nhất. (Đã xây dựng thành công hơn 200 công trình trong vòng 09 năm qua.)",
     },
   ] satisfies ImpactMilestone[],
   infrastructure: {
     eyebrow: "Đặc biệt từ năm học 2020 – 2021",
-    title: "Dự án Nuôi Em thu thêm",
+    title: "Quỹ Nuôi Em thu thêm",
     amount: "100.000đ / mã NE",
     subtitle: "Tiền cơ sở vật chất",
     body: "Số tiền này sẽ lên tới hơn 1.000.000.000 mỗi năm, kết hợp với dự án Sức mạnh 2000 sẽ giúp xây dựng ngay lập tức 15 điểm trường tại bản (chỉ tính 2021–2022).",
@@ -82,7 +82,7 @@ export const impactJourneySectionCopy = {
     posterImage: "/images/nuoiem/csvc19-20-20210905133309.jpg",
     posterAlt: "Điều kỳ diệu — các điểm trường đã xây 2019–2020",
     title: "Đây là kết quả của việc 8.700 anh chị nuôi em đồng lòng",
-    body: "Đóng thêm 50.000đ/bé/năm tiền cơ sở vật chất — 2019–2021: góp 26 điểm trường đã được xây. Jack Ma từng nói: nếu kiếm của mỗi người dân Trung Quốc 1 USD thì sẽ trở thành tỉ phú — và ông đã làm được. Năm 2020, nhìn 8.700 người nuôi 8.700 bé, dự án nhẩm tính: 50.000đ/365 ngày mỗi ngày chưa tới 140đ, mà sức mạnh thần kỳ: 430.000.000đ đủ xây 3 điểm trường luôn.",
+    body: "Đóng thêm 50.000đ/bé/năm tiền cơ sở vật chất — 2019–2021: góp 26 điểm trường đã được xây. Jack Ma từng nói: nếu kiếm của mỗi người dân Trung Quốc 1 USD thì sẽ trở thành tỉ phú — và ông đã làm được. Năm 2020, nhìn 8.700 người nuôi 8.700 bé, quỹ nhẩm tính: 50.000đ/365 ngày mỗi ngày chưa tới 140đ, mà sức mạnh thần kỳ: 430.000.000đ đủ xây 3 điểm trường luôn.",
     linkLabel: "Xem chi tiết 26 điểm trường",
     linkHref: SCHOOL_BUILD_URL,
   },

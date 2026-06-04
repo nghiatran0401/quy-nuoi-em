@@ -14,7 +14,7 @@ export const mealProgramSectionCopy = {
     },
     {
       label: "Đối tượng nuôi",
-      text: "Trẻ 3–5 tuổi (dự án vẫn hỗ trợ thêm từ năm học 2025–2026) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa. Một số bé nội trú xa được hỗ trợ cơm trưa và tối — mỗi bữa một mã NE (ví dụ NE00001S — ăn trưa, NE00001T — ăn tối). Khi bé được nhà nước nuôi, dự án đổi sang bé khác và giữ nguyên mã NE.",
+      text: "Trẻ 3–5 tuổi (quỹ vẫn hỗ trợ thêm từ năm học 2025–2026) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa. Một số bé nội trú xa được hỗ trợ cơm trưa và tối — mỗi bữa một mã NE (ví dụ NE00001S — ăn trưa, NE00001T — ăn tối). Khi bé được nhà nước nuôi, quỹ đổi sang bé khác và giữ nguyên mã NE.",
     },
     {
       label: "Số tiền",
@@ -32,6 +32,6 @@ export const mealProgramSectionCopy = {
   mascot: {
     image: nuoiEmImage("mascotASang"),
     name: "A Sáng",
-    caption: "A Sáng — Linh vật của dự án",
+    caption: "A Sáng — Linh vật của Quỹ Nuôi Em",
   },
 } as const;

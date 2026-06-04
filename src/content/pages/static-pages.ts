@@ -27,11 +27,11 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     meta: {
         title: "Về Chúng Tôi",
         description:
-          "Tìm hiểu về Dự án Nuôi Em — sứ mệnh gieo mầm hy vọng và minh bạch tài chính.",
+          "Tìm hiểu về Quỹ Nuôi Em — sứ mệnh gieo mầm hy vọng và minh bạch tài chính.",
     },
     hero: {
         eyebrow: "Nuôi cơm trưa — giúp trẻ tới trường",
-        title: "Dự án Nuôi Em",
+        title: "Quỹ Nuôi Em",
         description:
           "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. Từ 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm. Mã Tây Nguyên: 170.000đ/tháng.",
     },
@@ -39,19 +39,19 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
   logoStory: {
     meta: {
         title: "Câu chuyện logo",
-        description: "Ý nghĩa và cấu trúc thiết kế logo Dự án Nuôi Em.",
+        description: "Ý nghĩa và cấu trúc thiết kế logo Quỹ Nuôi Em.",
     },
     hero: {
         eyebrow: "Nhận diện thương hiệu",
         title: "Câu Chuyện Logo",
         description:
-          "Như trẻ vào tuổi trưởng thành cần Căn cước công dân, Dự án Nuôi Em khi phát triển cũng cần pháp nhân và logo mới để khẳng định mình.",
+          "Như trẻ vào tuổi trưởng thành cần Căn cước công dân, Quỹ Nuôi Em khi phát triển cũng cần pháp nhân và logo mới để khẳng định mình.",
     },
   },
   contact: {
     meta: {
         title: "Liên hệ",
-        description: "Thông tin liên hệ Ban điều hành Dự án Nuôi Em.",
+        description: "Thông tin liên hệ Ban điều hành Quỹ Nuôi Em.",
     },
     hero: {
         title: "Liên hệ với chúng tôi",
@@ -61,11 +61,11 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
   donate: {
     meta: {
         title: "Đóng góp",
-        description: "Thông tin chuyển khoản và quyên góp cho Dự án Nuôi Em.",
+        description: "Thông tin chuyển khoản và quyên góp cho Quỹ Nuôi Em.",
     },
     hero: {
         eyebrow: "CHUNG TAY GÓP SỨC",
-        title: "Đồng Hành Cùng Dự án Nuôi Em",
+        title: "Đồng Hành Cùng Quỹ Nuôi Em",
         description: "Mọi sự đóng góp của bạn đều trân quý và giúp các em nhỏ có thêm cơ hội đến trường.",
     },
   },
@@ -95,19 +95,19 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
   volunteer: {
     meta: {
         title: "Đăng ký tình nguyện viên",
-        description: "Đăng ký đồng hành cùng Dự án Nuôi Em và các em nhỏ được bảo trợ.",
+        description: "Đăng ký đồng hành cùng Quỹ Nuôi Em và các em nhỏ được bảo trợ.",
     },
     hero: {
         eyebrow: "Chung tay vì cộng đồng",
         title: "Đăng ký trở thành Tình nguyện viên",
         description:
-          "Dự án Nuôi Em xin trân trọng cảm ơn Bạn đã đăng ký trở thành Tình nguyện viên - đồng hành cùng chúng mình và các em bé trên bản đang được bảo trợ!",
+          "Quỹ Nuôi Em xin trân trọng cảm ơn Bạn đã đăng ký trở thành Tình nguyện viên - đồng hành cùng chúng mình và các em bé trên bản đang được bảo trợ!",
     },
   },
   mou: {
     meta: {
         title: "Biên bản ghi nhớ (MOU)",
-        description: "Hợp tác doanh nghiệp với Dự án Nuôi Em qua biên bản ghi nhớ (MOU).",
+        description: "Hợp tác doanh nghiệp với Quỹ Nuôi Em qua biên bản ghi nhớ (MOU).",
     },
     hero: {
         eyebrow: "Hợp tác & Phát triển",
@@ -118,25 +118,25 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
   members: {
     meta: {
         title: "Đối tác đồng hành",
-        description: "Các doanh nghiệp đồng hành và tài trợ Dự án Nuôi Em.",
+        description: "Các doanh nghiệp đồng hành và tài trợ Quỹ Nuôi Em.",
     },
     hero: {
         eyebrow: "Đối tác & Đồng hành",
         title: "Đối tác đồng hành",
         description:
-          "Những cánh tay nối dài yêu thương — Cùng chung tay vì tương lai trẻ em Việt Nam. Dự án Nuôi Em trân trọng sự đồng hành quý báu của các Doanh nghiệp thành viên.",
+          "Những cánh tay nối dài yêu thương — Cùng chung tay vì tương lai trẻ em Việt Nam. Quỹ Nuôi Em trân trọng sự đồng hành quý báu của các Doanh nghiệp thành viên.",
     },
   },
   careers: {
     meta: {
         title: "Tuyển dụng",
-        description: "Cơ hội nghề nghiệp tại Dự án Nuôi Em.",
+        description: "Cơ hội nghề nghiệp tại Quỹ Nuôi Em.",
     },
     hero: {
         eyebrow: "CƠ HỘI NGHỀ NGHIỆP",
-        title: "Nhân viên Thư ký Dự án Nuôi Em",
+        title: "Nhân viên Thư ký Quỹ Nuôi Em",
         description:
-          "Cùng Dự án Nuôi Em tiếp bước tới trường và sẻ chia yêu thương đến những hoàn cảnh khó khăn.",
+          "Cùng Quỹ Nuôi Em tiếp bước tới trường và sẻ chia yêu thương đến những hoàn cảnh khó khăn.",
     },
   },
 };
@@ -160,8 +160,8 @@ export const logoStorySections:
     {
       title: "Ngọn lửa nuôi dưỡng",
       paragraphs: [
-        "Logo Dự án Nuôi Em là biểu tượng của sự ấm áp, nghị lực và lòng trắc ẩn — giống như một ngọn lửa nhỏ được thắp lên để sưởi ấm hành trình của các em.",
-        "Biểu tượng kết hợp ngọn lửa cách điệo với dòng chữ “DỰ ÁN NUÔI EM”, trên nền sáng — thể hiện tinh thần Open Hearts: gần gũi, minh bạch và đầy hy vọng.",
+        "Logo Quỹ Nuôi Em là biểu tượng của sự ấm áp, nghị lực và lòng trắc ẩn — giống như một ngọn lửa nhỏ được thắp lên để sưởi ấm hành trình của các em.",
+        "Biểu tượng kết hợp ngọn lửa cách điệo với dòng chữ “QUỸ NUÔI EM”, trên nền sáng — thể hiện tinh thần Open Hearts: gần gũi, minh bạch và đầy hy vọng.",
       ],
     },
     {
@@ -179,7 +179,7 @@ export const logoStorySections:
         {
           title: "Phần chữ",
           items: [
-            'Dòng chữ “DỰ ÁN NUÔI EM” viết hoa, rõ ràng — tên gọi chính thức của dự án thiện nguyện Nuôi cơm trưa và giúp trẻ tới trường.',
+            'Dòng chữ “QUỸ NUÔI EM” viết hoa, rõ ràng — tên gọi chính thức của Quỹ Nuôi Em (nuôi cơm trưa và giúp trẻ tới trường).',
             "Phiên bản ngang có thêm dòng “Ánh Sáng Núi Rừng” khi cần nhận diện đối tác sáng lập.",
           ],
         },
@@ -202,7 +202,7 @@ export const processSteps: ProcessStep[] = [
       round: "Vòng 01",
       title: "THU THẬP THÔNG TIN",
       description:
-        "Dự án Nuôi Em nhận hồ sơ trẻ có hoàn cảnh khó khăn do đọc giả và mạnh thường quân giới thiệu và tiến hành thu thập thông tin.",
+        "Quỹ Nuôi Em nhận hồ sơ trẻ có hoàn cảnh khó khăn do đọc giả và mạnh thường quân giới thiệu và tiến hành thu thập thông tin.",
     },
     {
       round: "Vòng 02",
@@ -226,7 +226,7 @@ export const processSteps: ProcessStep[] = [
     },
     {
       round: "Vòng 05",
-      title: "TRÌNH BAN ĐIỀU HÀNH DỰ ÁN",
+      title: "TRÌNH BAN ĐIỀU HÀNH QUỸ",
       subTitle: "THÔNG QUA DANH SÁCH BẢO TRỢ",
       description: "Ban điều hành phê duyệt danh sách trẻ được bảo trợ chính thức.",
     },
@@ -297,7 +297,7 @@ export const mouContent: {
       { title: "Trách nhiệm các bên", description: "Quy định phạm vi trách nhiệm sau khi thống nhất mục tiêu và vai trò." },
     ],
     quote:
-      "Doanh nghiệp mong muốn hợp tác với Dự án Nuôi Em nhằm đóng góp cho xã hội, giúp trẻ em có hoàn cảnh khó khăn — vui lòng liên hệ để trao đổi chi tiết về biên bản ghi nhớ (MOU).",
+      "Doanh nghiệp mong muốn hợp tác với Quỹ Nuôi Em nhằm đóng góp cho xã hội, giúp trẻ em có hoàn cảnh khó khăn — vui lòng liên hệ để trao đổi chi tiết về biên bản ghi nhớ (MOU).",
     cta: "Liên hệ: duannuoiem@gmail.com",
   };
 
@@ -343,10 +343,10 @@ export const contactInfo: {
   donationNote: string;
   warning: string;
 } = {
-    address: "Dự án hỗ trợ trẻ bản cao tại hơn 25 tỉnh thành trên cả nước",
+    address: "Quỹ hỗ trợ trẻ bản cao tại hơn 25 tỉnh thành trên cả nước",
     email: "duannuoiem@gmail.com",
     phone: "0975 302 307",
-    donationNote: "Dự án chỉ tiếp nhận quyên góp qua số tài khoản công khai trên trang Đóng góp. Bắt buộc ghi mã NE khi chuyển khoản.",
+    donationNote: "Quỹ chỉ tiếp nhận quyên góp qua số tài khoản công khai trên trang Đóng góp. Bắt buộc ghi mã NE khi chuyển khoản.",
     warning: "Vui lòng cảnh giác với các hành vi mạo danh. Báo cáo tài chính tại taichinh.nuoiem.com",
   };
 

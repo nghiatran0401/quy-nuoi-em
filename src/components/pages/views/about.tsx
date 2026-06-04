@@ -2,7 +2,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/pages/page-hero";
 import { PartnersMarquee } from "@/components/pages/partners-marquee";
 import { StatsSection } from "@/components/shared/stats-section";
-import { siteStats } from "@/content/shared/site-stats";
+import { unavailableHomeStats } from "@/lib/data/home-metrics";
 import { getStaticPageHero, getUiLabel } from "@/content/pages/static-pages";
 import type { AboutPageContent } from "@/lib/data/about-page";
 import type { PartnerLogoDisplay } from "@/lib/data/partner-logos";
@@ -11,11 +11,12 @@ import { siteImage } from "@/lib/images";
 type AboutViewProps = {
   content?: AboutPageContent;
   partnerLogos: PartnerLogoDisplay[];
+  stats?: AboutPageContent["stats"];
 };
 
-export function AboutView({ content, partnerLogos }: AboutViewProps) {
+export function AboutView({ content, partnerLogos, stats: statsOverride }: AboutViewProps) {
   const hero = content?.hero ?? getStaticPageHero("about");
-  const stats = content?.stats ?? siteStats;
+  const stats = statsOverride ?? content?.stats ?? unavailableHomeStats;
   const partnersTitle = content?.partnersTitle ?? getUiLabel("partners");
   const heroImage = content?.heroImage ?? "/images/about/digital-heart-hero.png";
   const heroImageSrc = heroImage.startsWith("http://") || heroImage.startsWith("https://") ? heroImage : siteImage(heroImage);

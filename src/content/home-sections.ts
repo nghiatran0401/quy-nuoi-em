@@ -46,7 +46,7 @@ export const sponsoredChildrenSectionCopy = {
     },
   ],
   heroImage: "/images/nuoiem/3-1541577888.png",
-  heroAlt: "Em nhỏ vùng cao — dự án Nuôi Em",
+  heroAlt: "Em nhỏ vùng cao — Quỹ Nuôi Em",
   viewAlbum: "XEM ALBUM",
   albums: [
     {
@@ -95,18 +95,18 @@ export const faqSectionCopy = {
   eyebrow: "Giải đáp thắc mắc",
   title: "Câu Hỏi Thường Gặp",
   intro:
-    "Những thông tin phổ biến nhất về Dự án Nuôi Em được tổng hợp tại đây để giải đáp nhanh các thắc mắc của bạn.",
+    "Những thông tin phổ biến nhất về Quỹ Nuôi Em được tổng hợp tại đây để giải đáp nhanh các thắc mắc của bạn.",
   items: [
     {
       id: "dia-chi",
-      question: "Địa chỉ văn phòng của Dự án Nuôi Em ở đâu?",
+      question: "Địa chỉ văn phòng của Quỹ Nuôi Em ở đâu?",
       type: "dia-chi" as const,
       body: "Xin mời cả nhà, các anh chị ghé thăm văn phòng Quỹ để cùng lắng nghe những câu chuyện, để hiểu về hành trình mà Quỹ đang làm cho các con.",
       address: brandVisual.office.address,
     },
     {
       id: "ngan-hang",
-      question: "Số tài khoản của Dự án Nuôi Em?",
+      question: "Số tài khoản của Quỹ Nuôi Em?",
       type: "ngan-hang" as const,
     },
     {
@@ -118,7 +118,7 @@ export const faqSectionCopy = {
         "Thống nhất nội dung, điều kiện hỗ trợ bao gồm chưa nhận được sự hỗ trợ từ nhà nước, bữa cơm trưa ảnh hưởng việc học",
         "Tiếp nhận thông tin, số liệu ban đầu đăng ký từ Sở giáo dục / Nhà trường",
         "Bắt đầu cấp mã từ tháng 6-7",
-        "Toàn dự án ăn cơm trưa từ tháng 9",
+        "Toàn quỹ ăn cơm trưa từ tháng 9",
         "Nhận thông tin chi tiết từ Sở giáo dục / Nhà trường tháng 9 - 10",
         "Nhận đầy đủ thông tin học sinh và làm ảnh thẻ, đưa lên hệ thống tra cứu tháng 11",
         "Anh chị nuôi tra cứu và vào nhóm Facebook theo bản có thầy cô giáo cắm bản nấu ăn hàng ngày báo cáo theo tháng",
