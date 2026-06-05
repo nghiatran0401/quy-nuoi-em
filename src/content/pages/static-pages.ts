@@ -14,7 +14,8 @@ export type StaticPageKey =
   | "volunteer"
   | "mou"
   | "members"
-  | "careers";
+  | "careers"
+  | "contact";
 
 type StaticPageContent = {
   meta: PageMeta;
@@ -113,6 +114,18 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         title: "Nhân viên Thư ký Quỹ Nuôi Em",
         description:
           "Cùng Quỹ Nuôi Em tiếp bước tới trường và sẻ chia yêu thương đến những hoàn cảnh khó khăn.",
+    },
+  },
+  contact: {
+    meta: {
+        title: "Liên hệ",
+        description: "Thông tin liên hệ Quỹ Nuôi Em — email, hotline, fanpage và địa chỉ văn phòng.",
+    },
+    hero: {
+        eyebrow: "Kết nối với Quỹ",
+        title: "Liên hệ Quỹ Nuôi Em",
+        description:
+          "Anh chị cần hỗ trợ về nuôi em, đóng góp hoặc hợp tác — dự án luôn sẵn sàng đồng hành cùng anh chị.",
     },
   },
 };
@@ -276,6 +289,21 @@ export const mouContent: {
       "Doanh nghiệp mong muốn hợp tác với Quỹ Nuôi Em nhằm đóng góp cho xã hội, giúp trẻ em có hoàn cảnh khó khăn — vui lòng liên hệ để trao đổi chi tiết về biên bản ghi nhớ (MOU).",
     cta: "Liên hệ: duannuoiem@gmail.com",
   };
+
+export const contactContent: {
+  intro: string;
+  phoneContactName: string;
+  facebookLabel: string;
+  messengerLabel: string;
+  officeLabel: string;
+} = {
+  intro:
+    "Anh chị có thắc mắc về nuôi em, đóng góp, đăng ký tình nguyện hoặc hợp tác — vui lòng liên hệ dự án qua các kênh bên dưới.",
+  phoneContactName: "Anh Trung",
+  facebookLabel: "Fanpage Nuôi Em",
+  messengerLabel: "Nhắn tin qua Messenger",
+  officeLabel: "Địa chỉ văn phòng",
+};
 
 export const careersContent: {
   location: string;

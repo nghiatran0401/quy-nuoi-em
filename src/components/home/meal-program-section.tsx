@@ -45,7 +45,7 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
       className="border-b-[6px] border-brand-highlight bg-white home-section-pad"
       aria-labelledby="home-meal-heading"
     >
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="page-container">
         <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
           <div>
             <div className="mb-5 flex items-center gap-3">
@@ -59,14 +59,14 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
 
             <h2
               id="home-meal-heading"
-              className="heading-display mb-6 text-2xl uppercase leading-tight tracking-tight text-brand-ink md:text-3xl lg:text-[2rem]"
+              className="heading-section-xl mb-6 uppercase"
             >
               {copy.title}
             </h2>
 
             <div className="space-y-5 text-left text-[15px] leading-relaxed text-brand-ink sm:text-base">
               {copy.blocks.map((block) => (
-                <p key={block.label ?? block.text.slice(0, 28)} className="text-justify">
+                <p key={block.label ?? block.text.slice(0, 28)} className="text-left sm:text-justify">
                   {block.label ? (
                     <span className="font-heading font-bold text-brand-ink">{block.label}: </span>
                   ) : null}
@@ -75,11 +75,11 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
               ))}
             </div>
 
-            <ul className="mt-8 flex flex-wrap gap-3">
+            <ul className="mt-8 grid grid-cols-1 gap-3 min-[400px]:grid-cols-2 sm:flex sm:flex-wrap">
               {copy.costs.map((cost) => (
                 <li
                   key={cost.amount}
-                  className="rounded-2xl border border-brand-accent/25 bg-brand-highlight-soft px-4 py-3"
+                  className="rounded-2xl border border-brand-accent/25 bg-brand-highlight-soft px-4 py-3 sm:min-w-[9.5rem]"
                 >
                   <span className="font-heading text-xl font-extrabold tabular-nums text-brand-accent-dark">
                     {cost.amount}
@@ -90,7 +90,7 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-6 lg:sticky lg:top-28">
+          <div className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-2xl border border-brand-border/80 bg-brand-warm p-2 shadow-[var(--shadow-brand-card)] sm:p-2.5">
               <YoutubeEmbed
                 videoId={copy.media.youtubeId}

@@ -14,22 +14,20 @@ export function HeroSection({ content, heroImageUrl }: HeroSectionProps) {
   const copy = content ?? siteCopy.home;
 
   return (
-    <section className="hero-backdrop relative overflow-hidden py-8 sm:py-10 lg:py-14">
+    <section className="hero-backdrop relative overflow-hidden py-10 sm:py-12 lg:py-16">
       <div className="page-container relative z-10">
-        <div className="flex flex-col items-center gap-6 sm:gap-10 lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
+        <div className="flex flex-col items-center gap-8 sm:gap-10 lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
           <div className="w-full min-w-0 text-center lg:w-1/2 lg:text-left">
             <p className="eyebrow mb-3 sm:mb-4">{copy.eyebrow}</p>
-            <h1 className="heading-display mb-4 text-[1.75rem] leading-[1.15] sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
-              {copy.title}
-            </h1>
-            <p className="text-body home-prose mb-8 text-base leading-relaxed sm:mb-10 sm:text-lg md:text-xl lg:text-left">
+            <h1 className="heading-hero mb-4 sm:mb-6">{copy.title}</h1>
+            <p className="text-body home-prose mx-auto mb-8 max-w-prose text-[15px] leading-relaxed sm:mb-10 sm:text-lg md:text-xl lg:mx-0 lg:max-w-none">
               {copy.description}
             </p>
-            <div className="flex w-full flex-col justify-center gap-3 sm:flex-row sm:gap-4 lg:justify-start">
+            <div className="flex w-full max-w-md flex-col justify-center gap-3 sm:max-w-none sm:flex-row sm:gap-4 lg:justify-start">
               <Link href="/dong-gop" className="btn-primary w-full sm:w-auto">
                 {copy.sponsorNow}
               </Link>
-              <Link href="/about" className="btn-secondary w-full sm:w-auto">
+              <Link href="#home-process-heading" className="btn-secondary w-full sm:w-auto">
                 {copy.learnMore}
               </Link>
             </div>
@@ -42,7 +40,7 @@ export function HeroSection({ content, heroImageUrl }: HeroSectionProps) {
               alt={brandVisual.name}
               width={1920}
               height={1080}
-              className="h-auto w-full rounded-3xl border border-brand-border/80 shadow-[var(--shadow-brand-card)]"
+              className="h-auto w-full rounded-2xl border border-brand-border/80 shadow-[var(--shadow-brand-card)] sm:rounded-3xl"
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
             />

@@ -37,7 +37,7 @@ export function HomeCampaignBanner({
 
       <h2
         id={headingId}
-        className="heading-display mx-auto mt-5 max-w-4xl text-2xl font-extrabold leading-tight tracking-tight text-brand-accent sm:mt-6 md:text-4xl lg:text-[2.35rem]"
+        className="heading-display mx-auto mt-5 max-w-4xl text-[clamp(1.35rem,4vw+0.5rem,2.35rem)] font-extrabold leading-tight tracking-tight text-brand-accent sm:mt-6"
       >
         {campaign.headline}
       </h2>

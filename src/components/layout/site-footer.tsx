@@ -14,7 +14,7 @@ export function SiteFooter() {
 
   return (
     <footer className="site-footer py-10 sm:py-12">
-      <div className="container mx-auto px-4">
+      <div className="page-container">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10">
           <FooterBrandBlock
             name={brandVisual.name}
@@ -28,7 +28,6 @@ export function SiteFooter() {
             className="sm:max-lg:border-l sm:max-lg:border-brand-border/50 sm:max-lg:pl-8"
           >
             <div className="space-y-3">
-              <FooterDefinition label={t.taxCode} value={reg.enterpriseCode} />
               <FooterDefinition label={t.businessLicense} value={licenseDisplay} />
               <p className="text-sm leading-relaxed text-brand-muted">
                 {t.issuedOn}{" "}
@@ -101,7 +100,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="container mx-auto mt-10 border-t border-brand-border/60 px-4 pt-8 text-center text-sm text-brand-muted">
+      <div className="page-container mt-10 border-t border-brand-border/60 pt-8 text-center text-sm text-brand-muted">
         <p>
           © {year} {t.rights}
         </p>

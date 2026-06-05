@@ -48,7 +48,7 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
         </header>
 
         <div className="space-y-8">
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-2xl border border-brand-green/25 bg-brand-green/5 p-4 sm:p-5">
               <p className="flex items-start gap-2 text-sm font-semibold leading-relaxed text-brand-ink">
                 <CircleAlert className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" aria-hidden />
@@ -80,7 +80,7 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
               <div className="mt-4 grid flex-1 gap-5 sm:grid-cols-2">
                 <div className="rounded-xl border border-brand-border/60 bg-brand-warm px-4 py-4 sm:col-span-2">
                   <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">Số tài khoản</p>
-                  <p className="mt-1 font-mono text-3xl font-bold tabular-nums text-brand-accent">
+                  <p className="mt-1 break-all font-mono text-2xl font-bold tabular-nums text-brand-accent sm:text-3xl">
                     {c.transfer.accountNumber}
                   </p>
                 </div>

@@ -13,8 +13,13 @@ export function SiteHeader() {
     if (!mobileOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [mobileOpen]);
 
@@ -59,7 +64,14 @@ export function SiteHeader() {
             </Link>
           </div>
 
-          <div className="flex items-center lg:hidden">
+          <div className="flex items-center gap-1.5 lg:hidden">
+            <Link
+              href="/dong-gop"
+              className="touch-target focus-ring inline-flex items-center justify-center rounded-full bg-brand-accent p-2.5 text-white shadow-[0_2px_12px_-2px_rgb(240_120_74/0.45)] transition hover:bg-brand-accent-light active:scale-[0.98]"
+              aria-label={navLabel("donate")}
+            >
+              <Heart className="h-5 w-5 fill-current text-brand-highlight" aria-hidden />
+            </Link>
             <button
               type="button"
               className="touch-target focus-ring inline-flex items-center justify-center rounded-lg p-2 text-brand-muted transition-colors hover:bg-brand-surface hover:text-brand-ink"
@@ -73,7 +85,14 @@ export function SiteHeader() {
         </div>
 
         {mobileOpen ? (
-          <div className="max-h-[min(70vh,calc(100dvh-4.5rem))] space-y-1 overflow-y-auto overscroll-contain border-t border-brand-border pb-safe pt-3 lg:hidden">
+          <>
+            <button
+              type="button"
+              className="fixed inset-0 top-16 z-40 bg-brand-ink/20 backdrop-blur-[2px] lg:hidden"
+              aria-label={navLabel("closeMenu")}
+              onClick={() => setMobileOpen(false)}
+            />
+            <div className="relative z-50 max-h-[min(72vh,calc(100dvh-4.5rem))] space-y-1 overflow-y-auto overscroll-contain border-t border-brand-border bg-white/95 pb-safe pt-3 shadow-[var(--shadow-brand-soft)] backdrop-blur-xl lg:hidden">
             {mainNavItems.map((item) =>
               item.external ? (
                 <a
@@ -108,6 +127,7 @@ export function SiteHeader() {
               </Link>
             </div>
           </div>
+          </>
         ) : null}
       </div>
     </nav>

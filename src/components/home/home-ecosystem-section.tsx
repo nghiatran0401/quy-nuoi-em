@@ -86,15 +86,15 @@ export function HomeEcosystemSection({
         aria-hidden
       />
 
-      <div className="container relative z-10 mx-auto max-w-7xl px-4">
-        <header className="mx-auto mb-6 max-w-3xl text-center sm:mb-7">
+      <div className="page-container relative z-10">
+        <header className="mx-auto mb-7 max-w-3xl text-center sm:mb-8">
           <p className="eyebrow">{eyebrow}</p>
-          <h2 id="home-ecosystem-heading" className="heading-display mt-2 text-3xl font-extrabold md:text-4xl">
+          <h2 id="home-ecosystem-heading" className="heading-section-xl mt-2">
             {title}
           </h2>
         </header>
 
-        <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {ecosystem.map((card) => (
             <EcosystemCard key={card.title} card={card} />
           ))}

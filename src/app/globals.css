@@ -50,6 +50,7 @@
     /* Offset in-page anchors below sticky header (site-header is h-16–20). */
     scroll-padding-top: 4.5rem;
     overflow-x: clip;
+    scroll-behavior: smooth;
   }
 
   @media (min-width: 640px) {
@@ -64,6 +65,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
     html:focus-within {
       scroll-behavior: auto;
     }
@@ -119,11 +124,23 @@
   }
 
   .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.2em] text-brand-green;
+    @apply text-[11px] font-bold uppercase tracking-[0.16em] text-brand-green sm:text-xs sm:tracking-[0.2em];
   }
 
   .heading-display {
     @apply font-heading font-extrabold tracking-tight text-brand-ink;
+  }
+
+  .heading-hero {
+    @apply font-heading font-extrabold tracking-tight text-brand-ink;
+    font-size: clamp(1.75rem, 4.5vw + 0.65rem, 3.75rem);
+    line-height: 1.12;
+  }
+
+  .heading-section-xl {
+    @apply font-heading font-extrabold tracking-tight text-brand-ink;
+    font-size: clamp(1.625rem, 2.8vw + 0.85rem, 3rem);
+    line-height: 1.15;
   }
 
   .text-body {
@@ -132,7 +149,7 @@
 
   .home-page .home-prose p,
   .home-page p.home-prose {
-    text-align: justify;
+    @apply text-left sm:text-justify;
   }
 
   .btn-primary {
@@ -173,7 +190,7 @@
   }
 
   .home-section-pad {
-    @apply py-7 sm:py-9 lg:py-11;
+    @apply py-10 sm:py-12 lg:py-14;
   }
 
   .section-pad-lg {

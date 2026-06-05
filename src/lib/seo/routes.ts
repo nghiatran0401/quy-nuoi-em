@@ -13,6 +13,7 @@ export const STATIC_PAGE_PATHS: Record<StaticPageKey, string> = {
   mou: "/mou",
   members: "/thanh-vien-quy",
   careers: "/tuyen-dung",
+  contact: "/lien-he",
 };
 
 export const DATA_PAGE_PATHS: Record<DataPageKey, string> = {

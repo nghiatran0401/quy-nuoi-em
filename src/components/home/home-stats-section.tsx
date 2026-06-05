@@ -36,7 +36,7 @@ export function HomeStatsSection({
         aria-hidden
       />
 
-      <div className="container relative mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:py-10">
+      <div className="page-container relative py-8 sm:py-10 lg:py-12">
         <HomeCampaignBanner
           campaign={campaign}
           logos={logos}

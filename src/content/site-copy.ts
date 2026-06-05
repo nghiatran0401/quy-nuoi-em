@@ -22,7 +22,6 @@ export const siteCopy = {
   },
   footer: {
     projectName: "Quỹ Nuôi Em",
-    taxCode: "Mã số thuế",
     businessLicense: "Giấy ĐKKD số",
     enterpriseTypeSuffix: "DNXH",
     issuedOn: "Cấp ngày",

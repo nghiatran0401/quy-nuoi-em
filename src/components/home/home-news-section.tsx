@@ -18,15 +18,15 @@ export async function HomeNewsSection({
 
   return (
     <section className="bg-brand-sky-soft/50 home-section-pad">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="mb-6 flex flex-col gap-3 sm:mb-8 md:flex-row md:items-end md:justify-between">
+      <div className="page-container">
+        <div className="mb-7 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="eyebrow mb-2">{copy.eyebrow}</h2>
-            <h3 className="heading-display text-3xl font-bold md:text-4xl">{copy.title}</h3>
+            <h3 className="heading-section-xl">{copy.title}</h3>
           </div>
           <Link
             href="/news"
-            className="link-accent group flex items-center gap-2 transition-all hover:gap-3"
+            className="link-accent group inline-flex min-h-11 items-center gap-2 self-start transition-all hover:gap-3 sm:self-auto"
           >
             {copy.viewAll}
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -37,31 +37,30 @@ export async function HomeNewsSection({
             Chưa có tin tức. Vui lòng quay lại sau.
           </p>
         ) : (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {articles.map((article) => (
             <article
               key={article.slug}
-              className="brand-card-interactive group overflow-hidden"
+              className="brand-card-interactive group flex h-full flex-col overflow-hidden"
             >
-              <div className="flex h-full flex-col md:flex-row">
-                <div className="relative aspect-video w-full overflow-hidden bg-brand-surface md:aspect-auto md:w-2/5">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-surface">
                   {article.imageUrl ? (
                     <Image
                       src={article.imageUrl}
                       alt={article.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 240px"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
-                    <div className="flex min-h-[200px] h-full w-full items-center justify-center bg-brand-warm text-5xl text-brand-muted/40">
+                    <div className="flex h-full min-h-[180px] w-full items-center justify-center bg-brand-warm text-5xl text-brand-muted/40">
                       📰
                     </div>
                   )}
-                </div>
-                <div className="flex flex-1 flex-col justify-between p-6">
+              </div>
+              <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
                   <div>
-                    <h3 className="mb-2 line-clamp-2 text-xl font-bold leading-tight text-brand-ink transition-colors group-hover:text-brand-accent">
+                    <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-tight text-brand-ink transition-colors group-hover:text-brand-accent sm:text-xl">
                       <Link href={`/news/${article.slug}`}>{article.title}</Link>
                     </h3>
                     <div className="mb-3 flex flex-wrap items-center gap-4 text-xs text-brand-muted">
@@ -90,7 +89,6 @@ export async function HomeNewsSection({
                     </Link>
                   </div>
                 </div>
-              </div>
             </article>
           ))}
         </div>

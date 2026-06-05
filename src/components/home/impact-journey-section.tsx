@@ -18,7 +18,7 @@ function MilestoneHeading({ milestone }: { milestone: ImpactMilestone }) {
       <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand-border/80 bg-brand-sky-soft text-brand-green">
         <MessageCircle className="h-4 w-4" strokeWidth={2.25} aria-hidden />
       </span>
-      <h3 className="font-heading text-xl font-extrabold uppercase leading-snug tracking-tight text-brand-ink md:text-2xl">
+      <h3 className="font-heading text-lg font-extrabold uppercase leading-snug tracking-tight text-brand-ink sm:text-xl md:text-2xl">
         {milestone.titleBefore}
         <span className="rounded-sm bg-brand-highlight px-1.5 py-0.5 text-brand-ink">
           {milestone.titleHighlight}
@@ -49,7 +49,7 @@ function InitiativeStack({ items }: { items: readonly ImpactInitiative[] }) {
 
 function InitiativeGrid({ items }: { items: readonly ImpactInitiative[] }) {
   return (
-    <ul className="grid gap-4 sm:grid-cols-3">
+    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item) => (
         <li
           key={item.title}
@@ -68,9 +68,9 @@ function InitiativeGrid({ items }: { items: readonly ImpactInitiative[] }) {
 
 function MilestoneBlock({ milestone, variant }: { milestone: ImpactMilestone; variant: "stack" | "grid" }) {
   return (
-    <article className="relative rounded-2xl border border-brand-border/70 bg-white/90 p-5 shadow-[var(--shadow-brand-soft)] sm:p-6 lg:p-7" aria-labelledby={`impact-${milestone.id}`}>
+    <article className="relative rounded-2xl border border-brand-border/70 bg-white/90 p-4 shadow-[var(--shadow-brand-soft)] sm:p-6 lg:p-7" aria-labelledby={`impact-${milestone.id}`}>
       <MilestoneHeading milestone={milestone} />
-      <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12">
         <div id={`impact-${milestone.id}`} className="home-prose">
           <p className="text-body text-[15px] leading-relaxed sm:text-base">{milestone.body}</p>
           {milestone.footer ? (
@@ -159,7 +159,7 @@ export function ImpactJourneySection({
 
   return (
     <section className="home-section-pad bg-white" aria-label="Hành trình mở rộng Quỹ Nuôi Em">
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="page-container">
         <div className="space-y-5">
           <MilestoneBlock milestone={m2018} variant="stack" />
           <MilestoneBlock milestone={m2019} variant="grid" />

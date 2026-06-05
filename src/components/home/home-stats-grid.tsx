@@ -179,7 +179,7 @@ function SponsorshipPanel({ withSponsor, withoutSponsor }: { withSponsor: StatIt
           </div>
         </div>
 
-        <div className="grid shrink-0 grid-cols-2 gap-2.5 sm:gap-3 md:w-[min(100%,20rem)]">
+        <div className="grid shrink-0 grid-cols-2 gap-2 sm:gap-3 md:w-[min(100%,20rem)]">
           <div className="rounded-lg bg-white/90 p-3 shadow-sm ring-1 ring-brand-success/10">
             <p className="font-heading text-lg font-bold tabular-nums text-brand-success sm:text-xl">
               {withSponsor.value}

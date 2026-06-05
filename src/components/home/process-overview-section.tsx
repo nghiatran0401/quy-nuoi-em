@@ -33,17 +33,17 @@ export function ProcessOverviewSection({
             "radial-gradient(circle at 20% 10%, rgb(240 120 74 / 0.12), transparent 44%), radial-gradient(circle at 88% 80%, rgb(216 236 248 / 0.35), transparent 42%)",
         }}
       />
-      <div className="container relative z-10 mx-auto max-w-7xl px-4">
+      <div className="page-container relative z-10">
         <header className="mx-auto max-w-5xl text-center">
           <p className="font-heading text-sm font-semibold tracking-wide text-brand-green md:text-base">{copy.eyebrow}</p>
-          <h2 id="home-process-heading" className="heading-display mt-2 text-3xl font-extrabold tracking-tight md:text-5xl">
+          <h2 id="home-process-heading" className="heading-section-xl mt-2 scroll-mt-24">
             {copy.title}
           </h2>
         </header>
 
-        <div className="mx-auto mt-5 flex max-w-5xl flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+        <div className="mx-auto mt-6 flex max-w-5xl flex-col items-stretch justify-center gap-3 sm:mt-7 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
           <a href={process.links.messenger} target="_blank" rel="noreferrer" className="btn-primary w-full sm:w-auto">
-            <MessageCircle className="mr-2 h-5 w-5" aria-hidden />
+            <MessageCircle className="mr-2 h-5 w-5 shrink-0" aria-hidden />
             {process.hero.messengerCta}
           </a>
           <a href={process.links.group} target="_blank" rel="noreferrer" className="btn-secondary w-full sm:w-auto">
@@ -51,7 +51,7 @@ export function ProcessOverviewSection({
           </a>
         </div>
 
-        <div className="mx-auto mt-6 max-w-6xl overflow-hidden rounded-2xl border border-brand-border/80 bg-white shadow-[var(--shadow-brand-card)]">
+        <div className="mx-auto mt-6 max-w-6xl overflow-x-auto rounded-2xl border border-brand-border/80 bg-white shadow-[var(--shadow-brand-card)] sm:overflow-hidden">
           <Image
             src={guideImageSrc}
             alt="Sơ đồ tổng quan 6 bước nhận mã Nuôi Em"

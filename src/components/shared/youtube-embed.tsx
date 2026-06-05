@@ -75,8 +75,8 @@ export function YoutubeEmbed({
           aria-hidden
         />
         <span className="absolute inset-0 flex items-center justify-center" aria-hidden>
-          <span className="flex h-[4.25rem] w-[4.25rem] items-center justify-center rounded-full bg-brand-accent pl-1 shadow-[0_8px_32px_-4px_rgb(240_120_74/0.55)] ring-4 ring-white/30 transition duration-300 group-hover:scale-105 group-hover:bg-brand-accent-light sm:h-[4.75rem] sm:w-[4.75rem]">
-            <Play className="h-8 w-8 fill-white text-white sm:h-9 sm:w-9" />
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent pl-1 shadow-[0_8px_32px_-4px_rgb(240_120_74/0.55)] ring-4 ring-white/30 transition duration-300 group-hover:scale-105 group-hover:bg-brand-accent-light sm:h-[4.75rem] sm:w-[4.75rem]">
+            <Play className="h-7 w-7 fill-white text-white sm:h-9 sm:w-9" />
           </span>
         </span>
         <span className="absolute inset-x-0 bottom-0 px-4 pb-4 pt-10 text-left sm:px-5 sm:pb-5">

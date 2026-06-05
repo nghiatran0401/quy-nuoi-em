@@ -8,7 +8,7 @@ type ProcessStepsListProps = {
 
 export function ProcessStepsList({ steps, className = "" }: ProcessStepsListProps) {
   return (
-    <ol className={`grid gap-4 sm:grid-cols-2 ${className}`.trim()}>
+    <ol className={`grid gap-3 sm:gap-4 sm:grid-cols-2 ${className}`.trim()}>
       {steps.map((step) => (
         <li
           key={step.number}

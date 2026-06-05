@@ -13,6 +13,7 @@ export const mainNavItems: NavItem[] = [
   { href: "/bao-cao", labelKey: "reports" },
   { href: "/news", labelKey: "news" },
   { href: "/sao-ke-tai-khoan", labelKey: "statements" },
+  { href: "/lien-he", labelKey: "contact" },
 ];
 
 export function navLabel(key: NavLabelKey): string {

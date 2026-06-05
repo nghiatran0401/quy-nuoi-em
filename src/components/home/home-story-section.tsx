@@ -30,16 +30,16 @@ export function HomeStorySection({
         aria-hidden
       />
 
-      <div className="container relative z-10 mx-auto max-w-7xl px-4">
-        <header className="mx-auto mb-6 max-w-3xl text-center sm:mb-7">
+      <div className="page-container relative z-10">
+        <header className="mx-auto mb-7 max-w-3xl text-center sm:mb-8">
           <p className="eyebrow">{eyebrow}</p>
-          <h2 id="home-story-heading" className="heading-display mt-2 text-3xl font-extrabold md:text-4xl">
+          <h2 id="home-story-heading" className="heading-section-xl mt-2">
             {title}
           </h2>
         </header>
 
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-10">
-          <div className="relative rounded-[2rem] border-2 border-brand-accent/35 bg-gradient-to-br from-brand-accent/15 via-brand-peach/30 to-brand-highlight-soft p-6 shadow-[var(--shadow-brand-soft)] sm:p-8 lg:min-h-0">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 lg:items-center lg:gap-10">
+          <div className="relative rounded-2xl border-2 border-brand-accent/35 bg-gradient-to-br from-brand-accent/15 via-brand-peach/30 to-brand-highlight-soft p-5 shadow-[var(--shadow-brand-soft)] sm:rounded-[1.75rem] sm:p-7 lg:min-h-0">
             <div
               className="pointer-events-none absolute -top-3 left-8 h-6 w-10 rounded-t-lg bg-brand-accent/20"
               aria-hidden
@@ -57,7 +57,7 @@ export function HomeStorySection({
             </Link>
           </div>
 
-          <div className="rounded-[2rem] border-2 border-brand-accent/20 bg-white/80 p-2 shadow-[var(--shadow-brand-soft)] backdrop-blur-sm sm:p-2.5">
+          <div className="rounded-2xl border-2 border-brand-accent/20 bg-white/80 p-2 shadow-[var(--shadow-brand-soft)] backdrop-blur-sm sm:rounded-[1.75rem] sm:p-2.5">
             <YoutubeEmbed videoId={copy.media.youtubeId} title={copy.media.title} />
           </div>
         </div>

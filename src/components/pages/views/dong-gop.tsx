@@ -2,10 +2,8 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { BankTransferPanel } from "@/components/shared/bank-transfer-panel";
 import { PublicCatalogPromo } from "@/components/shared/public-catalog-promo";
-import { ShareButtons } from "@/components/seo/share-buttons";
 import { getStaticPageHero } from "@/content/pages/static-pages";
 import type { DonateInfoContent } from "@/lib/data/donate-info";
-import { absoluteUrl } from "@/lib/seo/paths";
 
 type DonateViewProps = {
   info: DonateInfoContent;
@@ -44,10 +42,6 @@ export function DonateView({ info, donateQrUrl }: DonateViewProps) {
             <ArrowRight className="h-6 w-6 text-brand-accent transition-transform group-hover:translate-x-1" />
           </Link>
           <PublicCatalogPromo variant="card" />
-        </div>
-
-        <div className="brand-card mx-auto mt-10 max-w-3xl p-5 sm:mt-12 sm:p-6">
-          <ShareButtons title={hero.title} url={absoluteUrl("/dong-gop")} />
         </div>
       </section>
     </article>
