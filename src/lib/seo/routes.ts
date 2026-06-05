@@ -17,7 +17,8 @@ export const STATIC_PAGE_PATHS: Record<StaticPageKey, string> = {
 };
 
 export const DATA_PAGE_PATHS: Record<DataPageKey, string> = {
-  children: "/danh-sach-bao-tro",
+  children: "/danh-sach-diem-truong-ho-tro",
+  donors: "/danh-sach-nha-tai-tro",
   reports: "/bao-cao",
   news: "/news",
   statements: "/sao-ke-tai-khoan",
@@ -63,7 +64,13 @@ export async function getAllSitemapEntries(): Promise<SitemapEntry[]> {
 
   for (const pathname of Object.values(DATA_PAGE_PATHS)) {
     const priority =
-      pathname === "/danh-sach-bao-tro" ? 0.9 : pathname === "/news" ? 0.85 : 0.7;
+      pathname === "/danh-sach-diem-truong-ho-tro"
+        ? 0.9
+        : pathname === "/danh-sach-nha-tai-tro"
+          ? 0.85
+          : pathname === "/news"
+            ? 0.85
+            : 0.7;
     entries.push(entryForPath(pathname, "weekly", priority));
   }
 
@@ -76,7 +83,7 @@ export async function getAllSitemapEntries(): Promise<SitemapEntry[]> {
   }
 
   for (const child of getAllChildren()) {
-    entries.push(entryForPath(`/danh-sach-bao-tro/${child.code}`, "monthly", 0.5));
+    entries.push(entryForPath(`/danh-sach-diem-truong-ho-tro/${child.code}`, "monthly", 0.5));
   }
 
   return entries;

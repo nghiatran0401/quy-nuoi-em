@@ -49,7 +49,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: "Danh sách trẻ",
         short_name: "Danh sách",
         description: "Danh sách trẻ đang được bảo trợ",
-        url: "/danh-sach-bao-tro",
+        url: "/danh-sach-diem-truong-ho-tro",
       },
       {
         name: "Bản tin",

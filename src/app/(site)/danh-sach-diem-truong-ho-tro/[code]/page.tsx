@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return buildMetadata({
     title,
     description,
-    pathname: `/danh-sach-bao-tro/${child.code}`,
+    pathname: `/danh-sach-diem-truong-ho-tro/${child.code}`,
     ogType: "website",
   });
 }
@@ -42,7 +42,7 @@ export default async function ChildDetailPage({ params }: PageProps) {
 
   const age = new Date().getFullYear() - child.birthYear;
   const listMeta = getDataPageMeta("children");
-  const pathname = `/danh-sach-bao-tro/${child.code}`;
+  const pathname = `/danh-sach-diem-truong-ho-tro/${child.code}`;
   const shareUrl = absoluteUrl(pathname);
   const shareTitle = `${child.name} (${child.code})`;
 
@@ -57,13 +57,13 @@ export default async function ChildDetailPage({ params }: PageProps) {
             pathname,
           }),
           siteBreadcrumb([
-            { name: listMeta.title, pathname: "/danh-sach-bao-tro" },
+            { name: listMeta.title, pathname: "/danh-sach-diem-truong-ho-tro" },
             { name: `${child.code} — ${child.name}`, pathname },
           ]),
         ]}
       />
       <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-        <Link href="/danh-sach-bao-tro" className="back-link mb-8">
+        <Link href="/danh-sach-diem-truong-ho-tro" className="back-link mb-8">
           <ArrowLeft className="h-4 w-4" />
           {getDataUiLabel("backToList")}
         </Link>

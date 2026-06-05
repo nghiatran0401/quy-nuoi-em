@@ -8,7 +8,7 @@ export type NavItem = {
 };
 
 export const mainNavItems: NavItem[] = [
-  { href: "/danh-sach-bao-tro", labelKey: "children" },
+  { href: "/danh-sach-diem-truong-ho-tro", labelKey: "children" },
   { href: publicCatalog.url, labelKey: "catalog", external: true },
   { href: "/bao-cao", labelKey: "reports" },
   { href: "/news", labelKey: "news" },

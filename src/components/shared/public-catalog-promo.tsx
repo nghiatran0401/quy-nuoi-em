@@ -3,13 +3,15 @@ import { publicCatalog, publicCatalogHost } from "@/config/public-catalog";
 
 type PublicCatalogPromoProps = {
   variant?: "banner" | "card";
+  catalogUrl?: string;
 };
 
-export function PublicCatalogPromo({ variant = "banner" }: PublicCatalogPromoProps) {
+export function PublicCatalogPromo({ variant = "banner", catalogUrl }: PublicCatalogPromoProps) {
+  const href = catalogUrl?.trim() || publicCatalog.url;
   if (variant === "card") {
     return (
       <a
-        href={publicCatalog.url}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         className="brand-card-interactive group flex items-center justify-between p-6"
@@ -38,7 +40,7 @@ export function PublicCatalogPromo({ variant = "banner" }: PublicCatalogPromoPro
         </div>
       </div>
       <a
-        href={publicCatalog.url}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         className="btn-secondary inline-flex shrink-0 items-center justify-center gap-2 self-start sm:self-center"

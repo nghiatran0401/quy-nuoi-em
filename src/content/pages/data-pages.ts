@@ -51,6 +51,18 @@ const pages = {
           "Theo dõi sao kê Ngân hàng Quân đội (MB) và hoạt động quyên góp minh bạch trên nền tảng Thiện Nguyện.",
     },
   },
+  donors: {
+    meta: {
+      title: "Danh sách nhà tài trợ",
+      description:
+        "Tra cứu nhà tài trợ Nuôi Em theo mã NE, tỉnh và trạng thái mã — dữ liệu công khai, liên hệ đã được ẩn một phần.",
+    },
+    hero: {
+      title: "Danh sách nhà tài trợ",
+      description:
+        "Danh sách công khai các nhà tài trợ đang đồng hành cùng Quỹ Nuôi Em. Thông tin liên hệ được ẩn một phần để bảo vệ quyền riêng tư.",
+    },
+  },
 } as const satisfies Record<string, DataPageContent>;
 
 export type DataPageKey = keyof typeof pages;

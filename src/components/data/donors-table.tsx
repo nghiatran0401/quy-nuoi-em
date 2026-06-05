@@ -1,16 +1,16 @@
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { ExternalLink, Search } from "lucide-react";
 import type {
-  SchoolsDirectoryQuery,
-  SchoolsDirectoryResponse,
-  SchoolsDirectorySchool,
-} from "@/lib/data/schools-directory";
-import { schoolsDirectoryQueryString } from "@/lib/data/schools-directory";
+  DonorsDirectoryDonor,
+  DonorsDirectoryQuery,
+  DonorsDirectoryResponse,
+} from "@/lib/data/donors-directory";
+import { donorsDirectoryQueryString } from "@/lib/data/donors-directory";
 
-type SchoolsTableProps = {
+type DonorsTableProps = {
   basePath: string;
-  data: SchoolsDirectoryResponse;
-  activeFilters: SchoolsDirectoryQuery;
+  data: DonorsDirectoryResponse;
+  activeFilters: DonorsDirectoryQuery;
 };
 
 const selectClassName =
@@ -20,125 +20,106 @@ function formatNumber(value: number): string {
   return new Intl.NumberFormat("vi-VN").format(value);
 }
 
-function statusBadgeClass(status: string): string {
-  if (status === "Đang ăn") {
+function codeStatusBadgeClass(status: string): string {
+  if (status === "Đã cấp" || status === "Đang nuôi") {
     return "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200";
   }
-  return "bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200";
+  if (status.includes("chờ") || status.includes("Chờ")) {
+    return "bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-200";
+  }
+  return "bg-slate-50 text-slate-700 ring-1 ring-inset ring-slate-200";
 }
 
-function SchoolRowCells({
-  row,
-  stt,
-}: {
-  row: SchoolsDirectorySchool;
-  stt: number;
-}) {
+function DonorRowCells({ row, stt }: { row: DonorsDirectoryDonor; stt: number }) {
   return (
     <>
       <td className="px-4 py-3 font-medium text-brand-muted">{stt}</td>
-      <td className="px-4 py-3 font-semibold text-brand-ink">{row.school}</td>
-      <td className="px-4 py-3 text-brand-muted">
-        <p>{row.locationLabel}</p>
-        {row.campusesDisplay ? (
-          <p className="text-xs">{row.campusesDisplay}</p>
-        ) : null}
-      </td>
-      <td className="px-4 py-3 font-semibold text-brand-ink">{row.display.studentCount}</td>
-      <td className="px-4 py-3 text-brand-muted">{row.display.codesIssued ?? "—"}</td>
       <td className="px-4 py-3">
-        {row.stopLetterUrl ? (
-          <a
-            href={row.stopLetterUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="link-accent text-xs"
-          >
-            Xem công văn
-          </a>
-        ) : (
-          <span className="text-brand-muted">—</span>
-        )}
+        <a
+          href={row.detailUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="link-accent inline-flex items-center gap-1 font-mono text-sm font-semibold"
+        >
+          {row.code}
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+        </a>
       </td>
+      <td className="px-4 py-3 text-brand-ink">{row.display.representativeName}</td>
+      <td className="px-4 py-3 text-brand-muted">{row.display.phone}</td>
+      <td className="px-4 py-3 text-brand-muted">{row.display.email}</td>
+      <td className="px-4 py-3 text-brand-muted">{row.display.province}</td>
       <td className="px-4 py-3">
         <span
-          className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${statusBadgeClass(row.eatingStatus)}`}
+          className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${codeStatusBadgeClass(row.display.codeStatus)}`}
         >
-          {row.eatingStatus}
+          {row.display.codeStatus}
         </span>
       </td>
     </>
   );
 }
 
-function SchoolCard({ row, stt }: { row: SchoolsDirectorySchool; stt: number }) {
+function DonorCard({ row, stt }: { row: DonorsDirectoryDonor; stt: number }) {
   return (
     <li className="rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-2">
-        <p className="font-semibold text-brand-ink">
-          <span className="mr-2 font-mono text-xs text-brand-muted">{stt}.</span>
-          {row.school}
-        </p>
-        <span
-          className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${statusBadgeClass(row.eatingStatus)}`}
+        <a
+          href={row.detailUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="link-accent inline-flex items-center gap-1 font-mono text-sm font-semibold"
         >
-          {row.eatingStatus}
+          {row.code}
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+        </a>
+        <span
+          className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${codeStatusBadgeClass(row.display.codeStatus)}`}
+        >
+          {row.display.codeStatus}
         </span>
       </div>
-      <p className="mt-1 text-sm text-brand-muted">{row.locationLabel}</p>
-      {row.campusesDisplay ? (
-        <p className="text-xs text-brand-muted/90">{row.campusesDisplay}</p>
-      ) : null}
-      <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-brand-border/50 pt-3 text-sm">
+      <p className="mt-2 font-medium text-brand-ink">{row.display.representativeName}</p>
+      <p className="text-sm text-brand-muted">{row.display.province}</p>
+      <dl className="mt-3 grid gap-2 border-t border-brand-border/50 pt-3 text-sm">
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">
-            Số học sinh
+            Liên hệ SĐT
           </dt>
-          <dd className="font-semibold text-brand-ink">{row.display.studentCount}</dd>
+          <dd className="text-brand-muted">{row.display.phone}</dd>
         </div>
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">
-            Mã đã cấp
+            Liên hệ email
           </dt>
-          <dd className="text-brand-muted">{row.display.codesIssued ?? "—"}</dd>
+          <dd className="break-all text-brand-muted">{row.display.email}</dd>
         </div>
-        {row.stopLetterUrl ? (
-          <div className="col-span-2">
-            <a
-              href={row.stopLetterUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="link-accent text-sm"
-            >
-              Xem công văn dừng ăn
-            </a>
-          </div>
-        ) : null}
       </dl>
+      <p className="mt-2 font-mono text-xs text-brand-muted/80">{stt}.</p>
     </li>
   );
 }
 
-export function SchoolsTable({ basePath, data, activeFilters }: SchoolsTableProps) {
-  const { schools, pagination, filters } = data;
+export function DonorsTable({ basePath, data, activeFilters }: DonorsTableProps) {
+  const { donors, pagination, filters } = data;
   const filterDefaults = {
     q: activeFilters.query ?? "",
     province: activeFilters.province ?? "",
-    eatingStatus: activeFilters.eatingStatus ?? "",
+    codeStatus: activeFilters.codeStatus ?? "",
   };
 
   const pageHref = (page: number) =>
-    `${basePath}${schoolsDirectoryQueryString({ ...activeFilters, page })}`;
+    `${basePath}${donorsDirectoryQueryString({ ...activeFilters, page })}`;
 
   return (
     <section className="space-y-4">
       <div className="rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm">
         <h2 className="text-lg font-semibold text-brand-ink sm:text-xl">
-          {formatNumber(pagination.total)} điểm trường phù hợp
+          {formatNumber(pagination.total)} dòng phù hợp
         </h2>
         <p className="text-sm text-brand-muted">
           Hiển thị {pagination.rangeStart}–{pagination.rangeEnd} trên tổng{" "}
-          {formatNumber(pagination.total)} điểm trường
+          {formatNumber(pagination.total)} nhà tài trợ
         </p>
       </div>
 
@@ -155,7 +136,7 @@ export function SchoolsTable({ basePath, data, activeFilters }: SchoolsTableProp
             type="search"
             name="q"
             defaultValue={filterDefaults.q}
-            placeholder="Tìm điểm trường..."
+            placeholder="Tìm mã NE, tên, SĐT, email..."
             className="min-h-11 w-full rounded-lg border border-brand-border py-3 pl-10 pr-4 text-base focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent sm:text-sm"
           />
         </div>
@@ -173,13 +154,13 @@ export function SchoolsTable({ basePath, data, activeFilters }: SchoolsTableProp
           ))}
         </select>
         <select
-          name="eatingStatus"
-          defaultValue={filterDefaults.eatingStatus}
+          name="codeStatus"
+          defaultValue={filterDefaults.codeStatus}
           className={selectClassName}
-          aria-label="Lọc theo tình trạng ăn"
+          aria-label="Lọc theo trạng thái mã"
         >
-          <option value="">Tất cả tình trạng</option>
-          {filters.eatingStatuses.map((item) => (
+          <option value="">Tất cả trạng thái</option>
+          {filters.codeStatuses.map((item) => (
             <option key={item} value={item}>
               {item}
             </option>
@@ -193,18 +174,14 @@ export function SchoolsTable({ basePath, data, activeFilters }: SchoolsTableProp
         </button>
       </form>
 
-      <ul className="space-y-3 lg:hidden" aria-label="Danh sách điểm trường">
-        {schools.map((row, index) => (
-          <SchoolCard
-            key={row.schoolIdentity}
-            row={row}
-            stt={pagination.rangeStart + index}
-          />
+      <ul className="space-y-3 lg:hidden" aria-label="Danh sách nhà tài trợ">
+        {donors.map((row, index) => (
+          <DonorCard key={row.code} row={row} stt={pagination.rangeStart + index} />
         ))}
       </ul>
-      {schools.length === 0 ? (
+      {donors.length === 0 ? (
         <p className="rounded-xl border border-brand-border/60 bg-white p-8 text-center text-brand-muted lg:hidden">
-          Không tìm thấy điểm trường phù hợp.
+          Không tìm thấy nhà tài trợ phù hợp.
         </p>
       ) : null}
 
@@ -213,24 +190,24 @@ export function SchoolsTable({ basePath, data, activeFilters }: SchoolsTableProp
           <thead className="bg-brand-sky-soft text-xs font-bold uppercase tracking-wide text-brand-ink">
             <tr>
               <th className="px-4 py-3">STT</th>
-              <th className="px-4 py-3">Tên trường</th>
-              <th className="px-4 py-3">Địa chỉ / Tỉnh</th>
-              <th className="px-4 py-3">Số học sinh</th>
-              <th className="px-4 py-3">Mã đã được cấp</th>
-              <th className="px-4 py-3">Công văn dừng ăn</th>
-              <th className="px-4 py-3">Tình trạng ăn</th>
+              <th className="px-4 py-3">Mã NE</th>
+              <th className="px-4 py-3">Đại diện đăng ký</th>
+              <th className="px-4 py-3">Liên hệ SĐT</th>
+              <th className="px-4 py-3">Liên hệ email</th>
+              <th className="px-4 py-3">Tỉnh</th>
+              <th className="px-4 py-3">Trạng thái</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-brand-border">
-            {schools.map((row, index) => (
-              <tr key={row.schoolIdentity} className="hover:bg-brand-surface">
-                <SchoolRowCells row={row} stt={pagination.rangeStart + index} />
+            {donors.map((row, index) => (
+              <tr key={row.code} className="hover:bg-brand-surface">
+                <DonorRowCells row={row} stt={pagination.rangeStart + index} />
               </tr>
             ))}
           </tbody>
         </table>
-        {schools.length === 0 ? (
-          <p className="p-8 text-center text-brand-muted">Không tìm thấy điểm trường phù hợp.</p>
+        {donors.length === 0 ? (
+          <p className="p-8 text-center text-brand-muted">Không tìm thấy nhà tài trợ phù hợp.</p>
         ) : null}
       </div>
 

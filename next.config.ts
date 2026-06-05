@@ -50,6 +50,16 @@ const nextConfig: NextConfig = {
       { source: "/en/:path*", destination: "/:path*", permanent: true },
       { source: "/quy-trinh-cap-ma-2026", destination: "/", permanent: true },
       { source: "/contact", destination: "/lien-he", permanent: true },
+      {
+        source: "/danh-sach-bao-tro",
+        destination: "/danh-sach-diem-truong-ho-tro",
+        permanent: true,
+      },
+      {
+        source: "/danh-sach-bao-tro/:code",
+        destination: "/danh-sach-diem-truong-ho-tro/:code",
+        permanent: true,
+      },
     ];
   },
 };

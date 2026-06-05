@@ -1,19 +1,15 @@
-import type { SchoolSummary as SchoolSummaryData } from "@/lib/data/schools";
+import type { SchoolsDirectorySummaryCards } from "@/lib/data/schools-directory";
 
 type SchoolsSummaryProps = {
-  summary: SchoolSummaryData;
+  summary: SchoolsDirectorySummaryCards;
 };
-
-function formatNumber(value: number): string {
-  return new Intl.NumberFormat("vi-VN").format(value);
-}
 
 export function SchoolsSummary({ summary }: SchoolsSummaryProps) {
   const cards = [
-    { label: "Điểm trường", value: formatNumber(summary.totalSchools) },
-    { label: "Học sinh", value: formatNumber(summary.totalStudents) },
-    { label: "Đã có người nuôi", value: formatNumber(summary.withSponsor) },
-    { label: "Chưa có người nuôi", value: formatNumber(summary.withoutSponsor) },
+    { label: "Điểm trường", value: summary.schoolCount },
+    { label: "Học sinh", value: summary.studentCount },
+    { label: "Đã có người nuôi", value: summary.sponsored },
+    { label: "Chưa có người nuôi", value: summary.unsponsored },
   ];
 
   return (

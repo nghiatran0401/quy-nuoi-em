@@ -107,7 +107,7 @@ export function ChildrenTable({
             className="rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm"
           >
             <div className="flex flex-wrap items-start justify-between gap-2">
-              <Link href={`/danh-sach-bao-tro/${child.code}`} className="link-accent font-mono text-sm">
+              <Link href={`/danh-sach-diem-truong-ho-tro/${child.code}`} className="link-accent font-mono text-sm">
                 {child.code}
               </Link>
               <StatusBadge status={child.status} />
@@ -159,7 +159,7 @@ export function ChildrenTable({
             {filtered.map((child) => (
               <tr key={child.code} className="hover:bg-brand-surface">
                 <td className="px-4 py-3 font-mono">
-                  <Link href={`/danh-sach-bao-tro/${child.code}`} className="link-accent text-sm">
+                  <Link href={`/danh-sach-diem-truong-ho-tro/${child.code}`} className="link-accent text-sm">
                     {child.code}
                   </Link>
                 </td>

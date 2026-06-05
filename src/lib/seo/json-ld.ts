@@ -128,7 +128,7 @@ export function websiteJsonLd(): JsonLdObject {
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${absoluteUrl("/danh-sach-bao-tro")}?q={search_term_string}`,
+          urlTemplate: `${absoluteUrl("/danh-sach-diem-truong-ho-tro")}?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
