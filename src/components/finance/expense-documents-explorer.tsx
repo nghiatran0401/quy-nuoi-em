@@ -238,8 +238,8 @@ export function ExpenseDocumentsExplorer({ payload, labels }: ExpenseDocumentsEx
         </p>
       ) : (
         <>
-          <div className="hidden overflow-x-auto rounded-xl border border-brand-border/60 md:block">
-            <table className="min-w-full divide-y divide-brand-border/60 text-left">
+          <div className="table-scroll hidden rounded-xl border border-brand-border/60 lg:block">
+            <table className="min-w-[52rem] w-full divide-y divide-brand-border/60 text-left">
               <thead className="bg-brand-surface text-xs font-semibold uppercase tracking-wide text-brand-muted">
                 <tr>
                   <th className="px-3 py-3">{labels.columnStt}</th>
@@ -261,7 +261,7 @@ export function ExpenseDocumentsExplorer({ payload, labels }: ExpenseDocumentsEx
             </table>
           </div>
 
-          <ul className="space-y-3 md:hidden">
+          <ul className="space-y-3 lg:hidden">
             {pageRows.map((row) => (
               <ExpenseCard key={`${activeList.id}-${row.stt}`} row={row} labels={labels} />
             ))}

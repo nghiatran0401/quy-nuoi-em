@@ -137,9 +137,9 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     },
     hero: {
       eyebrow: "Công khai tài chính",
-      title: "Sao kê tài khoản duy nhất của Quỹ Nuôi Em",
+      title: "Sao kê tài khoản Quỹ Nuôi Em",
       description:
-        "Trang tài chính được cập nhật bởi chính 20+ bạn TNV là anh chị Nuôi Em — chúng tôi cố gắng minh bạch theo nhiều cách, không chỉ mỗi giấy tờ.",
+        "Hệ thống dữ liệu tài chính được cập nhật trực tiếp bởi chính 20+ Tình nguyện viên, đồng thời là anh chị Nuôi Em — Minh bạch, công khai dựa trên nền tảng dữ liệu số, giúp mọi khoản đóng góp đều có thể theo dõi và đối soát dễ dàng",
     },
   },
 };

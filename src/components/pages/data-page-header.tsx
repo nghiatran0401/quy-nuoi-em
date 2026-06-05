@@ -9,8 +9,8 @@ export function DataPageHeader({ eyebrow, title, description }: DataPageHeaderPr
         {eyebrow ? (
           <p className="eyebrow mb-2">{eyebrow}</p>
         ) : null}
-        <h1 className="heading-display text-2xl md:text-3xl">{title}</h1>
-        {description ? <p className="text-body mt-3 max-w-2xl">{description}</p> : null}
+        <h1 className="heading-page">{title}</h1>
+        {description ? <p className="text-body mt-3 max-w-2xl text-base sm:text-lg">{description}</p> : null}
       </div>
     </div>
   );

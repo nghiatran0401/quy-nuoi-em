@@ -29,7 +29,7 @@ export function FaqSection({ content, donateInfo, donateQrUrl }: Props) {
       <div className="container mx-auto max-w-3xl px-4 sm:px-6">
         <div className="mb-10 text-center sm:mb-16">
           <h2 className="eyebrow mb-3">{copy.eyebrow}</h2>
-          <h3 className="heading-display mb-4 text-2xl sm:mb-6 sm:text-3xl md:text-5xl">{copy.title}</h3>
+          <h3 className="heading-section-xl mb-4 sm:mb-6">{copy.title}</h3>
           <p className="text-body mx-auto max-w-2xl text-base sm:text-lg">{copy.intro}</p>
         </div>
         <div className="flex flex-col gap-3">

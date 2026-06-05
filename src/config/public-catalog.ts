@@ -9,7 +9,7 @@ export const publicCatalog = {
     process.env.NEXT_PUBLIC_PUBLIC_CATALOG_URL?.trim() || DEFAULT_PUBLIC_CATALOG_URL,
   title: "Danh mục em nuôi công khai",
   shortDescription:
-    "Tra cứu mã NE, xem thống kê quy mô và bảng tổng hợp em nuôi theo tỉnh — minh bạch công khai.",
+    "Hệ thống minh bạch, công khai: Tra cứu mã NE và tổng hợp số liệu em nuôi theo tỉnh",
   ctaLabel: "Tra cứu mã NE",
   statsCtaLabel: "Xem danh mục & tra cứu",
 } as const;

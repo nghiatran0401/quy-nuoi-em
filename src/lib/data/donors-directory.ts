@@ -73,6 +73,48 @@ export const unavailableDonorsSummary: DonorsDirectorySummaryCards = {
   provinceCount: "—",
 };
 
+/** All 12 provinces supported by Quỹ Nuôi Em (aligned with directory APIs). */
+export const NUOI_EM_PROVINCES = [
+  "Cao Bằng",
+  "Đắk Lắk",
+  "Điện Biên",
+  "Gia Lai",
+  "Lai Châu",
+  "Lạng Sơn",
+  "Lào Cai",
+  "Phú Thọ",
+  "Quảng Ngãi",
+  "Thái Nguyên",
+  "Thanh Hóa",
+  "Tuyên Quang",
+] as const;
+
+export function normalizeDonorsProvinceStats(
+  provinceStats: DonorsDirectoryResponse["provinceStats"],
+): DonorsDirectoryResponse["provinceStats"] {
+  const byProvince = new Map(provinceStats.map((item) => [item.province, item]));
+
+  const complete = NUOI_EM_PROVINCES.map((province) => {
+    const existing = byProvince.get(province);
+    if (existing) {
+      return existing;
+    }
+
+    return {
+      province,
+      donorCount: 0,
+      display: { donorCount: "0" },
+    };
+  });
+
+  return complete.sort((a, b) => {
+    if (b.donorCount !== a.donorCount) {
+      return b.donorCount - a.donorCount;
+    }
+    return a.province.localeCompare(b.province, "vi");
+  });
+}
+
 function donorsDirectoryEndpoint(): string {
   return process.env.NUOIEM_DIRECTORY_DONORS_URL?.trim() || DEFAULT_DONORS_DIRECTORY_URL;
 }

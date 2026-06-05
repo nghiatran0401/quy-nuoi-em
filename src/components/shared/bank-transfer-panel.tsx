@@ -53,7 +53,7 @@ export function BankTransferPanel({
           <dl className="mt-4 space-y-3 text-sm text-brand-muted">
             <div>
               <dt className="font-semibold text-brand-ink">Số tài khoản</dt>
-              <dd className="mt-0.5 font-mono text-xl font-bold tabular-nums text-brand-accent">
+              <dd className="mt-0.5 break-all font-mono text-lg font-bold tabular-nums text-brand-accent sm:text-xl">
                 {bank.accountNumber}
               </dd>
             </div>
@@ -75,7 +75,7 @@ export function BankTransferPanel({
             </p>
             <p className="text-brand-muted">
               <span className="font-semibold text-brand-ink">Ví dụ:</span>{" "}
-              <span className="font-mono text-brand-ink">{bank.transferExample}</span>
+              <span className="break-all font-mono text-brand-ink">{bank.transferExample}</span>
             </p>
           </div>
 

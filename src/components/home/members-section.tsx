@@ -25,7 +25,7 @@ export function MembersSection({ content, memberImageUrls }: Props) {
         <div className="grid items-start gap-7 lg:grid-cols-12 lg:gap-8">
           <div className="order-2 w-full lg:order-1 lg:col-span-5">
             {eyebrow ? <h2 className="eyebrow mb-4">{eyebrow}</h2> : null}
-            <h3 className="heading-display mb-4 text-2xl leading-tight sm:text-3xl md:text-5xl">
+            <h3 className="heading-section-xl mb-4">
               {copy.title}
             </h3>
             <div className="text-body home-prose max-w-xl space-y-3 text-base leading-relaxed text-brand-muted sm:text-lg lg:text-left">
@@ -35,7 +35,7 @@ export function MembersSection({ content, memberImageUrls }: Props) {
             </div>
           </div>
           <div className="order-1 w-full lg:order-2 lg:col-span-7">
-            <div className="grid grid-cols-3 grid-rows-2 gap-2.5 md:gap-3 lg:gap-3.5">
+            <div className="grid grid-cols-2 grid-rows-2 gap-2.5 sm:grid-cols-3 md:gap-3 lg:gap-3.5">
               {awardLayout.map(({ index, className }) => {
                 const item = homeMemberImages[index - 1];
                 return (

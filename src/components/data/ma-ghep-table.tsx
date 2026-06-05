@@ -53,7 +53,7 @@ function MaGhepCard({ row }: { row: MaGhepRecord }) {
     <li className="rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-brand-green">Mã gốc</p>
+          <p className="text-xs font-bold uppercase tracking-wide text-brand-green">Mã NE dư tiền</p>
           <p className="mt-1 font-mono text-sm font-semibold text-brand-ink">
             {row.representativeCode}
           </p>
@@ -144,13 +144,13 @@ export function MaGhepTable({ basePath, data, activeFilters }: MaGhepTableProps)
                 type="search"
                 name="q"
                 defaultValue={searchQuery}
-                placeholder="Mã NE đại diện hoặc mã ghép mới..."
+                placeholder="Mã NE dư tiền hoặc mã ghép mới..."
                 className="min-h-11 w-full rounded-lg border border-brand-border py-3 pl-10 pr-4 text-base focus:border-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent sm:text-sm"
               />
             </div>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:shrink-0">
-            <p className="text-right text-xs text-brand-muted">
+            <p className="text-left text-xs text-brand-muted sm:text-right">
               Cập nhật <MaGhepSyncedAt iso={meta.lastSyncedAt} />
               <br />
               {summary.display.filteredTotal} dòng
@@ -184,7 +184,7 @@ export function MaGhepTable({ basePath, data, activeFilters }: MaGhepTableProps)
                 colSpan={6}
                 className="border-b border-brand-green/20 bg-brand-green-light px-3 py-2.5 text-center text-brand-green"
               >
-                Mã gốc
+                Mã NE dư tiền
               </th>
               <th
                 colSpan={3}
@@ -194,7 +194,7 @@ export function MaGhepTable({ basePath, data, activeFilters }: MaGhepTableProps)
               </th>
             </tr>
             <tr className="border-b border-brand-border bg-brand-sky-soft text-[11px] font-bold uppercase tracking-wide text-brand-ink">
-              <th className="px-3 py-3">Mã NE đại diện</th>
+              <th className="px-3 py-3">Mã NE dư tiền</th>
               <th className="px-3 py-3 text-center">Số tháng ăn</th>
               <th className="px-3 py-3">T.gian b.đầu</th>
               <th className="px-3 py-3">T.gian k.thúc</th>

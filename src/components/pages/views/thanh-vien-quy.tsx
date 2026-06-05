@@ -10,7 +10,7 @@ type MembersViewProps = {
 export function MembersView({ partnerLogos }: MembersViewProps) {
   return (
     <StaticPageShell {...getStaticPageHero("members")}>
-      <ul className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-4 lg:grid-cols-5">
         {partnerLogos.map((logo) => (
           <li
             key={logo.id ?? logo.src}

@@ -22,8 +22,8 @@ export function ScoringGrid({
     <div>
       <div className="mb-10 text-center">
         <p className="text-sm font-semibold text-brand-muted">{totalLabel}</p>
-        <p className="font-heading text-4xl font-black text-brand-ink">
-          0<span className="text-2xl text-brand-muted/70">{maxLabel}</span>
+        <p className="stat-value-muted">
+          0<span className="text-xl text-brand-muted/70 sm:text-2xl">{maxLabel}</span>
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

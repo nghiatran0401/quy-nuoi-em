@@ -1,8 +1,8 @@
 import { ArrowRight, BadgeCheck, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { brandVisual } from "@/config/brand-visual";
 import { thienNguyen } from "@/config/thien-nguyen";
 import { thienNguyenCopy } from "@/content/thien-nguyen";
+import { FINANCE_PAGE_PATH, FINANCE_STATEMENTS_PATH } from "@/lib/finance-url";
 
 type ThienNguyenProfileSectionProps = {
   variant?: "card" | "compact" | "embedded";
@@ -81,7 +81,7 @@ export function ThienNguyenProfileSection({
           </a>
           {showStatementsLink ? (
             <Link
-              href="/sao-ke-tai-khoan"
+              href={FINANCE_STATEMENTS_PATH}
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-border/80 bg-white px-5 py-3 text-sm font-semibold text-brand-ink transition hover:border-brand-accent/40"
             >
               {thienNguyenCopy.viewStatementsOnSite}
@@ -89,23 +89,12 @@ export function ThienNguyenProfileSection({
             </Link>
           ) : null}
           {showMonthlyReportsLink ? (
-            brandVisual.financeUrl.startsWith("/") ? (
-              <Link
-                href={brandVisual.financeUrl}
-                className="text-center text-sm font-medium text-brand-muted transition hover:text-brand-accent"
-              >
-                {thienNguyenCopy.monthlyReports}
-              </Link>
-            ) : (
-              <a
-                href={brandVisual.financeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-center text-sm font-medium text-brand-muted transition hover:text-brand-accent"
-              >
-                {thienNguyenCopy.monthlyReports}
-              </a>
-            )
+            <Link
+              href={FINANCE_PAGE_PATH}
+              className="text-center text-sm font-medium text-brand-muted transition hover:text-brand-accent"
+            >
+              {thienNguyenCopy.monthlyReports}
+            </Link>
           ) : null}
         </div>
       </div>

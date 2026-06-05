@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MaGhepDirectoryUnavailable } from "@/components/data/ma-ghep-directory-unavailable";
 import { MaGhepTable } from "@/components/data/ma-ghep-table";
 import { DataPageBanner } from "@/components/pages/data-page-banner";
+import { PublicCatalogPromo } from "@/components/shared/public-catalog-promo";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   getDataPageHero,
@@ -51,7 +52,7 @@ export default async function MaGhepPage({ searchParams }: PageProps) {
     : null;
 
   return (
-    <article className="min-h-screen bg-brand-warm pb-20">
+    <article className="min-h-screen bg-brand-warm page-bottom-pad">
       <JsonLd
         data={[
           collectionPageJsonLd({
@@ -69,7 +70,8 @@ export default async function MaGhepPage({ searchParams }: PageProps) {
         title={bannerTitle}
         description={hero.description}
       />
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
+        <PublicCatalogPromo catalogUrl={directory?.meta.directoryUrl} />
         {directory ? (
           <MaGhepTable basePath={basePath} data={directory} activeFilters={query} />
         ) : (

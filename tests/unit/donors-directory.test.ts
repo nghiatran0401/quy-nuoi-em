@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   donorsDirectoryQueryString,
+  normalizeDonorsProvinceStats,
   parseDonorsDirectorySearchParams,
   summaryCardsFromResponse,
   type DonorsDirectoryResponse,
@@ -56,6 +57,17 @@ const sample: DonorsDirectoryResponse = {
     donorsPageUrl: "https://nuoiem2025.quynuoiem.com/danh-sach-nha-tai-tro",
   },
 };
+
+describe("normalizeDonorsProvinceStats", () => {
+  it("fills missing provinces with zero and sorts by donor count", () => {
+    const normalized = normalizeDonorsProvinceStats(sample.provinceStats);
+
+    expect(normalized).toHaveLength(12);
+    expect(normalized[0]).toMatchObject({ province: "Lào Cai", donorCount: 420 });
+    expect(normalized[1]).toMatchObject({ province: "Điện Biên", donorCount: 380 });
+    expect(normalized.filter((item) => item.donorCount === 0).length).toBeGreaterThan(0);
+  });
+});
 
 describe("summaryCardsFromResponse (donors)", () => {
   it("maps API display fields to summary cards", () => {

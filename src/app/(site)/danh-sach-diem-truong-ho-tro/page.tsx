@@ -54,7 +54,7 @@ export default async function SchoolsDirectoryPage({ searchParams }: PageProps) 
     : null;
 
   return (
-    <article className="min-h-screen bg-brand-warm pb-20">
+    <article className="min-h-screen bg-brand-warm page-bottom-pad">
       <JsonLd
         data={[
           collectionPageJsonLd({

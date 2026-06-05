@@ -14,7 +14,7 @@ const pages = {
     hero: {
         title: "Danh sách điểm trường hỗ trợ",
         description:
-          "Theo dõi điểm trường theo quy mô học sinh và tra cứu nhanh theo tên trường.",
+          "Tra cứu nhanh tên điểm trường và cập nhật số lượng học sinh",
     },
   },
   reports: {
@@ -67,13 +67,13 @@ const pages = {
     meta: {
       title: "Bảng mã ghép NE",
       description:
-        "Công khai mã gốc, thời gian hỗ trợ, số tiền đã đóng, số tiền ăn thực tế và mã ghép mới sau điều chỉnh.",
+        'Danh sách mã ghép công khai từ danh mục Nuôi Em. "Mã NE dư tiền" sẽ bao gồm số tháng ăn + tiền Cơ sở vật chất, còn Mã Ghép Mới sẽ chỉ là tiền ăn x số tháng ăn (Không bao gồm tiền Cơ sở vật chất).',
     },
     hero: {
       eyebrow: "Ghép mã NE",
       title: "Bảng mã ghép NE",
       description:
-        "Công khai mã gốc, thời gian hỗ trợ, số tiền đã đóng, số tiền ăn thực tế và mã ghép mới sau điều chỉnh.",
+        'Danh sách mã ghép công khai từ danh mục Nuôi Em. "Mã NE dư tiền" sẽ bao gồm số tháng ăn + tiền Cơ sở vật chất, còn Mã Ghép Mới sẽ chỉ là tiền ăn x số tháng ăn (Không bao gồm tiền Cơ sở vật chất).',
     },
   },
 } as const satisfies Record<string, DataPageContent>;

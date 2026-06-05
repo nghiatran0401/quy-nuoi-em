@@ -36,17 +36,19 @@ function SchoolRowCells({
 }) {
   return (
     <>
-      <td className="px-4 py-3 font-medium text-brand-muted">{stt}</td>
-      <td className="px-4 py-3 font-semibold text-brand-ink">{row.school}</td>
-      <td className="px-4 py-3 text-brand-muted">
-        <p>{row.locationLabel}</p>
+      <td className="px-2.5 py-2.5 font-medium text-brand-muted">{stt}</td>
+      <td className="px-2.5 py-2.5 font-semibold leading-snug text-brand-ink">{row.school}</td>
+      <td className="px-2.5 py-2.5 text-brand-muted">
+        <p className="leading-snug">{row.locationLabel}</p>
         {row.campusesDisplay ? (
-          <p className="text-xs">{row.campusesDisplay}</p>
+          <p className="text-xs leading-snug">{row.campusesDisplay}</p>
         ) : null}
       </td>
-      <td className="px-4 py-3 font-semibold text-brand-ink">{row.display.studentCount}</td>
-      <td className="px-4 py-3 text-brand-muted">{row.display.codesIssued ?? "—"}</td>
-      <td className="px-4 py-3">
+      <td className="px-2.5 py-2.5 font-semibold tabular-nums text-brand-ink">
+        {row.display.studentCount}
+      </td>
+      <td className="px-2.5 py-2.5 tabular-nums text-brand-muted">{row.display.codesIssued ?? "—"}</td>
+      <td className="px-2.5 py-2.5">
         {row.stopLetterUrl ? (
           <a
             href={row.stopLetterUrl}
@@ -60,9 +62,9 @@ function SchoolRowCells({
           <span className="text-brand-muted">—</span>
         )}
       </td>
-      <td className="px-4 py-3">
+      <td className="px-2.5 py-2.5">
         <span
-          className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${statusBadgeClass(row.eatingStatus)}`}
+          className={`inline-flex max-w-full rounded-full px-2 py-0.5 text-[11px] font-semibold leading-tight ${statusBadgeClass(row.eatingStatus)}`}
         >
           {row.eatingStatus}
         </span>
@@ -209,16 +211,16 @@ export function SchoolsTable({ basePath, data, activeFilters }: SchoolsTableProp
       ) : null}
 
       <div className="table-scroll hidden rounded-xl border border-brand-border/60 bg-white shadow-sm lg:block">
-        <table className="w-full divide-y divide-brand-border text-left text-sm">
-          <thead className="bg-brand-sky-soft text-xs font-bold uppercase tracking-wide text-brand-ink">
+        <table className="w-full min-w-[56rem] table-auto divide-y divide-brand-border text-left text-sm">
+          <thead className="bg-brand-sky-soft text-[10px] font-bold uppercase leading-tight tracking-wide text-brand-ink">
             <tr>
-              <th className="px-4 py-3">STT</th>
-              <th className="px-4 py-3">Tên trường</th>
-              <th className="px-4 py-3">Địa chỉ / Tỉnh</th>
-              <th className="px-4 py-3">Số học sinh</th>
-              <th className="px-4 py-3">Mã đã được cấp</th>
-              <th className="px-4 py-3">Công văn dừng ăn</th>
-              <th className="px-4 py-3">Tình trạng ăn</th>
+              <th className="whitespace-nowrap px-2.5 py-2.5">STT</th>
+              <th className="px-2.5 py-2.5">Tên trường</th>
+              <th className="px-2.5 py-2.5">Địa chỉ / Tỉnh</th>
+              <th className="whitespace-nowrap px-2.5 py-2.5">Số học sinh</th>
+              <th className="whitespace-nowrap px-2.5 py-2.5">Mã đã được cấp</th>
+              <th className="whitespace-nowrap px-2.5 py-2.5">Công văn dừng ăn</th>
+              <th className="whitespace-nowrap px-2.5 py-2.5">Tình trạng ăn</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-brand-border">

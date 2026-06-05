@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { DonorsDirectoryUnavailable } from "@/components/data/donors-directory-unavailable";
+import { DonorsPageHeader } from "@/components/data/donors-page-header";
 import { DonorsProvinceStats } from "@/components/data/donors-province-stats";
-import { DonorsSummary } from "@/components/data/donors-summary";
 import { DonorsTable } from "@/components/data/donors-table";
-import { DataPageBanner } from "@/components/pages/data-page-banner";
 import { PublicCatalogPromo } from "@/components/shared/public-catalog-promo";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
@@ -12,6 +11,7 @@ import {
 } from "@/content/pages/data-pages";
 import {
   fetchDonorsDirectory,
+  normalizeDonorsProvinceStats,
   parseDonorsDirectorySearchParams,
   summaryCardsFromResponse,
   unavailableDonorsSummary,
@@ -55,7 +55,7 @@ export default async function DonorsDirectoryPage({ searchParams }: PageProps) {
     : null;
 
   return (
-    <article className="min-h-screen bg-brand-warm pb-20">
+    <article className="min-h-screen bg-brand-warm page-bottom-pad">
       <JsonLd
         data={[
           collectionPageJsonLd({
@@ -68,13 +68,15 @@ export default async function DonorsDirectoryPage({ searchParams }: PageProps) {
           siteBreadcrumb([{ name: meta.title, pathname: basePath }]),
         ]}
       />
-      <DataPageBanner {...getDataPageHero("donors")} />
+      <DonorsPageHeader {...getDataPageHero("donors")} summary={summary} />
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
         <PublicCatalogPromo catalogUrl={directory?.meta.directoryUrl} />
-        <DonorsSummary summary={summary} />
         {directory ? (
           <>
-            <DonorsProvinceStats provinceStats={directory.provinceStats} />
+            <DonorsProvinceStats
+              provinceStats={normalizeDonorsProvinceStats(directory.provinceStats)}
+              provinceCount={directory.summary.display.provinceCount}
+            />
             <DonorsTable basePath={basePath} data={directory} activeFilters={query} />
           </>
         ) : (

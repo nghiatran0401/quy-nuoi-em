@@ -27,8 +27,8 @@ export function ReportsList({ reports, years, labels }: ReportsListProps) {
   }, [reports, year]);
 
   return (
-    <section className="section-surface pb-20">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <section className="section-surface page-bottom-pad">
+      <div className="page-container py-8 sm:py-10">
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <h2 className="flex items-center gap-2 font-heading text-lg font-semibold text-brand-ink">
             <Filter className="h-5 w-5 text-brand-accent" aria-hidden />
@@ -64,14 +64,14 @@ export function ReportsList({ reports, years, labels }: ReportsListProps) {
                     src={report.imageUrl}
                     alt={report.title}
                     fill
-                    className="object-cover"
+                    className="object-contain p-4 sm:p-5"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
               ) : null}
               <div className="flex flex-1 flex-col p-5">
                 <h3 className="mb-4 font-heading text-lg font-bold text-brand-ink">{report.title}</h3>
-                <div className="mb-4 grid grid-cols-2 gap-3">
+                <div className="mb-4 grid grid-cols-1 gap-3 min-[22rem]:grid-cols-2">
                   <div className="income-chip">
                     <p className="mb-1 flex items-center gap-1 text-xs font-medium text-brand-success">
                       <ArrowUp className="h-3.5 w-3.5" aria-hidden />

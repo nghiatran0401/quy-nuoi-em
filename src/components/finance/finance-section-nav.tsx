@@ -49,11 +49,11 @@ export function FinanceSectionNav({ items }: FinanceSectionNavProps) {
           {items.map((item) => {
             const isActive = activeId === item.id;
             return (
-              <li key={item.id} className="min-w-0 flex-1">
+              <li key={item.id} className="shrink-0">
                 <a
                   href={`#${item.id}`}
                   aria-current={isActive ? "location" : undefined}
-                  className={`block rounded-full px-3 py-2 text-center text-xs font-semibold transition sm:px-4 sm:text-sm ${
+                  className={`block whitespace-nowrap rounded-full px-3 py-2 text-center text-xs font-semibold transition sm:px-4 sm:text-sm ${
                     isActive
                       ? "bg-brand-green text-white shadow-sm"
                       : "text-brand-muted hover:bg-brand-sky-soft hover:text-brand-ink"

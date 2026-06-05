@@ -35,7 +35,7 @@ export default async function NewsPage() {
   });
 
   return (
-    <article className="min-h-screen bg-brand-warm pb-20">
+    <article className="min-h-screen bg-brand-warm page-bottom-pad">
       <JsonLd
         data={[
           collectionPageJsonLd({

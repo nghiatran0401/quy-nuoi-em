@@ -70,7 +70,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
   const breadcrumbId = `${articleUrl}#breadcrumb`;
 
   return (
-    <article className="min-h-screen bg-brand-warm pb-20">
+    <article className="min-h-screen bg-brand-warm page-bottom-pad">
       <JsonLd
         data={[
           webPageJsonLd({
@@ -117,7 +117,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
             />
           </div>
         ) : null}
-        <h1 className="heading-display mb-2 text-3xl md:text-4xl">{article.title}</h1>
+        <h1 className="heading-page mb-2">{article.title}</h1>
         <p className="mb-6 text-sm font-semibold uppercase tracking-wide text-brand-accent">
           {getDataUiLabel("publishedOn")} {article.date}
         </p>

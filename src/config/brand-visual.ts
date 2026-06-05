@@ -51,6 +51,7 @@ export const brandVisual = {
     messenger: "https://www.messenger.com/t/duannuoiem",
     group: "https://www.facebook.com/groups/485546695224919",
   },
-  financeUrl: "/tai-chinh",
+  /** In-app finance hub (canonical: https://quynuoiem.com/tai-chinh). */
+  financeUrl: "/tai-chinh" as const,
   donateQrPath: "/qr.png",
 } as const;

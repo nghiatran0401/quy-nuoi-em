@@ -1,34 +1,38 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { BankTransferPanel } from "@/components/shared/bank-transfer-panel";
 import { PublicCatalogPromo } from "@/components/shared/public-catalog-promo";
+import { TransferInfoSection } from "@/components/shared/transfer-info-section";
+import { brandVisual } from "@/config/brand-visual";
+import { process2026PageContent } from "@/content/process-2026-content";
 import { getStaticPageHero } from "@/content/pages/static-pages";
-import type { DonateInfoContent } from "@/lib/data/donate-info";
 
 type DonateViewProps = {
-  info: DonateInfoContent;
   donateQrUrl: string;
 };
 
-export function DonateView({ info, donateQrUrl }: DonateViewProps) {
+export function DonateView({ donateQrUrl }: DonateViewProps) {
   const hero = getStaticPageHero("donate");
 
   return (
-    <article className="min-h-screen bg-brand-warm pb-20">
+    <article className="min-h-screen bg-brand-warm page-bottom-pad">
       <section className="banner-primary">
         <div className="page-container py-10 sm:py-12">
           <p className="eyebrow mb-3">
             {hero.eyebrow ?? "CHUNG TAY GÓP SỨC"}
           </p>
-          <h1 className="heading-display mb-4 text-2xl sm:text-3xl md:text-5xl">{hero.title}</h1>
+          <h1 className="heading-page mb-4">{hero.title}</h1>
           {hero.description ? (
-            <p className="text-body max-w-2xl text-lg">{hero.description}</p>
+            <p className="text-body max-w-2xl text-base sm:text-lg">{hero.description}</p>
           ) : null}
         </div>
       </section>
 
       <section className="page-container py-8 sm:py-10">
-        <BankTransferPanel bank={info} donateQrUrl={donateQrUrl} variant="page" />
+        <TransferInfoSection
+          transfer={process2026PageContent.transfer}
+          qrImageSrc={donateQrUrl}
+          fanpageUrl={brandVisual.social.messenger}
+        />
 
         <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-2">
           <Link

@@ -15,7 +15,7 @@ export function StaticPageShell({
   contentClassName = "",
 }: StaticPageShellProps) {
   return (
-    <article className="min-h-screen bg-brand-warm pb-20">
+    <article className="min-h-screen bg-brand-warm page-bottom-pad">
       <DataPageHeader eyebrow={eyebrow} title={title} description={description} />
       <div className={`page-container py-6 sm:py-8 ${contentClassName}`.trim()}>
         {children}

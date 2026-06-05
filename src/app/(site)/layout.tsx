@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JsonLd } from "@/components/seo/json-ld";
+import { ScrollToTopButton } from "@/components/layout/scroll-to-top-button";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteCopy } from "@/content/site-copy";
@@ -38,8 +39,9 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
       ) : null}
       <div className="flex min-h-screen min-w-0 flex-col">
         <SiteHeader />
-        <main className="min-w-0 flex-grow">{children}</main>
+        <main className="min-w-0 flex-grow pb-safe">{children}</main>
         <SiteFooter />
+        <ScrollToTopButton />
       </div>
     </>
   );

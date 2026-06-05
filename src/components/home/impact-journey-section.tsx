@@ -90,7 +90,7 @@ function InfrastructureFundBlock({ infra }: { infra: InfrastructureCopy }) {
       <h3 id="impact-infra-heading" className="heading-display mt-2 text-2xl md:text-3xl">
         {infra.title}
       </h3>
-      <p className="mt-3 font-heading text-3xl font-extrabold tabular-nums text-brand-accent md:text-4xl">
+      <p className="mt-3 font-heading text-2xl font-extrabold tabular-nums text-brand-accent sm:text-3xl md:text-4xl">
         {infra.amount}
       </p>
       <p className="mt-1 text-sm font-bold uppercase tracking-wide text-brand-ink">{infra.subtitle}</p>

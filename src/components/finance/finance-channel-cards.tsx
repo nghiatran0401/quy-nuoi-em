@@ -13,7 +13,7 @@ const channelIcons = {
 type FinanceChannelCardsProps = {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   channels: readonly FinanceChannel[];
 };
 

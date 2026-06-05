@@ -1,3 +1,5 @@
+import { rewriteLegacyFinanceUrls } from "@/lib/finance-url";
+
 const CANONICAL_BRAND = "Quỹ Nuôi Em";
 
 /** Unwrap Next.js image optimizer URLs to the underlying CDN URL. */
@@ -28,6 +30,7 @@ export function sanitizeBrandText(text: string): string {
     .replace(/DỰ ÁN NUÔI EM/gi, "QUỸ NUÔI EM")
     .replace(/Dự án Nuôi Em/gi, CANONICAL_BRAND);
 
+  out = rewriteLegacyFinanceUrls(out);
   out = out.replace(/ {2,}/g, " ");
 
   return out.replace(/\n{3,}/g, "\n\n").trim();

@@ -39,6 +39,11 @@ export function ProcessOverviewSection({
           <h2 id="home-process-heading" className="heading-section-xl mt-2 scroll-mt-24">
             {copy.title}
           </h2>
+          {copy.description ? (
+            <p className="text-body home-prose mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-brand-muted sm:mt-5 sm:text-[15px]">
+              {copy.description}
+            </p>
+          ) : null}
         </header>
 
         <div className="mx-auto mt-6 flex max-w-5xl flex-col items-stretch justify-center gap-3 sm:mt-7 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
@@ -51,13 +56,14 @@ export function ProcessOverviewSection({
           </a>
         </div>
 
-        <div className="mx-auto mt-6 max-w-6xl overflow-x-auto rounded-2xl border border-brand-border/80 bg-white shadow-[var(--shadow-brand-card)] sm:overflow-hidden">
+        <div className="scroll-hint-x mx-auto mt-6 max-w-6xl rounded-2xl border border-brand-border/80 bg-white shadow-[var(--shadow-brand-card)]">
           <Image
             src={guideImageSrc}
             alt="Sơ đồ tổng quan 6 bước nhận mã Nuôi Em"
             width={1200}
             height={430}
-            className="h-auto w-full object-contain"
+            className="h-auto min-w-[640px] w-full object-contain sm:min-w-0"
+            sizes="(max-width: 768px) 100vw, 1152px"
           />
         </div>
 

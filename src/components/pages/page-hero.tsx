@@ -13,10 +13,8 @@ export function PageHero({ eyebrow, title, description, centered = true, classNa
       {eyebrow ? (
         <p className="eyebrow mb-3">{eyebrow}</p>
       ) : null}
-      <h1 className="heading-display text-3xl md:text-5xl">{title}</h1>
-      {description ? (
-        <p className="text-body mt-4 text-lg">{description}</p>
-      ) : null}
+        <h1 className="heading-page">{title}</h1>
+        {description ? <p className="text-body mt-4 text-base sm:text-lg">{description}</p> : null}
     </header>
   );
 }

@@ -93,9 +93,7 @@ export function organizationJsonLd(): JsonLdObject {
       siteConfig.social.facebook,
       siteConfig.social.messenger,
       siteConfig.social.facebookGroup,
-      brandVisual.financeUrl.startsWith("/")
-        ? absoluteUrl(brandVisual.financeUrl)
-        : brandVisual.financeUrl,
+      absoluteUrl(brandVisual.financeUrl),
       publicCatalog.url,
     ].filter(Boolean),
     potentialAction: {

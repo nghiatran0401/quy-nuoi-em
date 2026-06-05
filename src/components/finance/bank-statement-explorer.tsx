@@ -272,8 +272,8 @@ export function BankStatementExplorer({
             </p>
           ) : (
             <>
-              <div className="mt-5 hidden overflow-x-auto rounded-xl border border-brand-border/60 md:block">
-                <table className="min-w-full divide-y divide-brand-border/60 text-left">
+              <div className="table-scroll mt-5 hidden rounded-xl border border-brand-border/60 lg:block">
+                <table className="min-w-[48rem] w-full divide-y divide-brand-border/60 text-left">
                   <thead className="bg-brand-surface text-xs font-semibold uppercase tracking-wide text-brand-muted">
                     <tr>
                       <th className="px-3 py-3">{labels.columnStt}</th>
@@ -294,7 +294,7 @@ export function BankStatementExplorer({
                 </table>
               </div>
 
-              <ul className="mt-5 space-y-3 md:hidden">
+              <ul className="mt-5 space-y-3 lg:hidden">
                 {pageRows.map((row) => (
                   <StatementCard key={row.stt} row={row} labels={labels} />
                 ))}

@@ -186,7 +186,7 @@ export function DonorsTable({ basePath, data, activeFilters }: DonorsTableProps)
       ) : null}
 
       <div className="table-scroll hidden rounded-xl border border-brand-border/60 bg-white shadow-sm lg:block">
-        <table className="w-full divide-y divide-brand-border text-left text-sm">
+        <table className="w-full min-w-[56rem] divide-y divide-brand-border text-left text-sm">
           <thead className="bg-brand-sky-soft text-xs font-bold uppercase tracking-wide text-brand-ink">
             <tr>
               <th className="px-4 py-3">STT</th>

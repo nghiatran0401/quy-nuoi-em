@@ -44,9 +44,7 @@ export const taiChinhContent = {
 
   intro: {
     paragraphs: [
-      'Trong những nỗ lực công khai tài chính, các bạn sẽ thấy Quỹ Nuôi Em là một dự án rất "kỳ lạ". Không quá trú trọng hết vào mặt "giấy tờ" — cái mà chúng tôi cho rằng có rất nhiều cách để làm được.',
-      'Chúng tôi còn "tự làm khó mình" khi nghĩ ra rất nhiều cách, và còn cùng lắng nghe các cách khác mọi người góp ý để ngày càng minh bạch hơn theo-rất-nhiều-cách, luôn luôn cập nhật những cách làm mới. Nếu có cách nào, anh chị cứ liên hệ với chúng tôi ở phía dưới.',
-      "Chúng tôi còn vinh dự được nhiều anh chị em ở tổ chức phi chính phủ, phi lợi nhuận, tổ chức kiểm toán uy tín tham gia nuôi em — sau này còn tham gia hỗ trợ kiểm soát, giúp tối ưu về mặt tài chính cho dự án.",
+      'Trong những nỗ lực công khai tài chính, các bạn sẽ thấy Quỹ Nuôi Em là một dự án rất "kỳ lạ". Không quá chú trọng hết vào mặt "giấy tờ" — cái mà chúng tôi cho rằng có rất nhiều cách để làm được.',
       "Khi đồng ý nuôi em, cũng có nghĩa anh chị đã hoàn toàn nắm rõ thông tin về Chương trình, uỷ quyền, đồng thuận, tin tưởng về cách thức quản lý tài chính, triển khai thực hiện do Nhóm Nuôi Em đang vận hành, triển khai, đồng thời trao quyền để Nhóm quyết định những vấn đề liên quan đến Chương trình.",
     ],
   },
@@ -64,8 +62,6 @@ export const taiChinhContent = {
   channelsIntro: {
     eyebrow: "Theo dõi tài chính",
     title: "Một vài cách để xem",
-    description:
-      "Dưới đây là các kênh chúng tôi đang dùng để công khai — anh chị có thể chọn cách phù hợp với mình.",
   },
 
   channels: [
@@ -73,7 +69,7 @@ export const taiChinhContent = {
       id: "archive",
       title: "Công khai sao kê tài khoản",
       description:
-        "Ngay phía dưới phần này là công khai toàn bộ sao kê gửi tới cho dự án, được cập nhật 2 ngày 1 lần. Sao kê được chúng tôi nhập và 2 lần check.",
+        "Ngay phía dưới phần này là công khai toàn bộ sao kê gửi tới cho dự án. Sao kê được chúng tôi nhập và 2 lần check.",
       ctaLabel: "Xuống phần sao kê",
       href: "#sao-ke",
     },
@@ -99,38 +95,38 @@ export const taiChinhContent = {
   pillarsIntro: {
     eyebrow: "Về mặt thực tế và giấy tờ",
     title: "8+ cách minh bạch",
-    description: "Những cách Quỹ Nuôi Em đang cố gắng áp dụng — chưa hoàn hảo, nhưng luôn mở để cải thiện.",
+    description: "Các phương thức minh bạch Nuôi Em đang vận hành:",
   },
 
   pillarGroups: [
     {
       id: "practical",
       eyebrow: "Về mặt thực tế",
-      title: "Mà Quỹ Nuôi Em đang cố gắng áp dụng",
+      title: "Quỹ Nuôi em đã và đang áp dụng",
       pillars: [
         {
           id: "phone",
           title: "Gọi điện bất kì lúc nào",
           description:
-            "Bạn được cung cấp SĐT Thầy cô giáo, phụ huynh học sinh, trưởng bản, hiệu trưởng và cả phòng giáo dục để kiểm soát em đó có được ăn không.",
+            "Có thể chủ động liên hệ thầy, cô hiệu trưởng hoặc Phòng Công tác Xã hội theo số điện thoại được cung cấp để kiểm tra và xác minh thực tế",
         },
         {
           id: "one-ne",
-          title: "Mỗi NE — mỗi cháu 1 người nuôi",
+          title: "Mỗi mã NE tương ứng 1 bữa ăn - 1 học sinh - 1 người nuôi",
           description:
-            "Không có chuyện 1 cháu có 2 người nuôi khác nhau. Một NE tương ứng 1 cháu — 1 người nuôi cụ thể.",
+            "Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 bữa ăn - 1 học sinh - 1 người nuôi cụ thể, hoàn toàn không có sự trùng lặp",
         },
         {
           id: "oversight",
-          title: "Có 20–30 giám sát từ chính người Nuôi Em",
+          title: "Có 20+ Tình nguyện viên, đồng thời nhận anh chị nuôi",
           description:
-            "Một điểm thú vị là dự án nuôi luôn mở rộng chào đón sự hỗ trợ, cũng chính là sự giám sát từ chính 40.000 anh chị Nuôi — các bạn hỗ trợ và được tham gia các công việc sao kê, hỗ trợ tài chính giúp dự án.",
+            "Không chỉ dừng lại ở việc đóng góp tài chính, các anh chị nuôi chính là những người trực tiếp đồng hành giám sát. Dự án luôn chào đón sự tham gia của các bạn vào công tác đối soát, kiểm tra sao kê và quản lý dòng tiền, cùng nhau xây dựng một hệ sinh thái minh bạch tuyệt đối.",
         },
         {
           id: "visits",
-          title: "Thăm nuôi 2–3 lần 1 năm",
+          title: "Thăm em nuôi 2–3 lần/ năm",
           description:
-            "Bạn thử nghĩ, cách nào là cách hùng hồn nhất cho việc minh bạch tài chính? Đó là thăm trực tiếp — 40.000 cháu không sai cháu nào thì tức là tài chính minh bạch. Tư duy rất đơn giản phải không? Dự án tổ chức thăm nuôi tập thể, 2–3 lần 1 năm, có thông báo rộng rãi để mọi người có thể đăng kí dự.",
+            "Bạn thử nghĩ, cách nào là cách hùng hồn nhất cho việc minh bạch tài chính? Đó là thăm trực tiếp 70.000+ cháu không sai cháu nào thì tức là tài chính minh bạch. Tư duy rất đơn giản phải không? Dự án tổ chức thăm nuôi định kỳ 2–3 lần/ năm, có thông báo rộng rãi để mọi người có thể đăng kí dự.",
         },
       ],
     },
@@ -141,15 +137,15 @@ export const taiChinhContent = {
       pillars: [
         {
           id: "inbox",
-          title: "Xác nhận bằng văn bản qua inbox",
+          title: "Xác nhận bằng văn bản qua tin nhắn Fanpage",
           description:
-            "Mỗi khi nhận được 1 khoản tiền chuyển khoản Nuôi Em (có kèm mã NE), dự án sẽ gửi phản hồi sau 24–48h thông qua inbox, kèm theo mã giao dịch cụ thể — do người hỗ trợ cũng là bỉm sữa, đi làm, cũng là anh chị nuôi em tham gia dự án, tối tranh thủ.",
+            "Mỗi khi nhận được khoản đóng góp kèm mã NE, Dự án sẽ gửi phản hồi trong vòng 24–48 giờ qua tin nhắn, tiếp sau đó là xác nhận kèm mã giao dịch cụ thể. Vì đội ngũ vận hành hoàn toàn là các bạn Tình nguyện viên — cũng là những người đi làm, đi học,... tranh thủ thời gian trong ngày để hỗ trợ dự án, Nuôi Em rất mong anh chị thông cảm và thấu hiểu sự nỗ lực này.",
         },
         {
           id: "statements",
           title: "Có công khai sao kê tài khoản",
           description:
-            "Ngay phía dưới phần này, là công khai toàn bộ sao kê gửi tới cho dự án. Được cập nhật 2 ngày 1 lần.",
+            "Ngay phía dưới phần này, là công khai toàn bộ sao kê gửi tới cho dự án.",
         },
         {
           id: "single-account",
@@ -170,7 +166,7 @@ export const taiChinhContent = {
   savingsNote: {
     title: "Tiền chưa sử dụng tới",
     description:
-      "Theo thống nhất từ anh chị em dự án Nuôi Em năm 2019, đồng ý cho phép dự án gửi tiền tiết kiệm. Tiền lãi được sử dụng mục đích: chi phí vận hành, hỗ trợ cán sự hàng tháng và hỗ trợ công tác phí từ 1.500.000 VNĐ/cán sự/lần/tỉnh; khác vùng, khu vực: 2.000.000đ/tỉnh; nước ngoài: tối đa 3.000.000/quốc gia.",
+      "Theo sự đồng thuận và thống nhất từ các anh chị nuôi tham gia dự án từ năm 2019, Nuôi Em được phép tối ưu hóa chi phí nhàn rỗi bằng hình thức gửi tiết kiệm. Toàn bộ tiền lãi phát sinh được cam kết sử dụng 100% cho mục đích vận hành, hỗ trợ cán sự đi khảo sát thực địa, hỗ trợ công các phí cho tình nguyện viên: từ 1.500.000 VNĐ/ cán sự/ lần/ tỉnh; khác vùng, khu vực: 2.000.000đ/ tỉnh; nước ngoài: tối đa 3.000.000/ quốc gia.",
   },
 
   saoKeSection: {
@@ -210,7 +206,7 @@ export const taiChinhContent = {
     id: "chung-tu-chi",
     title: "Một vài chứng từ",
     description:
-      "Danh sách điểm trường giải ngân tiền ăn tập trung — kèm link Drive chứng từ (nếu đã có). Toàn bộ các khoản chi được cập nhật đều đặn trong group chính thức của dự án.",
+      "Danh sách điểm trường giải ngân tiền ăn tập trung — kèm link Drive chứng từ (nếu đã có).",
     emptyState: "Chưa tải được danh sách chứng từ chi. Anh chị thử lại sau hoặc xem trên Group/Fanpage.",
     interimLabel: "Xem thêm trên",
   },
@@ -230,7 +226,7 @@ export const taiChinhContent = {
     columnAmount: "Số tiền giải ngân",
     columnDrive: "Chứng từ",
     viewDocuments: "Xem Drive",
-    noDocuments: "Chưa có",
+    noDocuments: "Đang cập nhật",
     noResults: "Không có điểm trường phù hợp.",
     page: "Trang",
     of: "/",

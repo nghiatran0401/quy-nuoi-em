@@ -23,7 +23,7 @@ export function TaiChinhView({ statementSection, expenseDocumentsSection }: TaiC
   const content = taiChinhContent;
 
   return (
-    <article className="min-h-screen bg-brand-warm pb-20">
+    <article className="min-h-screen bg-brand-warm page-bottom-pad">
       <DataPageBanner {...hero} />
       <div className="page-container py-8 sm:py-10 lg:py-12">
         <div className="mx-auto max-w-7xl space-y-10 md:space-y-14">
@@ -40,7 +40,6 @@ export function TaiChinhView({ statementSection, expenseDocumentsSection }: TaiC
           <FinanceChannelCards
             eyebrow={content.channelsIntro.eyebrow}
             title={content.channelsIntro.title}
-            description={content.channelsIntro.description}
             channels={content.channels}
           />
 
