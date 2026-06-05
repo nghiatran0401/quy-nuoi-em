@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { brandVisual } from "@/config/brand-visual";
 import { siteConfig } from "@/config/site";
+import { DATA_PAGE_PATHS } from "@/lib/seo/routes";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -46,10 +47,16 @@ export default function manifest(): MetadataRoute.Manifest {
         url: "/dong-gop",
       },
       {
-        name: "Danh sách trẻ",
-        short_name: "Danh sách",
-        description: "Danh sách trẻ đang được bảo trợ",
-        url: "/danh-sach-diem-truong-ho-tro",
+        name: "Điểm trường",
+        short_name: "Điểm trường",
+        description: "Danh sách điểm trường hỗ trợ",
+        url: DATA_PAGE_PATHS.children,
+      },
+      {
+        name: "Nhà tài trợ",
+        short_name: "Nhà tài trợ",
+        description: "Danh sách nhà tài trợ công khai",
+        url: DATA_PAGE_PATHS.donors,
       },
       {
         name: "Bản tin",

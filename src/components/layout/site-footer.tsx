@@ -5,6 +5,7 @@ import { BrandLogo } from "@/components/brand/logo";
 import { brandVisual } from "@/config/brand-visual";
 import { publicCatalog, publicCatalogHost } from "@/config/public-catalog";
 import { siteCopy } from "@/content/site-copy";
+import { footerResourceItems } from "@/lib/navigation";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -72,6 +73,16 @@ export function SiteFooter() {
                 {t.resourcesSection}
               </p>
               <ul className="space-y-2.5 text-sm leading-relaxed text-brand-muted">
+                {footerResourceItems.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="font-medium text-brand-ink transition-colors hover:text-brand-accent"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
                 <li>
                   {t.financePrefix}{" "}
                   <a
