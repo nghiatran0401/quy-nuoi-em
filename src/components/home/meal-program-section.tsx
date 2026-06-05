@@ -1,7 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { MessageCircle } from "lucide-react";
-import { mealProgramSectionCopy } from "@/content/homepage-content";
+import { mealProgramSectionCopy, type MealProgramBlock } from "@/content/homepage-content";
 import { YoutubeEmbed } from "@/components/shared/youtube-embed";
 
 type MealProgramSectionProps = {
@@ -37,6 +36,45 @@ function normalizeBlockText(text: string): string {
   return text.replace(/^\s*\d+\.\s+/, "");
 }
 
+function isListBlock(block: MealProgramBlock): block is { label: string; items: MealProgramBlock["items"] } {
+  return "items" in block;
+}
+
+function MealProgramTextBlock({ block }: { block: { label?: string; text: string } }) {
+  return (
+    <p className="text-left sm:text-justify">
+      {block.label ? (
+        <span className="font-heading font-bold text-brand-ink">{block.label}: </span>
+      ) : null}
+      {protectLineBreaks(normalizeBlockText(block.text))}
+    </p>
+  );
+}
+
+function MealProgramCostList({ block }: { block: { label: string; items: NonNullable<MealProgramBlock["items"]> } }) {
+  return (
+    <div>
+      <p className="font-heading font-bold text-brand-ink">{block.label}</p>
+      <ul className="mt-3 list-none space-y-3">
+        {block.items.map((item) => (
+          <li
+            key={item.amount}
+            className="rounded-xl border border-brand-border/60 bg-brand-warm/50 px-4 py-3.5 sm:px-5 sm:py-4"
+          >
+            <p className="font-heading text-lg font-extrabold tabular-nums text-brand-accent-dark sm:text-xl">
+              {item.amount}
+            </p>
+            <p className="mt-1.5 text-[15px] font-semibold leading-snug text-brand-ink sm:text-base">
+              {item.audience}
+            </p>
+            <p className="mt-1.5 text-sm leading-relaxed text-brand-muted">{item.breakdown}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function MealProgramSection({ content }: MealProgramSectionProps) {
   const copy = content ?? mealProgramSectionCopy;
 
@@ -65,29 +103,14 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
             </h2>
 
             <div className="space-y-5 text-left text-[15px] leading-relaxed text-brand-ink sm:text-base">
-              {copy.blocks.map((block) => (
-                <p key={block.label ?? block.text.slice(0, 28)} className="text-left sm:text-justify">
-                  {block.label ? (
-                    <span className="font-heading font-bold text-brand-ink">{block.label}: </span>
-                  ) : null}
-                  {protectLineBreaks(normalizeBlockText(block.text))}
-                </p>
-              ))}
+              {copy.blocks.map((block) =>
+                isListBlock(block) ? (
+                  <MealProgramCostList key={block.label} block={block} />
+                ) : (
+                  <MealProgramTextBlock key={block.label ?? block.text.slice(0, 28)} block={block} />
+                ),
+              )}
             </div>
-
-            <ul className="mt-8 grid grid-cols-1 gap-3 min-[400px]:grid-cols-2 sm:flex sm:flex-wrap">
-              {copy.costs.map((cost) => (
-                <li
-                  key={cost.amount}
-                  className="rounded-2xl border border-brand-accent/25 bg-brand-highlight-soft px-4 py-3 sm:min-w-[9.5rem]"
-                >
-                  <span className="font-heading text-xl font-extrabold tabular-nums text-brand-accent-dark">
-                    {cost.amount}
-                  </span>
-                  <span className="mt-0.5 block text-xs font-semibold text-brand-muted">{cost.note}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">

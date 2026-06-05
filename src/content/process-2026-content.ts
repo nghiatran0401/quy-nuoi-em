@@ -56,7 +56,7 @@ export const processSteps2026: readonly ProcessStepContent[] = [
       "Đầu tháng 9 các bé bắt đầu ăn; tháng 10 trường gửi hồ sơ — dự án tiếp nhận và làm ảnh thẻ; tháng 11 mở tra cứu trên trang Facebook.",
     bullets: [
       "Tra cứu mã NE trên danh mục em nuôi công khai (nuoiem2025.quynuoiem.com) khi quỹ mở cổng.",
-      "Theo dõi thông báo chatbot trang Facebook Nuôi Em song song.",
+      "Theo dõi thông báo trên trang Facebook Nuôi Em song song.",
       "Mỗi mã trả về thông tin và ảnh bé tương ứng sau khi xử lý dữ liệu.",
     ],
   },
@@ -65,10 +65,10 @@ export const processSteps2026: readonly ProcessStepContent[] = [
     title: "Ảnh hàng tháng",
     timing: "Định kỳ mỗi tháng",
     summary:
-      "Sau tra mã thành công, anh chị nhận link nhóm lớp có thầy cô cắm bản — cập nhật ảnh đầu mỗi tháng.",
+      "Sau khi tra mã thành công, anh chị nhận link nhóm lớp có thầy cô cắm bản — cập nhật quá trình ăn của học sinh đầu mỗi tháng.",
     bullets: [
-      "Có thể tương tác với thầy cô qua nhóm lớp.",
-      "Không gửi quần áo cũ lên bản qua kênh này.",
+      "Có thể liên lạc, trao đổi với thầy cô qua nhóm lớp.",
+      "Không gửi quần áo cũ lên bản.",
     ],
   },
   {
@@ -116,7 +116,7 @@ export const importantNotes = [
 
 export const timelineMilestones = [
   { when: "Trong 24 giờ", what: "Chuyển khoản đủ một lần (giữ mã)" },
-  { when: "Tháng 9", what: "Các bé bắt đầu ăn bữa trưa" },
+  { when: "Tháng 9", what: "Các bé bắt đầu đi học và ăn" },
   { when: "Tháng 10 – 11", what: "Tra mã và nhận thông tin, ảnh bé" },
   { when: "31/12", what: "Hoàn tất chuyển khoản đủ 100% tiền ăn" },
 ] as const;
@@ -180,7 +180,7 @@ export const process2026PageContent = {
     warning:
       "Nếu anh chị vô tình quên ghi nội dung hãy báo ngay lại với dự án qua trang Nuôi Em. Trong trường hợp dự án nhận được chuyển khoản nhưng không có nội dung sẽ không hoàn lại và chuyển thành giao dịch vô danh (xây trường).",
     codeExpiryNote:
-      "Anh chị lưu ý giúp dự án: sau 24 giờ chưa chuyển, mã NE có thể bị thu hồi. Khi mã hết hạn, anh chị vui lòng đăng ký lại từ đầu.",
+      "Anh chị lưu ý giúp dự án: sau 24 giờ chưa chuyển, mã NE sẽ bị thu hồi. Khi mã đã thu hồi, anh chị vui lòng đăng ký lại từ đầu.",
     transferFormat: "Mã NE + số điện thoại + tên anh chị",
     transferExample: "NE00123 0975302307 Nguyen Van A",
     accountNumber: "1805",

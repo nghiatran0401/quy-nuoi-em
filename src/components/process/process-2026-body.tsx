@@ -106,7 +106,7 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
 
               <div className="mt-5 space-y-2 rounded-xl border border-brand-border/70 bg-white px-4 py-3 text-sm">
                 <p>
-                  <span className="font-semibold text-brand-ink">Cú pháp nội dung CK:</span>{" "}
+                  <span className="font-semibold text-brand-ink">Cú pháp nội dung Chuyển khoản:</span>{" "}
                   {c.transfer.transferFormat}
                 </p>
                 <p className="text-brand-muted">

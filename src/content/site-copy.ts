@@ -43,7 +43,7 @@ export const siteCopy = {
     description:
       'Trên những mái nhà tranh vùng cao, chỉ từ 150.000đ – 170.000đ mỗi tháng, anh chị đã mang đến những bữa cơm trưa no bụng, giữ bước chân các em nhỏ đi học đều đặn. Với mô hình "Mỗi mã NE tương ứng 1 bữa ăn", anh chị sẽ biết rõ thông tin và có thể đến thăm em nuôi của mình.',
     sponsorNow: "Đóng góp ngay",
-    learnMore: "Tìm hiểu thêm",
+    learnMore: "Tra cứu mã",
   },
 } as const;
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { brandVisual } from "@/config/brand-visual";
+import { publicCatalog } from "@/config/public-catalog";
 import { siteCopy } from "@/content/site-copy";
 import { homeMediaImageSrc } from "@/lib/data/home-media";
 import type { HomeHeroContent } from "@/lib/data/homepage";
@@ -27,9 +28,14 @@ export function HeroSection({ content, heroImageUrl }: HeroSectionProps) {
               <Link href="/dong-gop" className="btn-primary w-full sm:w-auto">
                 {copy.sponsorNow}
               </Link>
-              <Link href="#home-process-heading" className="btn-secondary w-full sm:w-auto">
+              <a
+                href={publicCatalog.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary w-full sm:w-auto"
+              >
                 {copy.learnMore}
-              </Link>
+              </a>
             </div>
           </div>
 

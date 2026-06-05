@@ -146,8 +146,8 @@ function SponsorshipPanel({ withSponsor, withoutSponsor }: { withSponsor: StatIt
               <HandHeart className="h-4 w-4" strokeWidth={2.25} />
             </span>
             <div>
-              <p className="font-heading text-sm font-bold text-brand-ink">Phân bổ người nuôi</p>
-              <p className="text-xs text-brand-muted">Tỷ lệ em đã được và đang chờ bảo trợ</p>
+              <p className="font-heading text-sm font-bold text-brand-ink">Tỷ lệ nhận nuôi</p>
+              <p className="text-xs text-brand-muted">Tỷ lệ học sinh đã được nuôi và đang chờ nhận nuôi</p>
             </div>
           </div>
 

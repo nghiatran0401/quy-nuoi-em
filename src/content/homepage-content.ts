@@ -9,10 +9,15 @@ import { nuoiEmImage as legacyNuoiEmImage } from "@/lib/nuoiem-images";
 
 const HOME_MEMBER_IMAGE_COUNT = 5;
 
-export type MealProgramBlock = {
-  label?: string;
-  text: string;
+export type MealProgramSupportCost = {
+  amount: string;
+  audience: string;
+  breakdown: string;
 };
+
+export type MealProgramBlock =
+  | { label?: string; text: string }
+  | { label: string; items: MealProgramSupportCost[] };
 
 export const mealProgramSectionCopy = {
   since: "Từ 2014",
@@ -26,14 +31,23 @@ export const mealProgramSectionCopy = {
       text: "Học sinh mầm non (từ năm học 2025 - 2026, dự án mở rộng thêm đối tượng học sinh mầm non được hưởng chế độ 105 của nhà nước — 160.000đ/tháng) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa. Một số bé nội trú xa được hỗ trợ cơm trưa và tối — mỗi bữa một mã NE (ví dụ NE00001S — ăn trưa, NE00001T — ăn tối). Khi bé được nhà nước nuôi, dự án đổi sang bé khác và giữ nguyên mã NE khi anh chị tiếp tục tham gia dự án.",
     },
     {
-      label: "Số tiền",
-      text: "150.000đ/tháng/cháu × 9 tháng học + 100.000đ cơ sở vật chất. Tổng phổ biến: 1.450.000đ/năm học. Một số vùng Tây Nguyên (tiểu học / trung học cơ sở / trung học phổ thông): 170.000đ/tháng × 9 tháng + 120.000đ cơ sở vật chất — tổng 1.650.000đ/năm học.",
+      label: "Chi phí hỗ trợ",
+      items: [
+        {
+          amount: "1.450.000đ/mã",
+          audience: "Mã phía Bắc và mã Mầm non trong Tây Nguyên",
+          breakdown:
+            "Chi phí gồm 150.000đ/tháng/bé × 9 tháng học + 100.000đ (tiền cơ sở vật chất)",
+        },
+        {
+          amount: "1.650.000đ/mã",
+          audience: "Mã Tiểu học, THCS, THPT trong Tây Nguyên",
+          breakdown:
+            "Chi phí gồm 170.000đ/tháng/bé × 9 tháng học + 120.000đ (tiền cơ sở vật chất)",
+        },
+      ],
     },
   ] satisfies MealProgramBlock[],
-  costs: [
-    { amount: "1.450.000đ", note: "/ năm học (phổ biến)" },
-    { amount: "1.650.000đ", note: "/ năm học (một số vùng Tây Nguyên)" },
-  ],
   media: {
     youtubeId: "ouYY0ri-vIs",
     title: "Bữa cơm trưa tại điểm trường vùng cao",
@@ -146,15 +160,15 @@ export const campaignSectionCopy: HomeCampaignSectionContent = {
     },
   ],
   campaign: {
-    headline: "MỞ MÃ NUÔI EM MÙA 12 — ĐANG MỞ",
+    headline: "MÃ NUÔI EM MÙA 12 — ĐANG MỞ",
     phase: "2025 – 2026 · Thêm 30.000 bé đợt 1",
     goal: "Mục tiêu +120.000 bé được nhận nuôi trên cả nước",
   },
   story: {
     paragraphs: [
-      "Năm 2018 thật sự là một bước chuyển mình lớn đối với Quỹ Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ với người làm quỹ mà còn hơn 95.000+ niềm vui đến hết 2023 từ anh chị nuôi và các em tìm đến được với nhau.",
+      "Năm 2018 thật sự là một bước chuyển mình lớn đối với Quỹ Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ riêng với người làm quỹ mà còn hơn 95.000+ niềm vui đến từ anh chị nuôi và các em học sinh đã tìm đến được với nhau.",
       "Đến nay hơn 1.000 nhóm Facebook theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
-      "Ngay từ bây giờ hãy đăng ký là một phần trong số +120.000 anh chị nuôi của các bé trong 2025 – 2026.",
+      "Ngay từ bây giờ hãy đăng ký là một phần trong số các anh chị nuôi của các bé trong 2025 – 2026.",
     ],
     ctaLabel: "Tìm hiểu thêm",
     ctaHref: "https://web.sucmanh2000.com/",
