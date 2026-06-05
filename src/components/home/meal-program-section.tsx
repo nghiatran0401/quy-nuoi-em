@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { MessageCircle } from "lucide-react";
-import { mealProgramSectionCopy, type MealProgramBlock } from "@/content/homepage-content";
+import {
+  mealProgramSectionCopy,
+  type MealProgramBlock,
+  type MealProgramListBlock,
+  type MealProgramTextBlock as MealProgramTextBlockContent,
+} from "@/content/homepage-content";
 import { YoutubeEmbed } from "@/components/shared/youtube-embed";
 
 type MealProgramSectionProps = {
@@ -36,11 +41,11 @@ function normalizeBlockText(text: string): string {
   return text.replace(/^\s*\d+\.\s+/, "");
 }
 
-function isListBlock(block: MealProgramBlock): block is { label: string; items: MealProgramBlock["items"] } {
+function isListBlock(block: MealProgramBlock): block is MealProgramListBlock {
   return "items" in block;
 }
 
-function MealProgramTextBlock({ block }: { block: { label?: string; text: string } }) {
+function MealProgramTextBlock({ block }: { block: MealProgramTextBlockContent }) {
   return (
     <p className="text-left sm:text-justify">
       {block.label ? (
@@ -51,7 +56,7 @@ function MealProgramTextBlock({ block }: { block: { label?: string; text: string
   );
 }
 
-function MealProgramCostList({ block }: { block: { label: string; items: NonNullable<MealProgramBlock["items"]> } }) {
+function MealProgramCostList({ block }: { block: MealProgramListBlock }) {
   return (
     <div>
       <p className="font-heading font-bold text-brand-ink">{block.label}</p>

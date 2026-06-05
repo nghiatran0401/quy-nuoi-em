@@ -15,9 +15,9 @@ export type MealProgramSupportCost = {
   breakdown: string;
 };
 
-export type MealProgramBlock =
-  | { label?: string; text: string }
-  | { label: string; items: MealProgramSupportCost[] };
+export type MealProgramTextBlock = { label?: string; text: string };
+export type MealProgramListBlock = { label: string; items: MealProgramSupportCost[] };
+export type MealProgramBlock = MealProgramTextBlock | MealProgramListBlock;
 
 export const mealProgramSectionCopy = {
   since: "Từ 2014",
