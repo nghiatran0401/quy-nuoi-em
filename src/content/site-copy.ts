@@ -12,6 +12,7 @@ export const siteCopy = {
   nav: {
     children: "Điểm trường",
     donors: "Nhà tài trợ",
+    maGhep: "Mã ghép",
     catalog: "Tra cứu mã",
     reports: "Báo cáo",
     news: "Bản tin",

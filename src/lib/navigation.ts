@@ -11,6 +11,7 @@ export type NavItem = {
 export const mainNavItems: NavItem[] = [
   { href: DATA_PAGE_PATHS.children, labelKey: "children" },
   { href: DATA_PAGE_PATHS.donors, labelKey: "donors" },
+  { href: DATA_PAGE_PATHS.maGhep, labelKey: "maGhep" },
   { href: publicCatalog.url, labelKey: "catalog", external: true },
   { href: DATA_PAGE_PATHS.reports, labelKey: "reports" },
   { href: DATA_PAGE_PATHS.news, labelKey: "news" },

@@ -19,6 +19,7 @@ export const STATIC_PAGE_PATHS: Record<StaticPageKey, string> = {
 export const DATA_PAGE_PATHS: Record<DataPageKey, string> = {
   children: "/danh-sach-diem-truong-ho-tro",
   donors: "/danh-sach-nha-tai-tro",
+  maGhep: "/ma-ghep",
   reports: "/bao-cao",
   news: "/news",
   statements: "/sao-ke-tai-khoan",
@@ -68,6 +69,8 @@ export async function getAllSitemapEntries(): Promise<SitemapEntry[]> {
         ? 0.9
         : pathname === "/danh-sach-nha-tai-tro"
           ? 0.85
+          : pathname === "/ma-ghep"
+            ? 0.85
           : pathname === "/news"
             ? 0.85
             : 0.7;

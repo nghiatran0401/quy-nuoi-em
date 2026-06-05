@@ -213,6 +213,9 @@ function FinancePanel({ income, expense }: { income: StatItem; expense: StatItem
         <div>
           <p className="font-heading text-sm font-bold text-brand-ink">Minh bạch tài chính</p>
           <p className="text-xs text-brand-muted">Tổng thu và chi theo năm học</p>
+          <p className="text-[11px] leading-snug text-brand-muted">
+            Số liệu dựa trên số mã nuôi em chỉ riêng cho năm học 2025-2026
+          </p>
         </div>
       </div>
 

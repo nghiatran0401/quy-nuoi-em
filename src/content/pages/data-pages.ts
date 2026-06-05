@@ -63,6 +63,18 @@ const pages = {
         "Danh sách công khai các nhà tài trợ đang đồng hành cùng Quỹ Nuôi Em. Thông tin liên hệ được ẩn một phần để bảo vệ quyền riêng tư.",
     },
   },
+  maGhep: {
+    meta: {
+      title: "Bảng mã ghép NE giảm ăn",
+      description:
+        "Tra cứu mã ghép công khai cho NE giảm ăn — mã NE đại diện, thời gian hỗ trợ, số tiền và mã ghép mới theo niên khóa 2025–2026.",
+    },
+    hero: {
+      title: "Bảng mã ghép NE giảm ăn",
+      description:
+        "Danh sách mã ghép công khai từ danh mục Nuôi Em. Các dòng đánh dấu X là NE giảm ăn cần ghép mã mới.",
+    },
+  },
 } as const satisfies Record<string, DataPageContent>;
 
 export type DataPageKey = keyof typeof pages;
