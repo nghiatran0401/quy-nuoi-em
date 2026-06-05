@@ -1,6 +1,4 @@
 import { donateInfo as staticDonateInfo } from "@/content/pages/static-pages";
-import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { createPublicClient } from "@/lib/supabase/public";
 
 export type DonateInfoContent = {
   bank: string;
@@ -26,9 +24,9 @@ export const defaultDonateInfo: DonateInfoContent = {
   transferExample: staticDonateInfo.transferExample,
 };
 
-const LEGACY_TRANSFER_FORMAT = "“Mã bé nhận nuôi” + Tên bạn (bắt buộc có mã NE)";
+const LEGACY_TRANSFER_FORMAT = "“Mã bé nhận nuôi” + Tên anh chị (bắt buộc có mã NE)";
 const LEGACY_TRANSFER_FORMAT_SDT =
-  "Mã NE + SĐT + Tên bạn (bắt buộc có mã NE mới chuyển khoản)";
+  "Mã NE + số điện thoại + Tên anh chị (bắt buộc có mã NE mới chuyển khoản)";
 const LEGACY_TRANSFER_EXAMPLE = "NE00123 Nguyen Van A";
 
 function expandDonateAbbreviations(text: string): string {
@@ -36,7 +34,9 @@ function expandDonateAbbreviations(text: string): string {
     .replace(/\bSTK\b/g, "Số tài khoản")
     .replace(/\bSĐT\b/g, "số điện thoại")
     .replace(/\btại MB Bank\b/g, "tại Ngân hàng Quân đội (MB)")
-    .replace(/\btại MB:/g, "tại Ngân hàng Quân đội (MB):");
+    .replace(/\btại MB:/g, "tại Ngân hàng Quân đội (MB):")
+    .replace(/\bTên bạn\b/g, "tên anh chị")
+    .replace(/\btên bạn\b/g, "tên anh chị");
 }
 
 function isInvalidDonateInfo(value: DonateInfoContent | null | undefined): boolean {
@@ -87,24 +87,5 @@ export function resolveDonateInfo(raw: DonateInfoContent | null | undefined): Do
 }
 
 export async function getDonateInfo(): Promise<DonateInfoContent> {
-  if (!isSupabaseConfigured()) {
-    return defaultDonateInfo;
-  }
-
-  try {
-    const supabase = createPublicClient();
-    const { data, error } = await supabase
-      .from("homepage_content")
-      .select("donate_info")
-      .eq("locale", "vi")
-      .maybeSingle();
-
-    if (error || !data) {
-      return defaultDonateInfo;
-    }
-
-    return resolveDonateInfo(data.donate_info as DonateInfoContent | null);
-  } catch {
-    return defaultDonateInfo;
-  }
+  return defaultDonateInfo;
 }

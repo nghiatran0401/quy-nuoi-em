@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, Calendar, ChevronRight, User } from "lucide-react";
 import Link from "next/link";
-import { newsSectionCopy } from "@/content/home-sections";
+import { newsSectionCopy } from "@/content/homepage-content";
 import { getLatestNews } from "@/lib/data/news";
 
 function formatNewsDate(date: string) {
@@ -17,9 +17,9 @@ export async function HomeNewsSection({
   const articles = await getLatestNews(3);
 
   return (
-    <section className="bg-brand-sky-soft/50 section-pad">
+    <section className="bg-brand-sky-soft/50 home-section-pad">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="mb-8 flex flex-col gap-4 sm:mb-12 md:flex-row md:items-end md:justify-between">
+        <div className="mb-6 flex flex-col gap-3 sm:mb-8 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="eyebrow mb-2">{copy.eyebrow}</h2>
             <h3 className="heading-display text-3xl font-bold md:text-4xl">{copy.title}</h3>
@@ -75,7 +75,7 @@ export async function HomeNewsSection({
                       </div>
                     </div>
                     {article.excerpt ? (
-                      <p className="text-body mb-4 line-clamp-3 text-sm">
+                      <p className="text-body home-prose mb-4 line-clamp-3 text-sm">
                         {article.excerpt.replace(/[*#\[\]]/g, "").slice(0, 160)}
                       </p>
                     ) : null}

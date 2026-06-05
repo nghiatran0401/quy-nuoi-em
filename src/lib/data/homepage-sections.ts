@@ -1,13 +1,12 @@
 import { homeProcessOverview } from "@/content/home-process-overview";
+import { homepageContent } from "@/content/homepage-content";
 import { impactJourneySectionCopy } from "@/content/home-impact-journey";
-import { mealProgramSectionCopy } from "@/content/home-meal";
 import {
+  mealProgramSectionCopy,
+  newsSectionCopy,
   partnersHomeTitle,
   sponsoredChildrenSectionCopy,
-  newsSectionCopy,
-} from "@/content/home-sections";
-import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { createPublicClient } from "@/lib/supabase/public";
+} from "@/content/homepage-content";
 
 export type HomeSectionsContent = {
   meal: typeof mealProgramSectionCopy;
@@ -45,26 +44,5 @@ export function resolveHomeSectionsContent(
 }
 
 export async function getHomeSectionsContent(): Promise<HomeSectionsContent> {
-  if (!isSupabaseConfigured()) {
-    return defaultHomeSectionsContent;
-  }
-
-  try {
-    const supabase = createPublicClient();
-    const { data, error } = await supabase
-      .from("homepage_content")
-      .select("sections")
-      .eq("locale", "vi")
-      .maybeSingle();
-
-    if (error || !data) {
-      return defaultHomeSectionsContent;
-    }
-
-    return resolveHomeSectionsContent(
-      (data.sections as Partial<HomeSectionsContent> | null | undefined) ?? null,
-    );
-  } catch {
-    return defaultHomeSectionsContent;
-  }
+  return homepageContent.sections as HomeSectionsContent;
 }

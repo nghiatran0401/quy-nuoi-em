@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { sponsoredChildrenSectionCopy } from "@/content/home-sections";
-import { homeMediaImageSrc } from "@/lib/data/home-media";
+import { sponsoredChildrenSectionCopy } from "@/content/homepage-content";
 
 export function SponsoredChildrenSection({
   content,
@@ -10,24 +9,25 @@ export function SponsoredChildrenSection({
   const copy = content ?? sponsoredChildrenSectionCopy;
   return (
     <section className="section-elevated pb-14 pt-6 lg:pb-16 lg:pt-8">
-      <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center">
-            <h2 className="font-heading text-xl font-extrabold uppercase leading-snug tracking-tight text-brand-ink md:text-2xl">
-              {copy.title}
-              <span className="mt-1 block text-base font-bold normal-case text-brand-muted md:text-lg">
-                {copy.titleNote}
-              </span>
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-brand-muted">{copy.subtitle}</p>
-          </div>
+      <div className="container mx-auto max-w-7xl px-4">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center lg:gap-12">
+          <div>
+            <div className="text-center lg:text-left">
+              <h2 className="font-heading text-xl font-extrabold uppercase leading-snug tracking-tight text-brand-ink md:text-2xl">
+                {copy.title}
+                <span className="mt-1 block text-base font-bold normal-case text-brand-muted md:text-lg">
+                  {copy.titleNote}
+                </span>
+              </h2>
+              <p className="mt-4 text-center text-base leading-relaxed text-brand-muted">{copy.subtitle}</p>
+            </div>
 
-            <div className="mx-auto mt-8 grid max-w-4xl grid-cols-1 gap-6 text-left sm:grid-cols-2 sm:gap-x-8 sm:gap-y-7">
+            <div className="home-prose mt-8 grid grid-cols-1 gap-6 text-left sm:grid-cols-2 sm:gap-x-8 sm:gap-y-7">
               {copy.features.map((feature) => (
                 <div key={feature.title} className="flex gap-3">
                   <div className="relative h-12 w-12 shrink-0">
                     <Image
-                      src={homeMediaImageSrc(feature.icon)}
+                      src={feature.icon}
                       alt=""
                       fill
                       className="object-contain"
@@ -47,24 +47,18 @@ export function SponsoredChildrenSection({
             </div>
           </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6 lg:mt-12">
-          {copy.albums.map((album) => (
-            <article key={album.label} className="flex flex-col items-center text-center">
-              <div className="relative mb-4 aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-xl shadow-md md:max-w-none">
-                <Image
-                  src={homeMediaImageSrc(album.previewImage)}
-                  alt={`Album ảnh bé — ${album.label}`}
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 80vw, 30vw"
-                />
-              </div>
-              <h3 className="font-heading text-base font-bold leading-snug text-brand-ink">
-                {album.label}
-                <span className="block text-sm font-semibold text-brand-muted">{album.region}</span>
-              </h3>
-            </article>
-          ))}
+          <div className="flex justify-center">
+            <div className="w-full max-w-[220px] sm:max-w-[240px] lg:max-w-[260px]">
+              <Image
+                src={copy.exampleImage}
+                alt={copy.exampleImageAlt}
+                width={975}
+                height={1300}
+                className="h-auto w-full"
+                sizes="(max-width: 640px) 220px, (max-width: 1024px) 240px, 260px"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

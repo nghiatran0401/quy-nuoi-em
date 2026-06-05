@@ -1,4 +1,4 @@
-import { SCHOOL_BUILD_URL } from "@/content/quy-trinh-cap-ma-2026";
+import { SCHOOL_BUILD_URL } from "@/content/process-2026-content";
 import { nuoiEmImage } from "@/lib/nuoiem-images";
 
 export type ImpactInitiative = {
@@ -21,10 +21,10 @@ export const impactJourneySectionCopy = {
   milestones: [
     {
       id: "2018",
-      titleBefore: "Từ 2018, không chỉ là nuôi ",
-      titleHighlight: "cơm trưa",
+      titleBefore: "Từ 2018, không chỉ là ",
+      titleHighlight: "nuôi ăn",
       titleAfter: "",
-      body: "Hơn 25.000 bé tại Điện Biên và các vùng cao không chỉ được ăn no — các dự án bổ trợ triển khai đồng loạt, hoàn toàn không cần đóng thêm phí ngoài khoản nuôi em/năm học.",
+      body: "Hơn 80.000 bé tại 12 tỉnh không chỉ được ăn no — các dự án bổ trợ triển khai đồng loạt, hoàn toàn không cần đóng thêm phí ngoài khoản nuôi em/năm học.",
       initiatives: [
         {
           title: "Lọc nước bình gốm UNICEF",
@@ -43,7 +43,7 @@ export const impactJourneySectionCopy = {
       titleBefore: "Từ 2019, phát huy điều kì diệu ",
       titleHighlight: "từ số đông",
       titleAfter: "",
-      body: "Đệm, chăn, tủ sách, áo ấm đồng phục… mở rộng song song với bữa cơm trưa — lấy từ khoản cơ sở vật chất trong mức đóng góp hàng năm.",
+      body: "Đệm, chăn, tủ sách, áo ấm đồng phục, bếp gas công nghiệp, bình lọc nước, phòng tin học, … mở rộng song song với những bữa ăn - lấy từ khoản cơ sở vật chất trong mức đóng góp hàng năm.",
       initiatives: [
         {
           title: "Đệm, chăn",
@@ -70,13 +70,21 @@ export const impactJourneySectionCopy = {
     title: "Quỹ Nuôi Em thu thêm",
     amount: "100.000đ / mã NE",
     subtitle: "Tiền cơ sở vật chất",
-    body: "Số tiền này sẽ lên tới hơn 1.000.000.000 mỗi năm, kết hợp với dự án Sức mạnh 2000 sẽ giúp xây dựng ngay lập tức 15 điểm trường tại bản (chỉ tính 2021–2022).",
-    bodyEmphasis: "ngay lập tức",
+    body: "Số tiền này sẽ lên tới hơn 1.000.000.000 mỗi năm, kết hợp với dự án Sức mạnh 2000 (Đã xây dựng thành công hơn 800+ công trình trong vòng 12 năm qua.)",
+    bodyEmphasis: "Sức mạnh 2000",
     schoolBuildUrl: SCHOOL_BUILD_URL,
-    beforeImage: "/images/nuoiem/truong-nat-1541577909.png",
-    afterImage: "/images/nuoiem/truong-1541572871.png",
+    ctaLabel: "web.sucmanh2000.com",
+    beforeImage: "/school_before.jpg",
+    afterImage: "/school_after.jpg",
     beforeLabel: "Trước",
     afterLabel: "Sau",
+    beforeImageAlt: "Điểm trường vùng cao trước khi được hỗ trợ xây dựng",
+    afterImageAlt: "Điểm trường mới sau khi Quỹ Nuôi Em và Sức mạnh 2000 đồng hành",
+    highlights: [
+      { value: "1 tỷ+", label: "quy góp mỗi năm" },
+      { value: "800+", label: "công trình đã xây" },
+      { value: "12 năm", label: "dự án Sức mạnh 2000" },
+    ],
   },
   results: {
     posterImage: "/images/nuoiem/csvc19-20-20210905133309.jpg",

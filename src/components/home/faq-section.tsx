@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, CreditCard, FileCheck, MapPin } from "lucide-react";
 import { FaqBankPanel } from "@/components/home/faq-bank-panel";
-import { faqSectionCopy } from "@/content/home-sections";
+import { faqSectionCopy } from "@/content/homepage-content";
 import type { DonateInfoContent } from "@/lib/data/donate-info";
 import type { HomeFaqContent } from "@/lib/data/homepage";
 import { normalizeHomeFaqContent } from "@/lib/data/homepage";

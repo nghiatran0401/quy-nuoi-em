@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { homeMemberImages } from "@/content/home";
-import { membersSectionCopy } from "@/content/home-sections";
+import { membersSectionCopy } from "@/content/homepage-content";
 import { homeMediaImageSrc } from "@/lib/data/home-media";
 import type { HomeMembersContent } from "@/lib/data/homepage";
 
@@ -28,7 +28,7 @@ export function MembersSection({ content, memberImageUrls }: Props) {
             <h3 className="heading-display mb-4 text-2xl leading-tight sm:text-3xl md:text-5xl">
               {copy.title}
             </h3>
-            <div className="text-body max-w-xl space-y-3 text-base leading-relaxed text-brand-muted sm:text-lg lg:text-left">
+            <div className="text-body home-prose max-w-xl space-y-3 text-base leading-relaxed text-brand-muted sm:text-lg lg:text-left">
               {copy.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 20)}>{paragraph}</p>
               ))}

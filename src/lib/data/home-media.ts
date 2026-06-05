@@ -1,8 +1,7 @@
 import { brandVisual } from "@/config/brand-visual";
+import { homepageContent } from "@/content/homepage-content";
 import { resolveCmsImageUrl } from "@/lib/cms/resolve-image-url";
 import { nuoiEmImage, nuoiEmMemberGallery } from "@/lib/images";
-import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { createPublicClient } from "@/lib/supabase/public";
 
 export type HomeMediaContent = {
   heroImage: string;
@@ -43,26 +42,5 @@ export function homeMediaImageSrc(url: string): string {
 }
 
 export async function getHomeMedia(): Promise<HomeMediaContent> {
-  if (!isSupabaseConfigured()) {
-    return defaultHomeMedia;
-  }
-
-  try {
-    const supabase = createPublicClient();
-    const { data, error } = await supabase
-      .from("homepage_content")
-      .select("media")
-      .eq("locale", "vi")
-      .maybeSingle();
-
-    if (error || !data) {
-      return defaultHomeMedia;
-    }
-
-    return resolveHomeMedia(data.media as HomeMediaContent | null);
-  } catch {
-    return defaultHomeMedia;
-  }
+  return resolveHomeMedia(homepageContent.media as HomeMediaContent);
 }
-
-export const HOME_MEDIA_STORAGE_FOLDER = "trang-chu";

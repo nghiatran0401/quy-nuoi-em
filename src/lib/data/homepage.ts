@@ -1,23 +1,17 @@
-import { campaignSectionCopy } from "@/content/home-campaign";
-import { ctaSectionCopy } from "@/content/home-sections";
-import { defaultHomePageContent } from "@/lib/cms/vietnamese-defaults";
+import {
+  campaignSectionCopy,
+  ctaSectionCopy,
+  homepageContent,
+  type HomeCampaignBlock,
+  type HomeCampaignSectionContent,
+  type HomeCampaignStory,
+} from "@/content/homepage-content";
 import {
   normalizeFaqItemId,
   normalizeFaqItemType,
   type HomeFaqItemType,
 } from "@/lib/faq-item-types";
-import {
-  isTestOrEnglishCta,
-  isTestOrEnglishFaq,
-  isTestOrEnglishHero,
-  isLegacyMembersSectionContent,
-  isTestOrEnglishMembers,
-  isTestOrEnglishStats,
-} from "@/lib/cms/sanitize-cms";
 import type { StatItem } from "@/content/types";
-import { isSupabaseConfigured } from "@/lib/supabase/env";
-import { createPublicClient } from "@/lib/supabase/public";
-import { defaultHomeSectionsContent } from "@/lib/data/homepage-sections";
 
 export type HomeHeroContent = {
   eyebrow: string;
@@ -27,13 +21,6 @@ export type HomeHeroContent = {
   learnMore: string;
 };
 
-import type {
-  HomeCampaignBlock,
-  HomeCampaignSectionContent,
-  HomeCampaignStory,
-} from "@/content/home-campaign";
-
-/** CMS-editable slice of the campaign section (stored in `homepage_content.cta`). */
 export type HomeCtaContent = {
   title: string;
   paragraphs: string[];
@@ -43,10 +30,8 @@ export type HomeCtaContent = {
   story?: HomeCampaignStory;
 };
 
-/** Full campaign section after merging CMS + defaults. */
 export type ResolvedHomeCampaignContent = HomeCampaignSectionContent;
 
-/** Merge CMS overrides with canonical nuoiem.com campaign layout. */
 export function resolveHomeCampaignContent(
   content: HomeCtaContent | undefined,
   fallback: HomeCtaContent = ctaSectionCopy,
@@ -87,7 +72,6 @@ export type HomeMembersContent = {
 };
 
 export type HomeFaqItem = {
-  /** Mã nội bộ (không hiển thị ra trang công khai). */
   id: string;
   question: string;
   type: HomeFaqItemType;
@@ -127,70 +111,6 @@ export type HomePageContent = {
   faq: HomeFaqContent;
 };
 
-type HomePageContentRow = {
-  locale: string;
-  hero: HomeHeroContent | null;
-  stats: StatItem[] | null;
-  cta: HomeCtaContent | null;
-  members: HomeMembersContent | null;
-  faq: HomeFaqContent | null;
-};
-
-/** Same merge/sanitize rules as the public homepage (admin editor uses this). */
-export function resolveHomePageContent(row: HomePageContentRow | null | undefined): HomePageContent {
-  if (!row) {
-    return defaultHomePageContent;
-  }
-  return mergeHomePageContent(row);
-}
-
-function mergeHomePageContent(row: HomePageContentRow): HomePageContent {
-  const fallback = defaultHomePageContent;
-  return {
-    hero: isTestOrEnglishHero(row.hero) ? fallback.hero : row.hero!,
-    stats: isTestOrEnglishStats(row.stats) ? fallback.stats : row.stats!,
-    cta: isTestOrEnglishCta(row.cta) ? fallback.cta : row.cta!,
-    members:
-      isTestOrEnglishMembers(row.members) || isLegacyMembersSectionContent(row.members)
-        ? fallback.members
-        : row.members!,
-    faq: isTestOrEnglishFaq(row.faq) ? fallback.faq : normalizeHomeFaqContent(row.faq!),
-  };
-}
-
 export async function getHomePageContent(): Promise<HomePageContent> {
-  if (!isSupabaseConfigured()) {
-    return defaultHomePageContent;
-  }
-
-  try {
-    const supabase = createPublicClient();
-    const { data, error } = await supabase
-      .from("homepage_content")
-      .select("locale, hero, stats, cta, members, faq")
-      .eq("locale", "vi")
-      .maybeSingle();
-
-    if (error || !data) {
-      return defaultHomePageContent;
-    }
-
-    return resolveHomePageContent(data as HomePageContentRow);
-  } catch {
-    return defaultHomePageContent;
-  }
-}
-
-/** Upsert payload for restoring Vietnamese homepage in Supabase (admin/scripts). */
-export function getDefaultHomepageUpsertPayload() {
-  const content = defaultHomePageContent;
-  return {
-    locale: "vi" as const,
-    hero: content.hero,
-    stats: content.stats,
-    cta: content.cta,
-    members: content.members,
-    faq: content.faq,
-    sections: defaultHomeSectionsContent,
-  };
+  return homepageContent.page as HomePageContent;
 }

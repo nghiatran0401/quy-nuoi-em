@@ -28,7 +28,7 @@ export function SiteHeader() {
               className="block rounded-xl transition-opacity hover:opacity-90"
               onClick={() => setMobileOpen(false)}
             >
-              <BrandLogo priority className="h-9 w-auto max-w-[120px] sm:h-11 sm:max-w-[140px]" />
+              <BrandLogo priority className="h-10 w-auto max-w-[56px] object-contain sm:h-12 sm:max-w-[68px]" />
             </Link>
           </div>
 

@@ -8,14 +8,11 @@ export type NavItem = {
 };
 
 export const mainNavItems: NavItem[] = [
-  { href: "/about", labelKey: "about" },
-  { href: "/quy-trinh-cap-ma-2026", labelKey: "process2026" },
   { href: "/danh-sach-bao-tro", labelKey: "children" },
   { href: publicCatalog.url, labelKey: "catalog", external: true },
   { href: "/bao-cao", labelKey: "reports" },
   { href: "/news", labelKey: "news" },
   { href: "/sao-ke-tai-khoan", labelKey: "statements" },
-  { href: "/contact", labelKey: "contact" },
 ];
 
 export function navLabel(key: NavLabelKey): string {

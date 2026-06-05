@@ -7,10 +7,10 @@ export const brandVisual = {
   shortName: "Nuôi Em",
   tagline: "Nuôi cơm trưa và giúp trẻ tới trường",
   logo: {
-    /** Icon mark — transparent PNG for light header/footer */
-    default: "/logo/logo-ne-transparent.png",
+    /** Icon mark — transparent WebP for light header/footer */
+    default: "/logo.webp",
     /** Same mark; kept for API compatibility */
-    onDark: "/logo/logo-ne-transparent.png",
+    onDark: "/logo.webp",
     /** Horizontal lockup (Ánh Sáng Núi Rừng wordmark) */
     wide: "/logo/logo-ne-asnr-transparent.png",
     /** Opaque sources (black matte) — regenerate via `npm run logos:transparent` */
@@ -19,7 +19,7 @@ export const brandVisual = {
       wide: "/logo/logo-ne-asnr.png",
     },
   },
-  heroImage: "/images/nuoiem/home-1528463943.jpg",
+  heroImage: "/hero-2.jpg",
   contact: {
     email: "duannuoiem@gmail.com",
     phone: "0975302307",

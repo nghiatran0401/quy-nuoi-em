@@ -2,17 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, Info, ListOrdered, Newspaper, PieChart } from "lucide-react";
+import { Newspaper, PieChart } from "lucide-react";
 
 const navItems = [
-  { href: "/admin/homepage", label: "Trang chủ", icon: House, match: "/admin/homepage" },
-  { href: "/admin/about", label: "Giới thiệu", icon: Info, match: "/admin/about" },
-  {
-    href: "/admin/quy-trinh-cap-ma-2026",
-    label: "Quy trình cấp mã",
-    icon: ListOrdered,
-    match: "/admin/quy-trinh-cap-ma-2026",
-  },
   { href: "/admin/bao-cao", label: "Báo cáo", icon: PieChart, match: "/admin/bao-cao" },
   { href: "/admin/news", label: "Tin tức", icon: Newspaper, match: "/admin/news" },
 ] as const;

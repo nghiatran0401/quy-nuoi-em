@@ -5,9 +5,7 @@ import { getNewsSitemapEntries } from "@/lib/data/news";
 import { localizedPath } from "@/lib/seo/paths";
 
 export const STATIC_PAGE_PATHS: Record<StaticPageKey, string> = {
-  about: "/about",
   logoStory: "/cau-chuyen-logo",
-  contact: "/contact",
   donate: "/dong-gop",
   process: "/quy-trinh-xet-duyet",
   scoring: "/thang-diem",
@@ -29,7 +27,6 @@ export const EXTRA_INDEXED_PATHS: Array<{
   changeFrequency: SitemapEntry["changeFrequency"];
   priority: number;
 }> = [
-  { pathname: "/quy-trinh-cap-ma-2026", changeFrequency: "monthly", priority: 0.9 },
 ];
 
 export type SitemapEntry = {

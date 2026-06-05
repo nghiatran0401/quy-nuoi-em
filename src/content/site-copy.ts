@@ -10,8 +10,6 @@ export const siteCopy = {
       "Nuôi Em, quỹ nuôi em, quynuoiem, nuôi trẻ vùng cao, bảo trợ trẻ em, mã NE, cơm trưa học đường, quyên góp thiện nguyện, minh bạch tài chính, Điện Biên, Hà Giang, Tây Nguyên, nhận nuôi em",
   },
   nav: {
-    about: "Giới thiệu",
-    process2026: "Quy trình 2026",
     children: "Điểm trường",
     catalog: "Tra cứu mã",
     reports: "Báo cáo",
@@ -37,14 +35,14 @@ export const siteCopy = {
     tagline: "Chương trình nuôi cơm trưa cho trẻ vùng cao",
     financePrefix: "Minh bạch tài chính tại",
     catalogPrefix: "Tra cứu mã & danh mục em nuôi tại",
-    coverage: "Hỗ trợ trẻ bản cao tại hơn 25 tỉnh thành",
+    coverage: "Hỗ trợ trẻ bản cao tại 12 tỉnh",
     rights: "Quỹ Nuôi Em. Bảo lưu mọi quyền.",
   },
   home: {
     eyebrow: "Bữa cơm níu chân trẻ tới trường",
     title: "Quỹ Nuôi Em",
     description:
-      "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. Từ 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm. Mã Tây Nguyên: 170.000đ/tháng.",
+      'Trên những mái nhà tranh vùng cao, chỉ từ 150.000đ – 170.000đ mỗi tháng, anh chị đã mang đến những bữa cơm trưa no bụng, giữ bước chân các em nhỏ đi học đều đặn. Với mô hình "Mỗi mã NE tương ứng 1 bữa ăn", anh chị sẽ biết rõ thông tin và có thể đến thăm em nuôi của mình.',
     sponsorNow: "Đóng góp ngay",
     learnMore: "Tìm hiểu thêm",
   },

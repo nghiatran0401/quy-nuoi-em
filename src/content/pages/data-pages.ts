@@ -93,7 +93,7 @@ export const dataUiLabels: Record<string, string> = {
     readMore: "Xem chi tiết",
     backToNews: "Quay lại bản tin",
     publishedOn: "Đăng ngày",
-    embedNote: "Dữ liệu sao kê được cung cấp bởi nền tảng Thiện Nguyện (Ngân hàng Quân đội).",
+    embedNote: "Dưới đây là giao dịch được lấy trực tiếp từ App thiện nguyện",
     openFullPage: "Mở trang sao kê đầy đủ",
     sampleDataNote:
       "Hiển thị {shown} hồ sơ mẫu từ dữ liệu crawl. Kết nối Supabase (Phase 4) để tải đủ 387 hồ sơ.",

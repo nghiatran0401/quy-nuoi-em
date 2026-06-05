@@ -4,11 +4,10 @@ import type {
   ProcessStep,
   ScoringCategory,
 } from "@/content/types";
+import { brandVisual } from "@/config/brand-visual";
 
 export type StaticPageKey =
-  | "about"
   | "logoStory"
-  | "contact"
   | "donate"
   | "process"
   | "scoring"
@@ -23,19 +22,6 @@ type StaticPageContent = {
 };
 
 const pages: Record<StaticPageKey, StaticPageContent> = {
-  about: {
-    meta: {
-        title: "Về Chúng Tôi",
-        description:
-          "Tìm hiểu về Quỹ Nuôi Em — sứ mệnh gieo mầm hy vọng và minh bạch tài chính.",
-    },
-    hero: {
-        eyebrow: "Nuôi cơm trưa — giúp trẻ tới trường",
-        title: "Quỹ Nuôi Em",
-        description:
-          "Kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch. Từ 150.000đ/tháng giúp bé no bụng, đi học đầy đủ — biết rõ bé nào, có thể đi thăm. Mã Tây Nguyên: 170.000đ/tháng.",
-    },
-  },
   logoStory: {
     meta: {
         title: "Câu chuyện logo",
@@ -48,16 +34,6 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
           "Như trẻ vào tuổi trưởng thành cần Căn cước công dân, Quỹ Nuôi Em khi phát triển cũng cần pháp nhân và logo mới để khẳng định mình.",
     },
   },
-  contact: {
-    meta: {
-        title: "Liên hệ",
-        description: "Thông tin liên hệ Ban điều hành Quỹ Nuôi Em.",
-    },
-    hero: {
-        title: "Liên hệ với chúng tôi",
-        description: "Mọi ý kiến đóng góp và thắc mắc xin vui lòng gửi về cho Ban quản trị.",
-    },
-  },
   donate: {
     meta: {
         title: "Đóng góp",
@@ -66,7 +42,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
     hero: {
         eyebrow: "CHUNG TAY GÓP SỨC",
         title: "Đồng Hành Cùng Quỹ Nuôi Em",
-        description: "Mọi sự đóng góp của bạn đều trân quý và giúp các em nhỏ có thêm cơ hội đến trường.",
+        description: "Mọi sự đóng góp của anh chị đều trân quý và giúp các em nhỏ có thêm cơ hội đến trường.",
     },
   },
   process: {
@@ -101,7 +77,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         eyebrow: "Chung tay vì cộng đồng",
         title: "Đăng ký trở thành Tình nguyện viên",
         description:
-          "Quỹ Nuôi Em xin trân trọng cảm ơn Bạn đã đăng ký trở thành Tình nguyện viên - đồng hành cùng chúng mình và các em bé trên bản đang được bảo trợ!",
+          "Quỹ Nuôi Em xin trân trọng cảm ơn anh chị đã đăng ký trở thành Tình nguyện viên — đồng hành cùng chúng mình và các em bé trên bản đang được bảo trợ!",
     },
   },
   mou: {
@@ -281,7 +257,7 @@ export const scoringCategories: ScoringCategory[] = [
 ];
 
 /** Internal registration flow — do not link to legacy third-party forms. */
-export const volunteerRegisterPath = "/contact";
+export const volunteerRegisterPath = brandVisual.social.facebook;
 
 export const mouContent: {
   definition: string;
@@ -336,20 +312,6 @@ export const careersContent: {
     ],
   };
 
-export const contactInfo: {
-  address: string;
-  email: string;
-  phone: string;
-  donationNote: string;
-  warning: string;
-} = {
-    address: "Quỹ hỗ trợ trẻ bản cao tại hơn 25 tỉnh thành trên cả nước",
-    email: "duannuoiem@gmail.com",
-    phone: "0975 302 307",
-    donationNote: "Quỹ chỉ tiếp nhận quyên góp qua số tài khoản công khai trên trang Đóng góp. Bắt buộc ghi mã NE khi chuyển khoản.",
-    warning: "Vui lòng cảnh giác với các hành vi mạo danh. Báo cáo tài chính tại taichinh.nuoiem.com",
-  };
-
 export const donateInfo: {
   bank: string;
   branch: string;
@@ -365,7 +327,7 @@ export const donateInfo: {
   accountNumber: "1805",
   publicAccountLine:
     "Số tài khoản minh bạch công khai 4 số QUY NUOI EM tại Ngân hàng Quân đội (MB): 1805",
-  transferFormat: "Mã NE + số điện thoại + tên bạn (bắt buộc có mã NE mới chuyển khoản)",
+  transferFormat: "Mã NE + số điện thoại + tên anh chị",
   transferExample: "NE00123 09xxxxxxxx Nguyen Van A",
 };
 
@@ -382,7 +344,6 @@ export const uiLabels: Record<string, string> = {
     scanQr: "Quét mã QR để chuyển khoản nhanh",
     whatIsMou: "Biên bản ghi nhớ (MOU) là gì?",
     mouGallery: "Hình ảnh ký kết thực tế",
-    contactInfo: "Thông tin liên lạc",
     donateWarning: "Lưu ý về quyên góp",
     applyNow: "Ứng tuyển qua email",
   };

@@ -7,7 +7,6 @@ import {
 import manifest from "@/data/nuoiem-images.json";
 
 const legacyPathMap: Record<string, string> = {
-  "/images/about/digital-heart-hero.png": nuoiEmImage("heSinhThaiAbout"),
   "/images/scoring/reference.png": nuoiEmImage("processGuide"),
 };
 

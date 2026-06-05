@@ -48,6 +48,8 @@ const nextConfig: NextConfig = {
       })),
       { source: "/en", destination: "/", permanent: true },
       { source: "/en/:path*", destination: "/:path*", permanent: true },
+      { source: "/quy-trinh-cap-ma-2026", destination: "/", permanent: true },
+      { source: "/contact", destination: "/", permanent: true },
     ];
   },
 };

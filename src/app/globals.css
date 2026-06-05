@@ -130,6 +130,11 @@
     @apply leading-relaxed text-brand-muted;
   }
 
+  .home-page .home-prose p,
+  .home-page p.home-prose {
+    text-align: justify;
+  }
+
   .btn-primary {
     @apply inline-flex min-h-11 items-center justify-center rounded-full bg-brand-accent px-6 py-3 text-center text-base font-bold text-white shadow-[0_4px_16px_-4px_rgb(240_120_74/0.45)] transition duration-200 hover:bg-brand-accent-light hover:shadow-[0_6px_22px_-4px_rgb(240_120_74/0.4)] active:scale-[0.98] sm:px-8 sm:py-3.5;
   }
@@ -167,6 +172,10 @@
     @apply py-12 sm:py-16 lg:py-20;
   }
 
+  .home-section-pad {
+    @apply py-7 sm:py-9 lg:py-11;
+  }
+
   .section-pad-lg {
     @apply py-14 sm:py-16 lg:py-24;
   }
@@ -190,13 +199,8 @@
     }
   }
 
-  /* Transparent logo — subtle halo so mark reads on white header */
   .logo-wrap {
-    @apply rounded-xl bg-gradient-to-br from-brand-peach/25 via-transparent to-brand-sky-soft/40 px-1.5 py-0.5;
-  }
-
-  .logo-wrap[data-logo-variant="wide"] {
-    @apply bg-transparent px-0 py-0;
+    @apply inline-flex items-center;
   }
 
   /* Light, hopeful page heroes — no dark bands */

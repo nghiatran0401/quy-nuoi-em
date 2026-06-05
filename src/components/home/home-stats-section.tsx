@@ -1,17 +1,25 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { HomeCampaignBanner } from "@/components/home/home-campaign-banner";
 import { publicCatalog } from "@/config/public-catalog";
 import { HomeStatsGrid } from "@/components/home/home-stats-grid";
+import { campaignSectionCopy, type HomeCampaignBlock } from "@/content/homepage-content";
 import type { StatItem } from "@/content/types";
 
 type HomeStatsSectionProps = {
   stats: StatItem[];
   directoryUrl?: string;
+  campaign?: HomeCampaignBlock;
+  logos?: typeof campaignSectionCopy.logos;
 };
 
-export function HomeStatsSection({ stats, directoryUrl }: HomeStatsSectionProps) {
+export function HomeStatsSection({
+  stats,
+  directoryUrl,
+  campaign = campaignSectionCopy.campaign,
+  logos = campaignSectionCopy.logos,
+}: HomeStatsSectionProps) {
   const items = stats;
-  const periodHint = items[0]?.hint;
   const catalogUrl = directoryUrl?.trim() || publicCatalog.url;
 
   return (
@@ -28,33 +36,30 @@ export function HomeStatsSection({ stats, directoryUrl }: HomeStatsSectionProps)
         aria-hidden
       />
 
-      <div className="container relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:py-16">
-        <header className="mx-auto mb-8 max-w-2xl text-center sm:mb-10">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-accent-dark">
-            Tác động thực tế
-          </p>
-          <h2 id="home-stats-heading" className="font-heading mt-2 text-2xl font-extrabold text-brand-ink sm:text-3xl">
-            Con số nói lên sự tin tưởng
-          </h2>
-          {periodHint ? (
-            <p className="mt-2 text-sm text-brand-muted">{periodHint}</p>
-          ) : null}
-        </header>
+      <div className="container relative mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:py-10">
+        <HomeCampaignBanner
+          campaign={campaign}
+          logos={logos}
+          headingId="home-stats-heading"
+          className="mb-5 sm:mb-6"
+        />
 
         <HomeStatsGrid stats={items} />
 
-        <p className="mt-8 text-center text-sm text-brand-muted sm:mt-10">
-          Số liệu tổng hợp từ danh mục em nuôi công khai —{" "}
+        <div className="mx-auto mt-5 max-w-xl text-center sm:mt-6">
+          <p className="text-xs text-brand-muted sm:text-sm">
+            Số liệu tổng hợp từ danh mục em nuôi công khai
+          </p>
           <Link
             href={catalogUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="link-accent inline-flex items-center gap-1 font-medium"
+            className="btn-secondary mt-3 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold shadow-[var(--shadow-brand-soft)] transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-brand-card)]"
           >
             {publicCatalog.statsCtaLabel}
-            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
           </Link>
-        </p>
+        </div>
       </div>
     </section>
   );

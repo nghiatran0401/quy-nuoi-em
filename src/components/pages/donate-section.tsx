@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { brandVisual } from "@/config/brand-visual";
 import { BankTransferPanel } from "@/components/shared/bank-transfer-panel";
 import type { DonateInfoContent } from "@/lib/data/donate-info";
 
@@ -17,6 +18,8 @@ export function DonateSection({
   volunteerLabel,
   referChildLabel,
 }: DonateSectionProps) {
+  const fanpageUrl = brandVisual.social.facebook;
+
   return (
     <section className="mx-auto max-w-5xl px-4 pb-16">
       <BankTransferPanel bank={bank} donateQrUrl={donateQrUrl} variant="page" />
@@ -31,8 +34,10 @@ export function DonateSection({
           </div>
           <ArrowRight className="h-6 w-6 text-brand-accent transition-transform group-hover:translate-x-1" />
         </Link>
-        <Link
-          href="/contact"
+        <a
+          href={fanpageUrl}
+          target="_blank"
+          rel="noreferrer"
           className="brand-card-interactive group flex items-center justify-between p-6"
         >
           <div>
@@ -40,7 +45,7 @@ export function DonateSection({
             <p className="mt-2 text-sm text-brand-muted">Giúp đỡ những hoàn cảnh khó khăn cần hỗ trợ.</p>
           </div>
           <ArrowRight className="h-6 w-6 text-brand-accent transition-transform group-hover:translate-x-1" />
-        </Link>
+        </a>
       </div>
     </section>
   );

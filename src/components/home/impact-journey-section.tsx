@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import {
   impactJourneySectionCopy,
@@ -7,8 +6,10 @@ import {
   type ImpactMilestone,
 } from "@/content/home-impact-journey";
 
+type InfrastructureCopy = typeof impactJourneySectionCopy.infrastructure;
+
 function SectionRule() {
-  return <div className="my-12 h-0 border-t-4 border-brand-highlight lg:my-14" aria-hidden />;
+  return <div className="my-8 h-0 border-t-4 border-brand-highlight lg:my-10" aria-hidden />;
 }
 
 function MilestoneHeading({ milestone }: { milestone: ImpactMilestone }) {
@@ -70,13 +71,78 @@ function MilestoneBlock({ milestone, variant }: { milestone: ImpactMilestone; va
     <article className="relative rounded-2xl border border-brand-border/70 bg-white/90 p-5 shadow-[var(--shadow-brand-soft)] sm:p-6 lg:p-7" aria-labelledby={`impact-${milestone.id}`}>
       <MilestoneHeading milestone={milestone} />
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-        <div id={`impact-${milestone.id}`}>
+        <div id={`impact-${milestone.id}`} className="home-prose">
           <p className="text-body text-[15px] leading-relaxed sm:text-base">{milestone.body}</p>
           {milestone.footer ? (
             <p className="text-body mt-5 text-sm leading-relaxed text-brand-muted">{milestone.footer}</p>
           ) : null}
         </div>
         <div>{variant === "grid" ? <InitiativeGrid items={milestone.initiatives} /> : <InitiativeStack items={milestone.initiatives} />}</div>
+      </div>
+    </article>
+  );
+}
+
+function InfrastructureFundBlock({ infra }: { infra: InfrastructureCopy }) {
+  return (
+    <article className="mx-auto max-w-4xl text-center" aria-labelledby="impact-infra-heading">
+      <p className="eyebrow">{infra.eyebrow}</p>
+      <h3 id="impact-infra-heading" className="heading-display mt-2 text-2xl md:text-3xl">
+        {infra.title}
+      </h3>
+      <p className="mt-3 font-heading text-3xl font-extrabold tabular-nums text-brand-accent md:text-4xl">
+        {infra.amount}
+      </p>
+      <p className="mt-1 text-sm font-bold uppercase tracking-wide text-brand-ink">{infra.subtitle}</p>
+
+      <p className="home-prose mx-auto mt-6 max-w-2xl text-[15px] leading-relaxed text-brand-muted sm:text-base">
+        {infra.body.split(infra.bodyEmphasis).map((part, i, arr) =>
+          i < arr.length - 1 ? (
+            <span key={part.slice(0, 12)}>
+              {part}
+              <strong className="font-semibold text-brand-ink">{infra.bodyEmphasis}</strong>
+            </span>
+          ) : (
+            <span key={part.slice(0, 12)}>{part}</span>
+          ),
+        )}
+      </p>
+
+      <a
+        href={infra.schoolBuildUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="link-accent mt-4 inline-flex items-center gap-1 text-sm font-semibold"
+      >
+        {infra.ctaLabel}
+        <ArrowUpRight className="h-4 w-4" aria-hidden />
+      </a>
+
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
+        <figure>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-brand-border/70">
+            <Image
+              src={infra.beforeImage}
+              alt={infra.beforeImageAlt}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 100vw, 360px"
+            />
+          </div>
+          <figcaption className="mt-2 text-sm font-medium text-brand-muted">{infra.beforeLabel}</figcaption>
+        </figure>
+        <figure>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-brand-border/70">
+            <Image
+              src={infra.afterImage}
+              alt={infra.afterImageAlt}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 100vw, 360px"
+            />
+          </div>
+          <figcaption className="mt-2 text-sm font-medium text-brand-ink">{infra.afterLabel}</figcaption>
+        </figure>
       </div>
     </article>
   );
@@ -92,74 +158,16 @@ export function ImpactJourneySection({
   const infra = copy.infrastructure;
 
   return (
-    <section className="section-pad bg-white" aria-label="Hành trình mở rộng Quỹ Nuôi Em">
+    <section className="home-section-pad bg-white" aria-label="Hành trình mở rộng Quỹ Nuôi Em">
       <div className="container mx-auto max-w-7xl px-4">
-        <article className="rounded-3xl border border-brand-border/70 bg-brand-warm/45 p-5 sm:p-7 lg:p-9" aria-labelledby="impact-milestones-heading">
-          <h2 id="impact-milestones-heading" className="font-heading text-xl font-extrabold uppercase tracking-tight text-brand-ink sm:text-2xl">
-            Hành trình mở rộng từ cộng đồng nuôi em
-          </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-brand-muted sm:text-base">
-            Từ các sáng kiến nhỏ ban đầu đến những hạng mục triển khai diện rộng, toàn bộ hành trình được kết nối trong một dòng thời gian duy nhất.
-          </p>
-          <div className="mt-6 space-y-5 lg:mt-8">
-            <MilestoneBlock milestone={m2018} variant="stack" />
-            <MilestoneBlock milestone={m2019} variant="grid" />
-          </div>
-        </article>
+        <div className="space-y-5">
+          <MilestoneBlock milestone={m2018} variant="stack" />
+          <MilestoneBlock milestone={m2019} variant="grid" />
+        </div>
 
         <SectionRule />
 
-        <article className="text-center" aria-labelledby="impact-infra-heading">
-          <p className="eyebrow mb-3">{infra.eyebrow}</p>
-          <h3 id="impact-infra-heading" className="heading-display text-2xl md:text-3xl lg:text-4xl">
-            {infra.title}
-          </h3>
-          <p className="mt-2 font-heading text-3xl font-extrabold tabular-nums text-brand-accent md:text-4xl">
-            {infra.amount}
-          </p>
-          <p className="mt-1 text-lg font-bold uppercase tracking-wide text-brand-ink">{infra.subtitle}</p>
-
-          <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 sm:gap-6">
-            <figure className="overflow-hidden rounded-2xl border border-brand-border/80 shadow-[var(--shadow-brand-soft)]">
-              <div className="relative aspect-[4/3]">
-                <Image src={infra.beforeImage} alt="" fill className="object-cover" sizes="(max-width: 640px) 100vw, 400px" />
-              </div>
-              <figcaption className="bg-brand-warm px-3 py-2 text-sm font-semibold text-brand-muted">
-                {infra.beforeLabel}
-              </figcaption>
-            </figure>
-            <figure className="overflow-hidden rounded-2xl border border-brand-border/80 shadow-[var(--shadow-brand-card)]">
-              <div className="relative aspect-[4/3]">
-                <Image src={infra.afterImage} alt="" fill className="object-cover" sizes="(max-width: 640px) 100vw, 400px" />
-              </div>
-              <figcaption className="bg-brand-highlight-soft px-3 py-2 text-sm font-semibold text-brand-ink">
-                {infra.afterLabel}
-              </figcaption>
-            </figure>
-          </div>
-
-          <p className="text-body mx-auto mt-8 max-w-3xl text-[15px] leading-relaxed sm:text-base">
-            {infra.body.split(infra.bodyEmphasis).map((part, i, arr) =>
-              i < arr.length - 1 ? (
-                <span key={part.slice(0, 12)}>
-                  {part}
-                  <strong className="font-bold text-brand-red">{infra.bodyEmphasis}</strong>
-                </span>
-              ) : (
-                <span key={part.slice(0, 12)}>{part}</span>
-              ),
-            )}
-          </p>
-          <a
-            href={infra.schoolBuildUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="link-accent mt-4 inline-flex items-center gap-1 text-sm font-semibold"
-          >
-            {infra.schoolBuildUrl.replace("https://", "")}
-            <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </a>
-        </article>
+        <InfrastructureFundBlock infra={infra} />
 
         <SectionRule />
 

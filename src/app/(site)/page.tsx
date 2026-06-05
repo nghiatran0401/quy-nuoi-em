@@ -1,26 +1,23 @@
 import type { Metadata } from "next";
-import { CallToActionSection } from "@/components/home/call-to-action-section";
+import { HomeStorySection } from "@/components/home/home-story-section";
 import { ImpactJourneySection } from "@/components/home/impact-journey-section";
 import { MealProgramSection } from "@/components/home/meal-program-section";
 import { ProcessOverviewSection } from "@/components/home/process-overview-section";
-import { FaqSection } from "@/components/home/faq-section";
 import { HeroSection } from "@/components/home/hero-section";
+import { HomeEcosystemSection } from "@/components/home/home-ecosystem-section";
 import { HomeNewsSection } from "@/components/home/home-news-section";
 import { HomeStatsSection } from "@/components/home/home-stats-section";
-import { MembersSection } from "@/components/home/members-section";
-import { SponsoredChildrenSection } from "@/components/home/sponsored-children-section";
-import { PartnersMarquee } from "@/components/pages/partners-marquee";
+// import { MembersSection } from "@/components/home/members-section";
+// import { SponsoredChildrenSection } from "@/components/home/sponsored-children-section";
 import { JsonLd } from "@/components/seo/json-ld";
-import { partnersHomeTitle } from "@/content/home-sections";
 import { siteCopy } from "@/content/site-copy";
-import { getDonateInfo, type DonateInfoContent } from "@/lib/data/donate-info";
 import { getLiveHomeStats } from "@/lib/data/home-metrics";
-import { getHomePageContent, type HomeFaqItem } from "@/lib/data/homepage";
+import { getHomePageContent, resolveHomeCampaignContent } from "@/lib/data/homepage";
 import { getHomeMedia } from "@/lib/data/home-media";
 import { getHomeSectionsContent } from "@/lib/data/homepage-sections";
-import { getPartnerLogos } from "@/lib/data/partner-logos";
 import { getLatestNews } from "@/lib/data/news";
-import { faqPageJsonLd, itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
+import { getProcess2026PageContent } from "@/lib/data/process-2026-page";
+import { itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { buildMetadata } from "@/lib/seo/metadata";
 
 /** Match directory home-metrics API cache (max-age=300). */
@@ -39,42 +36,21 @@ export function generateMetadata(): Metadata {
   });
 }
 
-function faqAnswerText(item: HomeFaqItem, bank: DonateInfoContent): string {
-  if (item.type === "dia-chi") {
-    const body = item.body ?? "";
-    const address = item.address ?? "";
-    return [body, address].filter(Boolean).join(" — ");
-  }
-  if (item.type === "ngan-hang") {
-    return `${bank.publicAccountLine} — Chủ tài khoản ${bank.accountName} — ${bank.bank} (${bank.branch}). Cú pháp chuyển khoản: ${bank.transferFormat}. Ví dụ: ${bank.transferExample}.`;
-  }
-  if (item.type === "quy-trinh" && item.steps) {
-    return item.steps.map((step, i) => `${i + 1}. ${step}`).join(" ");
-  }
-  return item.body ?? "";
-}
-
 export default async function HomePage() {
-  const [homeContent, homeSections, donateInfo, partnerLogos, homeMedia, liveHomeStats] =
-    await Promise.all([
-      getHomePageContent(),
-      getHomeSectionsContent(),
-      getDonateInfo(),
-      getPartnerLogos(),
-      getHomeMedia(),
-      getLiveHomeStats(),
-    ]);
-  const faq = homeContent.faq;
-  const faqEntries = faq.items.map((item) => ({
-    question: item.question,
-    answer: faqAnswerText(item, donateInfo),
-  }));
+  const [homeContent, homeSections, homeMedia, liveHomeStats, processContent] = await Promise.all([
+    getHomePageContent(),
+    getHomeSectionsContent(),
+    getHomeMedia(),
+    getLiveHomeStats(),
+    getProcess2026PageContent(),
+  ]);
 
   const latestNews = await getLatestNews(6);
   const { metadata } = siteCopy;
+  const campaignContent = resolveHomeCampaignContent(homeContent.cta);
 
   return (
-    <div className="relative">
+    <div className="relative home-page">
       <JsonLd
         data={[
           webPageJsonLd({
@@ -82,7 +58,6 @@ export default async function HomePage() {
             description: metadata.description,
             pathname: "/",
           }),
-          faqPageJsonLd(faqEntries),
           ...(latestNews.length > 0
             ? [
                 itemListJsonLd({
@@ -102,16 +77,20 @@ export default async function HomePage() {
       <HomeStatsSection
         stats={liveHomeStats.stats}
         directoryUrl={liveHomeStats.directoryUrl}
+        campaign={campaignContent.campaign}
+        logos={campaignContent.logos}
       />
-      <CallToActionSection content={homeContent.cta} ctaImageUrl={homeMedia.ctaImage} />
+      <ProcessOverviewSection
+        header={homeSections.process}
+        processContent={processContent}
+      />
+      <HomeStorySection content={homeContent.cta} />
       <MealProgramSection content={homeSections.meal} />
       <ImpactJourneySection content={homeSections.impact} />
-      <ProcessOverviewSection content={homeSections.process} />
-      <MembersSection content={homeContent.members} memberImageUrls={homeMedia.memberImages} />
-      <SponsoredChildrenSection content={homeSections.sponsored} />
+      {/* <MembersSection content={homeContent.members} memberImageUrls={homeMedia.memberImages} /> */}
+      {/* <SponsoredChildrenSection content={homeSections.sponsored} /> */}
       <HomeNewsSection content={homeSections.news} />
-      <FaqSection content={homeContent.faq} donateInfo={donateInfo} donateQrUrl={homeMedia.donateQr} />
-      <PartnersMarquee title={homeSections.partnersTitle || partnersHomeTitle} logos={partnerLogos} variant="home" />
+      <HomeEcosystemSection ecosystem={campaignContent.ecosystem} />
     </div>
   );
 }

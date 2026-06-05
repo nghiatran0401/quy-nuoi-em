@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
-import { mealProgramSectionCopy } from "@/content/home-meal";
+import { mealProgramSectionCopy } from "@/content/homepage-content";
 import { YoutubeEmbed } from "@/components/shared/youtube-embed";
 
 type MealProgramSectionProps = {
@@ -33,16 +33,20 @@ function protectLineBreaks(text: string): string {
   );
 }
 
+function normalizeBlockText(text: string): string {
+  return text.replace(/^\s*\d+\.\s+/, "");
+}
+
 export function MealProgramSection({ content }: MealProgramSectionProps) {
   const copy = content ?? mealProgramSectionCopy;
 
   return (
     <section
-      className="border-b-[6px] border-brand-highlight bg-white section-pad"
+      className="border-b-[6px] border-brand-highlight bg-white home-section-pad"
       aria-labelledby="home-meal-heading"
     >
       <div className="container mx-auto max-w-7xl px-4">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-14">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
           <div>
             <div className="mb-5 flex items-center gap-3">
               <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-border/80 bg-brand-sky-soft text-brand-green">
@@ -62,11 +66,11 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
 
             <div className="space-y-5 text-left text-[15px] leading-relaxed text-brand-ink sm:text-base">
               {copy.blocks.map((block) => (
-                <p key={block.label ?? block.text.slice(0, 28)}>
+                <p key={block.label ?? block.text.slice(0, 28)} className="text-justify">
                   {block.label ? (
                     <span className="font-heading font-bold text-brand-ink">{block.label}: </span>
                   ) : null}
-                  {protectLineBreaks(block.text)}
+                  {protectLineBreaks(normalizeBlockText(block.text))}
                 </p>
               ))}
             </div>
@@ -84,10 +88,6 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
                 </li>
               ))}
             </ul>
-
-            <Link href="/quy-trinh-cap-ma-2026" className="link-accent mt-6 inline-block text-sm font-semibold">
-              Xem chi tiết quy trình &amp; mức đóng góp →
-            </Link>
           </div>
 
           <div className="flex flex-col gap-6 lg:sticky lg:top-28">
