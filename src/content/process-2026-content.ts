@@ -211,7 +211,7 @@ export const process2026PageContent = {
     eyebrow: "Minh bạch tài chính",
     title: "Xác nhận chuyển khoản",
     bodyBefore: "Báo cáo công khai tại ",
-    reportLinkLabel: "taichinh.nuoiem.com",
+    reportLinkLabel: "trang Tài chính",
     reportLinkUrl: brandVisual.financeUrl,
     bodyAfter:
       ". Đội ngũ tài chính xác nhận chuyển khoản thành công qua tin nhắn Facebook sau khoảng 7 ngày, kèm mã giao dịch.",

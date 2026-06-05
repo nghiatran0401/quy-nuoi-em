@@ -1,26 +1,3 @@
-export type ChildStatus =
-  | "Đang nhận bảo trợ"
-  | "Hoàn thành bảo trợ"
-  | "Chấm dứt bảo trợ"
-  | "Tạm ngưng";
-
-export type Child = {
-  code: string;
-  name: string;
-  birthYear: number;
-  gender: "Nam" | "Nữ";
-  province: string;
-  status: ChildStatus;
-};
-
-export type ChildrenSummary = {
-  total: number;
-  active: number;
-  completed: number;
-  terminated: number;
-  paused: number;
-};
-
 export type FinancialReport = {
   id: string;
   title: string;

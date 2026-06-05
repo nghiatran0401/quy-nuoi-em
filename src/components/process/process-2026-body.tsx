@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   Building2,
@@ -180,9 +181,15 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
           <p className="home-prose mt-3 leading-relaxed text-brand-muted">
             {c.finance.bodyBefore}
             {c.finance.reportLinkLabel && c.finance.reportLinkUrl ? (
-              <a href={c.finance.reportLinkUrl} target="_blank" rel="noreferrer" className="link-accent">
-                {c.finance.reportLinkLabel}
-              </a>
+              c.finance.reportLinkUrl.startsWith("/") ? (
+                <Link href={c.finance.reportLinkUrl} className="link-accent">
+                  {c.finance.reportLinkLabel}
+                </Link>
+              ) : (
+                <a href={c.finance.reportLinkUrl} target="_blank" rel="noreferrer" className="link-accent">
+                  {c.finance.reportLinkLabel}
+                </a>
+              )
             ) : null}
             {c.finance.bodyAfter}
           </p>

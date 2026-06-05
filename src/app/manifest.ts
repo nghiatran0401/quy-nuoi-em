@@ -62,7 +62,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: "Bản tin",
         short_name: "Bản tin",
         description: "Tin tức & hoạt động mới nhất",
-        url: "/news",
+        url: DATA_PAGE_PATHS.news,
       },
     ],
   };

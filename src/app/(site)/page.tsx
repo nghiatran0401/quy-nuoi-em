@@ -19,6 +19,7 @@ import { getLatestNews } from "@/lib/data/news";
 import { getProcess2026PageContent } from "@/lib/data/process-2026-page";
 import { itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { newsArticlePath } from "@/lib/seo/routes";
 
 /** Match directory home-metrics API cache (max-age=300). */
 export const revalidate = 300;
@@ -65,7 +66,7 @@ export default async function HomePage() {
                   description: "Những hoạt động mới nhất của Quỹ Nuôi Em.",
                   items: latestNews.map((article) => ({
                     name: article.title,
-                    pathname: `/news/${article.slug}`,
+                    pathname: newsArticlePath(article.slug),
                     description: article.excerpt,
                   })),
                 }),

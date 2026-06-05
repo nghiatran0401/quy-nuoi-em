@@ -8,7 +8,7 @@ import { createDataPageMetadata } from "@/lib/page-metadata";
 export const metadata: Metadata = createDataPageMetadata("reports");
 
 export default async function ReportsPage() {
-  const { reports, usedFallback } = await getReportsPayload();
+  const { reports } = await getReportsPayload();
   const years = await getReportYears();
 
   return (
@@ -24,11 +24,6 @@ export default async function ReportsPage() {
           totalExpense: getDataUiLabel("totalExpense"),
           downloadReport: getDataUiLabel("downloadReport"),
           reportsListTitle: getDataUiLabel("reportsListTitle"),
-          sampleDataNote: usedFallback
-            ? getDataUiLabel("reportsSampleNote", {
-                shown: String(reports.length),
-              })
-            : undefined,
         }}
       />
     </article>

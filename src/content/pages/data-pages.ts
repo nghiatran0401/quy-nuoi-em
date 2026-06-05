@@ -65,14 +65,15 @@ const pages = {
   },
   maGhep: {
     meta: {
-      title: "Bảng mã ghép NE giảm ăn",
+      title: "Bảng mã ghép NE",
       description:
-        "Tra cứu mã ghép công khai cho NE giảm ăn — mã NE đại diện, thời gian hỗ trợ, số tiền và mã ghép mới theo niên khóa 2025–2026.",
+        "Công khai mã gốc, thời gian hỗ trợ, số tiền đã đóng, số tiền ăn thực tế và mã ghép mới sau điều chỉnh.",
     },
     hero: {
-      title: "Bảng mã ghép NE giảm ăn",
+      eyebrow: "Ghép mã NE",
+      title: "Bảng mã ghép NE",
       description:
-        "Danh sách mã ghép công khai từ danh mục Nuôi Em. Các dòng đánh dấu X là NE giảm ăn cần ghép mã mới.",
+        "Công khai mã gốc, thời gian hỗ trợ, số tiền đã đóng, số tiền ăn thực tế và mã ghép mới sau điều chỉnh.",
     },
   },
 } as const satisfies Record<string, DataPageContent>;
@@ -107,8 +108,6 @@ export const dataUiLabels: Record<string, string> = {
     age: "Tuổi",
     reportsCount: "báo cáo",
     reportsListTitle: "Danh sách báo cáo",
-    reportsSampleNote:
-      "Hiển thị {shown} báo cáo mẫu từ dữ liệu crawl. Trang live có 67 báo cáo (kết nối Supabase ở Phase 4).",
     allYears: "Tất cả",
     year: "Năm",
     totalIncome: "Tổng thu",
@@ -119,8 +118,6 @@ export const dataUiLabels: Record<string, string> = {
     publishedOn: "Đăng ngày",
     embedNote: "Dưới đây là giao dịch được lấy trực tiếp từ App thiện nguyện",
     openFullPage: "Mở trang sao kê đầy đủ",
-    sampleDataNote:
-      "Hiển thị {shown} hồ sơ mẫu từ dữ liệu crawl. Kết nối Supabase (Phase 4) để tải đủ 387 hồ sơ.",
   };
 
 export function getDataUiLabel(key: string, vars?: Record<string, string>): string {

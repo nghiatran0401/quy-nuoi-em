@@ -1,5 +1,3 @@
-const LEGACY_SITE = /quytonybuoisang\.com/gi;
-const LEGACY_HASHTAG = /#Quỹ[_\s]*TNBS/gi;
 const CANONICAL_BRAND = "Quỹ Nuôi Em";
 
 /** Unwrap Next.js image optimizer URLs to the underlying CDN URL. */
@@ -27,22 +25,10 @@ function unwrapEmbeddedImageUrls(text: string): string {
 /** Normalize legacy fund naming in display copy. */
 export function sanitizeBrandText(text: string): string {
   let out = unwrapEmbeddedImageUrls(text)
-    .replace(LEGACY_SITE, "")
-    .replace(/\[←[^\]]*\]\([^)]*\)/g, "")
-    .replace(/\[\*\*#Quỹ\\?_TNBS\*\*\]\([^)]*\)/gi, CANONICAL_BRAND)
-    .replace(LEGACY_HASHTAG, CANONICAL_BRAND)
-    .replace(/TONY BUỎI SÁNG/gi, CANONICAL_BRAND)
-    .replace(/TONY BUOI SANG/gi, CANONICAL_BRAND)
-    .replace(/\bFund\b/gi, CANONICAL_BRAND)
     .replace(/DỰ ÁN NUÔI EM/gi, "QUỸ NUÔI EM")
     .replace(/Dự án Nuôi Em/gi, CANONICAL_BRAND);
 
-  out = out
-    .replace(/\[\*\*#Quỹ Nuôi Em\\?_TNBS\*\*\]\([^)]*\)/gi, CANONICAL_BRAND)
-    .replace(/Quỹ Nuôi Em TNBS/gi, CANONICAL_BRAND)
-    .replace(/\bTNBS\b/g, "")
-    .replace(/Quỹ Nuôi Em Nuôi Em/g, CANONICAL_BRAND)
-    .replace(/ {2,}/g, " ");
+  out = out.replace(/ {2,}/g, " ");
 
   return out.replace(/\n{3,}/g, "\n\n").trim();
 }
@@ -50,7 +36,6 @@ export function sanitizeBrandText(text: string): string {
 export function isAllowedNewsImage(url: string | undefined): boolean {
   if (!url) return false;
   const clean = unwrapProxiedImageUrl(url) ?? url;
-  if (clean.includes("quytonybuoisang.com")) return false;
   return (
     clean.startsWith("/") ||
     clean.includes("supabase.co") ||

@@ -93,7 +93,9 @@ export function organizationJsonLd(): JsonLdObject {
       siteConfig.social.facebook,
       siteConfig.social.messenger,
       siteConfig.social.facebookGroup,
-      brandVisual.financeUrl,
+      brandVisual.financeUrl.startsWith("/")
+        ? absoluteUrl(brandVisual.financeUrl)
+        : brandVisual.financeUrl,
       publicCatalog.url,
     ].filter(Boolean),
     potentialAction: {
@@ -248,52 +250,6 @@ export function articleJsonLd({
     isAccessibleForFree: true,
     articleSection: section,
     keywords: tags?.length ? tags.join(", ") : undefined,
-  };
-}
-
-export function childProfileJsonLd({
-  code,
-  name,
-  province,
-  pathname,
-  imageUrl,
-}: {
-  code: string;
-  name: string;
-  province?: string;
-  pathname: string;
-  imageUrl?: string;
-}): JsonLdObject {
-  const url = absoluteUrl(pathname);
-  return {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "@id": `${url}#profile`,
-    url,
-    name: `${code} — ${name}`,
-    inLanguage: "vi-VN",
-    isPartOf: { "@id": WEBSITE_ID },
-    about: { "@id": ORGANIZATION_ID },
-    ...(imageUrl
-      ? { primaryImageOfPage: { "@type": "ImageObject", url: imageUrl } }
-      : {}),
-    mainEntity: {
-      "@type": "Person",
-      identifier: code,
-      name,
-      ...(province
-        ? {
-            homeLocation: {
-              "@type": "Place",
-              address: {
-                "@type": "PostalAddress",
-                addressRegion: province,
-                addressCountry: "VN",
-              },
-            },
-          }
-        : {}),
-    },
   };
 }
 

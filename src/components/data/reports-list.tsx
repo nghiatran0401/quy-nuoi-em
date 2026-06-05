@@ -15,7 +15,6 @@ type ReportsListProps = {
     totalExpense: string;
     downloadReport: string;
     reportsListTitle: string;
-    sampleDataNote?: string;
   };
 };
 
@@ -30,10 +29,6 @@ export function ReportsList({ reports, years, labels }: ReportsListProps) {
   return (
     <section className="section-surface pb-20">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {labels.sampleDataNote ? (
-          <p className="notice-info mx-auto mb-8 max-w-3xl">{labels.sampleDataNote}</p>
-        ) : null}
-
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <h2 className="flex items-center gap-2 font-heading text-lg font-semibold text-brand-ink">
             <Filter className="h-5 w-5 text-brand-accent" aria-hidden />
@@ -97,7 +92,7 @@ export function ReportsList({ reports, years, labels }: ReportsListProps) {
                     href={report.documentUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-accent mt-auto inline-flex items-center gap-2 text-sm"
+                    className="link-accent mt-auto inline-flex items-center justify-center gap-2 self-center text-sm"
                   >
                     {labels.downloadReport}
                     <ExternalLink className="h-4 w-4" />

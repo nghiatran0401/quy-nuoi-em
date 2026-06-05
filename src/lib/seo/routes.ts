@@ -1,6 +1,5 @@
 import type { DataPageKey } from "@/content/pages/data-pages";
 import type { StaticPageKey } from "@/content/pages/static-pages";
-import { getAllChildren } from "@/lib/data/children";
 import { getNewsSitemapEntries } from "@/lib/data/news";
 import { localizedPath } from "@/lib/seo/paths";
 
@@ -10,10 +9,11 @@ export const STATIC_PAGE_PATHS: Record<StaticPageKey, string> = {
   process: "/quy-trinh-xet-duyet",
   scoring: "/thang-diem",
   volunteer: "/dang-ky-tnv",
-  mou: "/mou",
+  mou: "/bien-ban-ghi-nho",
   members: "/thanh-vien-quy",
   careers: "/tuyen-dung",
   contact: "/lien-he",
+  taiChinh: "/tai-chinh",
 };
 
 export const DATA_PAGE_PATHS: Record<DataPageKey, string> = {
@@ -21,7 +21,7 @@ export const DATA_PAGE_PATHS: Record<DataPageKey, string> = {
   donors: "/danh-sach-nha-tai-tro",
   maGhep: "/ma-ghep",
   reports: "/bao-cao",
-  news: "/news",
+  news: "/ban-tin",
   statements: "/sao-ke-tai-khoan",
 };
 
@@ -29,8 +29,11 @@ export const EXTRA_INDEXED_PATHS: Array<{
   pathname: string;
   changeFrequency: SitemapEntry["changeFrequency"];
   priority: number;
-}> = [
-];
+}> = [];
+
+export function newsArticlePath(slug: string): string {
+  return `${DATA_PAGE_PATHS.news}/${slug}`;
+}
 
 export type SitemapEntry = {
   pathname: string;
@@ -59,7 +62,8 @@ export async function getAllSitemapEntries(): Promise<SitemapEntry[]> {
   entries.push(entryForPath("/", "weekly", 1));
 
   for (const pathname of Object.values(STATIC_PAGE_PATHS)) {
-    const priority = pathname === "/dong-gop" ? 0.95 : 0.75;
+    const priority =
+      pathname === "/dong-gop" ? 0.95 : pathname === "/tai-chinh" ? 0.9 : 0.75;
     entries.push(entryForPath(pathname, "monthly", priority));
   }
 
@@ -71,9 +75,9 @@ export async function getAllSitemapEntries(): Promise<SitemapEntry[]> {
           ? 0.85
           : pathname === "/ma-ghep"
             ? 0.85
-          : pathname === "/news"
-            ? 0.85
-            : 0.7;
+            : pathname === DATA_PAGE_PATHS.news
+              ? 0.85
+              : 0.7;
     entries.push(entryForPath(pathname, "weekly", priority));
   }
 
@@ -82,11 +86,7 @@ export async function getAllSitemapEntries(): Promise<SitemapEntry[]> {
   }
 
   for (const news of await getNewsSitemapEntries()) {
-    entries.push(entryForPath(`/news/${news.slug}`, "monthly", 0.6, news.lastModified));
-  }
-
-  for (const child of getAllChildren()) {
-    entries.push(entryForPath(`/danh-sach-diem-truong-ho-tro/${child.code}`, "monthly", 0.5));
+    entries.push(entryForPath(newsArticlePath(news.slug), "monthly", 0.6, news.lastModified));
   }
 
   return entries;

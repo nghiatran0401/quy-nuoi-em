@@ -89,14 +89,23 @@ export function ThienNguyenProfileSection({
             </Link>
           ) : null}
           {showMonthlyReportsLink ? (
-            <a
-              href={brandVisual.financeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-center text-sm font-medium text-brand-muted transition hover:text-brand-accent"
-            >
-              {thienNguyenCopy.monthlyReports}
-            </a>
+            brandVisual.financeUrl.startsWith("/") ? (
+              <Link
+                href={brandVisual.financeUrl}
+                className="text-center text-sm font-medium text-brand-muted transition hover:text-brand-accent"
+              >
+                {thienNguyenCopy.monthlyReports}
+              </Link>
+            ) : (
+              <a
+                href={brandVisual.financeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-center text-sm font-medium text-brand-muted transition hover:text-brand-accent"
+              >
+                {thienNguyenCopy.monthlyReports}
+              </a>
+            )
           ) : null}
         </div>
       </div>

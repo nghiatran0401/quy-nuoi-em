@@ -17,6 +17,7 @@ export const siteCopy = {
     reports: "Báo cáo",
     news: "Bản tin",
     statements: "Sao kê",
+    taiChinh: "Tài chính",
     contact: "Liên hệ",
     donate: "Đóng góp",
     openMenu: "Mở menu",

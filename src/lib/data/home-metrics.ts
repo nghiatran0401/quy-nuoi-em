@@ -2,7 +2,7 @@ import { publicCatalog } from "@/config/public-catalog";
 import type { StatItem } from "@/content/types";
 
 const DEFAULT_HOME_METRICS_URL =
-  "https://nuoiem2025.quynuoiem.com/api/public/home-metrics";
+  "https://nuoiem2025.quynuoiem.com/api/cong-khai/thong-ke-tong-quan";
 
 const REVALIDATE_SECONDS = 300;
 

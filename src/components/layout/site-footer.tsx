@@ -3,20 +3,19 @@ import Link from "next/link";
 import { Facebook, Mail, MapPin, Phone } from "lucide-react";
 import { BrandLogo } from "@/components/brand/logo";
 import { brandVisual } from "@/config/brand-visual";
-import { publicCatalog, publicCatalogHost } from "@/config/public-catalog";
 import { siteCopy } from "@/content/site-copy";
 import { footerResourceItems } from "@/lib/navigation";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
   const t = siteCopy.footer;
-  const { contact, office, financeUrl, social, companyRegistration: reg } = brandVisual;
+  const { contact, office, social, companyRegistration: reg } = brandVisual;
   const licenseDisplay = `${reg.enterpriseCode}/${t.enterpriseTypeSuffix}`;
 
   return (
-    <footer className="site-footer py-10 sm:py-12">
-      <div className="page-container">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10">
+    <footer className="site-footer">
+      <div className="page-container py-10 sm:py-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">
           <FooterBrandBlock
             name={brandVisual.name}
             legalName={reg.legalName}
@@ -26,7 +25,7 @@ export function SiteFooter() {
 
           <FooterSection
             title={t.registrationSection}
-            className="sm:max-lg:border-l sm:max-lg:border-brand-border/50 sm:max-lg:pl-8"
+            className="md:border-l md:border-brand-border/50 md:pl-8 lg:pl-10"
           >
             <div className="space-y-3">
               <FooterDefinition label={t.businessLicense} value={licenseDisplay} />
@@ -47,9 +46,9 @@ export function SiteFooter() {
 
           <FooterSection
             title={t.contactSection}
-            className="sm:col-span-2 lg:col-span-1 lg:border-l lg:border-brand-border/50 lg:pl-10"
+            className="md:border-l md:border-brand-border/50 md:pl-8 lg:pl-10"
           >
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               <FooterContactItem
                 href={`mailto:${contact.email}`}
                 icon={Mail}
@@ -67,54 +66,30 @@ export function SiteFooter() {
                 external
               />
             </ul>
-
-            <div className="mt-6 border-t border-brand-border/50 pt-5">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-brand-green">
-                {t.resourcesSection}
-              </p>
-              <ul className="space-y-2.5 text-sm leading-relaxed text-brand-muted">
-                {footerResourceItems.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="font-medium text-brand-ink transition-colors hover:text-brand-accent"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  {t.financePrefix}{" "}
-                  <a
-                    href={financeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-brand-ink transition-colors hover:text-brand-accent"
-                  >
-                    taichinh.nuoiem.com
-                  </a>
-                </li>
-                <li>
-                  {t.catalogPrefix}{" "}
-                  <a
-                    href={publicCatalog.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-brand-ink transition-colors hover:text-brand-accent"
-                  >
-                    {publicCatalogHost()}
-                  </a>
-                </li>
-              </ul>
-            </div>
           </FooterSection>
         </div>
+
+        <nav
+          aria-label={t.resourcesSection}
+          className="mt-10 border-t border-brand-border/50 pt-8"
+        >
+          <p className="mb-4 text-sm font-bold text-brand-green">{t.resourcesSection}</p>
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {footerResourceItems.map((item) => (
+              <li key={item.href}>
+                <FooterResourceLink item={item} />
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
 
-      <div className="page-container mt-10 border-t border-brand-border/60 pt-8 text-center text-sm text-brand-muted">
-        <p>
-          © {year} {t.rights}
-        </p>
+      <div className="border-t border-brand-border/60">
+        <div className="page-container py-6 text-center text-sm text-brand-muted">
+          <p>
+            © {year} {t.rights}
+          </p>
+        </div>
       </div>
     </footer>
   );
@@ -132,17 +107,17 @@ function FooterBrandBlock({
   coverage: string;
 }) {
   return (
-    <div className="flex flex-col gap-5 lg:pr-4">
+    <div className="flex flex-col gap-4 lg:pr-6">
       <Link href="/" className="block w-fit transition-opacity hover:opacity-90">
         <BrandLogo variant="default" className="h-11 w-auto object-contain object-left" />
       </Link>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <p className="text-lg font-bold tracking-tight text-brand-ink">{name}</p>
         <p className="text-xs leading-relaxed text-brand-muted">{legalName}</p>
       </div>
-      <div className="space-y-1.5 text-sm leading-relaxed text-brand-muted">
+      <div className="space-y-1 text-sm leading-relaxed text-brand-muted">
         <p>{tagline}</p>
-        <p className="text-brand-ink/75">{coverage}</p>
+        <p className="font-medium text-brand-ink/80">{coverage}</p>
       </div>
     </div>
   );
@@ -192,6 +167,25 @@ function FooterContactItem({
   );
 }
 
+function FooterResourceLink({ item }: { item: (typeof footerResourceItems)[number] }) {
+  const className =
+    "text-sm font-medium text-brand-ink transition-colors hover:text-brand-accent";
+
+  if (item.external) {
+    return (
+      <a href={item.href} target="_blank" rel="noopener noreferrer" className={className}>
+        {item.label}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={item.href} className={className}>
+      {item.label}
+    </Link>
+  );
+}
+
 function FooterSection({
   title,
   children,
@@ -203,7 +197,7 @@ function FooterSection({
 }) {
   return (
     <section className={className}>
-      <h3 className="text-base font-bold text-brand-green sm:text-lg">{title}</h3>
+      <h3 className="text-base font-bold text-brand-green">{title}</h3>
       <div className="mt-4">{children}</div>
     </section>
   );

@@ -4,7 +4,7 @@ This project uses **Supabase directly** (`@supabase/supabase-js` + `@supabase/ss
 
 ## 1. Project
 
-Use your existing project if you already host images at `ckmvgvvcbqntbmhjzjof.supabase.co`, or create a new one at [supabase.com/dashboard](https://supabase.com/dashboard).
+Use your Supabase project from [supabase.com/dashboard](https://supabase.com/dashboard).
 
 From **Project Settings → API**, copy:
 

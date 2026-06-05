@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Calendar, ChevronRight, User } from "lucide-react";
 import Link from "next/link";
 import type { NewsArticle } from "@/lib/data/types";
+import { newsArticlePath } from "@/lib/seo/routes";
 
 type NewsGridProps = {
   articles: NewsArticle[];
@@ -27,7 +28,7 @@ export function NewsGrid({ articles, readMoreLabel, emptyLabel }: NewsGridProps)
       {articles.map((article) => (
         <li key={article.slug}>
           <Link
-            href={`/news/${article.slug}`}
+            href={newsArticlePath(article.slug)}
             className="brand-card-interactive group flex h-full flex-col overflow-hidden"
           >
             <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-surface">

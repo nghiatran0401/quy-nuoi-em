@@ -6,6 +6,7 @@ import { ArrowLeft, ImageIcon, Save } from "lucide-react";
 import type { NewsArticleRow } from "@/types/supabase";
 import { AdminActionForm } from "@/components/admin/admin-action-form";
 import type { AdminFormAction } from "@/lib/admin/action-state";
+import { DATA_PAGE_PATHS } from "@/lib/seo/routes";
 
 type NewsFormValues = Pick<
   NewsArticleRow,
@@ -71,7 +72,7 @@ export function NewsForm({ mode, submitLabel, action, values }: NewsFormProps) {
                 Đường dẫn URL
               </label>
               <div className="flex rounded-xl border border-slate-200 bg-slate-50 shadow-sm focus-within:border-[var(--admin-accent)] focus-within:ring-2 focus-within:ring-[color-mix(in_srgb,var(--admin-accent)_25%,transparent)]">
-                <span className="flex items-center border-r border-slate-200 px-3 text-xs text-slate-500">/news/</span>
+                <span className="flex items-center border-r border-slate-200 px-3 text-xs text-slate-500">{DATA_PAGE_PATHS.news}/</span>
                 <input
                   id="slug"
                   name="slug"

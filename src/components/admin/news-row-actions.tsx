@@ -5,6 +5,7 @@ import { Archive, ExternalLink, MoreHorizontal, Pencil, Trash2 } from "lucide-re
 import { useActionState, useState, type MouseEvent } from "react";
 import type { NewsArticleRow } from "@/types/supabase";
 import { ADMIN_ACTION_INITIAL, type AdminFormAction } from "@/lib/admin/action-state";
+import { newsArticlePath } from "@/lib/seo/routes";
 
 type NewsRowActionsProps = {
   row: Pick<NewsArticleRow, "id" | "slug" | "title" | "status" | "locale">;
@@ -34,7 +35,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
       </Link>
       {row.status === "published" ? (
         <Link
-          href={`/news/${row.slug}`}
+          href={newsArticlePath(row.slug)}
           target="_blank"
           rel="noopener noreferrer"
           className="admin-btn-ghost hidden px-2.5 sm:inline-flex"
@@ -78,7 +79,7 @@ export function NewsRowActions({ row, archiveAction, deleteAction }: NewsRowActi
             </Link>
             {row.status === "published" ? (
               <Link
-                href={`/news/${row.slug}`}
+                href={newsArticlePath(row.slug)}
                 target="_blank"
                 rel="noopener noreferrer"
                 role="menuitem"

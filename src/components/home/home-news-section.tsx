@@ -3,6 +3,7 @@ import { ArrowRight, Calendar, ChevronRight, User } from "lucide-react";
 import Link from "next/link";
 import { newsSectionCopy } from "@/content/homepage-content";
 import { getLatestNews } from "@/lib/data/news";
+import { DATA_PAGE_PATHS, newsArticlePath } from "@/lib/seo/routes";
 
 function formatNewsDate(date: string) {
   return date.replace(/^Thứ \w+,\s*/i, "").replace(/^\w+,\s*/i, "");
@@ -25,7 +26,7 @@ export async function HomeNewsSection({
             <h3 className="heading-section-xl">{copy.title}</h3>
           </div>
           <Link
-            href="/news"
+            href={DATA_PAGE_PATHS.news}
             className="link-accent group inline-flex min-h-11 items-center gap-2 self-start transition-all hover:gap-3 sm:self-auto"
           >
             {copy.viewAll}
@@ -61,7 +62,7 @@ export async function HomeNewsSection({
               <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
                   <div>
                     <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-tight text-brand-ink transition-colors group-hover:text-brand-accent sm:text-xl">
-                      <Link href={`/news/${article.slug}`}>{article.title}</Link>
+                      <Link href={newsArticlePath(article.slug)}>{article.title}</Link>
                     </h3>
                     <div className="mb-3 flex flex-wrap items-center gap-4 text-xs text-brand-muted">
                       <div className="flex items-center gap-1.5">
@@ -81,7 +82,7 @@ export async function HomeNewsSection({
                   </div>
                   <div className="mt-auto border-t border-brand-border/60 pt-4">
                     <Link
-                      href={`/news/${article.slug}`}
+                      href={newsArticlePath(article.slug)}
                       className="link-accent inline-flex items-center gap-2 text-sm transition-all hover:gap-3"
                     >
                       {copy.readMore}

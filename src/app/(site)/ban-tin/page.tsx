@@ -8,6 +8,7 @@ import {
   getDataUiLabel,
 } from "@/content/pages/data-pages";
 import { getAllNews } from "@/lib/data/news";
+import { DATA_PAGE_PATHS, newsArticlePath } from "@/lib/seo/routes";
 import { createDataPageMetadata } from "@/lib/page-metadata";
 import {
   collectionPageJsonLd,
@@ -28,7 +29,7 @@ export default async function NewsPage() {
     description: meta.description,
     items: articles.map((article) => ({
       name: article.title,
-      pathname: `/news/${article.slug}`,
+      pathname: newsArticlePath(article.slug),
       description: article.excerpt,
     })),
   });
@@ -40,11 +41,11 @@ export default async function NewsPage() {
           collectionPageJsonLd({
             title: meta.title,
             description: meta.description,
-            pathname: "/news",
+            pathname: DATA_PAGE_PATHS.news,
             hasPart: itemList,
           }),
           itemList,
-          siteBreadcrumb([{ name: meta.title, pathname: "/news" }]),
+          siteBreadcrumb([{ name: meta.title, pathname: DATA_PAGE_PATHS.news }]),
         ]}
       />
       <DataPageBanner {...getDataPageHero("news")} />

@@ -4,11 +4,8 @@ const DEFAULT_MA_GHEP_DIRECTORY_URL =
 export const MA_GHEP_DIRECTORY_REVALIDATE_SECONDS = 300;
 export const MA_GHEP_DIRECTORY_PAGE_SIZE = 20;
 
-export type MaGhepFilterMode = "all" | "reduced";
-
 export type MaGhepRecord = {
   representativeCode: string;
-  isReduced: boolean;
   eatingMonths: number | null;
   supportStart: string | null;
   supportEnd: string | null;
@@ -26,7 +23,6 @@ export type MaGhepRecord = {
     mergedCode: string;
     mergedEatingMonths: string;
     mergedAmount: string;
-    reducedLabel: string | null;
   };
 };
 
@@ -35,16 +31,11 @@ export type MaGhepResponse = {
   schoolYear: { label: string; code: "2025-2026" };
   summary: {
     total: number;
-    reducedCount: number;
     filteredTotal: number;
     display: {
       total: string;
-      reducedCount: string;
       filteredTotal: string;
     };
-  };
-  filters: {
-    modes: Array<{ value: MaGhepFilterMode; label: string }>;
   };
   records: MaGhepRecord[];
   pagination: {
@@ -69,18 +60,15 @@ export type MaGhepDirectoryQuery = {
   page?: number;
   pageSize?: number;
   query?: string;
-  filterMode?: MaGhepFilterMode;
 };
 
-export type MaGhepDirectorySummaryCards = {
+export type MaGhepDirectorySummary = {
   total: string;
-  reducedCount: string;
   filteredTotal: string;
 };
 
-export const unavailableMaGhepSummary: MaGhepDirectorySummaryCards = {
+export const unavailableMaGhepSummary: MaGhepDirectorySummary = {
   total: "—",
-  reducedCount: "—",
   filteredTotal: "—",
 };
 
@@ -88,14 +76,6 @@ function maGhepDirectoryEndpoint(): string {
   return (
     process.env.NUOIEM_DIRECTORY_MA_GHEP_URL?.trim() || DEFAULT_MA_GHEP_DIRECTORY_URL
   );
-}
-
-function normalizeFilterMode(value?: string): MaGhepFilterMode {
-  if (!value?.trim()) return "all";
-  const normalized = value.trim().toLowerCase();
-  if (normalized === "all") return "all";
-  if (normalized === "reduced" || normalized === "giam-an") return "reduced";
-  return "all";
 }
 
 function isMaGhepResponse(value: unknown): value is MaGhepResponse {
@@ -124,9 +104,6 @@ export function maGhepDirectoryQueryString(
   if (params.query?.trim()) {
     sp.set("q", params.query.trim());
   }
-  if (params.filterMode && params.filterMode !== "all") {
-    sp.set("filterMode", params.filterMode);
-  }
 
   const qs = sp.toString();
   return qs ? `?${qs}` : "";
@@ -142,22 +119,17 @@ export function parseMaGhepDirectorySearchParams(
 
   const pageRaw = read("page");
   const page = pageRaw ? Math.max(1, Number.parseInt(pageRaw, 10) || 1) : 1;
-  const filterRaw = read("filterMode") ?? read("filter");
 
   return {
     page,
     pageSize: MA_GHEP_DIRECTORY_PAGE_SIZE,
     query: read("q") ?? read("query"),
-    filterMode: normalizeFilterMode(filterRaw),
   };
 }
 
-export function summaryCardsFromResponse(
-  data: MaGhepResponse,
-): MaGhepDirectorySummaryCards {
+export function summaryFromResponse(data: MaGhepResponse): MaGhepDirectorySummary {
   return {
     total: data.summary.display.total,
-    reducedCount: data.summary.display.reducedCount,
     filteredTotal: data.summary.display.filteredTotal,
   };
 }
@@ -181,9 +153,6 @@ export async function fetchMaGhepDirectory(
 
   if (query.query?.trim()) {
     url.searchParams.set("q", query.query.trim());
-  }
-  if (query.filterMode && query.filterMode !== "all") {
-    url.searchParams.set("filterMode", query.filterMode);
   }
 
   try {

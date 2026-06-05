@@ -51,6 +51,6 @@ export const brandVisual = {
     messenger: "https://www.messenger.com/t/duannuoiem",
     group: "https://www.facebook.com/groups/485546695224919",
   },
-  financeUrl: "https://taichinh.nuoiem.com",
+  financeUrl: "/tai-chinh",
   donateQrPath: "/qr.png",
 } as const;

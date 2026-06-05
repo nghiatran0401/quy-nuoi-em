@@ -5,10 +5,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "ckmvgvvcbqntbmhjzjof.supabase.co",
-      },
-      {
-        protocol: "https",
         hostname: "*.supabase.co",
       },
       {
@@ -43,9 +39,12 @@ const nextConfig: NextConfig = {
     return [
       ...legacyNewsSlugs.map((slug) => ({
         source: `/news/${slug}`,
-        destination: "/news",
+        destination: "/ban-tin",
         permanent: true,
       })),
+      { source: "/news", destination: "/ban-tin", permanent: true },
+      { source: "/news/:slug", destination: "/ban-tin/:slug", permanent: true },
+      { source: "/mou", destination: "/bien-ban-ghi-nho", permanent: true },
       { source: "/en", destination: "/", permanent: true },
       { source: "/en/:path*", destination: "/:path*", permanent: true },
       { source: "/quy-trinh-cap-ma-2026", destination: "/", permanent: true },
@@ -57,7 +56,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/danh-sach-bao-tro/:code",
-        destination: "/danh-sach-diem-truong-ho-tro/:code",
+        destination: "/danh-sach-diem-truong-ho-tro",
+        permanent: true,
+      },
+      {
+        source: "/danh-sach-diem-truong-ho-tro/:code",
+        destination: "/danh-sach-diem-truong-ho-tro",
         permanent: true,
       },
     ];

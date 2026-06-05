@@ -15,6 +15,7 @@ import {
 } from "@/lib/seo/json-ld";
 import { buildMetadata, stripMarkdown } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/paths";
+import { DATA_PAGE_PATHS, newsArticlePath } from "@/lib/seo/routes";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return buildMetadata({
     title: article.title,
     description,
-    pathname: `/news/${slug}`,
+    pathname: newsArticlePath(slug),
     ogImage: article.imageUrl,
     ogImageAlt: article.title,
     ogType: "article",
@@ -64,7 +65,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
     getDataPageMeta("news").description;
 
   const newsListMeta = getDataPageMeta("news");
-  const pathname = `/news/${slug}`;
+  const pathname = newsArticlePath(slug);
   const articleUrl = absoluteUrl(pathname);
   const breadcrumbId = `${articleUrl}#breadcrumb`;
 
@@ -93,7 +94,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
           }),
           siteBreadcrumb(
             [
-              { name: newsListMeta.title, pathname: "/news" },
+              { name: newsListMeta.title, pathname: DATA_PAGE_PATHS.news },
               { name: article.title, pathname },
             ],
             breadcrumbId,
@@ -101,7 +102,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
         ]}
       />
       <div className="mx-auto max-w-3xl px-4 pt-10 pb-16 sm:px-6">
-        <Link href="/news" className="back-link mb-8">
+        <Link href={DATA_PAGE_PATHS.news} className="back-link mb-8">
           <ArrowLeft className="h-4 w-4" />
           {getDataUiLabel("backToNews")}
         </Link>

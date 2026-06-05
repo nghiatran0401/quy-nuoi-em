@@ -9,13 +9,14 @@ import { parseNewsFields } from "@/lib/admin/parsers/news";
 import { resolveImageUrlFromForm } from "@/lib/admin/storage-upload";
 import { requireAdminSession } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { DATA_PAGE_PATHS, newsArticlePath } from "@/lib/seo/routes";
 
 const NEWS_STORAGE_FOLDER = "tin-tuc";
 
 function revalidateNewsPaths(slug: string) {
   revalidatePath("/admin/news");
-  revalidatePath("/news");
-  revalidatePath(`/news/${slug}`);
+  revalidatePath(DATA_PAGE_PATHS.news);
+  revalidatePath(newsArticlePath(slug));
 }
 
 async function requireEditorOrAdmin() {

@@ -15,7 +15,8 @@ export type StaticPageKey =
   | "mou"
   | "members"
   | "careers"
-  | "contact";
+  | "contact"
+  | "taiChinh";
 
 type StaticPageContent = {
   meta: PageMeta;
@@ -126,6 +127,19 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
         title: "Liên hệ Quỹ Nuôi Em",
         description:
           "Anh chị cần hỗ trợ về nuôi em, đóng góp hoặc hợp tác — dự án luôn sẵn sàng đồng hành cùng anh chị.",
+    },
+  },
+  taiChinh: {
+    meta: {
+      title: "Tài chính — Công khai sao kê",
+      description:
+        "Trang tài chính Quỹ Nuôi Em — công khai sao kê tài khoản duy nhất, 8+ cách minh bạch, cập nhật bởi 20+ bạn TNV.",
+    },
+    hero: {
+      eyebrow: "Công khai tài chính",
+      title: "Sao kê tài khoản duy nhất của Quỹ Nuôi Em",
+      description:
+        "Trang tài chính được cập nhật bởi chính 20+ bạn TNV là anh chị Nuôi Em — chúng tôi cố gắng minh bạch theo nhiều cách, không chỉ mỗi giấy tờ.",
     },
   },
 };

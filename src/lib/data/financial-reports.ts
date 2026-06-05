@@ -1,4 +1,3 @@
-import reportsJson from "@/data/reports.json";
 import type { FinancialReport } from "@/lib/data/types";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -28,11 +27,6 @@ function rowToReport(row: FinancialReportRow): FinancialReport {
   };
 }
 
-const jsonFallback = (reportsJson as FinancialReport[]).sort((a, b) => {
-  if (a.year !== b.year) return b.year - a.year;
-  return b.title.localeCompare(a.title, "vi");
-});
-
 async function fetchReportsFromDb(): Promise<FinancialReport[] | null> {
   if (!isSupabaseConfigured()) return null;
 
@@ -52,19 +46,12 @@ async function fetchReportsFromDb(): Promise<FinancialReport[] | null> {
 }
 
 export async function getAllReports(): Promise<FinancialReport[]> {
-  return (await fetchReportsFromDb()) ?? jsonFallback;
+  return (await fetchReportsFromDb()) ?? [];
 }
 
-export async function getReportsPayload(): Promise<{
-  reports: FinancialReport[];
-  usedFallback: boolean;
-}> {
-  const reportsFromDb = await fetchReportsFromDb();
-  if (reportsFromDb !== null) {
-    return { reports: reportsFromDb, usedFallback: false };
-  }
-
-  return { reports: jsonFallback, usedFallback: true };
+export async function getReportsPayload(): Promise<{ reports: FinancialReport[] }> {
+  const reports = await fetchReportsFromDb();
+  return { reports: reports ?? [] };
 }
 
 export async function getReportYears(): Promise<number[]> {
@@ -87,17 +74,7 @@ export type FinancialReportAdminRow = FinancialReportRow;
 
 export async function listFinancialReportsForAdmin(): Promise<FinancialReportAdminRow[]> {
   if (!isSupabaseConfigured()) {
-    return jsonFallback.map((r, index) => ({
-      id: r.id,
-      title: r.title,
-      image_url: r.imageUrl,
-      document_url: r.documentUrl ?? null,
-      total_income: r.totalIncome,
-      total_expense: r.totalExpense,
-      summary: null,
-      year: r.year,
-      sort_order: index,
-    }));
+    return [];
   }
 
   const supabase = createAdminClient();
@@ -108,17 +85,7 @@ export async function listFinancialReportsForAdmin(): Promise<FinancialReportAdm
     .order("sort_order", { ascending: false });
 
   if (error) {
-    return jsonFallback.map((r, index) => ({
-      id: r.id,
-      title: r.title,
-      image_url: r.imageUrl,
-      document_url: r.documentUrl ?? null,
-      total_income: r.totalIncome,
-      total_expense: r.totalExpense,
-      summary: null,
-      year: r.year,
-      sort_order: index,
-    }));
+    return [];
   }
 
   return (data ?? []) as FinancialReportAdminRow[];
