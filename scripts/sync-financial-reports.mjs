@@ -53,8 +53,10 @@ function defaultSortOrder(year, month) {
 }
 
 function extractClosingBalance(text) {
-  const match = text.match(
-    /3\.2\.\s*Báo cáo thu\s*-\s*chi hoạt động vận hành[\s\S]*?Số dư cuối ngày\s+(\d{2}\/\d{2}\/\d{4}):\s*([\d.,]+)\s*VNĐ/i,
+  const section32Index = text.search(/3\.2\.\s*Báo cáo thu\s*-\s*chi hoạt động vận hành/i);
+  const charitySection = section32Index >= 0 ? text.slice(0, section32Index) : text;
+  const match = charitySection.match(
+    /Số dư Dự án Nuôi em tính cuối ngày\s+(\d{2}\/\d{2}\/\d{4}):\s*([\d.,]+)\s*VNĐ/i,
   );
   if (!match?.[1] || !match?.[2]) {
     return null;

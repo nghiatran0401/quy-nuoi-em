@@ -42,9 +42,13 @@ Tổng chi: 111.868.920 VNĐ. Chi tiết gồm:
     });
   });
 
-  it("extracts closing balance from section 3.2 operations report", () => {
+  it("extracts closing balance from section 3.1 charity project report", () => {
     const text = `
 3. Báo cáo tình hình tài chính chi tiết tháng 01/2026
+3.1. Báo cáo thu - chi hoạt động từ thiện Dự án Nuôi em
+Số dư Dự án Nuôi em đầu ngày 01/01/2026: 19.746.928.722 VNĐ
+Tổng thu: 0 VNĐ. Chi tiết gồm:
+Tổng chi: 23.072.569.302 VNĐ. Chi tiết gồm:
 Số dư Dự án Nuôi em tính cuối ngày 31/01/2026: 23.882.673.277 VNĐ
 3.2. Báo cáo thu - chi hoạt động vận hành - Toàn hệ sinh thái Nuôi em
 Số dư đầu ngày 01/01/2026: 4.002.740.418 VNĐ
@@ -57,7 +61,7 @@ Số dư cuối ngày 31/01/2026: 4.129.920.765 VNĐ
 
     expect(row).toMatchObject({
       closingBalanceDate: "31/01/2026",
-      closingBalance: "4.129.920.765 đ",
+      closingBalance: "23.882.673.277 đ",
     });
   });
 });
