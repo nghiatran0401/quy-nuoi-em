@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JsonLd } from "@/components/seo/json-ld";
+import { FirebaseAnalytics } from "@/components/analytics/firebase-analytics";
 import { ScrollToTopButton } from "@/components/layout/scroll-to-top-button";
 import { SiteBuildNotice } from "@/components/layout/site-build-notice";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteCopy } from "@/content/site-copy";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { isFirebaseConfigured } from "@/lib/firebase/env";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 import { buildRootMetadata } from "@/lib/seo/metadata";
 
@@ -32,6 +34,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
   return (
     <>
       <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+      {isFirebaseConfigured() ? <FirebaseAnalytics /> : null}
       {supabaseUrl ? (
         <>
           <link rel="preconnect" href={supabaseUrl} crossOrigin="anonymous" />
