@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DonorsDirectoryUnavailable } from "@/components/data/donors-directory-unavailable";
 import { DonorsPageHeader } from "@/components/data/donors-page-header";
-import { DonorsProvinceStats } from "@/components/data/donors-province-stats";
 import { DonorsTable } from "@/components/data/donors-table";
 import { PublicCatalogPromo } from "@/components/shared/public-catalog-promo";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -11,7 +10,6 @@ import {
 } from "@/content/pages/data-pages";
 import {
   fetchDonorsDirectory,
-  normalizeDonorsProvinceStats,
   parseDonorsDirectorySearchParams,
   summaryCardsFromResponse,
   unavailableDonorsSummary,
@@ -49,7 +47,7 @@ export default async function DonorsDirectoryPage({ searchParams }: PageProps) {
         items: directory.donors.map((donor) => ({
           name: donor.code,
           pathname: basePath,
-          description: `${donor.display.representativeName} — ${donor.display.province}`,
+          description: `${donor.display.representativeName} — ${donor.display.codeRange}`,
         })),
       })
     : null;
@@ -72,13 +70,7 @@ export default async function DonorsDirectoryPage({ searchParams }: PageProps) {
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
         <PublicCatalogPromo catalogUrl={directory?.meta.directoryUrl} />
         {directory ? (
-          <>
-            <DonorsProvinceStats
-              provinceStats={normalizeDonorsProvinceStats(directory.provinceStats)}
-              provinceCount={directory.summary.display.provinceCount}
-            />
-            <DonorsTable basePath={basePath} data={directory} activeFilters={query} />
-          </>
+          <DonorsTable basePath={basePath} data={directory} activeFilters={query} />
         ) : (
           <DonorsDirectoryUnavailable />
         )}

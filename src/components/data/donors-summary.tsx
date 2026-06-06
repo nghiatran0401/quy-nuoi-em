@@ -8,7 +8,6 @@ type DonorsSummaryProps = {
 export function DonorsSummary({ summary, variant = "cards" }: DonorsSummaryProps) {
   const items = [
     { label: "Tổng", value: summary.total, valueClassName: "text-brand-ink" },
-    { label: "Tỉnh", value: summary.provinceCount, valueClassName: "text-brand-accent" },
   ];
 
   if (variant === "compact") {

@@ -11,7 +11,7 @@ export type NavItem = {
 export const mainNavItems: NavItem[] = [
   { href: DATA_PAGE_PATHS.children, labelKey: "children" },
   { href: DATA_PAGE_PATHS.donors, labelKey: "donors" },
-  { href: DATA_PAGE_PATHS.maGhep, labelKey: "maGhep" },
+  // { href: DATA_PAGE_PATHS.maGhep, labelKey: "maGhep" },
   { href: publicCatalog.url, labelKey: "catalog", external: true },
   { href: STATIC_PAGE_PATHS.taiChinh, labelKey: "taiChinh" },
   { href: DATA_PAGE_PATHS.reports, labelKey: "reports" },
@@ -27,7 +27,7 @@ export type FooterResourceItem = {
 export const footerResourceItems: FooterResourceItem[] = [
   { href: DATA_PAGE_PATHS.children, label: "Danh sách điểm trường" },
   { href: DATA_PAGE_PATHS.donors, label: "Danh sách nhà tài trợ" },
-  { href: DATA_PAGE_PATHS.maGhep, label: "Bảng mã ghép NE" },
+  // { href: DATA_PAGE_PATHS.maGhep, label: "Bảng mã ghép NE" },
   { href: STATIC_PAGE_PATHS.taiChinh, label: "Minh bạch tài chính" },
   { href: DATA_PAGE_PATHS.reports, label: "Báo cáo tài chính" },
   { href: `${STATIC_PAGE_PATHS.taiChinh}#sao-ke`, label: "Sao kê tài khoản" },

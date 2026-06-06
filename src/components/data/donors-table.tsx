@@ -20,16 +20,6 @@ function formatNumber(value: number): string {
   return new Intl.NumberFormat("vi-VN").format(value);
 }
 
-function codeStatusBadgeClass(status: string): string {
-  if (status === "Đã cấp" || status === "Đang nuôi") {
-    return "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200";
-  }
-  if (status.includes("chờ") || status.includes("Chờ")) {
-    return "bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-200";
-  }
-  return "bg-slate-50 text-slate-700 ring-1 ring-inset ring-slate-200";
-}
-
 function DonorRowCells({ row, stt }: { row: DonorsDirectoryDonor; stt: number }) {
   return (
     <>
@@ -48,14 +38,8 @@ function DonorRowCells({ row, stt }: { row: DonorsDirectoryDonor; stt: number })
       <td className="px-4 py-3 text-brand-ink">{row.display.representativeName}</td>
       <td className="px-4 py-3 text-brand-muted">{row.display.phone}</td>
       <td className="px-4 py-3 text-brand-muted">{row.display.email}</td>
-      <td className="px-4 py-3 text-brand-muted">{row.display.province}</td>
-      <td className="px-4 py-3">
-        <span
-          className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${codeStatusBadgeClass(row.display.codeStatus)}`}
-        >
-          {row.display.codeStatus}
-        </span>
-      </td>
+      <td className="px-4 py-3 text-brand-muted tabular-nums">{row.display.totalCodes}</td>
+      <td className="px-4 py-3 font-mono text-xs text-brand-muted">{row.display.codeRange}</td>
     </>
   );
 }
@@ -73,14 +57,12 @@ function DonorCard({ row, stt }: { row: DonorsDirectoryDonor; stt: number }) {
           {row.code}
           <ExternalLink className="h-3.5 w-3.5" aria-hidden />
         </a>
-        <span
-          className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${codeStatusBadgeClass(row.display.codeStatus)}`}
-        >
-          {row.display.codeStatus}
+        <span className="text-sm font-semibold tabular-nums text-brand-ink">
+          {row.display.totalCodes} mã
         </span>
       </div>
       <p className="mt-2 font-medium text-brand-ink">{row.display.representativeName}</p>
-      <p className="text-sm text-brand-muted">{row.display.province}</p>
+      <p className="font-mono text-xs text-brand-muted">{row.display.codeRange}</p>
       <dl className="mt-3 grid gap-2 border-t border-brand-border/50 pt-3 text-sm">
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">
@@ -105,7 +87,6 @@ export function DonorsTable({ basePath, data, activeFilters }: DonorsTableProps)
   const filterDefaults = {
     q: activeFilters.query ?? "",
     province: activeFilters.province ?? "",
-    codeStatus: activeFilters.codeStatus ?? "",
   };
 
   const pageHref = (page: number) =>
@@ -153,19 +134,6 @@ export function DonorsTable({ basePath, data, activeFilters }: DonorsTableProps)
             </option>
           ))}
         </select>
-        <select
-          name="codeStatus"
-          defaultValue={filterDefaults.codeStatus}
-          className={selectClassName}
-          aria-label="Lọc theo trạng thái mã"
-        >
-          <option value="">Tất cả trạng thái</option>
-          {filters.codeStatuses.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
         <button
           type="submit"
           className="min-h-11 shrink-0 rounded-lg bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accent/90"
@@ -194,8 +162,8 @@ export function DonorsTable({ basePath, data, activeFilters }: DonorsTableProps)
               <th className="px-4 py-3">Đại diện đăng ký</th>
               <th className="px-4 py-3">Liên hệ SĐT</th>
               <th className="px-4 py-3">Liên hệ email</th>
-              <th className="px-4 py-3">Tỉnh</th>
-              <th className="px-4 py-3">Trạng thái</th>
+              <th className="px-4 py-3">Tổng mã</th>
+              <th className="px-4 py-3">Dãy mã</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-brand-border">

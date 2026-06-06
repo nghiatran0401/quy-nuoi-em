@@ -5,37 +5,30 @@ export const DONORS_DIRECTORY_PAGE_SIZE = 20;
 
 export type DonorsDirectoryDonor = {
   code: string;
-  province: string;
-  codeStatus: string;
+  totalCodes: number | null;
   detailUrl: string;
   display: {
     representativeName: string;
     phone: string;
     email: string;
-    province: string;
-    codeStatus: string;
+    totalCodes: string;
+    codeRange: string;
   };
 };
 
 export type DonorsDirectoryResponse = {
-  version: 1;
+  version: 1 | 2;
   schoolYear: { label: string; code: "2025-2026" };
   summary: {
     total: number;
-    provinceCount: number;
     display: {
       total: string;
-      provinceCount: string;
+      provinceCount?: string;
     };
   };
-  provinceStats: Array<{
-    province: string;
-    donorCount: number;
-    display: { donorCount: string };
-  }>;
   filters: {
     provinces: string[];
-    codeStatuses: string[];
+    codeStatuses?: string[];
   };
   donors: DonorsDirectoryDonor[];
   pagination: {
@@ -59,71 +52,30 @@ export type DonorsDirectoryQuery = {
   page?: number;
   pageSize?: number;
   province?: string;
-  codeStatus?: string;
   query?: string;
 };
 
 export type DonorsDirectorySummaryCards = {
   total: string;
-  provinceCount: string;
 };
 
 export const unavailableDonorsSummary: DonorsDirectorySummaryCards = {
   total: "—",
-  provinceCount: "—",
 };
 
-/** All 12 provinces supported by Quỹ Nuôi Em (aligned with directory APIs). */
-export const NUOI_EM_PROVINCES = [
-  "Cao Bằng",
-  "Đắk Lắk",
-  "Điện Biên",
-  "Gia Lai",
-  "Lai Châu",
-  "Lạng Sơn",
-  "Lào Cai",
-  "Phú Thọ",
-  "Quảng Ngãi",
-  "Thái Nguyên",
-  "Thanh Hóa",
-  "Tuyên Quang",
-] as const;
-
-export function normalizeDonorsProvinceStats(
-  provinceStats: DonorsDirectoryResponse["provinceStats"],
-): DonorsDirectoryResponse["provinceStats"] {
-  const byProvince = new Map(provinceStats.map((item) => [item.province, item]));
-
-  const complete = NUOI_EM_PROVINCES.map((province) => {
-    const existing = byProvince.get(province);
-    if (existing) {
-      return existing;
-    }
-
-    return {
-      province,
-      donorCount: 0,
-      display: { donorCount: "0" },
-    };
-  });
-
-  return complete.sort((a, b) => {
-    if (b.donorCount !== a.donorCount) {
-      return b.donorCount - a.donorCount;
-    }
-    return a.province.localeCompare(b.province, "vi");
-  });
-}
-
 function donorsDirectoryEndpoint(): string {
-  return process.env.NUOIEM_DIRECTORY_DONORS_URL?.trim() || DEFAULT_DONORS_DIRECTORY_URL;
+  return (
+    process.env.NUOIEM_DONORS_API_URL?.trim() ||
+    process.env.NUOIEM_DIRECTORY_DONORS_URL?.trim() ||
+    DEFAULT_DONORS_DIRECTORY_URL
+  );
 }
 
 function isDonorsDirectoryResponse(value: unknown): value is DonorsDirectoryResponse {
   if (!value || typeof value !== "object") return false;
   const row = value as DonorsDirectoryResponse;
   return (
-    row.version === 1 &&
+    (row.version === 1 || row.version === 2) &&
     Array.isArray(row.donors) &&
     Boolean(row.summary?.display?.total) &&
     Boolean(row.pagination)
@@ -141,9 +93,6 @@ export function donorsDirectoryQueryString(params: DonorsDirectoryQuery): string
   }
   if (params.province?.trim()) {
     sp.set("province", params.province.trim());
-  }
-  if (params.codeStatus?.trim()) {
-    sp.set("codeStatus", params.codeStatus.trim());
   }
   if (params.query?.trim()) {
     sp.set("q", params.query.trim());
@@ -168,7 +117,6 @@ export function parseDonorsDirectorySearchParams(
     page,
     pageSize: DONORS_DIRECTORY_PAGE_SIZE,
     province: read("province"),
-    codeStatus: read("codeStatus"),
     query: read("q") ?? read("query"),
   };
 }
@@ -178,7 +126,6 @@ export function summaryCardsFromResponse(
 ): DonorsDirectorySummaryCards {
   return {
     total: data.summary.display.total,
-    provinceCount: data.summary.display.provinceCount,
   };
 }
 
@@ -192,9 +139,6 @@ export async function fetchDonorsDirectory(
 
   if (query.province?.trim()) {
     url.searchParams.set("province", query.province.trim());
-  }
-  if (query.codeStatus?.trim()) {
-    url.searchParams.set("codeStatus", query.codeStatus.trim());
   }
   if (query.query?.trim()) {
     url.searchParams.set("q", query.query.trim());
