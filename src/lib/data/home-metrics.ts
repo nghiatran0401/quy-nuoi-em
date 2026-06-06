@@ -1,3 +1,4 @@
+import { getHomeFinanceDisplay } from "@/config/home-finance-stats";
 import { publicCatalog } from "@/config/public-catalog";
 import type { StatItem } from "@/content/types";
 
@@ -94,6 +95,8 @@ function financeDetailHint(detail: string): string {
 }
 
 export function homeMetricsToStatItems(data: HomeMetricsResponse): StatItem[] {
+  const finance = getHomeFinanceDisplay();
+
   return [
     {
       value: data.display.childrenTotal,
@@ -101,14 +104,14 @@ export function homeMetricsToStatItems(data: HomeMetricsResponse): StatItem[] {
       hint: data.schoolYear.label,
     },
     {
-      value: data.finance.display.thuCompact,
+      value: finance.thuCompact,
       label: "Tổng tiền thu",
-      hint: financeDetailHint(data.finance.display.thuDetail),
+      hint: financeDetailHint(finance.thuDetail),
     },
     {
-      value: data.finance.display.chiCompact,
+      value: finance.chiCompact,
       label: "Tổng tiền chi",
-      hint: financeDetailHint(data.finance.display.chiDetail),
+      hint: financeDetailHint(finance.chiDetail),
     },
     {
       value: data.display.sponsored,

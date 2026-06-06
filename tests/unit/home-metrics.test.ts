@@ -48,14 +48,14 @@ describe("homeMetricsToStatItems", () => {
       hint: "Năm học 9/2025–5/2026",
     });
     expect(stats[1]).toMatchObject({
-      value: "56,6 tỷ đ",
+      value: "71,2 tỷ đ",
       label: "Tổng tiền thu",
-      hint: "Chi tiết: 56.613.274.077đ",
+      hint: "Chi tiết: 71.159.937.110đ",
     });
     expect(stats[2]).toMatchObject({
-      value: "56,7 tỷ đ",
+      value: "78,5 tỷ đ",
       label: "Tổng tiền chi",
-      hint: "Chi tiết: 56.733.595.908đ",
+      hint: "Chi tiết: 78.507.521.826đ",
     });
     expect(stats[3]).toMatchObject({
       value: "40.699",

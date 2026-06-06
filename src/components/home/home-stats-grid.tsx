@@ -202,46 +202,43 @@ function SponsorshipPanel({ withSponsor, withoutSponsor }: { withSponsor: StatIt
 
 function FinancePanel({ income, expense }: { income: StatItem; expense: StatItem }) {
   return (
-    <article className="flex h-full w-full flex-col rounded-xl bg-white p-4 ring-1 ring-inset ring-brand-border/60 sm:p-5">
+    <article className="flex h-full w-full flex-col rounded-2xl bg-white p-5 ring-1 ring-inset ring-brand-border/60 sm:p-6">
       <div className="flex items-center gap-2.5">
         <span
-          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-green-light text-brand-deep"
+          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-green-light text-brand-deep"
           aria-hidden
         >
-          <CircleDollarSign className="h-4 w-4" strokeWidth={2.25} />
+          <CircleDollarSign className="h-5 w-5" strokeWidth={2.25} />
         </span>
         <div>
-          <p className="font-heading text-sm font-bold text-brand-ink">Minh bạch tài chính</p>
+          <p className="font-heading text-sm font-bold text-brand-ink sm:text-base">Minh bạch tài chính</p>
           <p className="text-xs text-brand-muted">Tổng thu và chi theo năm học</p>
-          <p className="text-[11px] leading-snug text-brand-muted">
-            Số liệu dựa trên số mã nuôi em chỉ riêng cho năm học 2025-2026
-          </p>
         </div>
       </div>
 
-      <div className="mt-4 grid gap-2.5 sm:grid-cols-2 sm:gap-3">
-        <div className={`rounded-lg p-3.5 ring-1 ring-inset ${toneStyles.deep.bg} ${toneStyles.deep.ring}`}>
+      <div className="mt-5 grid gap-3 sm:grid-cols-2 sm:gap-4">
+        <div className={`min-w-0 rounded-xl p-4 ring-1 ring-inset ${toneStyles.deep.bg} ${toneStyles.deep.ring}`}>
           <div className="flex items-center gap-2 text-brand-deep">
             <TrendingUp className="h-4 w-4" aria-hidden />
             <span className="text-xs font-bold uppercase tracking-wide">Thu</span>
           </div>
-          <p className="mt-1.5 font-heading text-xl font-bold tabular-nums text-brand-deep sm:text-2xl">
+          <p className="mt-2 whitespace-nowrap font-heading text-2xl font-bold tabular-nums text-brand-deep sm:text-[1.75rem]">
             {income.value}
           </p>
-          <p className="mt-0.5 text-xs font-semibold text-brand-ink sm:text-sm">{income.label}</p>
-          {income.hint ? <p className="mt-0.5 text-[10px] leading-snug text-brand-muted sm:text-[11px]">{income.hint}</p> : null}
+          <p className="mt-1 text-sm font-semibold text-brand-ink">{income.label}</p>
+          {income.hint ? <p className="mt-1 text-[11px] leading-snug text-brand-muted">{income.hint}</p> : null}
         </div>
 
-        <div className={`rounded-lg p-3.5 ring-1 ring-inset ${toneStyles.cyan.bg} ${toneStyles.cyan.ring}`}>
+        <div className={`min-w-0 rounded-xl p-4 ring-1 ring-inset ${toneStyles.cyan.bg} ${toneStyles.cyan.ring}`}>
           <div className="flex items-center gap-2 text-brand-cyan">
             <TrendingDown className="h-4 w-4" aria-hidden />
             <span className="text-xs font-bold uppercase tracking-wide">Chi</span>
           </div>
-          <p className="mt-1.5 font-heading text-xl font-bold tabular-nums text-brand-cyan sm:text-2xl">
+          <p className="mt-2 whitespace-nowrap font-heading text-2xl font-bold tabular-nums text-brand-cyan sm:text-[1.75rem]">
             {expense.value}
           </p>
-          <p className="mt-0.5 text-xs font-semibold text-brand-ink sm:text-sm">{expense.label}</p>
-          {expense.hint ? <p className="mt-0.5 text-[10px] leading-snug text-brand-muted sm:text-[11px]">{expense.hint}</p> : null}
+          <p className="mt-1 text-sm font-semibold text-brand-ink">{expense.label}</p>
+          {expense.hint ? <p className="mt-1 text-[11px] leading-snug text-brand-muted">{expense.hint}</p> : null}
         </div>
       </div>
     </article>
