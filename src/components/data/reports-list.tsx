@@ -71,20 +71,24 @@ export function ReportsList({ reports, years, labels }: ReportsListProps) {
               ) : null}
               <div className="flex flex-1 flex-col p-5">
                 <h3 className="mb-4 font-heading text-lg font-bold text-brand-ink">{report.title}</h3>
-                <div className="mb-4 grid grid-cols-1 gap-3 min-[22rem]:grid-cols-2">
-                  <div className="income-chip">
+                <div className="mb-4 grid grid-cols-2 gap-3">
+                  <div className="income-chip min-w-0">
                     <p className="mb-1 flex items-center gap-1 text-xs font-medium text-brand-success">
-                      <ArrowUp className="h-3.5 w-3.5" aria-hidden />
+                      <ArrowUp className="h-3.5 w-3.5 shrink-0" aria-hidden />
                       {labels.totalIncome}
                     </p>
-                    <p className="text-sm font-bold leading-tight text-brand-success">{report.totalIncome}</p>
+                    <p className="whitespace-nowrap text-xs font-bold tabular-nums leading-tight text-brand-success">
+                      {report.totalIncome}
+                    </p>
                   </div>
-                  <div className="expense-chip">
+                  <div className="expense-chip min-w-0">
                     <p className="mb-1 flex items-center gap-1 text-xs font-medium text-brand-danger">
-                      <ArrowDown className="h-3.5 w-3.5" aria-hidden />
+                      <ArrowDown className="h-3.5 w-3.5 shrink-0" aria-hidden />
                       {labels.totalExpense}
                     </p>
-                    <p className="text-sm font-bold leading-tight text-brand-danger">{report.totalExpense}</p>
+                    <p className="whitespace-nowrap text-xs font-bold tabular-nums leading-tight text-brand-danger">
+                      {report.totalExpense}
+                    </p>
                   </div>
                 </div>
                 {report.documentUrl ? (

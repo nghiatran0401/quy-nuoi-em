@@ -10,7 +10,7 @@ export default async function ReportsAdminPage() {
     <div className="space-y-6">
       <AdminPageHeader
         title="Ảnh báo cáo tài chính"
-        description="Thay ảnh bìa từng báo cáo tháng trên trang /bao-cao. Tiêu đề và link tài liệu giữ nguyên từ dữ liệu hiện có."
+        description="Thay ảnh bìa từng báo cáo tháng trên trang /bao-cao. Tiêu đề, số liệu và link tài liệu được đồng bộ từ thư mục Google Drive Báo cáo công bố qua lệnh npm run sync:bao-cao."
       />
 
       {reports.length === 0 ? (

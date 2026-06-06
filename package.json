@@ -15,7 +15,8 @@
     "test:integration": "vitest run tests/integration",
     "download:nuoiem-images": "node scripts/download-nuoiem-images.mjs",
     "logos:transparent": "python3 scripts/make-transparent-logos.py",
-    "favicons": "python3 scripts/generate-favicons.py"
+    "favicons": "python3 scripts/generate-favicons.py",
+    "sync:bao-cao": "tsx scripts/sync-financial-reports.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
@@ -34,6 +35,7 @@
     "eslint-config-next": "^16.2.6",
     "napi-postinstall": "^0.3.4",
     "tailwindcss": "^4.1.11",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "vitest": "^4.1.7"
   }

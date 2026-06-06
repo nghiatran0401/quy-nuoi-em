@@ -15,7 +15,7 @@ export const mainNavItems: NavItem[] = [
   { href: publicCatalog.url, labelKey: "catalog", external: true },
   { href: STATIC_PAGE_PATHS.taiChinh, labelKey: "taiChinh" },
   { href: DATA_PAGE_PATHS.reports, labelKey: "reports" },
-  { href: `${STATIC_PAGE_PATHS.taiChinh}#sao-ke`, labelKey: "statements" },
+  { href: DATA_PAGE_PATHS.statements, labelKey: "statements" },
 ];
 
 export type FooterResourceItem = {
@@ -30,7 +30,7 @@ export const footerResourceItems: FooterResourceItem[] = [
   // { href: DATA_PAGE_PATHS.maGhep, label: "Bảng mã ghép NE" },
   { href: STATIC_PAGE_PATHS.taiChinh, label: "Minh bạch tài chính" },
   { href: DATA_PAGE_PATHS.reports, label: "Báo cáo tài chính" },
-  { href: `${STATIC_PAGE_PATHS.taiChinh}#sao-ke`, label: "Sao kê tài khoản" },
+  { href: DATA_PAGE_PATHS.statements, label: "Sao kê tài khoản" },
   { href: DATA_PAGE_PATHS.news, label: "Bản tin & hoạt động" },
   { href: publicCatalog.url, label: "Tra cứu mã NE", external: true },
 ];
