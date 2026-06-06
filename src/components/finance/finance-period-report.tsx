@@ -1,4 +1,7 @@
-import { ArrowDownRight, Landmark, PiggyBank } from "lucide-react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { ArrowDownRight, ChevronDown, Landmark, PiggyBank } from "lucide-react";
 import {
   formatFinanceReportAmount,
   getHomeFinancePeriodReport,
@@ -156,47 +159,109 @@ export function FinancePeriodReport({
 }: FinancePeriodReportProps) {
   const report = getHomeFinancePeriodReport();
   const isHome = variant === "home";
+  const [open, setOpen] = useState(!isHome);
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    const syncFromHash = () => {
+      setOpen(window.location.hash === `#${id}`);
+    };
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, [isHome, id]);
+
+  const reportBody = (
+    <>
+      <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-brand-green-light/70 px-3 py-1.5 text-xs font-semibold text-brand-deep ring-1 ring-inset ring-brand-deep/10">
+        <span className="h-1.5 w-1.5 rounded-full bg-brand-deep" aria-hidden />
+        {report.periodShort}
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-2">
+        {report.sections.map((section) => (
+          <ReportSectionCard key={section.id} section={section} />
+        ))}
+      </div>
+
+      {showPageLink ? (
+        <div className="mt-5 flex justify-center border-t border-brand-border/50 pt-5">
+          <Link
+            href={`${STATIC_PAGE_PATHS.taiChinh}#${id}`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-deep transition hover:text-brand-accent-dark"
+          >
+            Xem đầy đủ trên trang Minh bạch tài chính
+            <ArrowDownRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+      ) : null}
+    </>
+  );
 
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className="scroll-mt-28">
       <div
         className={`rounded-2xl ring-1 ring-inset ring-brand-border/60 ${
-          isHome ? "bg-white p-5 sm:p-6" : "border border-brand-border/60 bg-white/80 p-4 sm:p-6 lg:p-8"
+          isHome ? "bg-white" : "border border-brand-border/60 bg-white/80 p-4 sm:p-6 lg:p-8"
         }`}
       >
-        <FinanceSectionHeader
-          eyebrow="Báo cáo tổng kết"
-          title={report.periodLabel}
-          description={
-            isHome
-              ? "Chi tiết thu chi hai luồng: dự án Nuôi em và vận hành hệ sinh thái trong giai đoạn năm học."
-              : "Báo cáo thu chi tổng hợp theo hai luồng: hoạt động từ thiện Nuôi em và vận hành toàn hệ sinh thái."
-          }
-          headingId={`${id}-heading`}
-        />
-
-        <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-brand-green-light/70 px-3 py-1.5 text-xs font-semibold text-brand-deep ring-1 ring-inset ring-brand-deep/10">
-          <span className="h-1.5 w-1.5 rounded-full bg-brand-deep" aria-hidden />
-          {report.periodShort}
-        </div>
-
-        <div className="grid gap-4 xl:grid-cols-2">
-          {report.sections.map((section) => (
-            <ReportSectionCard key={section.id} section={section} />
-          ))}
-        </div>
-
-        {showPageLink ? (
-          <div className="mt-5 flex justify-center border-t border-brand-border/50 pt-5">
-            <Link
-              href={`${STATIC_PAGE_PATHS.taiChinh}#${id}`}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-deep transition hover:text-brand-accent-dark"
+        {isHome ? (
+          <>
+            <button
+              type="button"
+              className="focus-ring flex w-full items-start justify-between gap-4 p-5 text-left sm:p-6"
+              onClick={() => setOpen((value) => !value)}
+              aria-expanded={open}
+              aria-controls={`${id}-panel`}
             >
-              Xem đầy đủ trên trang Minh bạch tài chính
-              <ArrowDownRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
-        ) : null}
+              <div className="min-w-0">
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-deep">
+                  Báo cáo tổng kết
+                </p>
+                <h2
+                  id={`${id}-heading`}
+                  className="mt-1 font-heading text-base font-bold leading-snug text-brand-ink sm:text-lg"
+                >
+                  {report.periodLabel}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-brand-muted">
+                  Chi tiết thu chi hai luồng: dự án Nuôi em và vận hành hệ sinh thái trong giai đoạn năm học.
+                </p>
+              </div>
+              <ChevronDown
+                className={`mt-1 h-5 w-5 shrink-0 text-brand-muted transition-transform duration-300 ${
+                  open ? "rotate-180 text-brand-deep" : ""
+                }`}
+                aria-hidden
+              />
+            </button>
+
+            <div
+              id={`${id}-panel`}
+              className={`grid transition-all duration-300 ease-in-out ${
+                open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <div className="border-t border-brand-border/50 px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
+                  {reportBody}
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <FinanceSectionHeader
+              eyebrow="Báo cáo tổng kết"
+              title={report.periodLabel}
+              description="Báo cáo thu chi tổng hợp theo hai luồng: hoạt động từ thiện Nuôi em và vận hành toàn hệ sinh thái."
+              headingId={`${id}-heading`}
+            />
+            {reportBody}
+          </>
+        )}
       </div>
     </section>
   );
