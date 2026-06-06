@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { publicCatalog } from "@/config/public-catalog";
+import { publicCatalog, publicCatalogLinksEnabled } from "@/config/public-catalog";
 import { ProcessStepsList } from "@/components/process/process-steps-list";
 import { TransferInfoSection } from "@/components/shared/transfer-info-section";
 import {
@@ -97,12 +97,14 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
             ) : null}
             {c.finance.footnoteAfter}
           </p>
-          <p className="mt-4 border-t border-brand-border/60 pt-4 text-sm text-brand-muted">
-            Danh mục em nuôi & tra cứu mã NE:{" "}
-            <a href={publicCatalog.url} target="_blank" rel="noreferrer" className="link-accent">
-              {publicCatalog.ctaLabel}
-            </a>
-          </p>
+          {publicCatalogLinksEnabled ? (
+            <p className="mt-4 border-t border-brand-border/60 pt-4 text-sm text-brand-muted">
+              Danh mục em nuôi & tra cứu mã NE:{" "}
+              <a href={publicCatalog.url} target="_blank" rel="noreferrer" className="link-accent">
+                {publicCatalog.ctaLabel}
+              </a>
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

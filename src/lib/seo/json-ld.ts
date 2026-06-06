@@ -1,5 +1,5 @@
 import { brandVisual } from "@/config/brand-visual";
-import { publicCatalog } from "@/config/public-catalog";
+import { publicCatalog, publicCatalogLinksEnabled } from "@/config/public-catalog";
 import { DEFAULT_OG_IMAGE_PATH, getSiteUrl, siteConfig, siteName } from "@/config/site";
 import { absoluteUrl } from "@/lib/seo/paths";
 
@@ -94,7 +94,7 @@ export function organizationJsonLd(): JsonLdObject {
       siteConfig.social.messenger,
       siteConfig.social.facebookGroup,
       absoluteUrl(brandVisual.financeUrl),
-      publicCatalog.url,
+      ...(publicCatalogLinksEnabled ? [publicCatalog.url] : []),
     ].filter(Boolean),
     potentialAction: {
       "@type": "DonateAction",

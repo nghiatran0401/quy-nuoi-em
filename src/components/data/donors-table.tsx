@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ExternalLink, Search } from "lucide-react";
+import { resolveCatalogPageHref } from "@/config/public-catalog";
 import type {
   DonorsDirectoryDonor,
   DonorsDirectoryQuery,
@@ -20,20 +21,32 @@ function formatNumber(value: number): string {
   return new Intl.NumberFormat("vi-VN").format(value);
 }
 
+function DonorCodeLabel({ code, detailUrl }: { code: string; detailUrl: string }) {
+  const href = resolveCatalogPageHref(detailUrl);
+
+  if (!href) {
+    return <span className="font-mono text-sm font-semibold text-brand-ink">{code}</span>;
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="link-accent inline-flex items-center gap-1 font-mono text-sm font-semibold"
+    >
+      {code}
+      <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+    </a>
+  );
+}
+
 function DonorRowCells({ row, stt }: { row: DonorsDirectoryDonor; stt: number }) {
   return (
     <>
       <td className="px-4 py-3 font-medium text-brand-muted">{stt}</td>
       <td className="px-4 py-3">
-        <a
-          href={row.detailUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="link-accent inline-flex items-center gap-1 font-mono text-sm font-semibold"
-        >
-          {row.code}
-          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-        </a>
+        <DonorCodeLabel code={row.code} detailUrl={row.detailUrl} />
       </td>
       <td className="px-4 py-3 text-brand-ink">{row.display.representativeName}</td>
       <td className="px-4 py-3 text-brand-muted">{row.display.phone}</td>
@@ -48,15 +61,7 @@ function DonorCard({ row, stt }: { row: DonorsDirectoryDonor; stt: number }) {
   return (
     <li className="rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-2">
-        <a
-          href={row.detailUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="link-accent inline-flex items-center gap-1 font-mono text-sm font-semibold"
-        >
-          {row.code}
-          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-        </a>
+        <DonorCodeLabel code={row.code} detailUrl={row.detailUrl} />
         <span className="text-sm font-semibold tabular-nums text-brand-ink">
           {row.display.totalCodes} mã
         </span>

@@ -1,5 +1,10 @@
 import { ArrowUpRight, Search } from "lucide-react";
-import { publicCatalog, publicCatalogHost } from "@/config/public-catalog";
+import {
+  publicCatalog,
+  publicCatalogHost,
+  publicCatalogLinksEnabled,
+  resolveCatalogPageHref,
+} from "@/config/public-catalog";
 
 type PublicCatalogPromoProps = {
   variant?: "banner" | "card";
@@ -7,7 +12,14 @@ type PublicCatalogPromoProps = {
 };
 
 export function PublicCatalogPromo({ variant = "banner", catalogUrl }: PublicCatalogPromoProps) {
-  const href = catalogUrl?.trim() || publicCatalog.url;
+  if (!publicCatalogLinksEnabled) {
+    return null;
+  }
+
+  const href = resolveCatalogPageHref(catalogUrl?.trim() || publicCatalog.url);
+  if (!href) {
+    return null;
+  }
   if (variant === "card") {
     return (
       <a
