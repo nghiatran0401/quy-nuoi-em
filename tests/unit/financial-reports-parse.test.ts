@@ -15,8 +15,8 @@ describe("parseFinancialReportRows", () => {
       id: "thang-5-2026",
       title: "Tháng 5/2026",
       documentUrl: "https://docs.google.com/document/d/def/edit",
-      totalIncome: "115.517.225 ₫",
-      totalExpense: "3.358.193.920 ₫",
+      totalIncome: "115.517.225 đ",
+      totalExpense: "3.358.193.920 đ",
       year: 2026,
       sortOrder: 101,
     });

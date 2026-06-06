@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   CircleDollarSign,
   HandHeart,
@@ -5,6 +6,8 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
+import { getHomeFinanceSummary } from "@/config/home-finance-stats";
+import { FinancePeriodReport } from "@/components/finance/finance-period-report";
 import type { StatItem } from "@/content/types";
 import type { LucideIcon } from "lucide-react";
 
@@ -201,6 +204,8 @@ function SponsorshipPanel({ withSponsor, withoutSponsor }: { withSponsor: StatIt
 }
 
 function FinancePanel({ income, expense }: { income: StatItem; expense: StatItem }) {
+  const summary = getHomeFinanceSummary();
+
   return (
     <article className="flex h-full w-full flex-col rounded-2xl bg-white p-5 ring-1 ring-inset ring-brand-border/60 sm:p-6">
       <div className="flex items-center gap-2.5">
@@ -240,6 +245,18 @@ function FinancePanel({ income, expense }: { income: StatItem; expense: StatItem
           <p className="mt-1 text-sm font-semibold text-brand-ink">{expense.label}</p>
           {expense.hint ? <p className="mt-1 text-[11px] leading-snug text-brand-muted">{expense.hint}</p> : null}
         </div>
+      </div>
+
+      <div className="mt-4 space-y-1 border-t border-brand-border/50 pt-4 text-xs leading-relaxed text-brand-muted sm:text-[13px]">
+        <p>{summary.periodLabel}</p>
+        <p>{summary.openingBalanceLabel}</p>
+        <p>{summary.closingBalanceLabel}</p>
+        <Link
+          href="#bc-thu-chi"
+          className="mt-2 inline-flex text-xs font-semibold text-brand-deep transition hover:text-brand-accent-dark sm:text-[13px]"
+        >
+          Xem báo cáo thu chi chi tiết ↓
+        </Link>
       </div>
     </article>
   );
@@ -283,6 +300,7 @@ export function HomeStatsGrid({ stats }: HomeStatsGridProps) {
         </div>
       </div>
       <SponsorshipPanel withSponsor={withSponsor} withoutSponsor={withoutSponsor} />
+      <FinancePeriodReport variant="home" showPageLink />
     </div>
   );
 }

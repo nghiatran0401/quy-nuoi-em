@@ -1,3 +1,5 @@
+import { getHomeChildrenDisplay } from "@/config/home-children-stats";
+
 const DEFAULT_SCHOOLS_DIRECTORY_URL =
   "https://nuoiem2025.quynuoiem.com/api/cong-khai/danh-sach-diem-truong-ho-tro";
 
@@ -163,11 +165,13 @@ export function parseSchoolsDirectorySearchParams(
 export function summaryCardsFromResponse(
   data: SchoolsDirectoryResponse,
 ): SchoolsDirectorySummaryCards {
+  const children = getHomeChildrenDisplay();
+
   return {
     schoolCount: data.summary.display.schoolCount,
     studentCount: data.summary.display.studentCount,
-    sponsored: data.summary.display.sponsored,
-    unsponsored: data.summary.display.unsponsored,
+    sponsored: children.sponsored,
+    unsponsored: children.unsponsored,
   };
 }
 

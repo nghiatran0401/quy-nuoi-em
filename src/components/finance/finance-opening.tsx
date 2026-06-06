@@ -5,6 +5,7 @@ import type { StatItem } from "@/content/types";
 type FinanceOpeningProps = {
   paragraphs: readonly string[];
   stats: readonly StatItem[];
+  stewardNoteTitle: string;
   stewardNote: string;
 };
 
@@ -88,7 +89,12 @@ function TrustStatCard({
   );
 }
 
-export function FinanceOpening({ paragraphs, stats, stewardNote }: FinanceOpeningProps) {
+export function FinanceOpening({
+  paragraphs,
+  stats,
+  stewardNoteTitle,
+  stewardNote,
+}: FinanceOpeningProps) {
   const [leadParagraph, ...supportingParagraphs] = paragraphs;
 
   return (
@@ -144,7 +150,7 @@ export function FinanceOpening({ paragraphs, stats, stewardNote }: FinanceOpenin
                 </span>
                 <div className="min-w-0">
                   <p className="font-heading text-sm font-bold text-brand-ink">
-                    Cập nhật bởi cộng đồng Nuôi Em
+                    {stewardNoteTitle}
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-brand-muted sm:text-[15px]">
                     {stewardNote}

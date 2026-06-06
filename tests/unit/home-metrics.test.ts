@@ -68,4 +68,28 @@ describe("homeMetricsToStatItems", () => {
       hint: "50,3% tổng số em nuôi",
     });
   });
+
+  it("uses official children totals even when live API returns different counts", () => {
+    const liveApiSample: HomeMetricsResponse = {
+      ...sample,
+      children: {
+        total: 81909,
+        sponsored: 50435,
+        unsponsored: 31474,
+        sponsoredPercent: 61.6,
+        unsponsoredPercent: 38.4,
+      },
+      display: {
+        childrenTotal: "81.909",
+        sponsored: "50.435",
+        unsponsored: "31.474",
+      },
+    };
+
+    const stats = homeMetricsToStatItems(liveApiSample);
+
+    expect(stats[0]?.value).toBe("81.909");
+    expect(stats[3]?.value).toBe("40.699");
+    expect(stats[4]?.value).toBe("41.210");
+  });
 });

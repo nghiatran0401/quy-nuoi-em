@@ -17,8 +17,8 @@ describe("parseFinancialTotalsFromDocumentText", () => {
       id: "thang-4-2026",
       title: "Tháng 4/2026",
       documentUrl: "https://docs.google.com/document/d/doc-abc/edit?usp=sharing",
-      totalIncome: "419.815.618 ₫",
-      totalExpense: "10.768.292.617 ₫",
+      totalIncome: "419.815.618 đ",
+      totalExpense: "10.768.292.617 đ",
       year: 2026,
       sortOrder: 202604,
     });

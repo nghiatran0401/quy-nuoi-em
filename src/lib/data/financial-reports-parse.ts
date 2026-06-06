@@ -1,4 +1,5 @@
 import { iterateCsvRecords } from "@/lib/data/vcb-statements-parse";
+import { normalizeVndUnit } from "@/lib/format-vnd";
 
 export type FinancialReportSheetRow = {
   id: string;
@@ -127,8 +128,8 @@ function rowFromCells(cells: string[], columnMap: Partial<Record<ColumnKey, numb
     id,
     title,
     documentUrl,
-    totalIncome,
-    totalExpense,
+    totalIncome: normalizeVndUnit(totalIncome),
+    totalExpense: normalizeVndUnit(totalExpense),
     summary,
     year,
     sortOrder,

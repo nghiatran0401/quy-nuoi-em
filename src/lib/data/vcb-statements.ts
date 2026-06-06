@@ -255,10 +255,8 @@ function pickParam(value: string | string[] | undefined): string | undefined {
   return value;
 }
 
-export function formatVnd(amount: number | null): string {
-  if (amount === null) return "—";
-  return new Intl.NumberFormat("vi-VN").format(amount);
-}
+
+export { formatVnd } from "@/lib/format-vnd";
 
 export function vcbStatementQueryString(selection: VcbStatementSelection): string {
   const params = new URLSearchParams({

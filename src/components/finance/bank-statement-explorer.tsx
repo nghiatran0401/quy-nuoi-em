@@ -41,10 +41,6 @@ type BankStatementExplorerProps = {
   };
 };
 
-function formatVndSummary(amount: number): string {
-  return `${new Intl.NumberFormat("vi-VN").format(amount)} đ`;
-}
-
 function StatementRowCells({ row }: { row: VcbStatementRow }) {
   return (
     <>
@@ -237,13 +233,13 @@ export function BankStatementExplorer({
             <div className="rounded-xl border border-brand-border/60 bg-brand-warm/70 px-4 py-3 text-sm">
               <p className="text-brand-muted">{labels.totalThu}</p>
               <p className="mt-1 font-heading text-lg font-bold text-brand-success">
-                {formatVndSummary(payload.summary.totalThu)}
+                {formatVnd(payload.summary.totalThu)}
               </p>
             </div>
             <div className="rounded-xl border border-brand-border/60 bg-brand-warm/70 px-4 py-3 text-sm">
               <p className="text-brand-muted">{labels.totalChi}</p>
               <p className="mt-1 font-heading text-lg font-bold text-brand-danger">
-                {formatVndSummary(payload.summary.totalChi)}
+                {formatVnd(payload.summary.totalChi)}
               </p>
             </div>
           </div>

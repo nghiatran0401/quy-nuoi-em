@@ -26,14 +26,14 @@ export type TransparencyPillarGroup = {
 export const taiChinhContent = {
   trustStats: [
     {
-      value: "Vào buổi tối",
-      label: "Update hàng tuần",
-      hint: "Sao kê được cập nhật định kỳ",
+      value: "Ngay lập tức",
+      label: "Cập nhật",
+      hint: "Sao kê trực tiếp từ App Thiện Nguyện MB Bank.",
     },
     {
-      value: "Trước 3–5 ngày",
-      label: "Sao kê toàn bộ tính tới",
-      hint: "Tính đến thời điểm gần nhất",
+      value: "Báo cáo tài chính",
+      label: "Định kỳ hàng tháng",
+      hint: "Bao gồm tiền dự án Nuôi Em và Vận hành",
     },
     {
       value: "20+ bạn Nuôi Em",
@@ -44,15 +44,17 @@ export const taiChinhContent = {
 
   intro: {
     paragraphs: [
-      'Trong những nỗ lực công khai tài chính, các bạn sẽ thấy Quỹ Nuôi Em là một dự án rất "kỳ lạ". Không quá chú trọng hết vào mặt "giấy tờ" — cái mà chúng tôi cho rằng có rất nhiều cách để làm được.',
+      'Trong những nỗ lực công khai tài chính, các bạn sẽ thấy Quỹ Nuôi Em kết hợp giữa "giấy tờ" và cả cơ chế giám sát từ xa, giám sát thực tế.',
       "Khi đồng ý nuôi em, cũng có nghĩa anh chị đã hoàn toàn nắm rõ thông tin về Chương trình, uỷ quyền, đồng thuận, tin tưởng về cách thức quản lý tài chính, triển khai thực hiện do Nhóm Nuôi Em đang vận hành, triển khai, đồng thời trao quyền để Nhóm quyết định những vấn đề liên quan đến Chương trình.",
     ],
   },
 
+  stewardNoteTitle: "Cập nhật bởi cộng đồng và địa phương",
   stewardNote:
-    'Trang tài chính của Quỹ Nuôi Em được cập nhật bởi chính 20+ bạn TNV là anh chị Nuôi Em. Chúng tôi không có kiểm toán độc lập theo kiểu quỹ lớn, nhưng vẫn cố gắng tìm mọi cách "chặt chẽ" và "minh bạch" hơn cả kiểm toán.',
+    "Báo cáo hàng tháng vận hành có sự tham gia đóng góp công sức, chụp ảnh, thông tin của hơn 700 thầy cô giáo cắm bản, hiệu trưởng, hiệu phó, đang trực tiếp dạy học và nấu ăn cho học sinh tham gia dự án, được đưa trực tiếp lên Nhóm Facebook theo từng trường / lớp và giao lưu, chia sẻ trực tiếp với các anh chị nuôi định danh của các học sinh. Đồng thời sẽ hỗ trợ anh chị lên thăm thực tế lớp học, gia đình 2-3 lần/năm học.",
 
   sectionNav: [
+    { id: "bc-thu-chi", label: "BC tổng kết" },
     { id: "kenh-minh-bach", label: "Theo dõi tài chính" },
     { id: "cach-minh-bach", label: "8+ cách minh bạch" },
     { id: "sao-ke", label: "Sao kê" },
@@ -166,7 +168,7 @@ export const taiChinhContent = {
   savingsNote: {
     title: "Tiền chưa sử dụng tới",
     description:
-      "Theo sự đồng thuận và thống nhất từ các anh chị nuôi tham gia dự án từ năm 2019, Nuôi Em được phép tối ưu hóa chi phí nhàn rỗi bằng hình thức gửi tiết kiệm. Toàn bộ tiền lãi phát sinh được cam kết sử dụng 100% cho mục đích vận hành, hỗ trợ cán sự đi khảo sát thực địa, hỗ trợ công các phí cho tình nguyện viên: từ 1.500.000 VNĐ/ cán sự/ lần/ tỉnh; khác vùng, khu vực: 2.000.000đ/ tỉnh; nước ngoài: tối đa 3.000.000/ quốc gia.",
+      "Theo sự đồng thuận và thống nhất từ các anh chị nuôi tham gia dự án từ năm 2019, Nuôi Em được phép tối ưu hóa chi phí nhàn rỗi bằng hình thức gửi tiết kiệm. Toàn bộ tiền lãi phát sinh được cam kết sử dụng 100% cho mục đích vận hành, hỗ trợ cán sự đi khảo sát thực địa, hỗ trợ công các phí cho tình nguyện viên: từ 1.500.000đ/ cán sự/ lần/ tỉnh; khác vùng, khu vực: 2.000.000đ/ tỉnh; nước ngoài: tối đa 3.000.000đ/ quốc gia.",
   },
 
   saoKeSection: {

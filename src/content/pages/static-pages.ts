@@ -139,7 +139,7 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
       eyebrow: "Công khai tài chính",
       title: "Sao kê tài khoản Quỹ Nuôi Em",
       description:
-        "Hệ thống dữ liệu tài chính được cập nhật trực tiếp bởi chính 20+ Tình nguyện viên, đồng thời là anh chị Nuôi Em — Minh bạch, công khai dựa trên nền tảng dữ liệu số, giúp mọi khoản đóng góp đều có thể theo dõi và đối soát dễ dàng",
+        "Hệ thống dữ liệu tài chính được hoàn thiện bởi đội ngũ Kế toán, Kiểm toán có chuyên môn và được báo cáo định kỳ. Sao kê được lấy trực tiếp từ App Thiện Nguyện - MB Bank minh bạch giúp mọi đóng góp được theo dõi và đối soát dễ dàng.",
     },
   },
 };

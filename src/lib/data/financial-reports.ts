@@ -1,4 +1,5 @@
 import type { FinancialReport } from "@/lib/data/types";
+import { normalizeVndUnit } from "@/lib/format-vnd";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createPublicClient } from "@/lib/supabase/public";
@@ -21,8 +22,8 @@ function rowToReport(row: FinancialReportRow): FinancialReport {
     title: row.title,
     imageUrl: row.image_url,
     documentUrl: row.document_url ?? undefined,
-    totalIncome: row.total_income ?? "",
-    totalExpense: row.total_expense ?? "",
+    totalIncome: normalizeVndUnit(row.total_income ?? ""),
+    totalExpense: normalizeVndUnit(row.total_expense ?? ""),
     year: row.year,
   };
 }

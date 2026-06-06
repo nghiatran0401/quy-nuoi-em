@@ -23,6 +23,11 @@ export const siteCopy = {
     openMenu: "Mở menu",
     closeMenu: "Đóng menu",
   },
+  buildNotice: {
+    prefix: "Lưu ý:",
+    body: "Website đang được xây dựng và cập nhật liên tục, có thể có số liệu chưa đầy đủ, vui lòng thông tin giúp chúng tôi về",
+    dismissLabel: "Đóng thông báo",
+  },
   footer: {
     projectName: "Quỹ Nuôi Em",
     businessLicense: "Giấy ĐKKD số",

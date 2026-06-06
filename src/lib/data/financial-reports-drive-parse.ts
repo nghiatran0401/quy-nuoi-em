@@ -1,7 +1,8 @@
 import type { FinancialReportSheetRow } from "@/lib/data/financial-reports-parse";
+import { formatVndLabelFromText } from "@/lib/format-vnd";
 
 function formatVndLabel(amount: string): string {
-  return `${amount.trim()} ₫`;
+  return formatVndLabelFromText(amount);
 }
 
 function buildSlug(month: number, year: number): string {

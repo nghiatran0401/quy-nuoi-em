@@ -188,9 +188,17 @@
     @apply font-medium text-brand-muted transition-colors hover:text-brand-green;
   }
 
-  .site-header {
-    @apply sticky top-0 z-50 border-b border-brand-border/50 bg-white/90 shadow-[var(--shadow-brand-soft)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/85;
+  .site-header-shell {
+    @apply sticky top-0 z-50;
     padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .site-header {
+    @apply border-b border-brand-border/50 bg-white/90 shadow-[var(--shadow-brand-soft)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/85;
+  }
+
+  .site-build-notice {
+    @apply border-b border-brand-border/35 bg-gradient-to-r from-brand-sky-soft/70 via-brand-warm/40 to-brand-peach/25 backdrop-blur-sm;
   }
 
   .section-pad {

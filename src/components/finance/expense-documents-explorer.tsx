@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, ExternalLink, FolderOpen, Search } from "luc
 import { expenseDocumentsConfig } from "@/config/expense-documents";
 import type { ExpenseDocumentList, ExpenseDocumentRow, ExpenseDocumentsPayload } from "@/lib/data/expense-documents";
 import { formatExpenseAmount } from "@/lib/data/expense-documents";
+import { formatVnd } from "@/lib/format-vnd";
 
 type ExpenseDocumentsExplorerProps = {
   payload: ExpenseDocumentsPayload;
@@ -31,10 +32,6 @@ type ExpenseDocumentsExplorerProps = {
     next: string;
   };
 };
-
-function formatVndSummary(amount: number): string {
-  return `${new Intl.NumberFormat("vi-VN").format(amount)} đ`;
-}
 
 function ExpenseRowCells({
   row,
@@ -204,7 +201,7 @@ export function ExpenseDocumentsExplorer({ payload, labels }: ExpenseDocumentsEx
         <div className="rounded-xl border border-brand-border/60 bg-brand-warm/70 px-4 py-3 text-sm">
           <p className="text-brand-muted">{labels.totalAmount}</p>
           <p className="mt-1 font-heading text-lg font-bold text-brand-danger">
-            {formatVndSummary(activeList.summary.totalAmount)}
+            {formatVnd(activeList.summary.totalAmount)}
           </p>
         </div>
         <div className="rounded-xl border border-brand-border/60 bg-brand-warm/70 px-4 py-3 text-sm">

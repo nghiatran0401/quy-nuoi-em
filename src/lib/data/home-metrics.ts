@@ -1,3 +1,4 @@
+import { getHomeChildrenDisplay } from "@/config/home-children-stats";
 import { getHomeFinanceDisplay } from "@/config/home-finance-stats";
 import { publicCatalog } from "@/config/public-catalog";
 import type { StatItem } from "@/content/types";
@@ -81,13 +82,6 @@ function homeMetricsEndpoint(): string {
   );
 }
 
-function formatPercentVi(percent: number): string {
-  return percent.toLocaleString("vi-VN", {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
-  });
-}
-
 function financeDetailHint(detail: string): string {
   const trimmed = detail.trim();
   if (/^chi tiết:/i.test(trimmed)) return trimmed;
@@ -96,12 +90,13 @@ function financeDetailHint(detail: string): string {
 
 export function homeMetricsToStatItems(data: HomeMetricsResponse): StatItem[] {
   const finance = getHomeFinanceDisplay();
+  const children = getHomeChildrenDisplay();
 
   return [
     {
-      value: data.display.childrenTotal,
+      value: children.total,
       label: "Tổng số em nuôi",
-      hint: data.schoolYear.label,
+      hint: children.schoolYearLabel,
     },
     {
       value: finance.thuCompact,
@@ -114,14 +109,14 @@ export function homeMetricsToStatItems(data: HomeMetricsResponse): StatItem[] {
       hint: financeDetailHint(finance.chiDetail),
     },
     {
-      value: data.display.sponsored,
+      value: children.sponsored,
       label: "Đã có người nuôi",
-      hint: `${formatPercentVi(data.children.sponsoredPercent)}% tổng số em nuôi`,
+      hint: `${children.sponsoredPercentLabel}% tổng số em nuôi`,
     },
     {
-      value: data.display.unsponsored,
+      value: children.unsponsored,
       label: "Chưa có người nuôi",
-      hint: `${formatPercentVi(data.children.unsponsoredPercent)}% tổng số em nuôi`,
+      hint: `${children.unsponsoredPercentLabel}% tổng số em nuôi`,
     },
   ];
 }

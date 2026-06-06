@@ -5,6 +5,7 @@ import {
   type ExpenseDocumentSheetSource,
 } from "@/config/expense-documents";
 import { parseExpenseDocumentRows } from "@/lib/data/expense-documents-parse";
+import { formatVnd } from "@/lib/format-vnd";
 
 export type ExpenseDocumentRow = {
   stt: number;
@@ -135,6 +136,5 @@ export async function getExpenseDocumentsPayload(): Promise<ExpenseDocumentsPayl
 }
 
 export function formatExpenseAmount(amount: number | null): string {
-  if (amount === null) return "—";
-  return `${new Intl.NumberFormat("vi-VN").format(amount)} đ`;
+  return formatVnd(amount);
 }

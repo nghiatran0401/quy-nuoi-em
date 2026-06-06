@@ -1,6 +1,7 @@
 import { FinanceChannelCards } from "@/components/finance/finance-channel-cards";
 import { FinanceCta } from "@/components/finance/finance-cta";
 import { FinanceOpening } from "@/components/finance/finance-opening";
+import { FinancePeriodReport } from "@/components/finance/finance-period-report";
 import { FinanceSectionNav } from "@/components/finance/finance-section-nav";
 import { TransparencyPillars } from "@/components/finance/transparency-pillars";
 import { DataPageBanner } from "@/components/pages/data-page-banner";
@@ -30,10 +31,13 @@ export function TaiChinhView({ statementSection, expenseDocumentsSection }: TaiC
           <FinanceOpening
             paragraphs={content.intro.paragraphs}
             stats={content.trustStats}
+            stewardNoteTitle={content.stewardNoteTitle}
             stewardNote={content.stewardNote}
           />
 
           <FinanceSectionNav items={content.sectionNav} />
+
+          <FinancePeriodReport />
 
           <FinanceSectionRule />
 
