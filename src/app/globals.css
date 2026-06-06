@@ -157,7 +157,7 @@
 
   .home-page .home-prose p,
   .home-page p.home-prose {
-    @apply text-left sm:text-justify;
+    @apply text-center sm:text-justify lg:text-left;
   }
 
   .btn-primary {
@@ -191,6 +191,19 @@
   .site-header-shell {
     @apply sticky top-0 z-50;
     padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  html[data-mobile-nav-open] .site-header-shell {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 220;
+    width: 100%;
+  }
+
+  html[data-mobile-nav-open] .site-build-notice {
+    @apply hidden;
   }
 
   .site-header {

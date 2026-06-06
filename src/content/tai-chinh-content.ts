@@ -185,7 +185,6 @@ export const taiChinhContent = {
     year: "Năm",
     month: "Tháng",
     searchPlaceholder: "Tìm theo nội dung, ngày hoặc STT…",
-    openSheet: "Mở trên Google Sheets",
     transactionCount: "Số giao dịch",
     totalChi: "Tổng chi",
     totalThu: "Tổng thu",
@@ -216,7 +215,6 @@ export const taiChinhContent = {
   expenseDocsTableLabels: {
     month: "Tháng",
     searchPlaceholder: "Tìm theo tên trường, xã, tỉnh…",
-    openSheet: "Mở trên Google Sheets",
     schoolCount: "Số điểm trường",
     totalAmount: "Tổng giải ngân",
     withDriveLink: "Đã có link Drive",

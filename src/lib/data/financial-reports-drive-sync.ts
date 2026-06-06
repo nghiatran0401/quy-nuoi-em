@@ -3,6 +3,7 @@ import {
   financialReportDocumentExportUrl,
   financialReportsDriveConfig,
 } from "@/config/financial-reports-drive";
+import { discoverFinancialReportDriveFiles } from "@/lib/data/financial-reports-drive-discover";
 import { parseFinancialTotalsFromDocumentText } from "@/lib/data/financial-reports-drive-parse";
 import type { FinancialReportSheetRow } from "@/lib/data/financial-reports-parse";
 import type { FinancialReportsSyncOptions, FinancialReportsSyncResult } from "@/lib/data/financial-reports-sync";
@@ -34,8 +35,9 @@ async function fetchDocumentText(fileId: string): Promise<string> {
 }
 
 async function loadReportsFromDrive(): Promise<FinancialReportSheetRow[]> {
+  const driveFiles = await discoverFinancialReportDriveFiles();
   const rows = await Promise.all(
-    financialReportsDriveConfig.reports.map(async ({ month, year, fileId }) => {
+    driveFiles.map(async ({ month, year, fileId }) => {
       const text = await fetchDocumentText(fileId);
       return parseFinancialTotalsFromDocumentText(text, month, year, fileId);
     }),
@@ -55,6 +57,8 @@ function toDbRow(
     document_url: row.documentUrl,
     total_income: row.totalIncome || null,
     total_expense: row.totalExpense || null,
+    closing_balance_date: row.closingBalanceDate,
+    closing_balance: row.closingBalance,
     summary: row.summary,
     year: row.year,
     sort_order: row.sortOrder,

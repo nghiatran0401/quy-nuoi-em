@@ -11,18 +11,15 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
+const DRIVE_FOLDER_ID =
+  process.env.FINANCIAL_REPORTS_DRIVE_FOLDER_ID ?? "1tlzUAOJrMtL5pZtvTSwPAMNFqz7OlPoK";
 const DRIVE_FOLDER_URL =
   process.env.FINANCIAL_REPORTS_DRIVE_FOLDER_URL ??
-  "https://drive.google.com/drive/folders/1tlzUAOJrMtL5pZtvTSwPAMNFqz7OlPoK";
+  `https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}`;
 const DEFAULT_IMAGE_URL = "/logo.webp";
 
-const REPORTS = [
-  { month: 1, year: 2026, fileId: "15aDgrQ7HXDtFZ_roswCjRjxqlQlLDu0q" },
-  { month: 2, year: 2026, fileId: "1T_zlURriSbb72w-grKtpa5wsKxnb-8S-" },
-  { month: 3, year: 2026, fileId: "1hD_s7_XsIsxtKP624onubj_woC2RcL_7" },
-  { month: 4, year: 2026, fileId: "1qMuH3UUmjgqhw286dU6GNEvI7Lf2uJ-2" },
-  { month: 5, year: 2026, fileId: "1l0D-8UW4i62MEOsA4iK7O-SZHO9sxj6k" },
-];
+const REPORT_FILE_PATTERN =
+  /data-id="([^"]+)" jsname="vtaz5c" data-tooltip="Báo cáo tình hình tài chính Dự án Nuôi em_T(\d{2})\/(\d{4})\.docx/g;
 
 function loadDotEnv(filePath) {
   try {
@@ -55,11 +52,39 @@ function defaultSortOrder(year, month) {
   return year * 100 + month;
 }
 
-function parseFinancialTotalsFromDocumentText(text, month, year, fileId) {
-  const incomeMatch = text.match(/Tổng nguồn thu tiếp nhận trong tháng:\s*([\d.,]+)\s*VNĐ/i);
-  const expenseMatch = text.match(/Tổng các khoản chi trong tháng:\s*([\d.,]+)\s*VNĐ/i);
+function extractClosingBalance(text) {
+  const match = text.match(
+    /3\.2\.\s*Báo cáo thu\s*-\s*chi hoạt động vận hành[\s\S]*?Số dư cuối ngày\s+(\d{2}\/\d{2}\/\d{4}):\s*([\d.,]+)\s*VNĐ/i,
+  );
+  if (!match?.[1] || !match?.[2]) {
+    return null;
+  }
 
-  if (!incomeMatch?.[1] || !expenseMatch?.[1]) {
+  return { date: match[1], amount: match[2].trim() };
+}
+
+function extractMonthlyTotals(text) {
+  const legacyIncome = text.match(/Tổng nguồn thu tiếp nhận trong tháng:\s*([\d.,]+)\s*VNĐ/i);
+  const legacyExpense = text.match(/Tổng các khoản chi trong tháng:\s*([\d.,]+)\s*VNĐ/i);
+  if (legacyIncome?.[1] && legacyExpense?.[1]) {
+    return { income: legacyIncome[1], expense: legacyExpense[1] };
+  }
+
+  const sectionMatch = text.match(
+    /3\.\s*Báo cáo tình hình tài chính chi tiết tháng[\s\S]*?Tổng thu:\s*([\d.,]+)\s*VNĐ[\s\S]*?Tổng chi:\s*([\d.,]+)\s*VNĐ/i,
+  );
+  if (sectionMatch?.[1] && sectionMatch?.[2]) {
+    return { income: sectionMatch[1], expense: sectionMatch[2] };
+  }
+
+  return null;
+}
+
+function parseFinancialTotalsFromDocumentText(text, month, year, fileId) {
+  const totals = extractMonthlyTotals(text);
+  const closingBalance = extractClosingBalance(text);
+
+  if (!totals) {
     throw new Error(`Could not parse income/expense totals for Tháng ${month}/${year} (${fileId}).`);
   }
 
@@ -67,12 +92,45 @@ function parseFinancialTotalsFromDocumentText(text, month, year, fileId) {
     id: buildSlug(month, year),
     title: buildTitle(month, year),
     documentUrl: `https://docs.google.com/document/d/${fileId}/edit?usp=sharing`,
-    totalIncome: `${incomeMatch[1].trim()} đ`,
-    totalExpense: `${expenseMatch[1].trim()} đ`,
+    totalIncome: `${totals.income.trim()} đ`,
+    totalExpense: `${totals.expense.trim()} đ`,
+    closingBalanceDate: closingBalance?.date ?? null,
+    closingBalance: closingBalance ? `${closingBalance.amount} đ` : null,
     summary: null,
     year,
     sortOrder: defaultSortOrder(year, month),
   };
+}
+
+function parseFinancialReportDriveFiles(html) {
+  const files = [];
+
+  for (const match of html.matchAll(REPORT_FILE_PATTERN)) {
+    const [, fileId, monthText, yearText] = match;
+    files.push({
+      month: Number(monthText),
+      year: Number(yearText),
+      fileId,
+    });
+  }
+
+  return files.sort((a, b) => b.year - a.year || b.month - a.month);
+}
+
+async function discoverFinancialReportDriveFiles(folderId = DRIVE_FOLDER_ID) {
+  const response = await fetch(`https://drive.google.com/drive/folders/${folderId}`, {
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error(`Drive folder fetch failed (${folderId}): ${response.status}`);
+  }
+
+  const files = parseFinancialReportDriveFiles(await response.text());
+  if (files.length === 0) {
+    throw new Error(`No monthly financial report documents found in Drive folder (${folderId}).`);
+  }
+
+  return files;
 }
 
 async function fetchDocumentText(fileId) {
@@ -105,6 +163,8 @@ function toDbRow(row, existingImageUrl) {
     document_url: row.documentUrl,
     total_income: row.totalIncome || null,
     total_expense: row.totalExpense || null,
+    closing_balance_date: row.closingBalanceDate,
+    closing_balance: row.closingBalance,
     summary: row.summary,
     year: row.year,
     sort_order: row.sortOrder,
@@ -113,8 +173,9 @@ function toDbRow(row, existingImageUrl) {
 }
 
 async function syncFinancialReportsFromDrive({ dryRun = false } = {}) {
+  const driveFiles = await discoverFinancialReportDriveFiles();
   const parsedRows = await Promise.all(
-    REPORTS.map(async ({ month, year, fileId }) => {
+    driveFiles.map(async ({ month, year, fileId }) => {
       const text = await fetchDocumentText(fileId);
       return parseFinancialTotalsFromDocumentText(text, month, year, fileId);
     }),

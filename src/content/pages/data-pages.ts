@@ -112,6 +112,7 @@ export const dataUiLabels: Record<string, string> = {
     year: "Năm",
     totalIncome: "Tổng thu",
     totalExpense: "Tổng chi",
+    closingBalance: "Số dư cuối ngày",
     downloadReport: "Tải báo cáo chi tiết",
     readMore: "Xem chi tiết",
     backToNews: "Quay lại bản tin",

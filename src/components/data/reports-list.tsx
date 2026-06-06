@@ -13,6 +13,7 @@ type ReportsListProps = {
     year: string;
     totalIncome: string;
     totalExpense: string;
+    closingBalance: string;
     downloadReport: string;
     reportsListTitle: string;
   };
@@ -91,6 +92,16 @@ export function ReportsList({ reports, years, labels }: ReportsListProps) {
                     </p>
                   </div>
                 </div>
+                {report.closingBalanceDate && report.closingBalance ? (
+                  <div className="mb-4 rounded-lg bg-brand-warm/80 px-3 py-2.5 text-xs leading-snug text-brand-muted">
+                    <p className="font-semibold text-brand-ink">
+                      {labels.closingBalance} {report.closingBalanceDate}:
+                    </p>
+                    <p className="mt-1 whitespace-nowrap font-bold tabular-nums text-brand-deep">
+                      {report.closingBalance}
+                    </p>
+                  </div>
+                ) : null}
                 {report.documentUrl ? (
                   <a
                     href={report.documentUrl}

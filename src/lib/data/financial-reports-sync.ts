@@ -59,6 +59,8 @@ function toDbRow(
     document_url: row.documentUrl,
     total_income: row.totalIncome || null,
     total_expense: row.totalExpense || null,
+    closing_balance_date: row.closingBalanceDate,
+    closing_balance: row.closingBalance,
     summary: row.summary,
     year: row.year,
     sort_order: row.sortOrder,

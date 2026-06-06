@@ -19,9 +19,11 @@ describe("public-catalog link gating", () => {
     ).toBe(true);
   });
 
-  it("blocks catalog page hrefs while links are disabled", () => {
-    expect(publicCatalogLinksEnabled).toBe(false);
-    expect(resolveCatalogPageHref("https://nuoiem2025.quynuoiem.com/")).toBeNull();
+  it("resolves catalog page hrefs when links are enabled", () => {
+    expect(publicCatalogLinksEnabled).toBe(true);
+    expect(resolveCatalogPageHref("https://nuoiem2025.quynuoiem.com/")).toBe(
+      "https://nuoiem2025.quynuoiem.com/",
+    );
     expect(
       resolveCatalogPageHref("https://nuoiem2025.quynuoiem.com/api/cong-khai/thong-ke-tong-quan"),
     ).toBe("https://nuoiem2025.quynuoiem.com/api/cong-khai/thong-ke-tong-quan");

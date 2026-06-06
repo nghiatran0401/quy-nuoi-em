@@ -20,6 +20,8 @@ export const siteCopy = {
     taiChinh: "Tài chính",
     contact: "Liên hệ",
     donate: "Đóng góp",
+    receiveCode: "Nhận mã qua Fanpage",
+    receiveCodeShort: "Nhận mã",
     openMenu: "Mở menu",
     closeMenu: "Đóng menu",
   },

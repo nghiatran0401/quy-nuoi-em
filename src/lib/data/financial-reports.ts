@@ -11,6 +11,8 @@ type FinancialReportRow = {
   document_url: string | null;
   total_income: string | null;
   total_expense: string | null;
+  closing_balance_date: string | null;
+  closing_balance: string | null;
   summary: string | null;
   year: number;
   sort_order: number;
@@ -24,6 +26,8 @@ function rowToReport(row: FinancialReportRow): FinancialReport {
     documentUrl: row.document_url ?? undefined,
     totalIncome: normalizeVndUnit(row.total_income ?? ""),
     totalExpense: normalizeVndUnit(row.total_expense ?? ""),
+    closingBalanceDate: row.closing_balance_date ?? undefined,
+    closingBalance: row.closing_balance ? normalizeVndUnit(row.closing_balance) : undefined,
     year: row.year,
   };
 }

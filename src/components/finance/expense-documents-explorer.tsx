@@ -12,7 +12,6 @@ type ExpenseDocumentsExplorerProps = {
   labels: {
     month: string;
     searchPlaceholder: string;
-    openSheet: string;
     schoolCount: string;
     totalAmount: string;
     withDriveLink: string;
@@ -162,33 +161,22 @@ export function ExpenseDocumentsExplorer({ payload, labels }: ExpenseDocumentsEx
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-2">
-          {payload.lists.map((list) => (
-            <button
-              key={list.id}
-              type="button"
-              onClick={() => {
-                setSelectedListId(list.id);
-                setPage(1);
-                setSearch("");
-              }}
-              className={activeList.id === list.id ? "pill-active" : "pill-inactive"}
-            >
-              {labels.month} {list.month}/{list.year}
-              <span className="ml-1 text-xs opacity-70">({list.summary.count.toLocaleString("vi-VN")})</span>
-            </button>
-          ))}
-        </div>
-        <a
-          href={activeList.sheetUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-brand-green transition hover:text-brand-accent"
-        >
-          {labels.openSheet}
-          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-        </a>
+      <div className="flex flex-wrap gap-2">
+        {payload.lists.map((list) => (
+          <button
+            key={list.id}
+            type="button"
+            onClick={() => {
+              setSelectedListId(list.id);
+              setPage(1);
+              setSearch("");
+            }}
+            className={activeList.id === list.id ? "pill-active" : "pill-inactive"}
+          >
+            {labels.month} {list.month}/{list.year}
+            <span className="ml-1 text-xs opacity-70">({list.summary.count.toLocaleString("vi-VN")})</span>
+          </button>
+        ))}
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">

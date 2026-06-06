@@ -7,6 +7,8 @@ export type FinancialReportSheetRow = {
   documentUrl: string | null;
   totalIncome: string;
   totalExpense: string;
+  closingBalanceDate: string | null;
+  closingBalance: string | null;
   summary: string | null;
   year: number;
   sortOrder: number;
@@ -130,6 +132,8 @@ function rowFromCells(cells: string[], columnMap: Partial<Record<ColumnKey, numb
     documentUrl,
     totalIncome: normalizeVndUnit(totalIncome),
     totalExpense: normalizeVndUnit(totalExpense),
+    closingBalanceDate: null,
+    closingBalance: null,
     summary,
     year,
     sortOrder,

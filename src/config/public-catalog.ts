@@ -5,8 +5,8 @@
 const DEFAULT_PUBLIC_CATALOG_URL = "https://nuoiem2025.quynuoiem.com/";
 const NUOIEM2025_HOST = "nuoiem2025.quynuoiem.com";
 
-/** Temporarily hide UI links to the catalog site. API calls to nuoiem2025 stay active. */
-export const publicCatalogLinksEnabled = false;
+/** Hide UI links to the catalog site when false. API calls to nuoiem2025 stay active either way. */
+export const publicCatalogLinksEnabled = true;
 
 export const publicCatalog = {
   url:

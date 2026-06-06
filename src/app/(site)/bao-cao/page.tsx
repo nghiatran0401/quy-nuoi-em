@@ -22,6 +22,7 @@ export default async function ReportsPage() {
           year: getDataUiLabel("year"),
           totalIncome: getDataUiLabel("totalIncome"),
           totalExpense: getDataUiLabel("totalExpense"),
+          closingBalance: getDataUiLabel("closingBalance"),
           downloadReport: getDataUiLabel("downloadReport"),
           reportsListTitle: getDataUiLabel("reportsListTitle"),
         }}

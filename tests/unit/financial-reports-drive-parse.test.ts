@@ -23,4 +23,41 @@ describe("parseFinancialTotalsFromDocumentText", () => {
       sortOrder: 202604,
     });
   });
+
+  it("extracts totals from the current Drive report section format", () => {
+    const text = `
+3. Báo cáo tình hình tài chính chi tiết tháng 05/2026
+Tổng thu: 21.499.900 VNĐ. Chi tiết gồm:
+Tổng chi: 3.259.425.000 VNĐ. Chi tiết gồm:
+3.2. Báo cáo thu - chi hoạt động vận hành - Toàn hệ sinh thái Nuôi em
+Tổng thu: 44.377.325 VNĐ. Chi tiết gồm:
+Tổng chi: 111.868.920 VNĐ. Chi tiết gồm:
+`;
+
+    const row = parseFinancialTotalsFromDocumentText(text, 5, 2026, "doc-may");
+
+    expect(row).toMatchObject({
+      totalIncome: "21.499.900 đ",
+      totalExpense: "3.259.425.000 đ",
+    });
+  });
+
+  it("extracts closing balance from section 3.2 operations report", () => {
+    const text = `
+3. Báo cáo tình hình tài chính chi tiết tháng 01/2026
+Số dư Dự án Nuôi em tính cuối ngày 31/01/2026: 23.882.673.277 VNĐ
+3.2. Báo cáo thu - chi hoạt động vận hành - Toàn hệ sinh thái Nuôi em
+Số dư đầu ngày 01/01/2026: 4.002.740.418 VNĐ
+Tổng thu: 270.793.599 VNĐ. Chi tiết gồm:
+Tổng chi: 143.613.252 VNĐ. Chi tiết gồm:
+Số dư cuối ngày 31/01/2026: 4.129.920.765 VNĐ
+`;
+
+    const row = parseFinancialTotalsFromDocumentText(text, 1, 2026, "doc-jan");
+
+    expect(row).toMatchObject({
+      closingBalanceDate: "31/01/2026",
+      closingBalance: "4.129.920.765 đ",
+    });
+  });
 });

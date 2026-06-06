@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { BankStatementLoading } from "@/components/finance/bank-statement-loading";
-import { vcbStatementsConfig, vcbStatementsSheetUrl } from "@/config/vcb-statements";
+import { vcbStatementsConfig } from "@/config/vcb-statements";
 import type {
   VcbStatementCatalog,
   VcbStatementMonthPayload,
@@ -21,7 +21,6 @@ type BankStatementExplorerProps = {
     year: string;
     month: string;
     searchPlaceholder: string;
-    openSheet: string;
     transactionCount: string;
     totalChi: string;
     totalThu: string;
@@ -164,36 +163,25 @@ export function BankStatementExplorer({
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-2">
-          {years.map((year) => (
-            <button
-              key={year}
-              type="button"
-              disabled={isLoading}
-              onClick={() => {
-                const firstMonth =
-                  catalog.periods.find((period) => period.year === year)?.month ??
-                  payload.selection.month;
-                navigatePeriod(year, firstMonth);
-              }}
-              className={
-                payload.selection.year === year ? "pill-active" : "pill-inactive"
-              }
-            >
-              {labels.year} {year}
-            </button>
-          ))}
-        </div>
-        <a
-          href={vcbStatementsSheetUrl()}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-brand-green transition hover:text-brand-accent"
-        >
-          {labels.openSheet}
-          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-        </a>
+      <div className="flex flex-wrap gap-2">
+        {years.map((year) => (
+          <button
+            key={year}
+            type="button"
+            disabled={isLoading}
+            onClick={() => {
+              const firstMonth =
+                catalog.periods.find((period) => period.year === year)?.month ??
+                payload.selection.month;
+              navigatePeriod(year, firstMonth);
+            }}
+            className={
+              payload.selection.year === year ? "pill-active" : "pill-inactive"
+            }
+          >
+            {labels.year} {year}
+          </button>
+        ))}
       </div>
 
       <div className="flex flex-wrap gap-2">

@@ -5,6 +5,8 @@ export type FinancialReport = {
   imageUrl: string;
   totalIncome: string;
   totalExpense: string;
+  closingBalanceDate?: string;
+  closingBalance?: string;
   documentUrl?: string;
   incomeNote?: string;
   expenseNote?: string;
