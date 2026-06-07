@@ -1,8 +1,14 @@
 "use client";
 
 import { getApps, initializeApp, type FirebaseApp } from "firebase/app";
-import { getAnalytics, isSupported, logEvent, type Analytics } from "firebase/analytics";
-import { getFirebaseConfig } from "@/lib/firebase/env";
+import {
+  getAnalytics,
+  isSupported,
+  logEvent,
+  setAnalyticsCollectionEnabled,
+  type Analytics,
+} from "firebase/analytics";
+import { getFirebaseConfig, isFirebaseAnalyticsDebugEnabled } from "@/lib/firebase/env";
 
 let app: FirebaseApp | undefined;
 let analytics: Analytics | undefined;
@@ -38,10 +44,19 @@ export async function getFirebaseAnalytics(): Promise<Analytics | undefined> {
 
     const supported = await isSupported();
     if (!supported) {
+      if (process.env.NODE_ENV === "development") {
+        console.warn("[firebase] Analytics is not supported in this browser.");
+      }
       return undefined;
     }
 
     analytics = getAnalytics(firebaseApp);
+    setAnalyticsCollectionEnabled(analytics, true);
+
+    if (isFirebaseAnalyticsDebugEnabled()) {
+      window.localStorage.setItem("debug_mode", "true");
+    }
+
     return analytics;
   })();
 
@@ -57,5 +72,6 @@ export async function logFirebasePageView(path: string, title?: string): Promise
   logEvent(instance, "page_view", {
     page_path: path,
     page_title: title ?? document.title,
+    page_location: window.location.href,
   });
 }
