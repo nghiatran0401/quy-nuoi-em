@@ -5,21 +5,14 @@ type SchoolsSummaryProps = {
 };
 
 export function SchoolsSummary({ summary }: SchoolsSummaryProps) {
-  const cards = [
-    { label: "Điểm trường", value: summary.schoolCount },
-    { label: "Học sinh", value: summary.studentCount },
-    { label: "Đã có người nuôi", value: summary.sponsored },
-    { label: "Chưa có người nuôi", value: summary.unsponsored },
-  ];
-
   return (
-    <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-      {cards.map((card) => (
-        <article key={card.label} className="brand-card p-4">
-          <p className="text-xs uppercase tracking-wide text-brand-muted">{card.label}</p>
-          <p className="mt-1 text-2xl font-bold text-brand-ink">{card.value}</p>
-        </article>
-      ))}
-    </section>
+    <div className="flex flex-wrap gap-3 self-stretch sm:self-start lg:self-auto">
+      <article className="min-w-[5.5rem] flex-1 rounded-xl border border-brand-border/60 bg-white px-3 py-3 shadow-sm sm:min-w-[6.5rem] sm:flex-none sm:px-4">
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-muted">Tổng</p>
+        <p className="mt-0.5 font-heading text-xl font-bold tabular-nums text-brand-ink sm:text-2xl">
+          {summary.schoolCount}
+        </p>
+      </article>
+    </div>
   );
 }

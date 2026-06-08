@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { PublicCatalogPromo } from "@/components/shared/public-catalog-promo";
 import { SchoolsDirectoryUnavailable } from "@/components/data/schools-directory-unavailable";
-import { SchoolsSummary } from "@/components/data/schools-summary";
+import { SchoolsPageHeader } from "@/components/data/schools-page-header";
 import { SchoolsTable } from "@/components/data/schools-table";
-import { DataPageBanner } from "@/components/pages/data-page-banner";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   getDataPageHero,
@@ -67,10 +66,9 @@ export default async function SchoolsDirectoryPage({ searchParams }: PageProps) 
           siteBreadcrumb([{ name: meta.title, pathname: basePath }]),
         ]}
       />
-      <DataPageBanner {...getDataPageHero("children")} />
+      <SchoolsPageHeader {...getDataPageHero("children")} summary={summary} />
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
         <PublicCatalogPromo catalogUrl={directory?.meta.directoryUrl} />
-        <SchoolsSummary summary={summary} />
         {directory ? (
           <SchoolsTable basePath={basePath} data={directory} activeFilters={query} />
         ) : (

@@ -211,7 +211,7 @@
   }
 
   .site-build-notice {
-    @apply border-b border-brand-border/35 bg-gradient-to-r from-brand-sky-soft/70 via-brand-warm/40 to-brand-peach/25 backdrop-blur-sm;
+    @apply border-y border-brand-border/40 bg-[#fff9e6];
   }
 
   .section-pad {

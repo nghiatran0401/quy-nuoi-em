@@ -101,11 +101,11 @@ export function DonorsTable({ basePath, data, activeFilters }: DonorsTableProps)
     <section className="space-y-4">
       <div className="rounded-xl border border-brand-border/60 bg-white p-4 shadow-sm">
         <h2 className="text-lg font-semibold text-brand-ink sm:text-xl">
-          {formatNumber(pagination.total)} dòng phù hợp
+          {formatNumber(pagination.total)} anh chị nuôi phù hợp
         </h2>
         <p className="text-sm text-brand-muted">
           Hiển thị {pagination.rangeStart}–{pagination.rangeEnd} trên tổng{" "}
-          {formatNumber(pagination.total)} nhà tài trợ
+          {formatNumber(pagination.total)} anh chị nuôi
         </p>
       </div>
 

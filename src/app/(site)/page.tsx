@@ -4,6 +4,7 @@ import { ImpactJourneySection } from "@/components/home/impact-journey-section";
 import { MealProgramSection } from "@/components/home/meal-program-section";
 import { ProcessOverviewSection } from "@/components/home/process-overview-section";
 import { HeroSection } from "@/components/home/hero-section";
+import { HomeWelcomePopup } from "@/components/home/home-welcome-popup";
 import { HomeEcosystemSection } from "@/components/home/home-ecosystem-section";
 import { HomeNewsSection } from "@/components/home/home-news-section";
 import { HomeStatsSection } from "@/components/home/home-stats-section";
@@ -52,6 +53,7 @@ export default async function HomePage() {
 
   return (
     <div className="relative home-page">
+      <HomeWelcomePopup />
       <JsonLd
         data={[
           webPageJsonLd({

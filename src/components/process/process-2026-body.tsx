@@ -41,14 +41,16 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
       <div className="rounded-2xl border border-brand-border/60 bg-white/80 p-6 sm:p-8">
         <p className="eyebrow">{c.timelineIntro.eyebrow}</p>
         <h3 className="heading-section mt-2">{c.timelineIntro.title}</h3>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
           {c.timeline.map((item) => (
             <div
               key={`${item.when}-${item.what}`}
-              className="rounded-2xl border border-brand-border/70 bg-brand-warm px-5 py-4"
+              className="flex flex-col rounded-2xl border border-brand-border/70 bg-brand-warm px-5 py-4"
             >
               <p className="text-sm font-bold text-brand-accent">{item.when}</p>
-              <p className="mt-2 font-semibold text-brand-ink">{item.what}</p>
+              <p className="mt-2 flex-1 text-balance text-sm font-semibold leading-snug text-brand-ink sm:text-base">
+                {item.what}
+              </p>
             </div>
           ))}
         </div>

@@ -116,8 +116,8 @@ export const importantNotes = [
 
 export const timelineMilestones = [
   { when: "Trong 24 giờ", what: "Chuyển khoản đủ một lần (giữ mã)" },
-  { when: "Tháng 9", what: "Các bé bắt đầu đi học và ăn" },
-  { when: "Tháng 10 – 11", what: "Tra mã và nhận thông tin, ảnh bé" },
+  { when: "Tháng 9", what: "Các bé bắt đầu đi học và ăn trưa" },
+  { when: "Tháng 10 – 11", what: "Tra mã, nhận thông tin và ảnh bé" },
 ] as const;
 
 export const CODE_MEANING_URL = "http://bit.ly/2sLs7HC";

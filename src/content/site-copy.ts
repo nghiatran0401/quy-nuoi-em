@@ -27,8 +27,10 @@ export const siteCopy = {
   },
   buildNotice: {
     prefix: "Lưu ý:",
-    body: "Website đang được xây dựng và cập nhật liên tục, có thể có số liệu chưa đầy đủ, vui lòng thông tin giúp chúng tôi về",
-    dismissLabel: "Đóng thông báo",
+    body: "Hệ thống website đang được hoàn thiện và tối ưu dữ liệu liên tục. Nếu gặp bất kỳ sự cố kỹ thuật hoặc thông tin chưa chính xác nào, mong anh chị",
+    line1Closing: "gửi phản hồi về",
+    linkLabel: "Fanpage",
+    suffix: "để Ban điều hành Dự án kiểm tra và cập nhật lại ❤",
   },
   footer: {
     projectName: "Quỹ Nuôi Em",
@@ -54,6 +56,18 @@ export const siteCopy = {
       'Trên những mái nhà tranh vùng cao, chỉ từ 150.000đ – 170.000đ mỗi tháng, anh chị đã mang đến những bữa cơm trưa no bụng, giữ bước chân các em nhỏ đi học đều đặn. Với mô hình "Mỗi mã NE tương ứng 1 bữa ăn", anh chị sẽ biết rõ thông tin và có thể đến thăm em nuôi của mình.',
     sponsorNow: "Đóng góp ngay",
     learnMore: "Tra cứu mã",
+  },
+  homePopup: {
+    eyebrow: "NUÔI EM",
+    titlePrefix: "Nhận mã NE qua chatbot",
+    titleHighlight: "Fanpage Nuôi Em",
+    descriptionPrefix: "Chỉ 2 phút – nhắn",
+    descriptionBold: "Nhận mã nuôi em",
+    descriptionSuffix: "và làm theo hướng dẫn.",
+    fanpageButton: "Fanpage Nuôi Em",
+    chatbotButton: "Cấp mã chatbot",
+    closeLabel: "Đóng",
+    imageAlt: "Các em nhỏ tham gia chương trình Nuôi Em tại điểm trường vùng cao",
   },
 } as const;
 
