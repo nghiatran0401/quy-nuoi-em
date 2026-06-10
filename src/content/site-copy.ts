@@ -31,6 +31,7 @@ export const siteCopy = {
     line1Closing: "gửi phản hồi về",
     linkLabel: "Fanpage",
     suffix: "để Ban điều hành Dự án kiểm tra và cập nhật lại ❤",
+    closeLabel: "Đóng thông báo",
   },
   footer: {
     projectName: "Quỹ Nuôi Em",

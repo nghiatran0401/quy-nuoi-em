@@ -200,3 +200,38 @@ export function maskTransactionDetail(text: string): string {
   result = maskNamesInText(result);
   return result;
 }
+
+function maskTrailingDigits(token: string): string {
+  return token.replace(/(\d+)$/, (digits) => {
+    if (digits.length < 3) return digits;
+    return `${digits.slice(0, -3)}xxx`;
+  });
+}
+
+function shouldKeepTokenUnmasked(token: string): boolean {
+  return /^20\d{2}$/.test(token) || /^\d{1,2}$/.test(token);
+}
+
+/** Sao kê NỘI DUNG — hide trailing digits in codes, keep names and years visible. */
+export function maskStatementDetail(text: string): string {
+  if (!text.trim()) return text;
+
+  const maskCode = (token: string): string => {
+    if (token.includes("xxx") || shouldKeepTokenUnmasked(token) || !/\d/.test(token)) return token;
+    return maskTrailingDigits(token);
+  };
+
+  let result = text;
+
+  result = result.replace(/NE(?:[A-Z0-9]*?\d{3,})/gi, (token) => maskCode(token));
+  result = result.replace(/FT\d{3,}/gi, (token) => maskCode(token));
+  result = result.replace(/Trace\d{3,}/gi, (token) => maskCode(token));
+  result = result.replace(/\/(\d{3,})(?!x)/g, (_, digits) => `/${maskCode(digits)}`);
+  result = result.replace(/\b[A-Z0-9]*\d[A-Z0-9]*\b/gi, (token) => {
+    if (/^(?:NE|FT|Trace)/i.test(token)) return token;
+    if (token.length < 4) return token;
+    return maskCode(token);
+  });
+
+  return result;
+}

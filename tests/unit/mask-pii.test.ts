@@ -3,6 +3,7 @@ import {
   maskEmail,
   maskPersonName,
   maskPhoneDigits,
+  maskStatementDetail,
   maskTransactionDetail,
 } from "@/lib/privacy/mask-pii";
 
@@ -63,5 +64,32 @@ describe("maskTransactionDetail", () => {
     const masked = maskTransactionDetail(input);
     expect(masked).toContain("HOANG HOA TRUNG");
     expect(masked).toContain("N***** H**** K**** L***");
+  });
+});
+
+describe("maskStatementDetail", () => {
+  it("keeps donor names and years visible while masking NE and FT codes", () => {
+    const input =
+      "NGUYEN THI HONG PHUC chuyen tien 2025 2026 ck 1 ma NE2900145 PHUC NGUYEN I2BAD3N3/453123";
+    const masked = maskStatementDetail(input);
+
+    expect(masked).toContain("NGUYEN THI HONG PHUC");
+    expect(masked).toContain("PHUC NGUYEN");
+    expect(masked).toContain("2025 2026");
+    expect(masked).toContain("ck 1");
+    expect(masked).toContain("NE2900xxx");
+    expect(masked).toContain("/453xxx");
+    expect(masked).not.toContain("N*****");
+  });
+
+  it("masks concatenated NE codes and trace references", () => {
+    const input =
+      "PHAN THI KHANH LY chuyen tien lan 3 4 Ma em nuoi NELCAI00012NELCAI00034 Trace252123 FT26160144018";
+    const masked = maskStatementDetail(input);
+
+    expect(masked).toContain("PHAN THI KHANH LY");
+    expect(masked).toContain("NELCAI00xxxNELCAI00xxx");
+    expect(masked).toContain("Trace252xxx");
+    expect(masked).toContain("FT26160144xxx");
   });
 });

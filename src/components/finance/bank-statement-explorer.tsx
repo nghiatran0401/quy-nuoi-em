@@ -5,13 +5,15 @@ import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { BankStatementLoading } from "@/components/finance/bank-statement-loading";
 import { vcbStatementsConfig } from "@/config/vcb-statements";
+import { bankStatementSourceLabel } from "@/lib/data/bank-statements";
 import type {
   VcbStatementCatalog,
   VcbStatementMonthPayload,
   VcbStatementRow,
 } from "@/lib/data/vcb-statements";
+import { formatStatementDateTime } from "@/lib/format-statement-datetime";
 import { formatVnd, vcbStatementQueryString } from "@/lib/data/vcb-statements";
-import { maskTransactionDetail } from "@/lib/privacy/mask-pii";
+import { maskStatementDetail } from "@/lib/privacy/mask-pii";
 
 type BankStatementExplorerProps = {
   basePath: string;
@@ -26,8 +28,7 @@ type BankStatementExplorerProps = {
     totalThu: string;
     columnStt: string;
     columnDate: string;
-    columnChi: string;
-    columnThu: string;
+    columnAmount: string;
     columnBalance: string;
     columnDetail: string;
     noResults: string;
@@ -40,30 +41,31 @@ type BankStatementExplorerProps = {
   };
 };
 
+function StatementAmount({ row }: { row: VcbStatementRow }) {
+  if (row.thu !== null) {
+    return <span className="text-brand-success">+ {formatVnd(row.thu)}</span>;
+  }
+  if (row.chi !== null) {
+    return <span className="text-brand-danger">- {formatVnd(row.chi)}</span>;
+  }
+  return <span className="text-brand-muted">—</span>;
+}
+
 function StatementRowCells({ row }: { row: VcbStatementRow }) {
   return (
     <>
       <td className="whitespace-nowrap px-3 py-2.5 text-sm text-brand-muted">{row.stt}</td>
-      <td className="whitespace-nowrap px-3 py-2.5 text-sm text-brand-ink">{row.dateDoc}</td>
-      <td className="whitespace-nowrap px-3 py-2.5 text-right text-sm tabular-nums">
-        {row.chi !== null ? (
-          <span className="text-brand-danger">{formatVnd(row.chi)}</span>
-        ) : (
-          <span className="text-brand-muted">—</span>
-        )}
+      <td className="whitespace-nowrap px-3 py-2.5 text-sm text-brand-ink">
+        {formatStatementDateTime(row)}
       </td>
       <td className="whitespace-nowrap px-3 py-2.5 text-right text-sm tabular-nums">
-        {row.thu !== null ? (
-          <span className="text-brand-success">{formatVnd(row.thu)}</span>
-        ) : (
-          <span className="text-brand-muted">—</span>
-        )}
+        <StatementAmount row={row} />
       </td>
       <td className="whitespace-nowrap px-3 py-2.5 text-right text-sm tabular-nums text-brand-ink">
         {formatVnd(row.balance)}
       </td>
       <td className="max-w-md px-3 py-2.5 text-sm leading-relaxed text-brand-muted">
-        {maskTransactionDetail(row.detail)}
+        {maskStatementDetail(row.detail)}
       </td>
     </>
   );
@@ -74,21 +76,17 @@ function StatementCard({ row, labels }: { row: VcbStatementRow; labels: BankStat
     <li className="rounded-xl border border-brand-border/60 bg-white p-4 text-sm">
       <div className="flex items-start justify-between gap-3">
         <p className="font-medium text-brand-ink">
-          #{row.stt} · {row.dateDoc}
+          #{row.stt} · {formatStatementDateTime(row)}
         </p>
         <p className="shrink-0 tabular-nums text-brand-muted">{formatVnd(row.balance)}</p>
       </div>
-      <dl className="mt-3 grid grid-cols-2 gap-2 border-t border-brand-border/50 pt-3">
-        <div>
-          <dt className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">{labels.columnChi}</dt>
-          <dd className="tabular-nums text-brand-danger">{formatVnd(row.chi)}</dd>
-        </div>
-        <div>
-          <dt className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">{labels.columnThu}</dt>
-          <dd className="tabular-nums text-brand-success">{formatVnd(row.thu)}</dd>
-        </div>
-      </dl>
-      <p className="mt-3 text-sm leading-relaxed text-brand-muted">{maskTransactionDetail(row.detail)}</p>
+      <div className="mt-3 border-t border-brand-border/50 pt-3">
+        <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted/80">{labels.columnAmount}</p>
+        <p className="mt-1 tabular-nums">
+          <StatementAmount row={row} />
+        </p>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-brand-muted">{maskStatementDetail(row.detail)}</p>
     </li>
   );
 }
@@ -140,6 +138,7 @@ export function BankStatementExplorer({
     return payload.rows.filter(
       (row) =>
         row.detail.toLowerCase().includes(query) ||
+        formatStatementDateTime(row).toLowerCase().includes(query) ||
         row.dateDoc.toLowerCase().includes(query) ||
         String(row.stt).includes(query),
     );
@@ -260,17 +259,16 @@ export function BankStatementExplorer({
                 <table className="min-w-[48rem] w-full divide-y divide-brand-border/60 text-left">
                   <thead className="bg-brand-surface text-xs font-semibold uppercase tracking-wide text-brand-muted">
                     <tr>
-                      <th className="px-3 py-3">{labels.columnStt}</th>
-                      <th className="px-3 py-3">{labels.columnDate}</th>
-                      <th className="px-3 py-3 text-right">{labels.columnChi}</th>
-                      <th className="px-3 py-3 text-right">{labels.columnThu}</th>
-                      <th className="px-3 py-3 text-right">{labels.columnBalance}</th>
-                      <th className="px-3 py-3">{labels.columnDetail}</th>
+                      <th className="whitespace-nowrap px-3 py-3">{labels.columnStt}</th>
+                      <th className="whitespace-nowrap px-3 py-3">{labels.columnDate}</th>
+                      <th className="whitespace-nowrap px-3 py-3 text-right">{labels.columnAmount}</th>
+                      <th className="whitespace-nowrap px-3 py-3 text-right">{labels.columnBalance}</th>
+                      <th className="whitespace-nowrap px-3 py-3">{labels.columnDetail}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-brand-border/40 bg-white">
                     {pageRows.map((row) => (
-                      <tr key={row.stt} className="align-top hover:bg-brand-surface/50">
+                      <tr key={row.rowKey ?? `vcb-${row.stt}`} className="align-top hover:bg-brand-surface/50">
                         <StatementRowCells row={row} />
                       </tr>
                     ))}
@@ -280,7 +278,7 @@ export function BankStatementExplorer({
 
               <ul className="mt-5 space-y-3 lg:hidden">
                 {pageRows.map((row) => (
-                  <StatementCard key={row.stt} row={row} labels={labels} />
+                  <StatementCard key={row.rowKey ?? `vcb-${row.stt}`} row={row} labels={labels} />
                 ))}
               </ul>
             </>
@@ -322,7 +320,7 @@ export function BankStatementExplorer({
       </div>
 
       <p className="text-center text-xs text-brand-muted">
-        {payload.label} · {vcbStatementsConfig.bankName} {vcbStatementsConfig.accountNumber}
+        {payload.label} · {bankStatementSourceLabel(payload.selection.year)}
       </p>
     </div>
   );

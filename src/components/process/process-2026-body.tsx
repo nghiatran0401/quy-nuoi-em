@@ -25,12 +25,21 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
         <p className="eyebrow">{c.costIntro.eyebrow}</p>
         <h3 className="heading-section mt-2">{c.costIntro.title}</h3>
         <p className="text-body home-prose mx-auto mt-3 max-w-3xl">{c.costIntro.description}</p>
-        <div className="mx-auto mt-8 grid max-w-4xl gap-4 md:grid-cols-2">
+        <div className="mx-auto mt-8 grid max-w-6xl gap-4 lg:grid-cols-2 lg:items-stretch">
           {c.costTiers.map((tier) => (
-            <div key={tier.label} className="rounded-2xl border border-brand-border/70 bg-white p-6 text-left">
-              <p className="text-sm font-semibold text-brand-green">{tier.label}</p>
-              <p className="mt-2 font-heading text-2xl font-bold text-brand-accent sm:text-3xl">{tier.amount}</p>
-              <p className="mt-2 text-sm text-brand-muted">{tier.breakdown}</p>
+            <div
+              key={tier.label}
+              className="flex h-full flex-col rounded-2xl border border-brand-border/70 bg-white p-6 text-left"
+            >
+              <div className="flex flex-1 flex-col">
+                <p className="overflow-x-auto text-xs font-semibold leading-snug whitespace-nowrap text-brand-green [-ms-overflow-style:none] [scrollbar-width:none] sm:text-sm [&::-webkit-scrollbar]:hidden">
+                  {tier.label}
+                </p>
+              </div>
+              <div className="mt-4">
+                <p className="font-heading text-2xl font-bold text-brand-accent sm:text-3xl">{tier.amount}</p>
+                <p className="mt-2 text-sm text-brand-muted">{tier.breakdown}</p>
+              </div>
             </div>
           ))}
         </div>

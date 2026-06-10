@@ -1,7 +1,10 @@
 import Image from "next/image";
-import { MessageCircle } from "lucide-react";
+import { HomeCampaignBanner } from "@/components/home/home-campaign-banner";
 import { Process2026Body } from "@/components/process/process-2026-body";
+import { siteConfig } from "@/config/site";
+import { campaignSectionCopy, type HomeCampaignBlock } from "@/content/homepage-content";
 import { homeProcessOverview } from "@/content/home-process-overview";
+import { siteCopy } from "@/content/site-copy";
 import {
   getProcess2026PageFallback,
   resolveProcess2026ImageSrc,
@@ -11,20 +14,23 @@ import {
 type ProcessOverviewSectionProps = {
   header?: typeof homeProcessOverview;
   processContent?: Process2026PageContent;
+  campaign?: HomeCampaignBlock;
 };
 
 export function ProcessOverviewSection({
   header,
   processContent,
+  campaign = campaignSectionCopy.campaign,
 }: ProcessOverviewSectionProps) {
   const copy = header ?? homeProcessOverview;
   const process = processContent ?? getProcess2026PageFallback();
   const guideImageSrc = resolveProcess2026ImageSrc(copy.guideImage);
+  const popupCopy = siteCopy.homePopup;
 
   return (
     <section
       className="section-warm relative overflow-hidden py-6 sm:py-8 lg:py-10"
-      aria-labelledby="home-process-heading"
+      aria-labelledby="home-campaign-heading"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-100"
@@ -34,27 +40,43 @@ export function ProcessOverviewSection({
         }}
       />
       <div className="page-container relative z-10">
-        <header className="mx-auto max-w-5xl text-center">
-          <p className="font-heading text-sm font-semibold tracking-wide text-brand-green md:text-base">{copy.eyebrow}</p>
-          <h2 id="home-process-heading" className="heading-section-xl mt-2 scroll-mt-24">
-            {copy.title}
-          </h2>
-          {copy.description ? (
-            <p className="text-body home-prose mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-brand-muted sm:mt-5 sm:text-[15px]">
-              {copy.description}
-            </p>
-          ) : null}
-        </header>
+        <HomeCampaignBanner
+          campaign={campaign}
+          headingId="home-campaign-heading"
+          showDivider={false}
+        />
 
         <div className="mx-auto mt-6 flex max-w-5xl flex-col items-stretch justify-center gap-3 sm:mt-7 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
-          <a href={process.links.messenger} target="_blank" rel="noreferrer" className="btn-primary w-full sm:w-auto">
-            <MessageCircle className="mr-2 h-5 w-5 shrink-0" aria-hidden />
-            {process.hero.messengerCta}
-          </a>
-          <a href={process.links.group} target="_blank" rel="noreferrer" className="btn-secondary w-full sm:w-auto">
+          <a
+            href={process.links.group}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary w-full sm:w-auto"
+          >
             {process.hero.groupCta}
           </a>
+          <a
+            href={siteConfig.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary w-full sm:w-auto"
+          >
+            {popupCopy.fanpageButton}
+          </a>
+          <a
+            href={siteConfig.social.messenger}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="focus-ring inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#0084FF] px-6 py-3 text-center text-base font-bold text-white transition duration-200 hover:bg-[#0078EB] active:scale-[0.98] sm:w-auto sm:px-8 sm:py-3.5"
+          >
+            {popupCopy.chatbotButton}
+          </a>
         </div>
+
+        <div
+          className="mx-auto mt-8 h-0 w-full max-w-3xl border-t-2 border-dashed border-brand-accent/50 sm:mt-10"
+          aria-hidden
+        />
 
         <div className="scroll-hint-x mx-auto mt-6 max-w-6xl rounded-2xl border border-brand-border/80 bg-white shadow-[var(--shadow-brand-card)]">
           <Image

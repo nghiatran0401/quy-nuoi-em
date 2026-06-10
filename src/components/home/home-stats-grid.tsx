@@ -101,25 +101,14 @@ function FeaturedStat({ stat }: { stat: StatItem }) {
 
   return (
     <article
-      className={`relative flex h-full w-full flex-col justify-center overflow-hidden rounded-xl p-4 sm:p-5 ${styles.bg} ring-1 ring-inset ${styles.ring}`}
+      className={`relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-xl p-4 text-center sm:p-5 ${styles.bg} ring-1 ring-inset ${styles.ring}`}
     >
       <div
         className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand-accent/10 blur-2xl"
         aria-hidden
       />
-      <div className="relative flex items-center gap-2.5">
-        <span
-          className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/90 shadow-sm ${styles.icon}`}
-          aria-hidden
-        >
-          <Users className="h-5 w-5" strokeWidth={2.25} />
-        </span>
-        <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-accent-dark">
-          Quy mô quỹ
-        </p>
-      </div>
       <p
-        className={`relative mt-3 font-heading text-[clamp(2rem,6vw,3rem)] font-bold leading-none tracking-tight tabular-nums ${styles.value}`}
+        className={`relative font-heading text-[clamp(2rem,6vw,3rem)] font-bold leading-none tracking-tight tabular-nums ${styles.value}`}
       >
         {stat.value}
       </p>

@@ -160,8 +160,8 @@ export const campaignSectionCopy: HomeCampaignSectionContent = {
     },
   ],
   campaign: {
-    headline: "MÃ NUÔI EM MÙA 12 — ĐANG MỞ",
-    phase: "2025 – 2026 · Thêm 30.000 bé đợt 1",
+    headline: "MÃ NUÔI EM MÙA 12 ĐANG MỞ",
+    phase: "Quy trình nhận mã",
     goal: "Mục tiêu +120.000 bé được nhận nuôi trên cả nước",
   },
   story: {

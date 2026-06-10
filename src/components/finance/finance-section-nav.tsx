@@ -40,11 +40,8 @@ export function FinanceSectionNav({ items }: FinanceSectionNavProps) {
   }, [items]);
 
   return (
-    <nav
-      aria-label="Mục trên trang tài chính"
-      className="sticky top-16 z-20 -mx-4 border-b border-brand-border/50 bg-brand-warm/90 px-4 py-3 backdrop-blur-md sm:top-20 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
-    >
-      <div className="mx-auto max-w-4xl rounded-full border border-brand-border/60 bg-white/90 p-1 shadow-[var(--shadow-brand-soft)]">
+    <nav aria-label="Mục trên trang tài chính">
+      <div className="rounded-full border border-brand-border/60 bg-white/90 p-1 shadow-[var(--shadow-brand-soft)]">
         <ul className="flex gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {items.map((item) => {
             const isActive = activeId === item.id;

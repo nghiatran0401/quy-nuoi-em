@@ -32,7 +32,7 @@ export const processSteps2026: readonly ProcessStepContent[] = [
     summary:
       "Chuyển khoản ngay sau khi có mã. Thiếu mã NE trên nội dung chuyển khoản → không hoàn lại, chuyển vào quỹ vô danh (xây trường).",
     bullets: [
-      "Ghi nội dung chuyển khoản: Mã NE + số điện thoại + tên anh chị.",
+      "Ghi nội dung chuyển khoản: Mã NE + tên anh chị + 2526.",
       "Sau 24 giờ có thể bị thu hồi mã — cần đăng ký lại từ đầu.",
       "Chuyển một lần đủ 9 tháng tiền ăn + cơ sở vật chất (xem mức đóng góp và tài khoản bên dưới).",
     ],
@@ -148,7 +148,7 @@ export const process2026PageContent = {
     description:
       "Khi đã có mã NE, làm đúng 6 bước dưới đây để giữ mã, chuyển khoản đúng cú pháp, nhận thông tin bé và theo dõi suốt năm học. Nội dung tham chiếu từ quy trình chính thức của Quỹ Nuôi Em.",
     messengerCta: "Nhận mã qua Fanpage",
-    groupCta: "Tham gia nhóm Facebook tổng Nuôi Em",
+    groupCta: "Facebook Nuôi Em",
   },
   stepsIntro: {
     eyebrow: "6 bước cốt lõi",
@@ -180,8 +180,8 @@ export const process2026PageContent = {
       "Nếu anh chị vô tình quên ghi nội dung hãy báo ngay lại với dự án qua trang Nuôi Em. Trong trường hợp dự án nhận được chuyển khoản nhưng không có nội dung sẽ không hoàn lại và chuyển thành giao dịch vô danh (xây trường).",
     codeExpiryNote:
       "Anh chị lưu ý giúp dự án: sau 24 giờ chưa chuyển, mã NE sẽ bị thu hồi. Khi mã đã thu hồi, anh chị vui lòng đăng ký lại từ đầu.",
-    transferFormat: "Mã NE + số điện thoại + tên anh chị",
-    transferExample: "NE00123 0975302307 Nguyen Van A",
+    transferFormat: "Mã NE + tên anh chị + 2526",
+    transferExample: "NE05559 Nguyen Tai 2526",
     accountNumber: "1805",
     bank: "Ngân hàng Quân đội (MB) — Ngân hàng TMCP Quân đội",
     accountName: "CTCP DNXH QUY NUOI EM",

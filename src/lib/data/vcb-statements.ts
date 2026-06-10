@@ -13,12 +13,16 @@ import {
 export type VcbStatementRow = {
   stt: number;
   dateDoc: string;
+  /** ISO-like timestamp for MB rows; used for Vietnam date/time display. */
+  occurredAt?: string;
   chi: number | null;
   thu: number | null;
   balance: number | null;
   detail: string;
   year: number;
   month: number;
+  source?: "vcb" | "mb";
+  rowKey?: string;
 };
 
 export type VcbStatementPeriod = {

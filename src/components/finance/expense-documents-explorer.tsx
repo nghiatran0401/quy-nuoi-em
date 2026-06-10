@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink, FolderOpen, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, Search } from "lucide-react";
 import { expenseDocumentsConfig } from "@/config/expense-documents";
 import type { ExpenseDocumentList, ExpenseDocumentRow, ExpenseDocumentsPayload } from "@/lib/data/expense-documents";
 import { formatExpenseAmount } from "@/lib/data/expense-documents";
@@ -282,11 +282,6 @@ export function ExpenseDocumentsExplorer({ payload, labels }: ExpenseDocumentsEx
           </div>
         </div>
       ) : null}
-
-      <p className="flex items-center justify-center gap-1.5 text-center text-xs text-brand-muted">
-        <FolderOpen className="h-3.5 w-3.5 shrink-0" aria-hidden />
-        {activeList.title}
-      </p>
     </div>
   );
 }

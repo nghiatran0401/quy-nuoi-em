@@ -12,7 +12,6 @@ export async function ExpenseDocumentsDataLoader() {
       title={content.expenseDocsSection.title}
       description={content.expenseDocsSection.description}
       emptyState={content.expenseDocsSection.emptyState}
-      interimLabel={content.expenseDocsSection.interimLabel}
       payload={payload}
       labels={content.expenseDocsTableLabels}
     />

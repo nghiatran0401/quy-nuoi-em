@@ -1,26 +1,18 @@
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { HomeCampaignBanner } from "@/components/home/home-campaign-banner";
-import { publicCatalog, publicCatalogLinksEnabled } from "@/config/public-catalog";
+import { HomeCampaignLogos } from "@/components/home/home-campaign-logos";
 import { HomeStatsGrid } from "@/components/home/home-stats-grid";
-import { campaignSectionCopy, type HomeCampaignBlock } from "@/content/homepage-content";
+import { campaignSectionCopy } from "@/content/homepage-content";
 import type { StatItem } from "@/content/types";
 
 type HomeStatsSectionProps = {
   stats: StatItem[];
-  directoryUrl?: string;
-  campaign?: HomeCampaignBlock;
   logos?: typeof campaignSectionCopy.logos;
 };
 
 export function HomeStatsSection({
   stats,
-  directoryUrl,
-  campaign = campaignSectionCopy.campaign,
   logos = campaignSectionCopy.logos,
 }: HomeStatsSectionProps) {
   const items = stats;
-  const catalogUrl = directoryUrl?.trim() || publicCatalog.url;
 
   return (
     <section
@@ -37,31 +29,25 @@ export function HomeStatsSection({
       />
 
       <div className="page-container relative py-8 sm:py-10 lg:py-12">
-        <HomeCampaignBanner
-          campaign={campaign}
-          logos={logos}
-          headingId="home-stats-heading"
-          className="mb-5 sm:mb-6"
-        />
+        <header className="mx-auto mb-6 max-w-5xl text-center sm:mb-8">
+          <HomeCampaignLogos logos={logos} className="mb-5 sm:mb-6" />
+          <h2
+            id="home-stats-heading"
+            className="heading-display mx-auto max-w-4xl scroll-mt-24 text-[clamp(1.35rem,4vw+0.5rem,2.35rem)] font-extrabold leading-tight tracking-tight text-brand-accent"
+          >
+            Thống kê tổng quan
+          </h2>
+          <p className="mt-3 font-heading text-sm font-semibold tracking-wide text-brand-green md:text-base">
+            Cảm ơn anh chị đã đồng hành cùng Quỹ Nuôi Em
+          </p>
+          <p className="mx-auto mt-4 max-w-3xl text-pretty text-sm leading-relaxed text-brand-muted md:text-base">
+            Khi đồng ý nuôi em, cũng có nghĩa bạn đã hoàn toàn nắm rõ thông tin về Chương trình, uỷ quyền, đồng
+            thuận, tin tưởng về cách thức quản lý tài chính, triển khai thực hiện do Nhóm Nuôi em đang vận hành,
+            triển khai, đồng thời trao quyền để Nhóm quyết định những vấn đề liên quan đến Chương trình.
+          </p>
+        </header>
 
         <HomeStatsGrid stats={items} />
-
-        {publicCatalogLinksEnabled ? (
-          <div className="mx-auto mt-5 max-w-xl text-center sm:mt-6">
-            <p className="text-xs text-brand-muted sm:text-sm">
-              Số liệu tổng hợp từ danh mục em nuôi công khai
-            </p>
-            <Link
-              href={catalogUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary mt-3 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold shadow-[var(--shadow-brand-soft)] transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-brand-card)]"
-            >
-              {publicCatalog.statsCtaLabel}
-              <ArrowUpRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
-        ) : null}
       </div>
     </section>
   );

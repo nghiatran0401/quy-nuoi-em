@@ -4,7 +4,6 @@ import { Facebook, Mail, MapPin, Phone } from "lucide-react";
 import { BrandLogo } from "@/components/brand/logo";
 import { brandVisual } from "@/config/brand-visual";
 import { siteCopy } from "@/content/site-copy";
-import { footerResourceItems } from "@/lib/navigation";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -68,20 +67,6 @@ export function SiteFooter() {
             </ul>
           </FooterSection>
         </div>
-
-        <nav
-          aria-label={t.resourcesSection}
-          className="mt-10 border-t border-brand-border/50 pt-8"
-        >
-          <p className="mb-4 text-sm font-bold text-brand-green">{t.resourcesSection}</p>
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {footerResourceItems.map((item) => (
-              <li key={item.href}>
-                <FooterResourceLink item={item} />
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
 
       <div className="border-t border-brand-border/60">
@@ -164,25 +149,6 @@ function FooterContactItem({
         <span>{label}</span>
       </a>
     </li>
-  );
-}
-
-function FooterResourceLink({ item }: { item: (typeof footerResourceItems)[number] }) {
-  const className =
-    "text-sm font-medium text-brand-ink transition-colors hover:text-brand-accent";
-
-  if (item.external) {
-    return (
-      <a href={item.href} target="_blank" rel="noopener noreferrer" className={className}>
-        {item.label}
-      </a>
-    );
-  }
-
-  return (
-    <Link href={item.href} className={className}>
-      {item.label}
-    </Link>
   );
 }
 

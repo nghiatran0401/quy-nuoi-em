@@ -1,7 +1,7 @@
+import { BankStatementLoadNotices } from "@/components/finance/bank-statement-load-notices";
 import { BankStatementLoading } from "@/components/finance/bank-statement-loading";
 import { FinanceSectionHeader } from "@/components/finance/finance-section-header";
 import { taiChinhContent } from "@/content/tai-chinh-content";
-import { Clock } from "lucide-react";
 
 export function BankStatementSectionFallback() {
   const content = taiChinhContent;
@@ -16,10 +16,7 @@ export function BankStatementSectionFallback() {
           headingId="bank-statements-heading"
         />
 
-        <div className="mb-5 flex items-center gap-2 rounded-xl bg-brand-sky-soft/70 px-4 py-3 text-xs leading-relaxed text-brand-muted sm:text-sm">
-          <Clock className="h-4 w-4 shrink-0 text-brand-green" aria-hidden />
-          <p>{content.saoKeSection.loadNotice}</p>
-        </div>
+        <BankStatementLoadNotices notices={content.saoKeSection.loadNotices} />
 
         <BankStatementLoading
           variant="page"

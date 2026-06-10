@@ -2,17 +2,59 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-import { useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import { createPortal } from "react-dom";
 import { siteConfig } from "@/config/site";
 import { siteCopy } from "@/content/site-copy";
 
 const POPUP_ORANGE = "#EE9352";
 
-export function HomeWelcomePopup() {
-  const [open, setOpen] = useState(true);
-  const [mounted] = useState(() => typeof window !== "undefined");
+type HomeWelcomePopupContextValue = {
+  openPopup: () => void;
+};
+
+const HomeWelcomePopupContext = createContext<HomeWelcomePopupContextValue | null>(null);
+
+export function useHomeWelcomePopup() {
+  return useContext(HomeWelcomePopupContext);
+}
+
+type HomeWelcomePopupProviderProps = {
+  children: ReactNode;
+};
+
+export function HomeWelcomePopupProvider({ children }: HomeWelcomePopupProviderProps) {
+  const [open, setOpen] = useState(false);
+  const openPopup = useCallback(() => setOpen(true), []);
+  const closePopup = useCallback(() => setOpen(false), []);
+  const value = useMemo(() => ({ openPopup }), [openPopup]);
+
+  return (
+    <HomeWelcomePopupContext.Provider value={value}>
+      {children}
+      <HomeWelcomePopup open={open} onClose={closePopup} />
+    </HomeWelcomePopupContext.Provider>
+  );
+}
+
+type HomeWelcomePopupProps = {
+  open: boolean;
+  onClose: () => void;
+};
+
+function HomeWelcomePopup({ open, onClose }: HomeWelcomePopupProps) {
+  const [mounted, setMounted] = useState(false);
   const copy = siteCopy.homePopup;
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;
@@ -21,7 +63,7 @@ export function HomeWelcomePopup() {
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") onClose();
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -30,7 +72,7 @@ export function HomeWelcomePopup() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open]);
+  }, [open, onClose]);
 
   if (!mounted || !open) return null;
 
@@ -40,7 +82,7 @@ export function HomeWelcomePopup() {
         type="button"
         aria-label={copy.closeLabel}
         className="absolute inset-0 bg-brand-ink/45 backdrop-blur-[2px]"
-        onClick={() => setOpen(false)}
+        onClick={onClose}
       />
 
       <div
@@ -61,7 +103,7 @@ export function HomeWelcomePopup() {
           <button
             type="button"
             aria-label={copy.closeLabel}
-            onClick={() => setOpen(false)}
+            onClick={onClose}
             className="focus-ring absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-brand-ink shadow-sm transition hover:bg-white active:scale-95"
           >
             <X className="h-4 w-4" strokeWidth={2.5} aria-hidden />

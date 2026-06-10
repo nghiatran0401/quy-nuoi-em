@@ -1,6 +1,7 @@
-import { Clock, FileSpreadsheet } from "lucide-react";
+import { FileSpreadsheet } from "lucide-react";
 import type { ComponentProps } from "react";
 import { BankStatementExplorer } from "@/components/finance/bank-statement-explorer";
+import { BankStatementLoadNotices } from "@/components/finance/bank-statement-load-notices";
 import { FinanceDataPlaceholder } from "@/components/finance/finance-data-placeholder";
 import { FinanceSectionHeader } from "@/components/finance/finance-section-header";
 import type {
@@ -13,7 +14,7 @@ type BankStatementSectionProps = {
   basePath: string;
   title: string;
   description: string;
-  loadNotice: string;
+  loadNotices: readonly string[];
   emptyState: string;
   catalog: VcbStatementCatalog | null;
   payload: VcbStatementMonthPayload | null;
@@ -25,7 +26,7 @@ export function BankStatementSection({
   basePath,
   title,
   description,
-  loadNotice,
+  loadNotices,
   emptyState,
   catalog,
   payload,
@@ -41,10 +42,7 @@ export function BankStatementSection({
           headingId="bank-statements-heading"
         />
 
-        <div className="mb-5 flex items-center gap-2 rounded-xl bg-brand-sky-soft/70 px-4 py-3 text-xs leading-relaxed text-brand-muted sm:text-sm">
-          <Clock className="h-4 w-4 shrink-0 text-brand-green" aria-hidden />
-          <p>{loadNotice}</p>
-        </div>
+        <BankStatementLoadNotices notices={loadNotices} />
 
         {catalog && payload ? (
           <BankStatementExplorer

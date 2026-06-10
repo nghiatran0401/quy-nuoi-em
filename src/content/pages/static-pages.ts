@@ -369,8 +369,8 @@ export const donateInfo: {
   accountNumber: "1805",
   publicAccountLine:
     "Số tài khoản minh bạch công khai 4 số QUY NUOI EM tại Ngân hàng Quân đội (MB): 1805",
-  transferFormat: "Mã NE + số điện thoại + tên anh chị",
-  transferExample: "NE00123 09xxxxxxxx Nguyen Van A",
+  transferFormat: "Mã NE + tên anh chị + 2526",
+  transferExample: "NE05559 Nguyen Tai 2526",
 };
 
 export const uiLabels: Record<string, string> = {

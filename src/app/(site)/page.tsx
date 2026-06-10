@@ -4,7 +4,7 @@ import { ImpactJourneySection } from "@/components/home/impact-journey-section";
 import { MealProgramSection } from "@/components/home/meal-program-section";
 import { ProcessOverviewSection } from "@/components/home/process-overview-section";
 import { HeroSection } from "@/components/home/hero-section";
-import { HomeWelcomePopup } from "@/components/home/home-welcome-popup";
+import { HomeWelcomePopupProvider } from "@/components/home/home-welcome-popup";
 import { HomeEcosystemSection } from "@/components/home/home-ecosystem-section";
 import { HomeNewsSection } from "@/components/home/home-news-section";
 import { HomeStatsSection } from "@/components/home/home-stats-section";
@@ -52,8 +52,8 @@ export default async function HomePage() {
   const campaignContent = resolveHomeCampaignContent(homeContent.cta);
 
   return (
+    <HomeWelcomePopupProvider>
     <div className="relative home-page">
-      <HomeWelcomePopup />
       <JsonLd
         data={[
           webPageJsonLd({
@@ -77,15 +77,11 @@ export default async function HomePage() {
         ]}
       />
       <HeroSection content={homeContent.hero} heroImageUrl={homeMedia.heroImage} />
-      <HomeStatsSection
-        stats={liveHomeStats.stats}
-        directoryUrl={liveHomeStats.directoryUrl}
-        campaign={campaignContent.campaign}
-        logos={campaignContent.logos}
-      />
+      <HomeStatsSection stats={liveHomeStats.stats} logos={campaignContent.logos} />
       <ProcessOverviewSection
         header={homeSections.process}
         processContent={processContent}
+        campaign={campaignContent.campaign}
       />
       <HomeStorySection content={homeContent.cta} />
       <MealProgramSection content={homeSections.meal} />
@@ -95,5 +91,6 @@ export default async function HomePage() {
       <HomeNewsSection content={homeSections.news} />
       <HomeEcosystemSection ecosystem={campaignContent.ecosystem} />
     </div>
+    </HomeWelcomePopupProvider>
   );
 }

@@ -175,10 +175,12 @@ export const taiChinhContent = {
     id: "sao-ke",
     title: "Sao kê tài khoản",
     description:
-      "Công khai sao kê VCB theo tháng — anh chị chọn năm và tháng để xem, hoặc mở bảng gốc trên Google Sheets.",
-    loadNotice:
-      "Lần đầu tải một tháng có thể mất vài giây. Một số tháng có hơn 10.000 giao dịch — anh chị có thể tìm theo nội dung hoặc mở bảng đầy đủ trên Google Sheets.",
-    emptyState: "Không tải được sao kê lúc này. Anh chị thử lại sau hoặc mở trực tiếp trên Google Sheets.",
+      "Công khai sao kê theo tháng — từ 2026, giao dịch MB được lấy trực tiếp từ App Thiện Nguyện mỗi lần tải trang.",
+    loadNotices: [
+      "Giao dịch MB (từ 05/2026) cập nhật theo thời gian thực từ App Thiện Nguyện.",
+      "Một số tháng VCB có hơn 10.000 giao dịch — lần đầu tải có thể mất vài giây.",
+    ],
+    emptyState: "Không tải được sao kê lúc này. Anh chị thử lại sau.",
   },
 
   statementTableLabels: {
@@ -190,8 +192,7 @@ export const taiChinhContent = {
     totalThu: "Tổng thu",
     columnStt: "STT",
     columnDate: "Ngày / Số CT",
-    columnChi: "Chi",
-    columnThu: "Thu",
+    columnAmount: "Thu / Chi",
     columnBalance: "Số dư",
     columnDetail: "Nội dung",
     noResults: "Không có giao dịch phù hợp trong tháng này.",
@@ -206,10 +207,8 @@ export const taiChinhContent = {
   expenseDocsSection: {
     id: "chung-tu-chi",
     title: "Một vài chứng từ",
-    description:
-      "Danh sách điểm trường giải ngân tiền ăn tập trung — kèm link Drive chứng từ (nếu đã có).",
-    emptyState: "Chưa tải được danh sách chứng từ chi. Anh chị thử lại sau hoặc xem trên Group/Fanpage.",
-    interimLabel: "Xem thêm trên",
+    description: "Danh sách điểm trường giải ngân tiền ăn tập trung — kèm chứng từ (nếu đã có).",
+    emptyState: "Chưa tải được danh sách chứng từ chi. Anh chị thử lại sau.",
   },
 
   expenseDocsTableLabels: {
@@ -217,7 +216,7 @@ export const taiChinhContent = {
     searchPlaceholder: "Tìm theo tên trường, xã, tỉnh…",
     schoolCount: "Số điểm trường",
     totalAmount: "Tổng giải ngân",
-    withDriveLink: "Đã có link Drive",
+    withDriveLink: "Đã có chứng từ",
     columnStt: "TT",
     columnSchool: "Trường",
     columnCommune: "Xã",
@@ -225,7 +224,7 @@ export const taiChinhContent = {
     columnStudents: "HS được hỗ trợ",
     columnAmount: "Số tiền giải ngân",
     columnDrive: "Chứng từ",
-    viewDocuments: "Xem Drive",
+    viewDocuments: "Xem chứng từ",
     noDocuments: "Đang cập nhật",
     noResults: "Không có điểm trường phù hợp.",
     page: "Trang",

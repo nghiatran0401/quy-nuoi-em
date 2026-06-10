@@ -20,8 +20,20 @@ function formatNumber(value: number): string {
   return new Intl.NumberFormat("vi-VN").format(value);
 }
 
+const ACTIVE_EATING_STATUS = "Đang ăn";
+const ACTIVE_EATING_STATUS_LABEL = "Ăn hết tháng 5/2026";
+
+function isActiveEatingStatus(status: string): boolean {
+  return status === ACTIVE_EATING_STATUS || status === ACTIVE_EATING_STATUS_LABEL;
+}
+
+function formatEatingStatus(status: string): string {
+  if (status === ACTIVE_EATING_STATUS) return ACTIVE_EATING_STATUS_LABEL;
+  return status;
+}
+
 function statusBadgeClass(status: string): string {
-  if (status === "Đang ăn") {
+  if (isActiveEatingStatus(status)) {
     return "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200";
   }
   return "bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200";
@@ -54,7 +66,7 @@ function SchoolRowCells({
             href={row.stopLetterUrl}
             target="_blank"
             rel="noreferrer"
-            className="link-accent text-xs"
+            className="cursor-pointer text-xs font-semibold text-blue-600 underline underline-offset-2 hover:text-blue-700"
           >
             Xem công văn
           </a>
@@ -64,9 +76,9 @@ function SchoolRowCells({
       </td>
       <td className="px-2.5 py-2.5">
         <span
-          className={`inline-flex max-w-full rounded-full px-2 py-0.5 text-[11px] font-semibold leading-tight ${statusBadgeClass(row.eatingStatus)}`}
+          className={`inline-flex whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-semibold leading-tight ${statusBadgeClass(row.eatingStatus)}`}
         >
-          {row.eatingStatus}
+          {formatEatingStatus(row.eatingStatus)}
         </span>
       </td>
     </>
@@ -82,9 +94,9 @@ function SchoolCard({ row, stt }: { row: SchoolsDirectorySchool; stt: number }) 
           {row.school}
         </p>
         <span
-          className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${statusBadgeClass(row.eatingStatus)}`}
+          className={`inline-flex shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold ${statusBadgeClass(row.eatingStatus)}`}
         >
-          {row.eatingStatus}
+          {formatEatingStatus(row.eatingStatus)}
         </span>
       </div>
       <p className="mt-1 text-sm text-brand-muted">{row.locationLabel}</p>
@@ -110,7 +122,7 @@ function SchoolCard({ row, stt }: { row: SchoolsDirectorySchool; stt: number }) 
               href={row.stopLetterUrl}
               target="_blank"
               rel="noreferrer"
-              className="link-accent text-sm"
+              className="cursor-pointer text-sm font-semibold text-blue-600 underline underline-offset-2 hover:text-blue-700"
             >
               Xem công văn dừng ăn
             </a>
@@ -183,7 +195,7 @@ export function SchoolsTable({ basePath, data, activeFilters }: SchoolsTableProp
           <option value="">Tất cả tình trạng</option>
           {filters.eatingStatuses.map((item) => (
             <option key={item} value={item}>
-              {item}
+              {formatEatingStatus(item)}
             </option>
           ))}
         </select>

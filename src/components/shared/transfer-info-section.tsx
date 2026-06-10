@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ArrowRight, Building2, CircleAlert } from "lucide-react";
+import { Building2, CircleAlert } from "lucide-react";
+import { TransferQrCta } from "@/components/shared/transfer-qr-cta";
 
 export type TransferInfoContent = {
   eyebrow: string;
@@ -97,7 +98,7 @@ export function TransferInfoSection({ transfer, qrImageSrc, fanpageUrl }: Transf
 
             <div className="mt-5 space-y-2 rounded-xl border border-brand-border/70 bg-white px-4 py-3 text-sm">
               <p>
-                <span className="font-semibold text-brand-ink">Cú pháp nội dung Chuyển khoản:</span>{" "}
+                <span className="font-semibold text-brand-ink">Cú pháp chuyển khoản:</span>{" "}
                 {transfer.transferFormat}
               </p>
               <p className="text-brand-muted">
@@ -119,10 +120,7 @@ export function TransferInfoSection({ transfer, qrImageSrc, fanpageUrl }: Transf
                   sizes="240px"
                 />
               </div>
-              <a href={fanpageUrl} target="_blank" rel="noreferrer" className="btn-primary mt-6 w-full">
-                {transfer.qrCta}
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-              </a>
+              <TransferQrCta label={transfer.qrCta} fanpageUrl={fanpageUrl} />
             </div>
           </aside>
         </div>

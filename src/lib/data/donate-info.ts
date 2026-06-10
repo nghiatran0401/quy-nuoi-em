@@ -27,7 +27,13 @@ export const defaultDonateInfo: DonateInfoContent = {
 const LEGACY_TRANSFER_FORMAT = "“Mã bé nhận nuôi” + Tên anh chị (bắt buộc có mã NE)";
 const LEGACY_TRANSFER_FORMAT_SDT =
   "Mã NE + số điện thoại + Tên anh chị (bắt buộc có mã NE mới chuyển khoản)";
+const LEGACY_TRANSFER_FORMAT_PHONE = "Mã NE + số điện thoại + tên anh chị";
 const LEGACY_TRANSFER_EXAMPLE = "NE00123 Nguyen Van A";
+const LEGACY_TRANSFER_EXAMPLES = new Set([
+  LEGACY_TRANSFER_EXAMPLE,
+  "NE00123 0975302307 Nguyen Van A",
+  "NE00123 09xxxxxxxx Nguyen Van A",
+]);
 
 function expandDonateAbbreviations(text: string): string {
   return text
@@ -53,16 +59,18 @@ export function resolveDonateInfo(raw: DonateInfoContent | null | undefined): Do
   const trimmedTransferFormat = raw.transferFormat?.trim();
   const normalizedTransferFormat =
     trimmedTransferFormat === LEGACY_TRANSFER_FORMAT ||
-    trimmedTransferFormat === LEGACY_TRANSFER_FORMAT_SDT
+    trimmedTransferFormat === LEGACY_TRANSFER_FORMAT_SDT ||
+    trimmedTransferFormat === LEGACY_TRANSFER_FORMAT_PHONE
       ? defaultDonateInfo.transferFormat
       : trimmedTransferFormat
         ? expandDonateAbbreviations(trimmedTransferFormat)
         : defaultDonateInfo.transferFormat;
 
+  const trimmedTransferExample = raw.transferExample?.trim();
   const normalizedTransferExample =
-    raw.transferExample?.trim() === LEGACY_TRANSFER_EXAMPLE
+    trimmedTransferExample && LEGACY_TRANSFER_EXAMPLES.has(trimmedTransferExample)
       ? defaultDonateInfo.transferExample
-      : raw.transferExample?.trim() || defaultDonateInfo.transferExample;
+      : trimmedTransferExample || defaultDonateInfo.transferExample;
 
   const accountHighlight = raw.accountHighlight?.trim()
     ? expandDonateAbbreviations(raw.accountHighlight.trim())
