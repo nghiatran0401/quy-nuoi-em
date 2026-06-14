@@ -1,7 +1,4 @@
-import {
-  vcbStatementsConfig,
-  vcbStatementsCsvExportUrl,
-} from "@/config/vcb-statements";
+import { vpStatementsConfig, vpStatementsCsvExportUrl } from "@/config/vp-statements";
 import {
   formatPeriodLabel,
   iterateCsvRecords,
@@ -10,49 +7,13 @@ import {
   parseVndCell,
   pickDefaultStatementSelection,
 } from "@/lib/data/vcb-statements-parse";
-
-export type VcbStatementRow = {
-  stt: number;
-  dateDoc: string;
-  /** ISO-like timestamp for MB rows; used for Vietnam date/time display. */
-  occurredAt?: string;
-  chi: number | null;
-  thu: number | null;
-  balance: number | null;
-  detail: string;
-  year: number;
-  month: number;
-  source?: "vcb" | "vp" | "mb";
-  rowKey?: string;
-};
-
-export type VcbStatementPeriod = {
-  year: number;
-  month: number;
-  count: number;
-  label: string;
-};
-
-export type VcbStatementSelection = {
-  year: number;
-  month: number;
-};
-
-export type VcbStatementMonthPayload = {
-  selection: VcbStatementSelection;
-  label: string;
-  rows: VcbStatementRow[];
-  summary: {
-    count: number;
-    totalChi: number;
-    totalThu: number;
-  };
-};
-
-export type VcbStatementCatalog = {
-  periods: VcbStatementPeriod[];
-  defaultSelection: VcbStatementSelection;
-};
+import type {
+  VcbStatementCatalog,
+  VcbStatementMonthPayload,
+  VcbStatementPeriod,
+  VcbStatementRow,
+  VcbStatementSelection,
+} from "@/lib/data/vcb-statements";
 
 const DATA_HEADER = "stt";
 
@@ -65,10 +26,9 @@ const memoryCache = new Map<string, MemoryCacheEntry<unknown>>();
 const inFlight = new Map<string, Promise<unknown>>();
 
 function cacheTtlMs(): number {
-  return vcbStatementsConfig.revalidateSeconds * 1000;
+  return vpStatementsConfig.revalidateSeconds * 1000;
 }
 
-/** In-process cache — Next.js unstable_cache rejects payloads over 2MB (CSV is ~37MB). */
 async function withMemoryCache<T>(key: string, factory: () => Promise<T>): Promise<T> {
   const now = Date.now();
   const cached = memoryCache.get(key);
@@ -97,19 +57,19 @@ async function withMemoryCache<T>(key: string, factory: () => Promise<T>): Promi
 }
 
 async function fetchCsvText(): Promise<string> {
-  const response = await fetch(vcbStatementsCsvExportUrl(), {
+  const response = await fetch(vpStatementsCsvExportUrl(), {
     cache: "no-store",
   });
 
   if (!response.ok) {
-    throw new Error(`VCB statements CSV fetch failed: ${response.status}`);
+    throw new Error(`VP statements CSV fetch failed: ${response.status}`);
   }
 
   return response.text();
 }
 
 function getCachedCsvText(): Promise<string> {
-  return withMemoryCache("vcb-statements-csv", fetchCsvText);
+  return withMemoryCache("vp-statements-csv", fetchCsvText);
 }
 
 function rowFromRecord(record: string[]): VcbStatementRow | null {
@@ -120,15 +80,22 @@ function rowFromRecord(record: string[]): VcbStatementRow | null {
   const month = parseIntCell(record[7]);
   if (stt === null || year === null || month === null) return null;
 
+  const date = normalizeDateDoc(record[1] ?? "");
+  const description = (record[2] ?? "").trim();
+  const transactionCode = (record[3] ?? "").trim();
+  const dateDoc = transactionCode ? `${date}\n${transactionCode}` : date;
+
   return {
     stt,
-    dateDoc: normalizeDateDoc(record[1] ?? ""),
-    chi: parseVndCell(record[2]),
-    thu: parseVndCell(record[3]),
-    balance: parseVndCell(record[4]),
-    detail: (record[5] ?? "").trim(),
+    dateDoc,
+    chi: parseVndCell(record[4]),
+    thu: parseVndCell(record[5]),
+    balance: null,
+    detail: description,
     year,
     month,
+    source: "vp",
+    rowKey: `vp-${stt}`,
   };
 }
 
@@ -177,10 +144,6 @@ function periodsFromMap(periodMap: Map<string, number>): VcbStatementPeriod[] {
     .sort((a, b) => b.year - a.year || b.month - a.month);
 }
 
-function pickDefaultSelection(periods: VcbStatementPeriod[]): VcbStatementSelection {
-  return pickDefaultStatementSelection(periods);
-}
-
 function summarizeRows(rows: VcbStatementRow[]) {
   let totalChi = 0;
   let totalThu = 0;
@@ -197,12 +160,12 @@ async function buildCatalog(): Promise<VcbStatementCatalog> {
   const periods = periodsFromMap(periodMap);
 
   if (periods.length === 0) {
-    throw new Error("VCB statements catalog is empty");
+    throw new Error("VP statements catalog is empty");
   }
 
   return {
     periods,
-    defaultSelection: pickDefaultSelection(periods),
+    defaultSelection: pickDefaultStatementSelection(periods),
   };
 }
 
@@ -222,49 +185,15 @@ async function buildMonthPayload(
   };
 }
 
-export function getVcbStatementCatalog(): Promise<VcbStatementCatalog> {
-  return withMemoryCache("vcb-statements-catalog", buildCatalog);
+export function getVpStatementCatalog(): Promise<VcbStatementCatalog> {
+  return withMemoryCache("vp-statements-catalog", buildCatalog);
 }
 
-export function getVcbStatementMonth(
+export function getVpStatementMonth(
   year: number,
   month: number,
 ): Promise<VcbStatementMonthPayload> {
-  return withMemoryCache(`vcb-statements-month-${year}-${month}`, () =>
+  return withMemoryCache(`vp-statements-month-${year}-${month}`, () =>
     buildMonthPayload(year, month),
   );
-}
-
-export function parseVcbStatementSearchParams(
-  params: Record<string, string | string[] | undefined>,
-  catalog: VcbStatementCatalog,
-): VcbStatementSelection {
-  const yearRaw = pickParam(params.year);
-  const monthRaw = pickParam(params.month);
-
-  const year = yearRaw ? Number(yearRaw) : catalog.defaultSelection.year;
-  const month = monthRaw ? Number(monthRaw) : catalog.defaultSelection.month;
-
-  const valid = catalog.periods.some((period) => period.year === year && period.month === month);
-  if (valid && Number.isFinite(year) && Number.isFinite(month) && month >= 1 && month <= 12) {
-    return { year, month };
-  }
-
-  return catalog.defaultSelection;
-}
-
-function pickParam(value: string | string[] | undefined): string | undefined {
-  if (Array.isArray(value)) return value[0];
-  return value;
-}
-
-
-export { formatVnd } from "@/lib/format-vnd";
-
-export function vcbStatementQueryString(selection: VcbStatementSelection): string {
-  const params = new URLSearchParams({
-    year: String(selection.year),
-    month: String(selection.month),
-  });
-  return params.toString();
 }

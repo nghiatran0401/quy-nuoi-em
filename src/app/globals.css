@@ -185,7 +185,11 @@
   }
 
   .nav-link {
-    @apply font-medium text-brand-muted transition-colors hover:text-brand-green;
+    @apply rounded-full px-3 py-1.5 text-sm font-medium text-brand-muted transition-colors hover:bg-brand-sky-soft hover:text-brand-ink;
+  }
+
+  .nav-link-active {
+    @apply bg-brand-green font-semibold text-white shadow-sm hover:bg-brand-green hover:text-white;
   }
 
   .site-header-shell {

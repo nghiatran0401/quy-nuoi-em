@@ -4,6 +4,10 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { BankStatementLoading } from "@/components/finance/bank-statement-loading";
+import {
+  BankStatementAccountsBar,
+  BankStatementSourceBadge,
+} from "@/components/finance/bank-statement-accounts-bar";
 import { vcbStatementsConfig } from "@/config/vcb-statements";
 import { bankStatementSourceLabel } from "@/lib/data/bank-statements";
 import type {
@@ -27,6 +31,7 @@ type BankStatementExplorerProps = {
     totalChi: string;
     totalThu: string;
     columnStt: string;
+    columnBank: string;
     columnDate: string;
     columnAmount: string;
     columnBalance: string;
@@ -38,6 +43,8 @@ type BankStatementExplorerProps = {
     next: string;
     loadingTitle: string;
     loadingHint: string;
+    accountsTitle: string;
+    accountsNote: string;
   };
 };
 
@@ -55,6 +62,9 @@ function StatementRowCells({ row }: { row: VcbStatementRow }) {
   return (
     <>
       <td className="whitespace-nowrap px-3 py-2.5 text-sm text-brand-muted">{row.stt}</td>
+      <td className="whitespace-nowrap px-3 py-2.5 text-sm">
+        <BankStatementSourceBadge row={row} />
+      </td>
       <td className="whitespace-nowrap px-3 py-2.5 text-sm text-brand-ink">
         {formatStatementDateTime(row)}
       </td>
@@ -75,9 +85,14 @@ function StatementCard({ row, labels }: { row: VcbStatementRow; labels: BankStat
   return (
     <li className="rounded-xl border border-brand-border/60 bg-white p-4 text-sm">
       <div className="flex items-start justify-between gap-3">
-        <p className="font-medium text-brand-ink">
-          #{row.stt} · {formatStatementDateTime(row)}
-        </p>
+        <div className="min-w-0">
+          <p className="font-medium text-brand-ink">
+            #{row.stt} · {formatStatementDateTime(row)}
+          </p>
+          <p className="mt-1">
+            <BankStatementSourceBadge row={row} />
+          </p>
+        </div>
         <p className="shrink-0 tabular-nums text-brand-muted">{formatVnd(row.balance)}</p>
       </div>
       <div className="mt-3 border-t border-brand-border/50 pt-3">
@@ -162,7 +177,9 @@ export function BankStatementExplorer({
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-wrap gap-2">
+      <BankStatementAccountsBar title={labels.accountsTitle} note={labels.accountsNote} />
+
+      <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {years.map((year) => (
           <button
             key={year}
@@ -174,25 +191,25 @@ export function BankStatementExplorer({
                 payload.selection.month;
               navigatePeriod(year, firstMonth);
             }}
-            className={
+            className={`shrink-0 whitespace-nowrap ${
               payload.selection.year === year ? "pill-active" : "pill-inactive"
-            }
+            }`}
           >
             {labels.year} {year}
           </button>
         ))}
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {monthsForYear.map((period) => (
           <button
             key={`${period.year}-${period.month}`}
             type="button"
             disabled={isLoading}
             onClick={() => navigatePeriod(period.year, period.month)}
-            className={
+            className={`shrink-0 whitespace-nowrap ${
               payload.selection.month === period.month ? "pill-active" : "pill-inactive"
-            }
+            }`}
           >
             {labels.month} {period.month}
             <span className="ml-1 text-xs opacity-70">({period.count.toLocaleString("vi-VN")})</span>
@@ -260,6 +277,7 @@ export function BankStatementExplorer({
                   <thead className="bg-brand-surface text-xs font-semibold uppercase tracking-wide text-brand-muted">
                     <tr>
                       <th className="whitespace-nowrap px-3 py-3">{labels.columnStt}</th>
+                      <th className="whitespace-nowrap px-3 py-3">{labels.columnBank}</th>
                       <th className="whitespace-nowrap px-3 py-3">{labels.columnDate}</th>
                       <th className="whitespace-nowrap px-3 py-3 text-right">{labels.columnAmount}</th>
                       <th className="whitespace-nowrap px-3 py-3 text-right">{labels.columnBalance}</th>

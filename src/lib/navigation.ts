@@ -42,3 +42,8 @@ export const footerResourceItems: FooterResourceItem[] = [
 export function navLabel(key: NavLabelKey): string {
   return siteCopy.nav[key];
 }
+
+export function isNavItemActive(pathname: string, href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}

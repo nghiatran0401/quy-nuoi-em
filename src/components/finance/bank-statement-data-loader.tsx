@@ -36,7 +36,6 @@ export async function BankStatementDataLoader({ searchParams }: BankStatementDat
       basePath={basePath}
       title={content.saoKeSection.title}
       description={content.saoKeSection.description}
-      loadNotices={content.saoKeSection.loadNotices}
       emptyState={content.saoKeSection.emptyState}
       catalog={catalog}
       payload={payload}

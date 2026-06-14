@@ -175,11 +175,7 @@ export const taiChinhContent = {
     id: "sao-ke",
     title: "Sao kê tài khoản",
     description:
-      "Công khai sao kê theo tháng — từ 2026, giao dịch MB được lấy trực tiếp từ App Thiện Nguyện mỗi lần tải trang.",
-    loadNotices: [
-      "Giao dịch MB (từ 05/2026) cập nhật theo thời gian thực từ App Thiện Nguyện.",
-      "Một số tháng VCB có hơn 10.000 giao dịch — lần đầu tải có thể mất vài giây.",
-    ],
+      "Công khai sao kê theo tháng từ 3 nguồn: Vietcombank (VCB), VPBank (chi dự án) và Ngân hàng Quân đội (MB, từ 2026 qua App Thiện Nguyện). Mỗi giao dịch có nhãn ngân hàng để anh chị đối soát.",
     emptyState: "Không tải được sao kê lúc này. Anh chị thử lại sau.",
   },
 
@@ -191,6 +187,7 @@ export const taiChinhContent = {
     totalChi: "Tổng chi",
     totalThu: "Tổng thu",
     columnStt: "STT",
+    columnBank: "TK",
     columnDate: "Ngày / Số CT",
     columnAmount: "Thu / Chi",
     columnBalance: "Số dư",
@@ -202,6 +199,9 @@ export const taiChinhContent = {
     next: "Sau",
     loadingTitle: "Đang tải sao kê…",
     loadingHint: "Tháng này có thể có hàng nghìn giao dịch — xin anh chị chờ chút nhé.",
+    accountsTitle: "3 tài khoản / nguồn sao kê",
+    accountsNote:
+      "VCB và MB là sao kê thu chi; VPBank là danh sách chi dự án. Cột TK giúp phân biệt từng giao dịch.",
   },
 
   expenseDocsSection: {
@@ -231,12 +231,5 @@ export const taiChinhContent = {
     of: "/",
     prev: "Trước",
     next: "Sau",
-  },
-
-  cta: {
-    title: "Để lại lời nhắn cho Quỹ Nuôi Em",
-    description: "Chúng tôi sẽ phản hồi toàn bộ ý kiến của anh chị ngay khi nhận được.",
-    donateLabel: "Đóng góp",
-    contactLabel: "Liên hệ",
   },
 } as const;

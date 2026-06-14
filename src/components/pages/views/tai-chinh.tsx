@@ -1,8 +1,7 @@
 import { FinanceChannelCards } from "@/components/finance/finance-channel-cards";
-import { FinanceCta } from "@/components/finance/finance-cta";
 import { FinanceOpening } from "@/components/finance/finance-opening";
 import { FinancePeriodReport } from "@/components/finance/finance-period-report";
-import { FinanceSectionNav } from "@/components/finance/finance-section-nav";
+import { FinancePageToc } from "@/components/finance/finance-section-nav";
 import { TransparencyPillars } from "@/components/finance/transparency-pillars";
 import { DataPageBanner } from "@/components/pages/data-page-banner";
 import { ThienNguyenProfileSection } from "@/components/shared/thien-nguyen-profile-section";
@@ -35,8 +34,6 @@ export function TaiChinhView({ statementSection, expenseDocumentsSection }: TaiC
             stewardNote={content.stewardNote}
           />
 
-          <FinanceSectionNav items={content.sectionNav} />
-
           <FinancePeriodReport />
 
           <FinanceSectionRule />
@@ -64,15 +61,10 @@ export function TaiChinhView({ statementSection, expenseDocumentsSection }: TaiC
           {expenseDocumentsSection}
 
           <ThienNguyenProfileSection showMonthlyReportsLink={false} className="!border-brand-border/60" />
-
-          <FinanceCta
-            title={content.cta.title}
-            description={content.cta.description}
-            donateLabel={content.cta.donateLabel}
-            contactLabel={content.cta.contactLabel}
-          />
         </div>
       </div>
+
+      <FinancePageToc items={content.sectionNav} />
     </article>
   );
 }

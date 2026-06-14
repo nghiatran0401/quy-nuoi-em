@@ -13,6 +13,13 @@ const catalog: VcbStatementCatalog = {
 };
 
 describe("parseBankStatementSearchParams", () => {
+  it("uses catalog default when no params are provided", () => {
+    expect(parseBankStatementSearchParams({}, catalog)).toEqual({
+      year: 2018,
+      month: 3,
+    });
+  });
+
   it("picks latest month when only year is provided", () => {
     expect(parseBankStatementSearchParams({ year: "2026" }, catalog)).toEqual({
       year: 2026,
@@ -29,14 +36,16 @@ describe("parseBankStatementSearchParams", () => {
 });
 
 describe("bankStatementSourceLabel", () => {
-  it("shows both banks from 2026 onward", () => {
+  it("shows all three banks from 2026 onward", () => {
     expect(bankStatementSourceLabel(2026)).toContain("Vietcombank");
+    expect(bankStatementSourceLabel(2026)).toContain("VPBank");
     expect(bankStatementSourceLabel(2026)).toContain("MB");
     expect(bankStatementSourceLabel(2026)).toContain("1805");
   });
 
-  it("shows only VCB before 2026", () => {
+  it("shows VCB and VP before 2026", () => {
     expect(bankStatementSourceLabel(2025)).toContain("Vietcombank");
+    expect(bankStatementSourceLabel(2025)).toContain("VPBank");
     expect(bankStatementSourceLabel(2025)).not.toContain("1805");
   });
 });

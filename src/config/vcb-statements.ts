@@ -6,7 +6,7 @@ export const vcbStatementsConfig = {
   bankName: "Vietcombank (VCB)",
   /** ISR / fetch cache for CSV export (seconds). */
   revalidateSeconds: 3600,
-  pageSize: 50,
+  pageSize: 20,
 } as const;
 
 export function vcbStatementsCsvExportUrl(): string {

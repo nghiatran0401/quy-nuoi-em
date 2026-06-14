@@ -4,6 +4,7 @@ import {
   iterateCsvRecords,
   parseIntCell,
   parseVndCell,
+  pickDefaultStatementSelection,
 } from "@/lib/data/vcb-statements-parse";
 import { parseVcbStatementSearchParams } from "@/lib/data/vcb-statements";
 import type { VcbStatementCatalog } from "@/lib/data/vcb-statements";
@@ -51,6 +52,29 @@ describe("parseIntCell", () => {
 describe("formatPeriodLabel", () => {
   it("formats Vietnamese month label", () => {
     expect(formatPeriodLabel(2025, 9)).toBe("Tháng 9/2025");
+  });
+});
+
+describe("pickDefaultStatementSelection", () => {
+  const periods = [
+    { year: 2026, month: 6, count: 10, label: "Tháng 6/2026" },
+    { year: 2026, month: 2, count: 1, label: "Tháng 2/2026" },
+    { year: 2018, month: 3, count: 2, label: "Tháng 3/2018" },
+  ];
+
+  it("selects the current month when data exists", () => {
+    const now = new Date("2026-06-14T10:00:00+07:00");
+    expect(pickDefaultStatementSelection(periods, now)).toEqual({ year: 2026, month: 6 });
+  });
+
+  it("falls back to the latest month in the current year when the current month has no data", () => {
+    const now = new Date("2026-03-01T10:00:00+07:00");
+    expect(pickDefaultStatementSelection(periods, now)).toEqual({ year: 2026, month: 6 });
+  });
+
+  it("falls back to the newest period when the current year has no data", () => {
+    const now = new Date("2025-01-01T10:00:00+07:00");
+    expect(pickDefaultStatementSelection(periods, now)).toEqual({ year: 2026, month: 6 });
   });
 });
 

@@ -1,7 +1,6 @@
 import { FileSpreadsheet } from "lucide-react";
 import type { ComponentProps } from "react";
 import { BankStatementExplorer } from "@/components/finance/bank-statement-explorer";
-import { BankStatementLoadNotices } from "@/components/finance/bank-statement-load-notices";
 import { FinanceDataPlaceholder } from "@/components/finance/finance-data-placeholder";
 import { FinanceSectionHeader } from "@/components/finance/finance-section-header";
 import type {
@@ -14,7 +13,6 @@ type BankStatementSectionProps = {
   basePath: string;
   title: string;
   description: string;
-  loadNotices: readonly string[];
   emptyState: string;
   catalog: VcbStatementCatalog | null;
   payload: VcbStatementMonthPayload | null;
@@ -26,7 +24,6 @@ export function BankStatementSection({
   basePath,
   title,
   description,
-  loadNotices,
   emptyState,
   catalog,
   payload,
@@ -41,8 +38,6 @@ export function BankStatementSection({
           description={description}
           headingId="bank-statements-heading"
         />
-
-        <BankStatementLoadNotices notices={loadNotices} />
 
         {catalog && payload ? (
           <BankStatementExplorer

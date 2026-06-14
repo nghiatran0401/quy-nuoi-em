@@ -95,3 +95,48 @@ export function normalizeDateDoc(value: string): string {
 export function formatPeriodLabel(year: number, month: number): string {
   return `Tháng ${month}/${year}`;
 }
+
+export type StatementPeriod = {
+  year: number;
+  month: number;
+};
+
+export function currentYearMonthInVietnam(now = new Date()): { year: number; month: number } {
+  const formatter = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Ho_Chi_Minh",
+    year: "numeric",
+    month: "2-digit",
+  });
+  const parts = formatter.formatToParts(now);
+
+  return {
+    year: Number(parts.find((part) => part.type === "year")?.value),
+    month: Number(parts.find((part) => part.type === "month")?.value),
+  };
+}
+
+/** Prefer the current calendar month; fall back to the newest period with data. */
+export function pickDefaultStatementSelection(
+  periods: StatementPeriod[],
+  now = new Date(),
+): { year: number; month: number } {
+  if (periods.length === 0) {
+    return currentYearMonthInVietnam(now);
+  }
+
+  const { year: currentYear, month: currentMonth } = currentYearMonthInVietnam(now);
+
+  if (periods.some((period) => period.year === currentYear && period.month === currentMonth)) {
+    return { year: currentYear, month: currentMonth };
+  }
+
+  const latestInCurrentYear = periods
+    .filter((period) => period.year === currentYear)
+    .sort((a, b) => b.month - a.month)[0];
+  if (latestInCurrentYear) {
+    return { year: latestInCurrentYear.year, month: latestInCurrentYear.month };
+  }
+
+  const sorted = [...periods].sort((a, b) => b.year - a.year || b.month - a.month);
+  return { year: sorted[0].year, month: sorted[0].month };
+}

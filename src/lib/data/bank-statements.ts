@@ -1,9 +1,11 @@
 import { mbStatementsConfig } from "@/config/mb-statements";
-import { vcbStatementsConfig } from "@/config/vcb-statements";
 import {
   getMbStatementMonthRows,
   getMbStatementPeriods,
 } from "@/lib/data/mb-statements";
+import {
+  bankStatementSourceSummary,
+} from "@/lib/data/bank-statement-sources";
 import {
   getVcbStatementCatalog,
   getVcbStatementMonth,
@@ -14,31 +16,30 @@ import {
   type VcbStatementRow,
   type VcbStatementSelection,
 } from "@/lib/data/vcb-statements";
-import { formatPeriodLabel } from "@/lib/data/vcb-statements-parse";
+import { getVpStatementCatalog, getVpStatementMonth } from "@/lib/data/vp-statements";
+import { formatPeriodLabel, pickDefaultStatementSelection } from "@/lib/data/vcb-statements-parse";
 import { parseVietnamDateTime } from "@/lib/format-statement-datetime";
 
 function shouldMergeMb(year: number): boolean {
   return year >= mbStatementsConfig.mergeFromYear;
 }
 
-function mergePeriods(vcbPeriods: VcbStatementPeriod[], mbPeriods: VcbStatementPeriod[]): VcbStatementPeriod[] {
+function mergePeriods(...periodLists: VcbStatementPeriod[][]): VcbStatementPeriod[] {
   const merged = new Map<string, VcbStatementPeriod>();
 
-  for (const period of vcbPeriods) {
-    merged.set(`${period.year}-${period.month}`, { ...period });
-  }
-
-  for (const period of mbPeriods) {
-    const key = `${period.year}-${period.month}`;
-    const existing = merged.get(key);
-    if (existing) {
-      merged.set(key, {
-        ...existing,
-        count: existing.count + period.count,
-      });
-      continue;
+  for (const periods of periodLists) {
+    for (const period of periods) {
+      const key = `${period.year}-${period.month}`;
+      const existing = merged.get(key);
+      if (existing) {
+        merged.set(key, {
+          ...existing,
+          count: existing.count + period.count,
+        });
+        continue;
+      }
+      merged.set(key, { ...period });
     }
-    merged.set(key, { ...period });
   }
 
   return [...merged.values()].sort((a, b) => b.year - a.year || b.month - a.month);
@@ -76,22 +77,23 @@ function sortStatementRowsNewestFirst(rows: VcbStatementRow[]): VcbStatementRow[
 
 function normalizeStatementRows(rows: VcbStatementRow[]): VcbStatementRow[] {
   return sortStatementRowsNewestFirst(
-    rows.map((row) => ({
-      ...row,
-      source: row.source ?? "vcb",
-      rowKey: row.rowKey ?? `vcb-${row.stt}`,
-    })),
+    rows.map((row) => {
+      const source = row.source ?? "vcb";
+      return {
+        ...row,
+        source,
+        rowKey: row.rowKey ?? `${source}-${row.stt}`,
+      };
+    }),
   );
 }
 
-function mergeRows(vcbRows: VcbStatementRow[], mbRows: VcbStatementRow[]): VcbStatementRow[] {
-  return normalizeStatementRows([...vcbRows, ...mbRows]);
+function mergeRows(...rowLists: VcbStatementRow[][]): VcbStatementRow[] {
+  return normalizeStatementRows(rowLists.flat());
 }
 
 function pickDefaultSelection(periods: VcbStatementPeriod[]): VcbStatementSelection {
-  const substantial = periods.find((period) => period.count >= 100);
-  const chosen = substantial ?? periods[0];
-  return { year: chosen.year, month: chosen.month };
+  return pickDefaultStatementSelection(periods);
 }
 
 function pickMonthForYear(catalog: VcbStatementCatalog, year: number, monthRaw: string | undefined): number {
@@ -103,40 +105,54 @@ function pickMonthForYear(catalog: VcbStatementCatalog, year: number, monthRaw: 
 }
 
 export async function getBankStatementCatalog(): Promise<VcbStatementCatalog> {
-  const vcbCatalog = await getVcbStatementCatalog();
+  const [vcbCatalog, vpCatalog] = await Promise.all([
+    getVcbStatementCatalog(),
+    getVpStatementCatalog().catch(() => null),
+  ]);
+
+  const periodLists = [vcbCatalog.periods];
+  if (vpCatalog) {
+    periodLists.push(vpCatalog.periods);
+  }
 
   try {
     const mbPeriods = await getMbStatementPeriods(mbStatementsConfig.mergeFromYear);
-    const periods = mergePeriods(vcbCatalog.periods, mbPeriods);
-    return {
-      periods,
-      defaultSelection: pickDefaultSelection(periods),
-    };
+    periodLists.push(mbPeriods);
   } catch {
-    return vcbCatalog;
+    // MB API optional for catalog
   }
+
+  const periods = mergePeriods(...periodLists);
+  return {
+    periods,
+    defaultSelection: pickDefaultSelection(periods),
+  };
 }
 
 export async function getBankStatementMonth(
   year: number,
   month: number,
 ): Promise<VcbStatementMonthPayload> {
-  const vcbPayload = await getVcbStatementMonth(year, month);
-  if (!shouldMergeMb(year)) {
-    return {
-      ...vcbPayload,
-      rows: normalizeStatementRows(vcbPayload.rows),
-    };
+  const [vcbPayload, vpPayload] = await Promise.all([
+    getVcbStatementMonth(year, month),
+    getVpStatementMonth(year, month).catch(() => null),
+  ]);
+
+  const rowLists = [vcbPayload.rows];
+  if (vpPayload) {
+    rowLists.push(vpPayload.rows);
   }
 
-  let mbRows: VcbStatementRow[] = [];
-  try {
-    mbRows = await getMbStatementMonthRows(year, month);
-  } catch {
-    mbRows = [];
+  if (shouldMergeMb(year)) {
+    try {
+      const mbRows = await getMbStatementMonthRows(year, month);
+      rowLists.push(mbRows);
+    } catch {
+      // MB API optional for month payload
+    }
   }
 
-  const rows = mergeRows(vcbPayload.rows, mbRows);
+  const rows = mergeRows(...rowLists);
 
   return {
     selection: { year, month },
@@ -169,9 +185,5 @@ export function parseBankStatementSearchParams(
 }
 
 export function bankStatementSourceLabel(year: number): string {
-  if (!shouldMergeMb(year)) {
-    return `${vcbStatementsConfig.bankName} ${vcbStatementsConfig.accountNumber}`;
-  }
-
-  return `${vcbStatementsConfig.bankName} ${vcbStatementsConfig.accountNumber} + ${mbStatementsConfig.bankName} ${mbStatementsConfig.accountNumber}`;
+  return bankStatementSourceSummary(year, mbStatementsConfig.mergeFromYear);
 }

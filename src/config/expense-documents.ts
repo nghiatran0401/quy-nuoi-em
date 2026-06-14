@@ -36,7 +36,7 @@ function buildExpenseDocumentList(
 
 export const expenseDocumentsConfig = {
   revalidateSeconds: 3600,
-  pageSize: 50,
+  pageSize: 20,
   driveFolderId: expenseDocumentsDriveFolderId,
   lists: [
     buildExpenseDocumentList(

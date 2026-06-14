@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Heart, Menu, X } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BrandLogo } from "@/components/brand/logo";
 import { ReceiveCodeButton } from "@/components/layout/receive-code-button";
-import { mainNavItems, navLabel } from "@/lib/navigation";
+import { isNavItemActive, mainNavItems, navLabel } from "@/lib/navigation";
 
 const MOBILE_MENU_SELECTOR = '[data-mobile-menu="true"]';
 
@@ -45,6 +46,7 @@ function readHeaderBottom(navElement: HTMLElement | null): number | null {
 }
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const menuTopRef = useRef<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -131,8 +133,15 @@ export function SiteHeader() {
               style={overlayStyle}
             >
               <nav className="page-container py-1">
-                {mainNavItems.map((item) =>
-                  item.external ? (
+                {mainNavItems.map((item) => {
+                  const active = !item.external && isNavItemActive(pathname, item.href);
+                  const mobileLinkClass = `block min-h-11 rounded-xl px-3 py-2.5 text-base font-medium transition-colors ${
+                    active
+                      ? "bg-brand-green font-semibold text-white shadow-sm"
+                      : "text-brand-ink hover:bg-brand-surface active:bg-brand-sky-soft"
+                  }`;
+
+                  return item.external ? (
                     <a
                       key={item.href}
                       href={item.href}
@@ -147,13 +156,14 @@ export function SiteHeader() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="block min-h-11 rounded-lg py-2.5 text-base font-medium text-brand-ink transition-colors hover:bg-brand-surface active:bg-brand-sky-soft"
+                      className={mobileLinkClass}
+                      aria-current={active ? "page" : undefined}
                       onClick={closeMobile}
                     >
                       {navLabel(item.labelKey)}
                     </Link>
-                  ),
-                )}
+                  );
+                })}
               </nav>
               <div className="page-container space-y-2 border-t border-brand-border/70 py-3 pb-safe">
                 <ReceiveCodeButton variant="mobile-menu" onNavigate={closeMobile} />
@@ -187,9 +197,12 @@ export function SiteHeader() {
               </Link>
             </div>
 
-            <div className="hidden min-w-0 flex-1 items-center justify-center gap-4 lg:flex xl:gap-6">
-              {mainNavItems.map((item) =>
-                item.external ? (
+            <div className="hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex xl:gap-1.5">
+              {mainNavItems.map((item) => {
+                const active = !item.external && isNavItemActive(pathname, item.href);
+                const desktopLinkClass = `nav-link whitespace-nowrap${active ? " nav-link-active" : ""}`;
+
+                return item.external ? (
                   <a
                     key={item.href}
                     href={item.href}
@@ -200,11 +213,16 @@ export function SiteHeader() {
                     {navLabel(item.labelKey)}
                   </a>
                 ) : (
-                  <Link key={item.href} href={item.href} className="nav-link whitespace-nowrap">
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={desktopLinkClass}
+                    aria-current={active ? "page" : undefined}
+                  >
                     {navLabel(item.labelKey)}
                   </Link>
-                ),
-              )}
+                );
+              })}
             </div>
 
             <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-2.5 lg:gap-3">

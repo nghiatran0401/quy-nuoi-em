@@ -1,4 +1,3 @@
-import { BankStatementLoadNotices } from "@/components/finance/bank-statement-load-notices";
 import { BankStatementLoading } from "@/components/finance/bank-statement-loading";
 import { FinanceSectionHeader } from "@/components/finance/finance-section-header";
 import { taiChinhContent } from "@/content/tai-chinh-content";
@@ -15,8 +14,6 @@ export function BankStatementSectionFallback() {
           description={content.saoKeSection.description}
           headingId="bank-statements-heading"
         />
-
-        <BankStatementLoadNotices notices={content.saoKeSection.loadNotices} />
 
         <BankStatementLoading
           variant="page"
