@@ -30,6 +30,8 @@ describe("buildMetadata", () => {
     expect(meta.openGraph?.images?.[0]).toMatchObject({
       url: "https://quynuoiem.com/og/default.jpg",
       secureUrl: "https://quynuoiem.com/og/default.jpg",
+      width: 1200,
+      height: 630,
     });
   });
 

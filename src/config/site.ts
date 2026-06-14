@@ -4,6 +4,12 @@ import { publicCatalog } from "@/config/public-catalog";
 /** Default share image (1200×630; committed under public/og for reliable social crawlers). */
 export const DEFAULT_OG_IMAGE_PATH = "/og/default.jpg";
 
+/** Standard Open Graph dimensions (Zalo, Facebook, LinkedIn, X). */
+export const OG_IMAGE_SIZE = {
+  width: 1200,
+  height: 630,
+} as const;
+
 export const siteConfig = {
   name: brandVisual.name,
   shortName: brandVisual.shortName,

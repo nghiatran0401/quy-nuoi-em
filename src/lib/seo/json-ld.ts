@@ -1,7 +1,7 @@
 import { brandVisual } from "@/config/brand-visual";
 import { publicCatalog, publicCatalogLinksEnabled } from "@/config/public-catalog";
 import { DEFAULT_OG_IMAGE_PATH, getSiteUrl, siteConfig, siteName } from "@/config/site";
-import { absoluteUrl } from "@/lib/seo/paths";
+import { absoluteAssetUrl, absoluteUrl } from "@/lib/seo/paths";
 
 const SITE_URL = getSiteUrl();
 
@@ -65,7 +65,7 @@ export function organizationJsonLd(): JsonLdObject {
     legalName: brandVisual.companyRegistration.legalName,
     url: SITE_URL,
     logo: logoImageObject(),
-    image: `${SITE_URL}${DEFAULT_OG_IMAGE_PATH}`,
+    image: absoluteAssetUrl(DEFAULT_OG_IMAGE_PATH),
     description:
       "Quỹ Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — 150.000–170.000đ/tháng giúp bé no bụng và đến trường.",
     slogan: brandVisual.tagline,
@@ -172,7 +172,7 @@ export function webPageJsonLd({
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORGANIZATION_ID },
     inLanguage: "vi-VN",
-    ...(imageUrl ? { primaryImageOfPage: { "@type": "ImageObject", url: imageUrl } } : {}),
+    ...(imageUrl ? { primaryImageOfPage: { "@type": "ImageObject", url: absoluteAssetUrl(imageUrl) } } : {}),
     ...(datePublished ? { datePublished } : {}),
     ...(dateModified ? { dateModified } : {}),
     ...(breadcrumbId ? { breadcrumb: { "@id": breadcrumbId } } : {}),
@@ -228,8 +228,8 @@ export function articleJsonLd({
     url,
     mainEntityOfPage: { "@type": "WebPage", "@id": `${url}#webpage` },
     image: imageUrl
-      ? [{ "@type": "ImageObject", url: imageUrl, width: 1200, height: 630 }]
-      : undefined,
+      ? [{ "@type": "ImageObject", url: absoluteAssetUrl(imageUrl), width: 1200, height: 630 }]
+      : [{ "@type": "ImageObject", url: absoluteAssetUrl(DEFAULT_OG_IMAGE_PATH), width: 1200, height: 630 }],
     datePublished: datePublished || undefined,
     dateModified: dateModified || datePublished || undefined,
     author: {

@@ -11,6 +11,7 @@ import { HomeStatsSection } from "@/components/home/home-stats-section";
 // import { MembersSection } from "@/components/home/members-section";
 // import { SponsoredChildrenSection } from "@/components/home/sponsored-children-section";
 import { JsonLd } from "@/components/seo/json-ld";
+import { DEFAULT_OG_IMAGE_PATH } from "@/config/site";
 import { siteCopy } from "@/content/site-copy";
 import { getLiveHomeStats } from "@/lib/data/home-metrics";
 import { getHomePageContent, resolveHomeCampaignContent } from "@/lib/data/homepage";
@@ -20,6 +21,7 @@ import { getLatestNews } from "@/lib/data/news";
 import { getProcess2026PageContent } from "@/lib/data/process-2026-page";
 import { itemListJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { absoluteAssetUrl } from "@/lib/seo/paths";
 import { newsArticlePath } from "@/lib/seo/routes";
 
 /** Match directory home-metrics API cache (max-age=300). */
@@ -60,6 +62,7 @@ export default async function HomePage() {
             title: metadata.title,
             description: metadata.description,
             pathname: "/",
+            imageUrl: absoluteAssetUrl(DEFAULT_OG_IMAGE_PATH),
           }),
           ...(latestNews.length > 0
             ? [

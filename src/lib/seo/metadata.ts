@@ -4,10 +4,11 @@ import {
   getMetadataBase,
   getSiteUrl,
   localeOgLocale,
+  OG_IMAGE_SIZE,
   siteConfig,
   siteName,
 } from "@/config/site";
-import { absoluteUrl } from "@/lib/seo/paths";
+import { absoluteAssetUrl, absoluteUrl } from "@/lib/seo/paths";
 import { getSiteVerification, getSocialMetaOther } from "@/lib/seo/verification";
 
 export type BuildMetadataOptions = {
@@ -40,12 +41,7 @@ function imageMimeType(path: string): string {
 }
 
 function resolveImageUrl(imagePath: string | undefined | null): string {
-  const path = imagePath?.trim() || DEFAULT_OG_IMAGE_PATH;
-  if (path.startsWith("http://") || path.startsWith("https://")) {
-    return path;
-  }
-  const base = getMetadataBase();
-  return new URL(path.startsWith("/") ? path.slice(1) : path, base).toString();
+  return absoluteAssetUrl(imagePath?.trim() || DEFAULT_OG_IMAGE_PATH) ?? absoluteAssetUrl(DEFAULT_OG_IMAGE_PATH)!;
 }
 
 function stripMarkdown(text: string, maxLength = 160): string {
@@ -97,8 +93,8 @@ export function buildMetadata(options: BuildMetadataOptions): Metadata {
       {
         url: imageUrl,
         ...(isHttps ? { secureUrl: imageUrl } : {}),
-        width: 1200,
-        height: 630,
+        width: OG_IMAGE_SIZE.width,
+        height: OG_IMAGE_SIZE.height,
         alt: ogImageAlt ?? socialTitle,
         type: imageType,
       },

@@ -16,6 +16,7 @@
     "download:nuoiem-images": "node scripts/download-nuoiem-images.mjs",
     "logos:transparent": "python3 scripts/make-transparent-logos.py",
     "favicons": "python3 scripts/generate-favicons.py",
+    "og:images": "python3 scripts/generate-og-images.py",
     "sync:bao-cao": "node scripts/sync-financial-reports.mjs",
     "sync:chung-tu-chi": "node scripts/sync-expense-documents.mjs"
   },
