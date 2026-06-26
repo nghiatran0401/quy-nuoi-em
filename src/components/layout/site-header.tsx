@@ -40,6 +40,14 @@ function unlockPageScroll({ preventTouchMove, preventWheel }: ScrollLockHandlers
   document.removeEventListener("wheel", preventWheel);
 }
 
+function mobileNavLinkClass(active: boolean): string {
+  return `block rounded-xl px-3 py-2.5 text-base font-medium transition-colors ${
+    active
+      ? "bg-brand-green font-semibold text-white shadow-sm"
+      : "text-brand-ink hover:bg-brand-surface active:bg-brand-sky-soft"
+  }`;
+}
+
 function readHeaderBottom(navElement: HTMLElement | null): number | null {
   if (!navElement) return null;
   return navElement.getBoundingClientRect().bottom;
@@ -129,52 +137,50 @@ export function SiteHeader() {
               aria-modal="true"
               aria-label={navLabel("openMenu")}
               data-mobile-menu="true"
-              className="fixed inset-x-0 z-[210] overflow-y-auto overscroll-contain border-b border-brand-border bg-white shadow-[var(--shadow-brand-soft)] lg:hidden"
+              className="fixed inset-x-0 z-[210] w-full overflow-y-auto overscroll-contain border-b border-brand-border bg-white shadow-[var(--shadow-brand-soft)] lg:hidden"
               style={overlayStyle}
             >
-              <nav className="page-container py-1">
-                {mainNavItems.map((item) => {
-                  const active = !item.external && isNavItemActive(pathname, item.href);
-                  const mobileLinkClass = `block min-h-11 rounded-xl px-3 py-2.5 text-base font-medium transition-colors ${
-                    active
-                      ? "bg-brand-green font-semibold text-white shadow-sm"
-                      : "text-brand-ink hover:bg-brand-surface active:bg-brand-sky-soft"
-                  }`;
+              <div className="page-container flex flex-col py-2">
+                <nav className="flex flex-col gap-0.5">
+                  {mainNavItems.map((item) => {
+                    const active = !item.external && isNavItemActive(pathname, item.href);
+                    const linkClass = mobileNavLinkClass(active);
 
-                  return item.external ? (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block min-h-11 rounded-lg py-2.5 text-base font-medium text-brand-ink transition-colors hover:bg-brand-surface active:bg-brand-sky-soft"
-                      onClick={closeMobile}
-                    >
-                      {navLabel(item.labelKey)}
-                    </a>
-                  ) : (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={mobileLinkClass}
-                      aria-current={active ? "page" : undefined}
-                      onClick={closeMobile}
-                    >
-                      {navLabel(item.labelKey)}
-                    </Link>
-                  );
-                })}
-              </nav>
-              <div className="page-container space-y-2 border-t border-brand-border/70 py-3 pb-safe">
-                <ReceiveCodeButton variant="mobile-menu" onNavigate={closeMobile} />
-                <Link
-                  href="/dong-gop"
-                  className="btn-primary-sm flex w-full justify-center"
-                  onClick={closeMobile}
-                >
-                  <Heart className="h-5 w-5 fill-current text-brand-highlight" aria-hidden />
-                  <span>{navLabel("donate")}</span>
-                </Link>
+                    return item.external ? (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={linkClass}
+                        onClick={closeMobile}
+                      >
+                        {navLabel(item.labelKey)}
+                      </a>
+                    ) : (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={linkClass}
+                        aria-current={active ? "page" : undefined}
+                        onClick={closeMobile}
+                      >
+                        {navLabel(item.labelKey)}
+                      </Link>
+                    );
+                  })}
+                </nav>
+                <div className="mt-2 flex flex-col gap-2 border-t border-brand-border/70 pt-3 pb-safe">
+                  <ReceiveCodeButton variant="mobile-menu" onNavigate={closeMobile} />
+                  <Link
+                    href="/dong-gop"
+                    className="btn-primary-sm flex w-full justify-center"
+                    onClick={closeMobile}
+                  >
+                    <Heart className="h-5 w-5 fill-current text-brand-highlight" aria-hidden />
+                    <span>{navLabel("donate")}</span>
+                  </Link>
+                </div>
               </div>
             </div>
           </>,

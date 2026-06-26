@@ -69,27 +69,29 @@ describe("homeMetricsToStatItems", () => {
     });
   });
 
-  it("uses official children totals even when live API returns different counts", () => {
+  it("uses live directory children totals from the API response", () => {
     const liveApiSample: HomeMetricsResponse = {
       ...sample,
       children: {
-        total: 81909,
-        sponsored: 50435,
-        unsponsored: 31474,
-        sponsoredPercent: 61.6,
-        unsponsoredPercent: 38.4,
+        total: 81901,
+        sponsored: 40701,
+        unsponsored: 41200,
+        sponsoredPercent: 49.7,
+        unsponsoredPercent: 50.3,
       },
       display: {
-        childrenTotal: "81.909",
-        sponsored: "50.435",
-        unsponsored: "31.474",
+        childrenTotal: "81.901",
+        sponsored: "40.701",
+        unsponsored: "41.200",
       },
     };
 
     const stats = homeMetricsToStatItems(liveApiSample);
 
-    expect(stats[0]?.value).toBe("81.909");
-    expect(stats[3]?.value).toBe("40.699");
-    expect(stats[4]?.value).toBe("41.210");
+    expect(stats[0]?.value).toBe("81.901");
+    expect(stats[3]?.value).toBe("40.701");
+    expect(stats[3]?.hint).toBe("49,7% tổng số em nuôi");
+    expect(stats[4]?.value).toBe("41.200");
+    expect(stats[4]?.hint).toBe("50,3% tổng số em nuôi");
   });
 });

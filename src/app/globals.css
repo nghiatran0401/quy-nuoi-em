@@ -197,6 +197,12 @@
     padding-top: env(safe-area-inset-top, 0px);
   }
 
+  html[data-mobile-nav-open],
+  html[data-mobile-nav-open] body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
   html[data-mobile-nav-open] .site-header-shell {
     position: fixed;
     top: 0;

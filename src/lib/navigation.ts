@@ -18,6 +18,7 @@ export const mainNavItems: NavItem[] = [
   { href: STATIC_PAGE_PATHS.taiChinh, labelKey: "taiChinh" },
   { href: DATA_PAGE_PATHS.reports, labelKey: "reports" },
   { href: DATA_PAGE_PATHS.statements, labelKey: "statements" },
+  { href: DATA_PAGE_PATHS.news, labelKey: "news" },
 ];
 
 export type FooterResourceItem = {

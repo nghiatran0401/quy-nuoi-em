@@ -148,7 +148,7 @@ export const process2026PageContent = {
     description:
       "Khi đã có mã NE, làm đúng 6 bước dưới đây để giữ mã, chuyển khoản đúng cú pháp, nhận thông tin bé và theo dõi suốt năm học. Nội dung tham chiếu từ quy trình chính thức của Quỹ Nuôi Em.",
     messengerCta: "Nhận mã qua Fanpage",
-    groupCta: "Facebook Nuôi Em",
+    groupCta: "Group Nuôi Em tổng",
   },
   stepsIntro: {
     eyebrow: "6 bước cốt lõi",

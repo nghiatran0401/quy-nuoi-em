@@ -4,7 +4,6 @@ import { FinancePeriodReport } from "@/components/finance/finance-period-report"
 import { FinancePageToc } from "@/components/finance/finance-section-nav";
 import { TransparencyPillars } from "@/components/finance/transparency-pillars";
 import { DataPageBanner } from "@/components/pages/data-page-banner";
-import { ThienNguyenProfileSection } from "@/components/shared/thien-nguyen-profile-section";
 import { taiChinhContent } from "@/content/tai-chinh-content";
 import { getStaticPageHero } from "@/content/pages/static-pages";
 import type { ReactNode } from "react";
@@ -23,9 +22,9 @@ export function TaiChinhView({ statementSection, expenseDocumentsSection }: TaiC
   const content = taiChinhContent;
 
   return (
-    <article className="min-h-screen bg-brand-warm page-bottom-pad">
+    <article className="min-h-screen bg-brand-warm pb-8 sm:pb-10">
       <DataPageBanner {...hero} />
-      <div className="page-container py-8 sm:py-10 lg:py-12">
+      <div className="page-container pt-8 sm:pt-10 lg:pt-12">
         <div className="mx-auto max-w-7xl space-y-10 md:space-y-14">
           <FinanceOpening
             paragraphs={content.intro.paragraphs}
@@ -59,8 +58,6 @@ export function TaiChinhView({ statementSection, expenseDocumentsSection }: TaiC
           {statementSection}
 
           {expenseDocumentsSection}
-
-          <ThienNguyenProfileSection showMonthlyReportsLink={false} className="!border-brand-border/60" />
         </div>
       </div>
 
