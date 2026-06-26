@@ -17,6 +17,20 @@ const DRIVE_FOLDER_URL = `https://drive.google.com/drive/folders/${DRIVE_FOLDER_
 
 const CONFIGURED_SHEETS = [
   {
+    id: "2025-12",
+    year: 2025,
+    month: 12,
+    sheetId: process.env.EXPENSE_DOCS_SHEET_DEC_2025_ID ?? "1hB6wCXQmhTemqUyB1hG2fYm8yhxcirB5DgHdiBrnJb8",
+    gid: process.env.EXPENSE_DOCS_SHEET_DEC_2025_GID ?? "0",
+  },
+  {
+    id: "2025-11",
+    year: 2025,
+    month: 11,
+    sheetId: process.env.EXPENSE_DOCS_SHEET_NOV_2025_ID ?? "1Ywo-ZXhIo3K_sqeBKPSlGsEpQ-zGAHXK4CmYRT_6Xms",
+    gid: process.env.EXPENSE_DOCS_SHEET_NOV_2025_GID ?? "0",
+  },
+  {
     id: "2026-05",
     year: 2026,
     month: 5,
@@ -211,12 +225,11 @@ async function discoverSheetsFromDriveFolder(folderId = DRIVE_FOLDER_ID) {
 
   const html = await response.text();
   const pattern =
-    /\\"([a-zA-Z0-9_-]+)\\",\\"\[\\"([^"\\]+)\\"\\],\\"Danh sách Điểm trường giải ngân tiền ăn tập trung trong tháng (\d{2})\\\/(\d{4})\\"/g;
+    /data-id="([^"]+)" jsname="vtaz5c" data-tooltip="Danh sách Điểm trường giải ngân tiền ăn tập trung trong tháng (\d{2})\/(\d{4}) Google Sheets"/g;
   const discovered = [];
 
   for (const match of html.matchAll(pattern)) {
-    const [, sheetId, parentFolderId, monthText, yearText] = match;
-    if (parentFolderId !== folderId) continue;
+    const [, sheetId, monthText, yearText] = match;
     discovered.push({
       sheetId,
       year: Number(yearText),

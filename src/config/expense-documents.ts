@@ -40,6 +40,18 @@ export const expenseDocumentsConfig = {
   driveFolderId: expenseDocumentsDriveFolderId,
   lists: [
     buildExpenseDocumentList(
+      2025,
+      12,
+      process.env.EXPENSE_DOCS_SHEET_DEC_2025_ID ?? "1hB6wCXQmhTemqUyB1hG2fYm8yhxcirB5DgHdiBrnJb8",
+      process.env.EXPENSE_DOCS_SHEET_DEC_2025_GID ?? "0",
+    ),
+    buildExpenseDocumentList(
+      2025,
+      11,
+      process.env.EXPENSE_DOCS_SHEET_NOV_2025_ID ?? "1Ywo-ZXhIo3K_sqeBKPSlGsEpQ-zGAHXK4CmYRT_6Xms",
+      process.env.EXPENSE_DOCS_SHEET_NOV_2025_GID ?? "0",
+    ),
+    buildExpenseDocumentList(
       2026,
       5,
       process.env.EXPENSE_DOCS_SHEET_MAY_2026_ID ?? "13cljtyGE0FRoTY92intN8cw5zFhLY07FzyOHPnNux0I",
