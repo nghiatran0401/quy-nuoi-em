@@ -7,6 +7,9 @@ import { createDataPageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = createDataPageMetadata("reports");
 
+/** Refresh report list from Supabase (e.g. after npm run sync:bao-cao). */
+export const revalidate = 300;
+
 export default async function ReportsPage() {
   const { reports } = await getReportsPayload();
   const years = await getReportYears();
