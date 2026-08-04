@@ -27,6 +27,20 @@ export type Process2026TimelineItem = {
   what: string;
 };
 
+export type Process2026Note = {
+  text: string;
+  bullets?: string[];
+  afterBullets?: string;
+  examples?: string[];
+  footnote?: string;
+};
+
+export type Process2026NoteGroup = {
+  title: string;
+  shortLabel: string;
+  notes: Process2026Note[];
+};
+
 export type Process2026PageMedia = {
   heroImage: string;
   qrImage: string;
@@ -89,6 +103,7 @@ export type Process2026PageContent = {
   timelineIntro: { eyebrow: string; title: string };
   timeline: Process2026TimelineItem[];
   notesIntro: { eyebrow: string; title: string };
+  noteGroups: Process2026NoteGroup[];
   importantNotes: string[];
   codeMeaningLabel: string;
   codeMeaningUrl: string;

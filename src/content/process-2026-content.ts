@@ -32,9 +32,9 @@ export const processSteps2026: readonly ProcessStepContent[] = [
     summary:
       "Chuyển khoản ngay sau khi có mã. Thiếu mã NE trên nội dung chuyển khoản → không hoàn lại, chuyển vào quỹ vô danh (xây trường).",
     bullets: [
-      "Ghi nội dung chuyển khoản: Mã NE + tên anh chị + 2526.",
+      "Ghi nội dung chuyển khoản: Mã NE + tên Facebook + 2627.",
       "Sau 24 giờ có thể bị thu hồi mã — cần đăng ký lại từ đầu.",
-      "Chuyển một lần đủ 9 tháng tiền ăn + cơ sở vật chất (xem mức đóng góp và tài khoản bên dưới).",
+      "Chuyển một lần đủ tiền ăn của mã NE (xem mức đóng góp và tài khoản bên dưới).",
     ],
   },
   {
@@ -53,9 +53,9 @@ export const processSteps2026: readonly ProcessStepContent[] = [
     title: "Tra mã và nhận thông tin bé",
     timing: "Tháng 10 – 11",
     summary:
-      "Đầu tháng 9 các bé bắt đầu ăn; tháng 10 trường gửi hồ sơ — dự án tiếp nhận và làm ảnh thẻ; tháng 11 mở tra cứu trên trang Facebook.",
+      "Đầu tháng 9 các bé bắt đầu ăn; tháng 10 trường gửi hồ sơ — dự án tiếp nhận và làm ảnh thẻ; tháng 11 mở tra cứu trên trang Facebook và website.",
     bullets: [
-      "Tra cứu mã NE trên danh mục em nuôi công khai (nuoiem2025.quynuoiem.com) khi quỹ mở cổng.",
+      "Tra cứu thông tin em nuôi trên danh mục Tra cứu mã (khi quỹ mở cổng).",
       "Theo dõi thông báo trên trang Facebook Nuôi Em song song.",
       "Mỗi mã trả về thông tin và ảnh bé tương ứng sau khi xử lý dữ liệu.",
     ],
@@ -99,20 +99,80 @@ export const costTiers = [
   {
     label: "Phổ biến (tiểu học & mầm non)",
     amount: "1.450.000đ / năm học",
-    breakdown: "150.000đ × 9 tháng + 100.000đ cơ sở vật chất",
+    breakdown: "",
   },
   {
     label: "Một số vùng Tây Nguyên (trung học cơ sở / trung học phổ thông)",
     amount: "1.650.000đ / năm học",
-    breakdown: "170.000đ × 9 tháng + 120.000đ cơ sở vật chất",
+    breakdown: "",
   },
 ] as const;
 
-export const importantNotes = [
-  "Mỗi mã NE chỉ có một người nuôi duy nhất trong 1 năm học.",
-  "Qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể thay đổi.",
-  "Mã đuôi S/T (ví dụ: NE00001S — mã ăn trưa, NE00001T — mã ăn tối). Lưu ý: ở một số tỉnh Tây Nguyên có cách đánh mã riêng — bé nội trú ăn 2 bữa mỗi ngày được tách thành 2 mã, mỗi mã một người nuôi một bữa.",
+export type Process2026Note = {
+  text: string;
+  bullets?: readonly string[];
+  afterBullets?: string;
+  examples?: readonly string[];
+  footnote?: string;
+};
+
+export type Process2026NoteGroup = {
+  title: string;
+  shortLabel: string;
+  notes: readonly Process2026Note[];
+};
+
+export const importantNoteGroups: readonly Process2026NoteGroup[] = [
+  {
+    title: "Các năm học trước đến năm học 2025-2026",
+    shortLabel: "Đến 2025–2026",
+    notes: [
+      {
+        text: "Mỗi mã NE chỉ có một người nuôi duy nhất trong 1 năm học.",
+      },
+      {
+        text: "Qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể thay đổi.",
+      },
+      {
+        text: "Mã đuôi S/T (ví dụ: NE00001S — mã ăn trưa, NE00001T — mã ăn tối). Lưu ý: ở một số tỉnh Tây Nguyên có cách đánh mã riêng — bé nội trú ăn 2 bữa mỗi ngày được tách thành 2 mã, mỗi mã một người nuôi một bữa.",
+      },
+    ],
+  },
+  {
+    title: "Bắt đầu từ năm học 2026-2027",
+    shortLabel: "Từ 2026–2027",
+    notes: [
+      {
+        text: "Mỗi mã NE chỉ có một người nuôi duy nhất trong 1 năm học.",
+      },
+      {
+        text: "Bắt đầu từ năm học 9/2026 - 5/2027, dự án KHÔNG triển khai tổ chức ăn đồng loạt. Khi hoàn tất thu đủ kinh phí nhận nuôi cho từng trường (đã đăng ký), Dự án sẽ thông báo trực tiếp đến Nhà trường để bắt đầu triển khai bữa ăn cho các em. Vậy nên, qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể THAY ĐỔI.",
+      },
+      {
+        text: "Dự án sẽ có một số mã là các bạn học sinh ăn 2 bữa (bữa trưa và bữa tối), các em ngủ lại ở trường từ thứ 2 đến thứ 6. Vì vậy, chi phí của những mã đó sẽ nhân đôi.",
+      },
+      {
+        text: "Đối với trường hợp đăng ký NHẬN NUÔI SAU THÁNG 9:",
+        bullets: [
+          "Dự án không áp dụng hình thức cho học sinh ăn đồng loạt từ đầu năm như các năm học trước.",
+          "Do đó, mức phí và danh sách học sinh cần hỗ trợ sẽ được cập nhật theo từng thời điểm thực tế.",
+        ],
+        afterBullets:
+          "Nếu còn học sinh chưa được nhận nuôi, khi đăng ký nhận mã Dự án sẽ thông báo mức chi phí và thời gian ăn cụ thể để anh chị xem xét đồng hành.",
+        examples: [
+          "Nhận mã tháng 8/2026 → Bé sẽ ăn 9 tháng bắt đầu từ tháng 9/2026",
+          "Nhận mã tháng 9/2026 → Bé sẽ ăn 8 tháng bắt đầu từ tháng 10/2026",
+        ],
+        footnote: "Lưu ý: Dự án chỉ tiếp nhận đăng ký nhận mã đến hết tháng 12/2026.",
+      },
+    ],
+  },
 ] as const;
+
+/** @deprecated Prefer importantNoteGroups. */
+export const importantNotes = importantNoteGroups.flatMap((group) =>
+  group.notes.map((note) => note.text),
+);
 
 export const timelineMilestones = [
   { when: "Trong 24 giờ", what: "Chuyển khoản đủ một lần (giữ mã)" },
@@ -166,22 +226,22 @@ export const process2026PageContent = {
   })),
   costIntro: {
     eyebrow: "Mức đóng góp",
-    title: "Nuôi một em, một bữa, một năm học",
+    title: "Nuôi một học sinh, một năm học",
     description:
-      "Bữa ăn ~8.500đ/suất (tiểu học), mầm non ~6.800đ/suất. Khoản cơ sở vật chất 100.000đ/mã (120.000đ/mã tại một số vùng Tây Nguyên) dùng cho các dự án bổ trợ (không đóng thêm).",
+      "Bữa ăn ~9.000đ/suất đối với học sinh Tiểu học, THCS, THPT; Mầm non ~7.300đ/suất. Từ năm học 9/2026 - 5/2027, Dự án chuyển chi phí cơ sở vật chất sang chi phí thực phẩm (tiền ăn) để đảm bảo chất lượng bữa ăn cho các bạn học sinh.",
   },
   costTiers: costTiers.map((tier) => ({ ...tier })),
   transfer: {
     eyebrow: "Chuyển khoản",
     title: "Thông tin chuyển khoản và Lưu ý quan trọng",
     transferReminder:
-      "Anh chị lưu ý giúp dự án CHỈ CHUYỂN KHOẢN KHI ĐÃ NHẬN ĐƯỢC MÃ NE, anh chị giúp dự án chuyển khoản MỘT LẦN đủ chi phí đã thoả thuận trong vòng 24H. Dự án cảm ơn anh chị đã đồng hành",
+      "CHỈ CHUYỂN KHOẢN KHI ĐÃ NHẬN ĐƯỢC MÃ NE và gửi đủ chi phí trong 01 LẦN (trong 24 giờ) để đảm bảo Dự án vận hành được hiệu quả nhất như đã thoả thuận. Dự án cảm ơn anh chị đã đồng hành.",
     warning:
       "Nếu anh chị vô tình quên ghi nội dung hãy báo ngay lại với dự án qua trang Nuôi Em. Trong trường hợp dự án nhận được chuyển khoản nhưng không có nội dung sẽ không hoàn lại và chuyển thành giao dịch vô danh (xây trường).",
     codeExpiryNote:
-      "Anh chị lưu ý giúp dự án: sau 24 giờ chưa chuyển, mã NE sẽ bị thu hồi. Khi mã đã thu hồi, anh chị vui lòng đăng ký lại từ đầu.",
-    transferFormat: "Mã NE + tên anh chị + 2526",
-    transferExample: "NE05559 Nguyen Tai 2526",
+      "Sau 24 giờ chưa chuyển khoản, mã NE sẽ được THU HỒI. Khi mã đã thu hồi, anh chị vui lòng đăng ký lại từ đầu.",
+    transferFormat: "Mã NE + tên Facebook + 2627",
+    transferExample: "NE99999 Nguyen Nhan 2627",
     accountNumber: "1805",
     bank: "Ngân hàng Quân đội (MB) — Ngân hàng TMCP Quân đội",
     accountName: "CTCP DNXH QUY NUOI EM",
@@ -203,6 +263,17 @@ export const process2026PageContent = {
     eyebrow: "Lưu ý quan trọng",
     title: "Về mã NE và thông tin bé",
   },
+  noteGroups: importantNoteGroups.map((group) => ({
+    title: group.title,
+    shortLabel: group.shortLabel,
+    notes: group.notes.map((note) => ({
+      text: note.text,
+      ...(note.bullets ? { bullets: [...note.bullets] } : {}),
+      ...(note.afterBullets ? { afterBullets: note.afterBullets } : {}),
+      ...(note.examples ? { examples: [...note.examples] } : {}),
+      ...(note.footnote ? { footnote: note.footnote } : {}),
+    })),
+  })),
   importantNotes: [...importantNotes],
   codeMeaningLabel: "Mã mỗi em có ý nghĩa gì?",
   codeMeaningUrl: CODE_MEANING_URL,

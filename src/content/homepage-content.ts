@@ -12,42 +12,90 @@ const HOME_MEMBER_IMAGE_COUNT = 5;
 export type MealProgramSupportCost = {
   amount: string;
   audience: string;
-  breakdown: string;
+  breakdown?: string;
 };
 
-export type MealProgramTextBlock = { label?: string; text: string };
+export type MealProgramTextBlock = {
+  label?: string;
+  text?: string;
+  paragraphs?: readonly string[];
+};
 export type MealProgramListBlock = { label: string; items: MealProgramSupportCost[] };
 export type MealProgramBlock = MealProgramTextBlock | MealProgramListBlock;
+
+export type MealProgramPeriod = {
+  title: string;
+  shortLabel: string;
+  blocks: readonly MealProgramBlock[];
+};
+
+const mealProgramCostItems = [
+  {
+    amount: "1.450.000đ/mã",
+    audience: "Mã phía Bắc và mã Mầm non trong Tây Nguyên",
+  },
+  {
+    amount: "1.650.000đ/mã",
+    audience: "Mã Tiểu học, THCS, THPT trong Tây Nguyên",
+  },
+] as const satisfies readonly MealProgramSupportCost[];
 
 export const mealProgramSectionCopy = {
   since: "Từ 2014",
   title: "Bữa cơm níu chân trẻ tới trường",
-  blocks: [
+  periods: [
     {
-      text: "Mỗi bữa, các bé được ăn thịt, đậu, canh, rau, ... - còn gạo, gia vị, chất đốt do địa phương, gia đình đối ứng. Tiểu học, Trung học cơ sở, Trung học phổ thông thường ăn 4 bữa/tuần với chi phí 8.500đ/suất; mầm non ăn 5 bữa/tuần với chi phí 6.800đ/suất.",
-    },
-    {
-      label: "Đối tượng nuôi",
-      text: "Học sinh mầm non (từ năm học 2025 - 2026, dự án mở rộng thêm đối tượng học sinh mầm non được hưởng chế độ 105 của nhà nước — 160.000đ/tháng) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa. Một số bé nội trú xa được hỗ trợ cơm trưa và tối — mỗi bữa một mã NE (ví dụ NE00001S — ăn trưa, NE00001T — ăn tối). Khi bé được nhà nước nuôi, dự án đổi sang bé khác và giữ nguyên mã NE khi anh chị tiếp tục tham gia dự án.",
-    },
-    {
-      label: "Chi phí hỗ trợ",
-      items: [
+      title: "Các năm học trước đến năm học 2025-2026",
+      shortLabel: "Đến 2025–2026",
+      blocks: [
         {
-          amount: "1.450.000đ/mã",
-          audience: "Mã phía Bắc và mã Mầm non trong Tây Nguyên",
-          breakdown:
-            "Chi phí gồm 150.000đ/tháng/bé × 9 tháng học + 100.000đ (tiền cơ sở vật chất)",
+          text: "Mỗi bữa, các bé được ăn thịt, đậu, canh, rau, ... - còn gạo, gia vị, chất đốt do địa phương, gia đình đối ứng. Tiểu học, Trung học cơ sở, Trung học phổ thông thường ăn 4 bữa/tuần với chi phí 8.500đ/suất; mầm non ăn 5 bữa/tuần với chi phí 6.800đ/suất.",
         },
         {
-          amount: "1.650.000đ/mã",
-          audience: "Mã Tiểu học, THCS, THPT trong Tây Nguyên",
-          breakdown:
-            "Chi phí gồm 170.000đ/tháng/bé × 9 tháng học + 120.000đ (tiền cơ sở vật chất)",
+          label: "Đối tượng nuôi",
+          text: "Học sinh mầm non (từ năm học 2025 - 2026, dự án mở rộng thêm đối tượng học sinh mầm non được hưởng chế độ 105 của nhà nước — 160.000đ/tháng) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa. Một số bé nội trú xa được hỗ trợ cơm trưa và tối — mỗi bữa một mã NE (ví dụ NE00001S — ăn trưa, NE00001T — ăn tối). Khi bé được nhà nước nuôi, dự án đổi sang bé khác và giữ nguyên mã NE khi anh chị tiếp tục tham gia dự án.",
+        },
+        {
+          label: "Chi phí hỗ trợ",
+          items: [
+            {
+              amount: "1.450.000đ/mã",
+              audience: "Mã phía Bắc và mã Mầm non trong Tây Nguyên",
+              breakdown:
+                "Chi phí gồm 150.000đ/tháng/bé × 9 tháng học + 100.000đ (tiền cơ sở vật chất)",
+            },
+            {
+              amount: "1.650.000đ/mã",
+              audience: "Mã Tiểu học, THCS, THPT trong Tây Nguyên",
+              breakdown:
+                "Chi phí gồm 170.000đ/tháng/bé × 9 tháng học + 120.000đ (tiền cơ sở vật chất)",
+            },
+          ],
         },
       ],
     },
-  ] satisfies MealProgramBlock[],
+    {
+      title: "Bắt đầu từ năm học 2026-2027",
+      shortLabel: "Từ 2026–2027",
+      blocks: [
+        {
+          text: "Nhằm đảm bảo chất lượng bữa ăn cho học sinh, từ năm học 9/2026–5/2027, Dự án thực hiện điều chỉnh chi phí: Chuyển phần chi phí cơ sở vật chất sang chi phí thực phẩm (tiền ăn). Sau điều chỉnh, định mức mỗi bữa ăn ~7.300 đồng/suất đối với các em Mầm non và ~9.000 đồng/suất đối với các em học sinh Tiểu học, THCS, THPT.",
+        },
+        {
+          label: "Đối tượng nuôi",
+          paragraphs: [
+            "Học sinh mầm non (từ năm học 2025 - 2026, dự án mở rộng thêm đối tượng học sinh mầm non được hưởng chế độ 105 của nhà nước — 160.000đ/tháng) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa.",
+            "Dự án sẽ có một số mã là các bạn học sinh ăn 2 bữa (bữa trưa và bữa tối), các em ngủ lại ở trường từ thứ 2 đến thứ 6. Vì vậy, chi phí của những mã đó sẽ nhân đôi.",
+            "Bắt đầu từ năm học 9/2026 - 5/2027, dự án KHÔNG triển khai tổ chức ăn đồng loạt. Khi hoàn tất thu đủ kinh phí nhận nuôi cho từng trường (đã đăng ký), Dự án sẽ thông báo trực tiếp đến Nhà trường để bắt đầu triển khai bữa ăn cho các em. Vậy nên, qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể THAY ĐỔI.",
+          ],
+        },
+        {
+          label: "Chi phí hỗ trợ",
+          items: [...mealProgramCostItems],
+        },
+      ],
+    },
+  ] satisfies MealProgramPeriod[],
   media: {
     youtubeId: "ouYY0ri-vIs",
     title: "Bữa cơm trưa tại điểm trường vùng cao",
@@ -160,15 +208,15 @@ export const campaignSectionCopy: HomeCampaignSectionContent = {
     },
   ],
   campaign: {
-    headline: "MÃ NUÔI EM MÙA 12 ĐANG MỞ",
+    headline: "MÃ NUÔI EM MÙA 13 ĐANG MỞ",
     phase: "Quy trình nhận mã",
-    goal: "Mục tiêu +120.000 bé được nhận nuôi trên cả nước",
+    goal: "Khảo sát thực tế cho thấy, hiện có khoảng 10.000 em nhỏ cần được nhận nuôi do các em chưa thuộc diện nhận hỗ trợ từ ngân sách Nhà nước.",
   },
   story: {
     paragraphs: [
       "Năm 2018 thật sự là một bước chuyển mình lớn đối với Quỹ Nuôi Em, khi hơn 5.436 em nhỏ bản cao đã được tìm thấy anh chị nuôi cơm trưa. Đó là hạnh phúc không chỉ riêng với người làm quỹ mà còn hơn 95.000+ niềm vui đến từ anh chị nuôi và các em học sinh đã tìm đến được với nhau.",
       "Đến nay hơn 1.000 nhóm Facebook theo trường thuộc hơn 500 xã tại Điện Biên, Hà Giang, Lào Cai, Yên Bái, Lai Châu, Bắc Kạn, Lạng Sơn, Hòa Bình, Cao Bằng, Thanh Hóa, Đắk Nông, Đắk Lắk, Kon Tum, Gia Lai… hoạt động tích cực và cập nhật tình hình các bé hàng tháng.",
-      "Ngay từ bây giờ hãy đăng ký là một phần trong số các anh chị nuôi của các bé trong 2025 – 2026.",
+      "Ngay từ bây giờ hãy đăng ký là một phần trong số các anh chị nuôi của các bé trong 2026 - 2027.",
     ],
     ctaLabel: "Tìm hiểu thêm",
     ctaHref: "https://web.sucmanh2000.com/",

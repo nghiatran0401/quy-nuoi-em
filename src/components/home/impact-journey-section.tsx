@@ -144,6 +144,17 @@ function InfrastructureFundBlock({ infra }: { infra: InfrastructureCopy }) {
           <figcaption className="mt-2 text-sm font-medium text-brand-ink">{infra.afterLabel}</figcaption>
         </figure>
       </div>
+
+      {infra.pauseNote ? (
+        <div className="mt-8 rounded-2xl border border-brand-accent/25 bg-gradient-to-br from-brand-accent/[0.08] via-white to-brand-warm/70 px-5 py-5 text-left sm:px-6 sm:py-6">
+          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-accent-dark">
+            {infra.pauseNote.eyebrow}
+          </p>
+          <p className="mt-2 text-[15px] leading-relaxed text-brand-ink sm:text-base">
+            {infra.pauseNote.body}
+          </p>
+        </div>
+      ) : null}
     </article>
   );
 }
