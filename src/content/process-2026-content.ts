@@ -18,7 +18,7 @@ export const processSteps2026: readonly ProcessStepContent[] = [
     title: "Nhận mã NE",
     timing: "Trong ~2 phút",
     summary:
-      "Quỹ chỉ cấp mã qua tin nhắn trang Facebook Nuôi Em (chatbot tự động). Mỗi mã gắn với một anh chị nuôi duy nhất.",
+      "Quỹ chỉ cấp mã qua tin nhắn trang Facebook Nuôi Em (chatbot tự động). Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi, hoàn toàn không trùng lặp.",
     bullets: [
       "Ấn nút Nhận mã trên trang Facebook hoặc nhắn: «Nhận mã nuôi em».",
       "Hoặc chọn Menu «Nhận mã Nuôi Em» trong hộp thoại tin nhắn Fanpage.",
@@ -128,7 +128,7 @@ export const importantNoteGroups: readonly Process2026NoteGroup[] = [
     shortLabel: "Đến 2025–2026",
     notes: [
       {
-        text: "Mỗi mã NE chỉ có một người nuôi duy nhất trong 1 năm học.",
+        text: "Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi. Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 học sinh - 1 người nuôi cụ thể, hoàn toàn KHÔNG có sự trùng lặp.",
       },
       {
         text: "Qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể thay đổi.",
@@ -143,7 +143,7 @@ export const importantNoteGroups: readonly Process2026NoteGroup[] = [
     shortLabel: "Từ 2026–2027",
     notes: [
       {
-        text: "Mỗi mã NE chỉ có một người nuôi duy nhất trong 1 năm học.",
+        text: "Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi. Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 học sinh - 1 người nuôi cụ thể, hoàn toàn KHÔNG có sự trùng lặp.",
       },
       {
         text: "Bắt đầu từ năm học 9/2026 - 5/2027, dự án KHÔNG triển khai tổ chức ăn đồng loạt. Khi hoàn tất thu đủ kinh phí nhận nuôi cho từng trường (đã đăng ký), Dự án sẽ thông báo trực tiếp đến Nhà trường để bắt đầu triển khai bữa ăn cho các em. Vậy nên, qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể THAY ĐỔI.",

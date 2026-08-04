@@ -160,7 +160,7 @@ export function MealProgramSection({ content }: MealProgramSectionProps) {
         <div className="overflow-x-auto rounded-2xl border border-brand-border/70 bg-white shadow-[var(--shadow-brand-soft)]">
           <table className="w-full min-w-[44rem] border-collapse text-left">
             <caption className="sr-only">
-              So sánh chương trình bữa cơm giữa các năm học trước đến 2025-2026 và từ năm học
+              So sánh dự án bữa cơm giữa các năm học trước đến 2025-2026 và từ năm học
               2026-2027
             </caption>
             <thead>

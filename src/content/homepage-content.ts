@@ -247,15 +247,15 @@ export const sponsoredChildrenSectionCopy = {
     "Có ảnh hơn 65.000 bé đã được nhận nuôi. Con số tiếp tục ngày đêm được tăng và đăng tải",
   features: [
     {
-      title: "MỖI EM CHỈ MỘT MÃ MỖI BỮA",
+      title: "MỖI MÃ NE TƯƠNG ỨNG 1 HỌC SINH - 1 NGƯỜI NUÔI",
       description:
-        "Mỗi em chỉ một mã mỗi bữa và một ảnh bé duy nhất, không trùng trong hàng nghìn em nhỏ.",
+        "Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 học sinh - 1 người nuôi cụ thể, hoàn toàn KHÔNG có sự trùng lặp.",
       icon: "/images/nuoiem/1-lan-20220415042856.png",
     },
     {
-      title: "MỖI EM CHỈ 01 NGƯỜI NUÔI TRONG 1 NĂM HỌC",
+      title: "MỖI MÃ CHỈ 01 NGƯỜI NUÔI TRONG 1 NĂM HỌC",
       description:
-        "Để đảm bảo an toàn, bảo mật thông tin cho các bé, mỗi bé, mỗi bữa, mỗi mã chỉ có một người nhận nuôi duy nhất.",
+        "Mỗi mã NE chỉ gắn với một người nuôi trong một năm học — không chia sẻ, không trùng người nhận nuôi.",
       icon: "/images/nuoiem/2-lan-20220415042856.png",
     },
     {

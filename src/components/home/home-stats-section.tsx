@@ -41,9 +41,9 @@ export function HomeStatsSection({
             Cảm ơn anh chị đã đồng hành cùng Quỹ Nuôi Em
           </p>
           <p className="mx-auto mt-4 max-w-3xl text-pretty text-sm leading-relaxed text-brand-muted md:text-base">
-            Khi đồng ý nuôi em, cũng có nghĩa bạn đã hoàn toàn nắm rõ thông tin về Chương trình, uỷ quyền, đồng
-            thuận, tin tưởng về cách thức quản lý tài chính, triển khai thực hiện do Nhóm Nuôi em đang vận hành,
-            triển khai, đồng thời trao quyền để Nhóm quyết định những vấn đề liên quan đến Chương trình.
+            Khi đồng ý nuôi em, cũng có nghĩa bạn đã hoàn toàn nắm rõ thông tin về Dự án, uỷ quyền, đồng
+            thuận, tin tưởng về cách thức quản lý tài chính, triển khai thực hiện do Dự án Nuôi Em đang vận hành,
+            triển khai, đồng thời trao quyền để Dự án quyết định những vấn đề liên quan đến Dự án.
           </p>
         </header>
 

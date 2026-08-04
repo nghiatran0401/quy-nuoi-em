@@ -45,7 +45,7 @@ export const taiChinhContent = {
   intro: {
     paragraphs: [
       'Trong những nỗ lực công khai tài chính, các bạn sẽ thấy Quỹ Nuôi Em kết hợp giữa "giấy tờ" và cả cơ chế giám sát từ xa, giám sát thực tế.',
-      "Khi đồng ý nuôi em, cũng có nghĩa anh chị đã hoàn toàn nắm rõ thông tin về Chương trình, uỷ quyền, đồng thuận, tin tưởng về cách thức quản lý tài chính, triển khai thực hiện do Nhóm Nuôi Em đang vận hành, triển khai, đồng thời trao quyền để Nhóm quyết định những vấn đề liên quan đến Chương trình.",
+      "Khi đồng ý nuôi em, cũng có nghĩa anh chị đã hoàn toàn nắm rõ thông tin về Dự án, uỷ quyền, đồng thuận, tin tưởng về cách thức quản lý tài chính, triển khai thực hiện do Dự án Nuôi Em đang vận hành, triển khai, đồng thời trao quyền để Dự án quyết định những vấn đề liên quan đến Dự án.",
     ],
   },
 
@@ -114,9 +114,9 @@ export const taiChinhContent = {
         },
         {
           id: "one-ne",
-          title: "Mỗi mã NE tương ứng 1 bữa ăn - 1 học sinh - 1 người nuôi",
+          title: "Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi",
           description:
-            "Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 bữa ăn - 1 học sinh - 1 người nuôi cụ thể, hoàn toàn không có sự trùng lặp",
+            "Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 học sinh - 1 người nuôi cụ thể, hoàn toàn KHÔNG có sự trùng lặp",
         },
         {
           id: "oversight",
