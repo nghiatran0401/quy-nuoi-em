@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { Facebook, Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, FileText, Mail, MapPin, Phone } from "lucide-react";
 import { BrandLogo } from "@/components/brand/logo";
 import { brandVisual } from "@/config/brand-visual";
 import { siteCopy } from "@/content/site-copy";
+import { STATIC_PAGE_PATHS } from "@/lib/seo/routes";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -65,6 +66,18 @@ export function SiteFooter() {
                 external
               />
             </ul>
+
+            <div className="mt-6 border-t border-brand-border/50 pt-5">
+              <Link
+                href={STATIC_PAGE_PATHS.dieuKhoanThamGia}
+                className="group inline-flex items-center gap-2.5 text-sm font-medium text-brand-ink transition-colors hover:text-brand-accent"
+              >
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-green-light text-brand-green transition-colors group-hover:bg-brand-accent/10 group-hover:text-brand-accent">
+                  <FileText className="h-4 w-4" aria-hidden />
+                </span>
+                <span className="underline-offset-4 group-hover:underline">{t.termsLink}</span>
+              </Link>
+            </div>
           </FooterSection>
         </div>
       </div>

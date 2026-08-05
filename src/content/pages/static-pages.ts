@@ -16,7 +16,8 @@ export type StaticPageKey =
   | "members"
   | "careers"
   | "contact"
-  | "taiChinh";
+  | "taiChinh"
+  | "dieuKhoanThamGia";
 
 type StaticPageContent = {
   meta: PageMeta;
@@ -140,6 +141,19 @@ const pages: Record<StaticPageKey, StaticPageContent> = {
       title: "Sao kê tài khoản Quỹ Nuôi Em",
       description:
         "Hệ thống dữ liệu tài chính được hoàn thiện bởi đội ngũ Kế toán, Kiểm toán có chuyên môn và được báo cáo định kỳ. Sao kê được lấy trực tiếp từ App Thiện Nguyện - MB Bank minh bạch giúp mọi đóng góp được theo dõi và đối soát dễ dàng.",
+    },
+  },
+  dieuKhoanThamGia: {
+    meta: {
+      title: "Điều khoản tham gia",
+      description:
+        "Điều khoản tham gia Dự án Nuôi em năm học 2026–2027 — áp dụng đối với tất cả Anh/Chị nuôi.",
+    },
+    hero: {
+      eyebrow: "Điều khoản tham gia",
+      title: "Điều khoản tham gia Dự án Nuôi em",
+      description:
+        "Áp dụng đối với tất cả Anh/Chị nuôi tham gia Dự án Nuôi em từ năm học 2026–2027.",
     },
   },
 };

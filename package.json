@@ -18,7 +18,8 @@
     "favicons": "python3 scripts/generate-favicons.py",
     "og:images": "python3 scripts/generate-og-images.py",
     "sync:bao-cao": "node scripts/sync-financial-reports.mjs",
-    "sync:chung-tu-chi": "node scripts/sync-expense-documents.mjs"
+    "sync:chung-tu-chi": "node scripts/sync-expense-documents.mjs",
+    "sync:dieu-khoan": "node scripts/sync-dieu-khoan-tham-gia.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

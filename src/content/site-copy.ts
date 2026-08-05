@@ -49,6 +49,7 @@ export const siteCopy = {
     catalogPrefix: "Tra cứu mã & danh mục em nuôi tại",
     coverage: "Hỗ trợ trẻ bản cao tại 12 tỉnh",
     rights: "Quỹ Nuôi Em. Bảo lưu mọi quyền.",
+    termsLink: "Điều khoản tham gia",
   },
   home: {
     eyebrow: "Bữa cơm níu chân trẻ tới trường",

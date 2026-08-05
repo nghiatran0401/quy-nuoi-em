@@ -14,6 +14,7 @@ export const STATIC_PAGE_PATHS: Record<StaticPageKey, string> = {
   careers: "/tuyen-dung",
   contact: "/lien-he",
   taiChinh: "/tai-chinh",
+  dieuKhoanThamGia: "/dieu-khoan-tham-gia",
 };
 
 export const DATA_PAGE_PATHS: Record<DataPageKey, string> = {

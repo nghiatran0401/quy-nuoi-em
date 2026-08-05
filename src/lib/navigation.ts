@@ -35,6 +35,7 @@ export const footerResourceItems: FooterResourceItem[] = [
   { href: DATA_PAGE_PATHS.reports, label: "Báo cáo tài chính" },
   { href: DATA_PAGE_PATHS.statements, label: "Sao kê tài khoản" },
   { href: DATA_PAGE_PATHS.news, label: "Bản tin & hoạt động" },
+  { href: STATIC_PAGE_PATHS.dieuKhoanThamGia, label: "Điều khoản tham gia" },
   ...(publicCatalogLinksEnabled
     ? [{ href: publicCatalog.url, label: "Tra cứu mã NE", external: true }]
     : []),
