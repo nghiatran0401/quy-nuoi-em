@@ -131,7 +131,7 @@ export const campaignSectionCopy: HomeCampaignSectionContent = {
   ],
   ecosystemSection: {
     eyebrow: "Hệ sinh thái",
-    title: "Các dự án đồng hành cùng Quỹ Nuôi Em",
+    title: "Các dự án đồng hành cùng\nQuỹ\u00A0Nuôi\u00A0Em",
   },
   storySection: {
     eyebrow: "Câu chuyện",

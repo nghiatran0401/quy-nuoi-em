@@ -89,7 +89,7 @@ export function HomeEcosystemSection({
       <div className="page-container relative z-10">
         <header className="mx-auto mb-7 max-w-3xl text-center sm:mb-8">
           <p className="eyebrow">{eyebrow}</p>
-          <h2 id="home-ecosystem-heading" className="heading-section-xl mt-2">
+          <h2 id="home-ecosystem-heading" className="heading-section-xl mt-2 whitespace-pre-line">
             {title}
           </h2>
         </header>

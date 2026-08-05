@@ -78,13 +78,13 @@ export function ProcessOverviewSection({
           aria-hidden
         />
 
-        <div className="scroll-hint-x mx-auto mt-6 max-w-6xl rounded-2xl border border-brand-border/80 bg-white shadow-[var(--shadow-brand-card)]">
+        <div className="-mx-4 mt-6 overflow-hidden border-y border-brand-border/80 bg-white shadow-[var(--shadow-brand-card)] sm:mx-auto sm:max-w-6xl sm:rounded-2xl sm:border">
           <Image
             src={guideImageSrc}
             alt="Sơ đồ tổng quan 6 bước nhận mã Nuôi Em"
             width={1200}
             height={430}
-            className="h-auto min-w-[640px] w-full object-contain sm:min-w-0"
+            className="h-auto w-full object-contain"
             sizes="(max-width: 768px) 100vw, 1152px"
           />
         </div>

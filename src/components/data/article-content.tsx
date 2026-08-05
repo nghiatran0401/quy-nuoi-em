@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { sanitizeBrandText } from "@/lib/brand-sanitize";
+import { createHeadingIdAssigner } from "@/lib/dieu-khoan-toc";
 import { FINANCE_PAGE_PATH, legacyFinancePath } from "@/lib/finance-url";
 
 const URL_PATTERN = /https?:\/\/[^\s]+/g;
@@ -90,15 +91,22 @@ type ArticleContentProps = {
   content: string;
   /** When the page already renders an <h1>, skip the first markdown H1. */
   skipTopHeading?: boolean;
+  /** Add stable `id` anchors on `##` headings for in-page TOC links. */
+  anchorHeadings?: boolean;
 };
 
-export function ArticleContent({ content, skipTopHeading = false }: ArticleContentProps) {
+export function ArticleContent({
+  content,
+  skipTopHeading = false,
+  anchorHeadings = false,
+}: ArticleContentProps) {
   const lines = sanitizeBrandText(content)
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line.length > 0 && !line.startsWith("[←"));
 
   let skippedTopHeading = false;
+  const assignHeadingId = anchorHeadings ? createHeadingIdAssigner() : null;
 
   return (
     <article className="mt-6 max-w-none">
@@ -115,9 +123,15 @@ export function ArticleContent({ content, skipTopHeading = false }: ArticleConte
           );
         }
         if (line.startsWith("## ")) {
+          const label = line.slice(3);
+          const id = assignHeadingId?.(label);
           return (
-            <h2 key={index} className="mb-4 mt-8 font-heading text-xl font-bold text-brand-ink">
-              {line.slice(3)}
+            <h2
+              key={index}
+              id={id}
+              className="mb-4 mt-8 scroll-mt-24 font-heading text-xl font-bold text-brand-ink"
+            >
+              {label}
             </h2>
           );
         }
