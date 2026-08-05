@@ -17,14 +17,14 @@ export function HomeCampaignBanner({
     <header className={`mx-auto max-w-5xl text-center ${className}`.trim()}>
       <h2
         id={headingId}
-        className="heading-display mx-auto max-w-4xl text-[clamp(1.35rem,4vw+0.5rem,2.35rem)] font-extrabold leading-tight tracking-tight text-brand-accent"
+        className="heading-display mx-auto max-w-4xl text-balance text-[clamp(1.25rem,4vw+0.4rem,2.35rem)] font-extrabold leading-tight tracking-tight text-brand-accent"
       >
         {campaign.headline}
       </h2>
-      <p className="mt-3 text-center font-heading text-[clamp(1.25rem,3.5vw+0.4rem,2.25rem)] font-bold leading-tight text-brand-ink sm:mt-4">
+      <p className="mt-3 text-balance text-center font-heading text-[clamp(1.15rem,3.2vw+0.35rem,2.1rem)] font-bold leading-tight text-brand-ink sm:mt-4">
         {campaign.phase}
       </p>
-      <p className="mt-1.5 text-center text-sm font-semibold text-brand-muted sm:text-base md:text-lg">
+      <p className="mx-auto mt-3 max-w-3xl text-pretty text-center text-sm font-medium leading-relaxed text-brand-muted sm:mt-4 sm:text-[0.95rem] md:text-base">
         {campaign.goal}
       </p>
 

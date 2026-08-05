@@ -29,14 +29,29 @@ export type MealProgramPeriod = {
   blocks: readonly MealProgramBlock[];
 };
 
-const mealProgramCostItems = [
+const mealProgramCostItemsPast = [
   {
     amount: "1.450.000đ/mã",
     audience: "Mã phía Bắc và mã Mầm non trong Tây Nguyên",
+    breakdown: "Chi phí gồm 150.000đ/tháng/bé × 9 tháng học + 100.000đ (tiền cơ sở vật chất)",
   },
   {
     amount: "1.650.000đ/mã",
     audience: "Mã Tiểu học, THCS, THPT trong Tây Nguyên",
+    breakdown: "Chi phí gồm 170.000đ/tháng/bé × 9 tháng học + 120.000đ (tiền cơ sở vật chất)",
+  },
+] as const satisfies readonly MealProgramSupportCost[];
+
+const mealProgramCostItemsCurrent = [
+  {
+    amount: "1.530.000đ/học sinh/năm học",
+    audience: "Học sinh ăn 01 bữa/ngày",
+    breakdown: "170.000 đồng/tháng × 09 tháng",
+  },
+  {
+    amount: "3.060.000đ/học sinh/năm học",
+    audience: "Học sinh ăn 02 bữa/ngày",
+    breakdown: "340.000 đồng/tháng × 09 tháng",
   },
 ] as const satisfies readonly MealProgramSupportCost[];
 
@@ -57,20 +72,7 @@ export const mealProgramSectionCopy = {
         },
         {
           label: "Chi phí hỗ trợ",
-          items: [
-            {
-              amount: "1.450.000đ/mã",
-              audience: "Mã phía Bắc và mã Mầm non trong Tây Nguyên",
-              breakdown:
-                "Chi phí gồm 150.000đ/tháng/bé × 9 tháng học + 100.000đ (tiền cơ sở vật chất)",
-            },
-            {
-              amount: "1.650.000đ/mã",
-              audience: "Mã Tiểu học, THCS, THPT trong Tây Nguyên",
-              breakdown:
-                "Chi phí gồm 170.000đ/tháng/bé × 9 tháng học + 120.000đ (tiền cơ sở vật chất)",
-            },
-          ],
+          items: [...mealProgramCostItemsPast],
         },
       ],
     },
@@ -91,7 +93,13 @@ export const mealProgramSectionCopy = {
         },
         {
           label: "Chi phí hỗ trợ",
-          items: [...mealProgramCostItems],
+          items: [...mealProgramCostItemsCurrent],
+        },
+        {
+          paragraphs: [
+            "Mức tài trợ tại khu vực Phía Bắc. Đối với học sinh ăn 02 bữa/ngày (bữa trưa và bữa tối), mức tài trợ được tính bằng 02 lần mức tài trợ của học sinh ăn 01 bữa/ngày do chi phí bữa ăn được hỗ trợ gấp đôi.",
+            "Mức tài trợ có thể được tài trợ theo từng năm học hoặc theo số tháng ăn, căn cứ vào tình hình thực tế, chi phí tổ chức bữa ăn và nguồn lực huy động. Mọi thay đổi sẽ được Dự án công bố công khai trước thời điểm bắt đầu tiếp nhận tài trợ của năm học tương ứng.",
+          ],
         },
       ],
     },

@@ -86,25 +86,25 @@ export const processSteps2026: readonly ProcessStepContent[] = [
   },
 ] as const;
 
-/** Quỹ chỉ nhận chuyển khoản một lần đủ cho cả năm học. */
+/** Quỹ chỉ nhận chuyển khoản một lần đủ theo mức đã thoả thuận. */
 export const paymentScenarios = [
   {
     label: "Chuyển một lần",
     detail:
-      "Anh chị vui lòng chuyển khoản 1 lần 9 tháng tiền ăn + tiền cơ sở vật chất trong một giao dịch, trong vòng 24 giờ sau khi nhận mã NE.",
+      "Anh chị vui lòng chuyển khoản 1 lần đủ chi phí tiền ăn của mã NE trong một giao dịch, trong vòng 24 giờ sau khi nhận mã NE.",
   },
 ] as const;
 
 export const costTiers = [
   {
-    label: "Phổ biến (tiểu học & mầm non)",
-    amount: "1.450.000đ / năm học",
-    breakdown: "",
+    label: "Học sinh ăn 01 bữa/ngày",
+    amount: "1.530.000đ / học sinh / năm học",
+    breakdown: "170.000 đồng/tháng × 09 tháng",
   },
   {
-    label: "Một số vùng Tây Nguyên (trung học cơ sở / trung học phổ thông)",
-    amount: "1.650.000đ / năm học",
-    breakdown: "",
+    label: "Học sinh ăn 02 bữa/ngày",
+    amount: "3.060.000đ / học sinh / năm học",
+    breakdown: "340.000 đồng/tháng × 09 tháng",
   },
 ] as const;
 
@@ -226,9 +226,9 @@ export const process2026PageContent = {
   })),
   costIntro: {
     eyebrow: "Mức đóng góp",
-    title: "Nuôi một học sinh, một năm học",
+    title: "Mức tài trợ tại khu vực Phía Bắc",
     description:
-      "Bữa ăn ~9.000đ/suất đối với học sinh Tiểu học, THCS, THPT; Mầm non ~7.300đ/suất. Từ năm học 9/2026 - 5/2027, Dự án chuyển chi phí cơ sở vật chất sang chi phí thực phẩm (tiền ăn) để đảm bảo chất lượng bữa ăn cho các bạn học sinh.",
+      "Đối với học sinh ăn 02 bữa/ngày (bữa trưa và bữa tối), mức tài trợ được tính bằng 02 lần mức tài trợ của học sinh ăn 01 bữa/ngày do chi phí bữa ăn được hỗ trợ gấp đôi. Mức tài trợ có thể theo từng năm học hoặc theo số tháng ăn, căn cứ vào tình hình thực tế, chi phí tổ chức bữa ăn và nguồn lực huy động. Mọi thay đổi sẽ được Dự án công bố công khai trước thời điểm bắt đầu tiếp nhận tài trợ của năm học tương ứng.",
   },
   costTiers: costTiers.map((tier) => ({ ...tier })),
   transfer: {

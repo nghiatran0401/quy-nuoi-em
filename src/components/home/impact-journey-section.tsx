@@ -146,11 +146,11 @@ function InfrastructureFundBlock({ infra }: { infra: InfrastructureCopy }) {
       </div>
 
       {infra.pauseNote ? (
-        <div className="mt-8 rounded-2xl border border-brand-accent/25 bg-gradient-to-br from-brand-accent/[0.08] via-white to-brand-warm/70 px-5 py-5 text-left sm:px-6 sm:py-6">
+        <div className="mt-8 rounded-2xl border border-brand-accent/25 bg-gradient-to-br from-brand-accent/[0.08] via-white to-brand-warm/70 px-4 py-4 text-left sm:px-6 sm:py-5">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-accent-dark">
             {infra.pauseNote.eyebrow}
           </p>
-          <p className="mt-2 text-[15px] leading-relaxed text-brand-ink sm:text-base">
+          <p className="mt-2 text-pretty text-[15px] leading-relaxed text-brand-ink sm:text-base">
             {infra.pauseNote.body}
           </p>
         </div>

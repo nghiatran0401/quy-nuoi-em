@@ -67,7 +67,7 @@ export function organizationJsonLd(): JsonLdObject {
     logo: logoImageObject(),
     image: absoluteAssetUrl(DEFAULT_OG_IMAGE_PATH),
     description:
-      "Quỹ Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — 150.000–170.000đ/tháng giúp bé no bụng và đến trường.",
+      "Quỹ Nuôi Em kết nối anh chị nuôi với trẻ vùng cao qua mã NE minh bạch — từ 170.000đ/tháng (01 bữa) tại Phía Bắc giúp bé no bụng và đến trường.",
     slogan: brandVisual.tagline,
     email: brandVisual.contact.email,
     telephone: `+84${brandVisual.contact.phone.replace(/^0/, "")}`,
@@ -354,7 +354,7 @@ export function donatePageJsonLd({
       recipient: { "@id": ORGANIZATION_ID },
       price: 150000,
       priceCurrency: "VND",
-      description: "Mức bảo trợ tham khảo 150.000 – 170.000đ/tháng cho mỗi mã NE.",
+      description: "Mức tài trợ tham khảo tại Phía Bắc: 170.000đ/tháng (01 bữa) hoặc 340.000đ/tháng (02 bữa).",
     },
   };
 }
