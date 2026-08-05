@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: siteConfig.name,
     short_name: siteConfig.shortName,
     description:
-      "Quỹ Nuôi Em — nuôi cơm trưa cho trẻ vùng cao qua mã NE minh bạch trên quynuoiem.com. Từ 170.000đ/tháng (01 bữa) tại Phía Bắc.",
+      "Quỹ Nuôi Em — nuôi cơm trưa cho trẻ vùng cao qua mã NE minh bạch trên quynuoiem.com. Từ 160.000đ/tháng.",
     start_url: "/",
     scope: "/",
     id: "/",

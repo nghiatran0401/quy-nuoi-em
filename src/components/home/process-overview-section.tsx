@@ -90,7 +90,7 @@ export function ProcessOverviewSection({
         </div>
 
         <div className="mt-6 lg:mt-8">
-          <Process2026Body content={process} />
+          <Process2026Body content={process} showTimeline={false} />
         </div>
       </div>
     </section>

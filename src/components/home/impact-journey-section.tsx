@@ -151,7 +151,11 @@ function InfrastructureFundBlock({ infra }: { infra: InfrastructureCopy }) {
             {infra.pauseNote.eyebrow}
           </p>
           <p className="mt-2 text-pretty text-[15px] leading-relaxed text-brand-ink sm:text-base">
-            {infra.pauseNote.body}
+            {infra.pauseNote.body} Xem{" "}
+            <a href="/#muc-tai-tro" className="link-accent font-semibold">
+              mức đóng góp
+            </a>{" "}
+            ở phần quy trình phía trên.
           </p>
         </div>
       ) : null}

@@ -76,7 +76,7 @@ export const impactJourneySectionCopy = {
     ctaLabel: "web.sucmanh2000.com",
     pauseNote: {
       eyebrow: "Từ năm học 2026-2027",
-      body: "Từ năm học 2026-2027, Dự án tạm dừng thu chi phí cơ sở vật chất nhằm đảm bảo dòng tiền minh bạch và tránh chồng chéo thông tin. Toàn bộ phần chi phí này sẽ được chuyển hoàn toàn sang chi phí thực phẩm (tiền ăn) để nâng cao và đảm bảo chất lượng bữa ăn cho các em học sinh.",
+      body: "Dự án không còn thu chi phí cơ sở vật chất.",
     },
     beforeImage: "/school_before.jpg",
     afterImage: "/school_after.jpg",

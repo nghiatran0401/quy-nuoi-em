@@ -23,87 +23,23 @@ export type MealProgramTextBlock = {
 export type MealProgramListBlock = { label: string; items: MealProgramSupportCost[] };
 export type MealProgramBlock = MealProgramTextBlock | MealProgramListBlock;
 
-export type MealProgramPeriod = {
-  title: string;
-  shortLabel: string;
-  blocks: readonly MealProgramBlock[];
-};
-
-const mealProgramCostItemsPast = [
-  {
-    amount: "1.450.000đ/mã",
-    audience: "Mã phía Bắc và mã Mầm non trong Tây Nguyên",
-    breakdown: "Chi phí gồm 150.000đ/tháng/bé × 9 tháng học + 100.000đ (tiền cơ sở vật chất)",
-  },
-  {
-    amount: "1.650.000đ/mã",
-    audience: "Mã Tiểu học, THCS, THPT trong Tây Nguyên",
-    breakdown: "Chi phí gồm 170.000đ/tháng/bé × 9 tháng học + 120.000đ (tiền cơ sở vật chất)",
-  },
-] as const satisfies readonly MealProgramSupportCost[];
-
-const mealProgramCostItemsCurrent = [
-  {
-    amount: "1.530.000đ/học sinh/năm học",
-    audience: "Học sinh ăn 01 bữa/ngày",
-    breakdown: "170.000 đồng/tháng × 09 tháng",
-  },
-  {
-    amount: "3.060.000đ/học sinh/năm học",
-    audience: "Học sinh ăn 02 bữa/ngày",
-    breakdown: "340.000 đồng/tháng × 09 tháng",
-  },
-] as const satisfies readonly MealProgramSupportCost[];
-
 export const mealProgramSectionCopy = {
   since: "Từ 2014",
   title: "Bữa cơm níu chân trẻ tới trường",
-  periods: [
+  seasonLabel: "Từ 2026–2027",
+  blocks: [
     {
-      title: "Các năm học trước đến năm học 2025-2026",
-      shortLabel: "Đến 2025–2026",
-      blocks: [
-        {
-          text: "Mỗi bữa, các bé được ăn thịt, đậu, canh, rau, ... - còn gạo, gia vị, chất đốt do địa phương, gia đình đối ứng. Tiểu học, Trung học cơ sở, Trung học phổ thông thường ăn 4 bữa/tuần với chi phí 8.500đ/suất; mầm non ăn 5 bữa/tuần với chi phí 6.800đ/suất.",
-        },
-        {
-          label: "Đối tượng nuôi",
-          text: "Học sinh mầm non (từ năm học 2025 - 2026, dự án mở rộng thêm đối tượng học sinh mầm non được hưởng chế độ 105 của nhà nước — 160.000đ/tháng) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa. Một số bé nội trú xa được hỗ trợ cơm trưa và tối — mỗi bữa một mã NE (ví dụ NE00001S — ăn trưa, NE00001T — ăn tối). Khi bé được nhà nước nuôi, dự án đổi sang bé khác và giữ nguyên mã NE khi anh chị tiếp tục tham gia dự án.",
-        },
-        {
-          label: "Chi phí hỗ trợ",
-          items: [...mealProgramCostItemsPast],
-        },
-      ],
+      text: "Nhằm đảm bảo chất lượng bữa ăn cho học sinh, từ năm học 9/2026–5/2027, Dự án chuyển chi phí cơ sở vật chất sang chi phí thực phẩm (tiền ăn). Định mức mỗi bữa ăn ~7.300 đồng/suất đối với các em Mầm non và ~9.000 đồng/suất đối với các em học sinh Tiểu học, THCS, THPT.",
     },
     {
-      title: "Bắt đầu từ năm học 2026-2027",
-      shortLabel: "Từ 2026–2027",
-      blocks: [
-        {
-          text: "Nhằm đảm bảo chất lượng bữa ăn cho học sinh, từ năm học 9/2026–5/2027, Dự án thực hiện điều chỉnh chi phí: Chuyển phần chi phí cơ sở vật chất sang chi phí thực phẩm (tiền ăn). Sau điều chỉnh, định mức mỗi bữa ăn ~7.300 đồng/suất đối với các em Mầm non và ~9.000 đồng/suất đối với các em học sinh Tiểu học, THCS, THPT.",
-        },
-        {
-          label: "Đối tượng nuôi",
-          paragraphs: [
-            "Học sinh mầm non (từ năm học 2025 - 2026, dự án mở rộng thêm đối tượng học sinh mầm non được hưởng chế độ 105 của nhà nước — 160.000đ/tháng) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa.",
-            "Dự án sẽ có một số mã là các bạn học sinh ăn 2 bữa (bữa trưa và bữa tối), các em ngủ lại ở trường từ thứ 2 đến thứ 6. Vì vậy, chi phí của những mã đó sẽ nhân đôi.",
-            "Bắt đầu từ năm học 9/2026 - 5/2027, dự án KHÔNG triển khai tổ chức ăn đồng loạt. Khi hoàn tất thu đủ kinh phí nhận nuôi cho từng trường (đã đăng ký), Dự án sẽ thông báo trực tiếp đến Nhà trường để bắt đầu triển khai bữa ăn cho các em. Vậy nên, qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể THAY ĐỔI.",
-          ],
-        },
-        {
-          label: "Chi phí hỗ trợ",
-          items: [...mealProgramCostItemsCurrent],
-        },
-        {
-          paragraphs: [
-            "Mức tài trợ tại khu vực Phía Bắc. Đối với học sinh ăn 02 bữa/ngày (bữa trưa và bữa tối), mức tài trợ được tính bằng 02 lần mức tài trợ của học sinh ăn 01 bữa/ngày do chi phí bữa ăn được hỗ trợ gấp đôi.",
-            "Mức tài trợ có thể được tài trợ theo từng năm học hoặc theo số tháng ăn, căn cứ vào tình hình thực tế, chi phí tổ chức bữa ăn và nguồn lực huy động. Mọi thay đổi sẽ được Dự án công bố công khai trước thời điểm bắt đầu tiếp nhận tài trợ của năm học tương ứng.",
-          ],
-        },
+      label: "Đối tượng nuôi",
+      paragraphs: [
+        "Học sinh mầm non (từ năm học 2025 - 2026, dự án mở rộng thêm đối tượng học sinh mầm non được hưởng chế độ 105 của nhà nước — 160.000đ/tháng) và học sinh cấp 1–2–3 chưa được nhà nước nuôi cơm trưa.",
+        "Một số mã dành cho học sinh ăn 2 bữa (trưa và tối), ngủ lại ở trường từ thứ 2 đến thứ 6 — chi phí những mã đó nhân đôi theo mức tài trợ.",
+        "Quy định triển khai bữa ăn theo từng trường và các lưu ý mã NE xem tại phần quy trình phía trên.",
       ],
     },
-  ] satisfies MealProgramPeriod[],
+  ] satisfies MealProgramBlock[],
   media: {
     youtubeId: "ouYY0ri-vIs",
     title: "Bữa cơm trưa tại điểm trường vùng cao",

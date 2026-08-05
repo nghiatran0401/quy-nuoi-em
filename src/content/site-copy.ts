@@ -5,7 +5,7 @@ export const siteCopy = {
     /** Shorter label for Open Graph / Zalo / Facebook link previews. */
     ogTitle: "Quỹ Nuôi Em",
     description:
-      "Nuôi cơm trưa cho trẻ vùng cao: mỗi mã NE tương ứng 1 học sinh - 1 người nuôi, không trùng lặp. Từ 170.000đ/tháng (01 bữa) tại Phía Bắc, minh bạch thu chi, tra cứu hồ sơ và đi thăm bé trên quynuoiem.com.",
+      "Nuôi cơm trưa cho trẻ vùng cao: mỗi mã NE tương ứng 1 học sinh - 1 người nuôi, không trùng lặp. Từ 160.000đ/tháng, minh bạch thu chi, tra cứu hồ sơ và đi thăm bé trên quynuoiem.com.",
     keywords:
       "Nuôi Em, quỹ nuôi em, quynuoiem, nuôi trẻ vùng cao, bảo trợ trẻ em, mã NE, cơm trưa học đường, quyên góp thiện nguyện, minh bạch tài chính, Điện Biên, Hà Giang, Tây Nguyên, nhận nuôi em",
   },
@@ -54,7 +54,7 @@ export const siteCopy = {
     eyebrow: "Bữa cơm níu chân trẻ tới trường",
     title: "Quỹ Nuôi Em",
     description:
-      'Trên những mái nhà tranh vùng cao, từ 170.000đ mỗi tháng (01 bữa) tại khu vực Phía Bắc — hoặc 340.000đ/tháng với học sinh ăn 02 bữa/ngày — anh chị đã mang đến những bữa cơm no bụng, giữ bước chân các em nhỏ đi học đều đặn. Với mô hình "Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi", anh chị sẽ biết rõ thông tin và có thể đến thăm em nuôi của mình.',
+      'Trên những mái nhà tranh vùng cao, từ 160.000đ mỗi tháng, anh chị mang đến những bữa cơm no bụng, giữ bước chân các em nhỏ đi học đều đặn. Với mô hình "Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi", anh chị sẽ biết rõ thông tin và có thể đến thăm em nuôi của mình.',
     sponsorNow: "Đóng góp ngay",
     learnMore: "Tra cứu mã",
   },

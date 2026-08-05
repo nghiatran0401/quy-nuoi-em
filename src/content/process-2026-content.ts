@@ -97,14 +97,14 @@ export const paymentScenarios = [
 
 export const costTiers = [
   {
-    label: "Học sinh ăn 01 bữa/ngày",
-    amount: "1.530.000đ / học sinh / năm học",
-    breakdown: "170.000 đồng/tháng × 09 tháng",
+    label: "Miền Bắc và mầm non Tây Nguyên",
+    amount: "1.530.000đ / mã / năm học",
+    breakdown: "160.000 đồng/tháng × 09 tháng",
   },
   {
-    label: "Học sinh ăn 02 bữa/ngày",
-    amount: "3.060.000đ / học sinh / năm học",
-    breakdown: "340.000 đồng/tháng × 09 tháng",
+    label: "Tây Nguyên cấp 1, 2, 3",
+    amount: "1.683.000đ / mã / năm học",
+    breakdown: "187.000 đồng/tháng × 09 tháng",
   },
 ] as const;
 
@@ -122,14 +122,19 @@ export type Process2026NoteGroup = {
   notes: readonly Process2026Note[];
 };
 
+/** Quy tắc chung — hiện 1 lần phía trên bảng so sánh. */
+export const sharedImportantNotes: readonly Process2026Note[] = [
+  {
+    text: "Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi. Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 học sinh - 1 người nuôi cụ thể, hoàn toàn KHÔNG có sự trùng lặp.",
+  },
+] as const;
+
+/** Chỉ các điểm khác biệt giữa hai giai đoạn (không lặp quy tắc chung). */
 export const importantNoteGroups: readonly Process2026NoteGroup[] = [
   {
     title: "Các năm học trước đến năm học 2025-2026",
     shortLabel: "Đến 2025–2026",
     notes: [
-      {
-        text: "Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi. Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 học sinh - 1 người nuôi cụ thể, hoàn toàn KHÔNG có sự trùng lặp.",
-      },
       {
         text: "Qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể thay đổi.",
       },
@@ -142,9 +147,6 @@ export const importantNoteGroups: readonly Process2026NoteGroup[] = [
     title: "Bắt đầu từ năm học 2026-2027",
     shortLabel: "Từ 2026–2027",
     notes: [
-      {
-        text: "Mỗi mã NE tương ứng 1 học sinh - 1 người nuôi. Để đảm bảo tính minh bạch, mỗi mã NE luôn tương ứng với 1 học sinh - 1 người nuôi cụ thể, hoàn toàn KHÔNG có sự trùng lặp.",
-      },
       {
         text: "Bắt đầu từ năm học 9/2026 - 5/2027, dự án KHÔNG triển khai tổ chức ăn đồng loạt. Khi hoàn tất thu đủ kinh phí nhận nuôi cho từng trường (đã đăng ký), Dự án sẽ thông báo trực tiếp đến Nhà trường để bắt đầu triển khai bữa ăn cho các em. Vậy nên, qua các năm học, nếu anh chị tiếp tục tham gia, mã NE có thể giữ nguyên nhưng thông tin học sinh có thể THAY ĐỔI.",
       },
@@ -169,10 +171,11 @@ export const importantNoteGroups: readonly Process2026NoteGroup[] = [
   },
 ] as const;
 
-/** @deprecated Prefer importantNoteGroups. */
-export const importantNotes = importantNoteGroups.flatMap((group) =>
-  group.notes.map((note) => note.text),
-);
+/** @deprecated Prefer sharedImportantNotes / importantNoteGroups. */
+export const importantNotes = [
+  ...sharedImportantNotes.map((note) => note.text),
+  ...importantNoteGroups.flatMap((group) => group.notes.map((note) => note.text)),
+];
 
 export const timelineMilestones = [
   { when: "Trong 24 giờ", what: "Chuyển khoản đủ một lần (giữ mã)" },
@@ -226,7 +229,7 @@ export const process2026PageContent = {
   })),
   costIntro: {
     eyebrow: "Mức đóng góp",
-    title: "Mức tài trợ tại khu vực Phía Bắc",
+    title: "Mức tài trợ theo khu vực",
     description:
       "Đối với học sinh ăn 02 bữa/ngày (bữa trưa và bữa tối), mức tài trợ được tính bằng 02 lần mức tài trợ của học sinh ăn 01 bữa/ngày do chi phí bữa ăn được hỗ trợ gấp đôi. Mức tài trợ có thể theo từng năm học hoặc theo số tháng ăn, căn cứ vào tình hình thực tế, chi phí tổ chức bữa ăn và nguồn lực huy động. Mọi thay đổi sẽ được Dự án công bố công khai trước thời điểm bắt đầu tiếp nhận tài trợ của năm học tương ứng.",
   },
@@ -263,6 +266,7 @@ export const process2026PageContent = {
     eyebrow: "Lưu ý quan trọng",
     title: "Về mã NE và thông tin bé",
   },
+  sharedNotes: sharedImportantNotes.map((note) => ({ text: note.text })),
   noteGroups: importantNoteGroups.map((group) => ({
     title: group.title,
     shortLabel: group.shortLabel,

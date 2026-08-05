@@ -103,6 +103,7 @@ export type Process2026PageContent = {
   timelineIntro: { eyebrow: string; title: string };
   timeline: Process2026TimelineItem[];
   notesIntro: { eyebrow: string; title: string };
+  sharedNotes: Process2026Note[];
   noteGroups: Process2026NoteGroup[];
   importantNotes: string[];
   codeMeaningLabel: string;

@@ -86,8 +86,8 @@ export default async function HomePage() {
         processContent={processContent}
         campaign={campaignContent.campaign}
       />
-      <HomeStorySection content={homeContent.cta} />
       <MealProgramSection content={homeSections.meal} />
+      <HomeStorySection content={homeContent.cta} />
       <ImpactJourneySection content={homeSections.impact} />
       {/* <MembersSection content={homeContent.members} memberImageUrls={homeMedia.memberImages} /> */}
       {/* <SponsoredChildrenSection content={homeSections.sponsored} /> */}

@@ -10,6 +10,8 @@ import {
 
 type Process2026BodyProps = {
   content: Process2026PageContent;
+  /** Hide timeline on homepage embed — steps already cover the same milestones. */
+  showTimeline?: boolean;
 };
 
 function NoteBody({ note }: { note: Process2026Note }) {
@@ -178,7 +180,7 @@ function NotesCompareTable({
   );
 }
 
-export function Process2026Body({ content: c }: Process2026BodyProps) {
+export function Process2026Body({ content: c, showTimeline = true }: Process2026BodyProps) {
   const qrImageSrc = resolveProcess2026ImageSrc(c.media.qrImage);
   const fanpageUrl = c.links.messenger;
 
@@ -188,7 +190,7 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
         <ProcessStepsList steps={c.steps} />
       </div>
 
-      <div className="rounded-2xl border border-brand-border/60 bg-brand-surface/80 p-5 text-center sm:p-7 lg:p-8">
+      <div id="muc-tai-tro" className="scroll-mt-24 rounded-2xl border border-brand-border/60 bg-brand-surface/80 p-5 text-center sm:p-7 lg:p-8">
         <p className="eyebrow">{c.costIntro.eyebrow}</p>
         <h3 className="heading-section mt-2 text-balance">{c.costIntro.title}</h3>
         <p className="text-body home-prose mx-auto mt-3 max-w-3xl text-pretty text-[15px] sm:text-base">
@@ -216,27 +218,48 @@ export function Process2026Body({ content: c }: Process2026BodyProps) {
 
       <TransferInfoSection transfer={c.transfer} qrImageSrc={qrImageSrc} fanpageUrl={fanpageUrl} />
 
-      <div className="rounded-2xl border border-brand-border/60 bg-white/80 p-5 sm:p-7 lg:p-8">
-        <p className="eyebrow">{c.timelineIntro.eyebrow}</p>
-        <h3 className="heading-section mt-2 text-balance">{c.timelineIntro.title}</h3>
-        <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-3">
-          {c.timeline.map((item) => (
-            <div
-              key={`${item.when}-${item.what}`}
-              className="flex flex-col rounded-2xl border border-brand-border/70 bg-brand-warm px-4 py-4 sm:px-5"
-            >
-              <p className="text-sm font-bold text-brand-accent">{item.when}</p>
-              <p className="mt-2 flex-1 text-pretty text-sm font-semibold leading-snug text-brand-ink sm:text-base">
-                {item.what}
-              </p>
-            </div>
-          ))}
+      {showTimeline ? (
+        <div className="rounded-2xl border border-brand-border/60 bg-white/80 p-5 sm:p-7 lg:p-8">
+          <p className="eyebrow">{c.timelineIntro.eyebrow}</p>
+          <h3 className="heading-section mt-2 text-balance">{c.timelineIntro.title}</h3>
+          <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-3">
+            {c.timeline.map((item) => (
+              <div
+                key={`${item.when}-${item.what}`}
+                className="flex flex-col rounded-2xl border border-brand-border/70 bg-brand-warm px-4 py-4 sm:px-5"
+              >
+                <p className="text-sm font-bold text-brand-accent">{item.when}</p>
+                <p className="mt-2 flex-1 text-pretty text-sm font-semibold leading-snug text-brand-ink sm:text-base">
+                  {item.what}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
 
-      <div>
+      <div id="luu-y-ma-ne" className="scroll-mt-24">
         <p className="eyebrow">{c.notesIntro.eyebrow}</p>
         <h3 className="heading-section mt-2 text-balance">{c.notesIntro.title}</h3>
+
+        {c.sharedNotes.length > 0 ? (
+          <div className="mt-5 rounded-2xl border border-dashed border-brand-accent/35 bg-gradient-to-r from-brand-warm/80 via-white to-brand-sky-soft/40 px-4 py-4 sm:mt-6 sm:px-6">
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-accent-dark">
+              Quy tắc chung
+            </p>
+            <ul className="mt-3 space-y-3">
+              {c.sharedNotes.map((note, i) => (
+                <li key={note.text} className="flex gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-accent text-sm font-bold text-white">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <NoteBody note={note} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
         <div className="mt-5 sm:mt-6">
           <NotesCompareMobile groups={c.noteGroups} />
           <NotesCompareTable groups={c.noteGroups} />
